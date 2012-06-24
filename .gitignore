@@ -4,3 +4,4 @@ bombers_list.txt
 .dropbox
 *.pyc
 config.py
+venv

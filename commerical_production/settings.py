@@ -1,26 +1,27 @@
-# Django settings for cpratings project.
-import os 
-from config import NAME, USER, PASSWORD, HOST
+# Django settings for commerical_production project.
+import dj_database_url
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Joshua Blum', 'joshblum@mit.edu'),
-    ('Max Kanter', 'kanter@mit.edu'),
+    # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': NAME,    # Or path to database file if using sqlite3.
-        'USER': USER,                      # Not used with sqlite3.
-        'PASSWORD': PASSWORD,                  # Not used with sqlite3.
-        'HOST': HOST,                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
+##DATABASES = {
+##    'default': {
+##        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+##        'NAME': '',                      # Or path to database file if using sqlite3.
+##        'USER': '',                      # Not used with sqlite3.
+##        'PASSWORD': '',                  # Not used with sqlite3.
+##        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+##        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+##    }
+##}
+
+DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -29,7 +30,7 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = None
+TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -61,8 +62,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-ROOT_PATH = os.path.dirname(__file__)
-STATIC_ROOT = os.path.join(ROOT_PATH, 'public'),
+STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -84,7 +84,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '3wa4nf*o!ykndkubvv8awseebvc+y)-2eon3f_(4gdeesshtp&amp;'
+SECRET_KEY = 'mya95^-vjyf5q*8_=6xpgizqbxb*l73%9@ddj3t28*t2avsmma'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -103,13 +103,15 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'cpratings.urls'
+ROOT_URLCONF = 'commerical_production.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'cpratings.wsgi.application'
+WSGI_APPLICATION = 'commerical_production.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(ROOT_PATH, 'templates'),
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
 )
 
 INSTALLED_APPS = (
@@ -120,10 +122,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'commProd', 
 )
 
 # A sample logging configuration. The only tangible logging
@@ -154,5 +155,3 @@ LOGGING = {
         },
     }
 }
-
-AUTH_PROFILE_MODULE = 'commProd.UserProfile'
