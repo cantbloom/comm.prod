@@ -3,5 +3,5 @@ bombers_list.txt
 .DS_Store
 .dropbox
 *.pyc
-config.py
+
 venv
