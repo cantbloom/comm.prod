@@ -1,12 +1,12 @@
 # Django settings for commerical_production project.
 import dj_database_url
+from config import ADMIN_INFO, KEY
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
+ADMINS = ADMIN_INFO
 
 MANAGERS = ADMINS
 
@@ -21,7 +21,9 @@ MANAGERS = ADMINS
 ##    }
 ##}
 
-DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
+DATABASES = {
+    'default': dj_database_url.config(default='postgres://localhost')
+    }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -30,7 +32,7 @@ DATABASES = {'default': dj_database_url.config(default='postgres://localhost')}
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = None
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -62,7 +64,8 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+ROOT_PATH = os.path.dirname(__file__)
+STATIC_ROOT = os.path.join(ROOT_PATH, 'public'),
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -84,7 +87,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'mya95^-vjyf5q*8_=6xpgizqbxb*l73%9@ddj3t28*t2avsmma'
+SECRET_KEY = KEY
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -109,9 +112,7 @@ ROOT_URLCONF = 'commerical_production.urls'
 WSGI_APPLICATION = 'commerical_production.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(ROOT_PATH, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -122,9 +123,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'commProd,',
 )
 
 # A sample logging configuration. The only tangible logging
