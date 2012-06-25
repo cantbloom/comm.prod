@@ -3,7 +3,8 @@ from django.utils import simplejson as json
 # Create your models here.
 
 class CommProd(models.Model):
-	content = models.TextField() 
+	comm_prod = models.TextField() 
+	content = models.TextField()
 	author = models.IntegerField() # user id of author
 	score = models.FloatField(default=0.0)
 	date = models.DateTimeField(auto_now=True)

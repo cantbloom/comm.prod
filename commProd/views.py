@@ -50,24 +50,24 @@ def processMail(**kwargs):
     alt_email_search = UserInfo.objects.filter(alt_email__exact=sender)
 
     if len(email_search) == 1:
-        user = email_search[0]
+        user_id = email_search[0].id
     elif len(alt_email_search) == 1:
-        user = alt_email_search[0]
+        user_id = alt_email_search[0].user_id
     else:
-        logger.warn("User not found with email address %s" % sender)
-        #return
-        return HttpResponse("User not found with email address %s" % sender)
-
-    parsed_content = processProd(content):
+        logger.info("User not found with email address %s" % sender)
+        return 
+        
+    parsed_content = processProd(content)
     if parsed_content:
-        for item in parsed_content:
-            cp = CommProd(content=item, author=user.id)
+        for prod in parsed_content:
+            cp = CommProd(content=content, comm_prod=prod, author=user_id)
             cp.save()
-    else:
-        logger.warn("No commprod found from email %s with content %s"%s(sender, content))
+            logger.info("Commprod found from email %s with commprod %s" % (sender, prod))
+        return 
+
+    logger.info("No commprod found from email %s with content %s" % (sender, content))
     
-    #return
-    return HttpResponse(json.dumps(sender))
+    return 
 
 
 mail_handler = MailHandler()

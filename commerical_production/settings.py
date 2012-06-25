@@ -9,22 +9,16 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = ADMIN_INFO
 
 MANAGERS = ADMINS
-if DEBUG: #dev server
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': NAME,    # Or path to database file if using sqlite3.
-            'USER': USER,                      # Not used with sqlite3.
-            'PASSWORD': PASSWORD,                  # Not used with sqlite3.
-            'HOST': HOST,                      # Set to empty string for localhost. Not used with sqlite3.
-            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': NAME,    # Or path to database file if using sqlite3.
+        'USER': USER,                      # Not used with sqlite3.
+        'PASSWORD': PASSWORD,                  # Not used with sqlite3.
+        'HOST': HOST,                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
-
-else: #heroko postgres
-    DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
-        }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -66,7 +60,7 @@ MEDIA_URL = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 ROOT_PATH = os.path.dirname(__file__)
-STATIC_ROOT = os.path.join(ROOT_PATH, 'public'),
+STATIC_ROOT = os.path.join(ROOT_PATH, 'public')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -139,23 +133,46 @@ INSTALLED_APPS = (
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        },
     },
     'handlers': {
+        # Include the default Django email handler for errors
+        # This is what you'd get without configuring logging at all.
         'mail_admins': {
+            'class': 'django.utils.log.AdminEmailHandler',
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
+             # But the emails are plain text by default - HTML is nicer
+            'include_html': True,
+        },
+        # Log to a text file that can be rotated by logrotate
+        'logfile': {
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': os.path.join(ROOT_PATH, 'logs/log.log'),
+        },
     },
     'loggers': {
+        # Again, default Django configuration to email unhandled exceptions
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
         },
-    }
+        # Might as well log any errors anywhere else in Django
+        'django': {
+            'handlers': ['logfile'],
+            'level': 'ERROR',
+            'propagate': False,
+            'formatter': 'simple',
+        },
+        # Your own app - this assumes all your logger names start with "myapp."
+        'commProd.views': {
+            'handlers': ['logfile'],
+            'level': 'INFO', # Or maybe INFO or DEBUG
+            'propagate': False,
+            'formatter': 'simple',
+        },
+    },
 }

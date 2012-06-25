@@ -3,6 +3,18 @@ import re
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 
+
+"""
+ssh to athena and blanche bombers > bombers.txt
+
+use this to add new users the database each year
+
+python manage.py shell
+
+>>> import commerical_production.admin_utils as utils
+>>> utils.add_users('bombers.txt')
+"""
+
 def add_users(filePath):
 
     try:
@@ -17,9 +29,9 @@ def add_users(filePath):
             try:
                 user, created = User.objects.get_or_create(username=username, email = email, password = User.objects.make_random_password())
                 user.save()
-                print email + " | " + created
+                print email + " | " + str(created)
             except IntegrityError:
-                print email + " | " + False
+                print email + " | " + str(False)
                 continue
         
         f.close()
@@ -27,7 +39,6 @@ def add_users(filePath):
         print "File not found, your current working directory is", os.getcwd()
         print "Tried path:", os.getcwd() + "/" +filePath
         print "What is the actual path?"
-
 
 def testRegex():
     while True:
