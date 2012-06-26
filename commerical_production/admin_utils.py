@@ -27,7 +27,7 @@ def add_users(filePath):
 
             username , host = email.split('@')
             try:
-                user, created = User.objects.get_or_create(username=username, email = email, password = User.objects.make_random_password())
+                user, created = User.objects.get_or_create(username=username, email=email, password=User.objects.make_random_password())
                 user.save()
                 print email + " | " + str(created)
             except IntegrityError:
