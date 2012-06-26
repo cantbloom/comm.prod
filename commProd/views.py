@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
 from django.utils import simplejson as json
 from cloudmailin.views import MailHandler
-from commProd.utils import parseProd
+from commProd.utils import parseProd    
 import re
 import logging
 # Get an instance of a logger
@@ -57,7 +57,7 @@ def processMail(**kwargs):
         logger.info("User not found with email address %s" % sender)
         return 
         
-    parsed_content = processProd(content)
+    parsed_content = parseProd(content)
     if parsed_content:
         for prod in parsed_content:
             cp = CommProd(content=content, comm_prod=prod, author=user_id)

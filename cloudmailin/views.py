@@ -31,8 +31,7 @@ class MailHandler(object):
             # if not self.is_valid_signature(params, addr['secret']):
             #     return HttpResponseForbidden("invalid message signature", mimetype="text/plain")
             
-            ### remove return
-            return addr['callback'](**params)
+            addr['callback'](**params)
             
         except Exception, e:
             return HttpResponseServerError(e.message, mimetype="text/plain")

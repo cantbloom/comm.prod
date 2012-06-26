@@ -10,7 +10,7 @@ class CommProd(models.Model):
 	date = models.DateTimeField(auto_now=True)
 
 	def __unicode__(self):
-		return 'a btb "%s"comm.prod by %s on %s' % (self.content, self.author, self.date)
+		return 'a btb "%s" comm.prod by %s on %s' % (self.comm_prod, self.author, self.date)
 
 class Rating(models.Model):
 	cp_id = models.IntegerField() # comm prod id
