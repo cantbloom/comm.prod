@@ -1,7 +1,8 @@
-from commProd.models import CommProd, Rating, UserInfo
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
 from django.utils import simplejson as json
+from django.contrib.auth.decorators import login_required
+from commProd.models import CommProd, Rating, UserInfo
 from cloudmailin.views import MailHandler
 from commProd.utils import parseProd    
 import re
@@ -12,18 +13,20 @@ logger = logging.getLogger(__name__)
 """
 Landing page, top ten rated comm prods + ten newest commprods 
 """
-def index(request):
+@login_required
+def home(request):
 
     ##TODO
     template_values = {
 
     }
-    return render_to_response('homepage.html', template_values)
+    return render_to_response('home.html', template_values)
 
 """
 User profile page, 
 displays avg. overall score + list of commprods
 """
+@login_required
 def user(request):
     ##TODO
 
@@ -32,8 +35,7 @@ def user(request):
     }
     return render_to_response('commProd/user.html', template_values)
 
-
-#todo but problbly not dodo
+@login_required
 def search(request):
     data  = 'a'
     data = json.dumps(data)
@@ -62,7 +64,7 @@ def processMail(**kwargs):
         for prod in parsed_content:
             cp = CommProd(content=content, comm_prod=prod, author=user_id)
             cp.save()
-            logger.info("Commprod found from email %s with commprod %s" % (sender, prod))
+            logger.info("Commprod found from email %s with commprod '%s'" % (sender, prod))
         return 
 
     logger.info("No commprod found from email %s with content %s" % (sender, content))
