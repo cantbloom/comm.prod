@@ -1,5 +1,4 @@
 # Django settings for commerical_production project.
-import dj_database_url
 from config import ADMIN_INFO, NAME, USER, PASSWORD, HOST, KEY
 import os
 
