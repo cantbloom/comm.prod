@@ -1,8 +1,9 @@
 #logo {
-	width:40px;
-	height:40px;
+	width:32px;
+	height:32px;
 }
 
-.nav {
-	text-align:center !important;
+.brand {
+	padding-top:7px !important;
+	padding-bottom:5px !important;  
 }
