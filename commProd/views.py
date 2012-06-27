@@ -4,11 +4,7 @@ from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
 from commProd.models import CommProd, Rating, UserInfo
 from cloudmailin.views import MailHandler
-from commProd.utils import parseProd    
 import re
-import logging
-# Get an instance of a logger
-logger = logging.getLogger(__name__)
 
 """
 Landing page, top ten rated comm prods + ten newest commprods 
@@ -43,39 +39,31 @@ def search(request):
     return HttpResponse(data, mimetype='application/json')
 
 
-def processMail(**kwargs):
-    sender = kwargs['x_from_header']
-    sender = sender[2:len(sender)-2] #strip crap
-    content = kwargs['plain'] 
+def processMail(request):
+    data = request.POST["data"]
+    resp = ""
+    if data:
+        data = json.loads(data) #[{sender : (content, comm_prods)}]
+        for dic in data:
+            sender = dic.keys()[0]
+            content = dic[sender][0]
+            comm_prods = dic[sender][1]
 
-    email_search = User.objects.filter(email__exact=sender)
-    alt_email_search = UserInfo.objects.filter(alt_email__exact=sender)
+            email_search = User.objects.filter(email__exact=sender)
+            alt_email_search = UserInfo.objects.filter(alt_email__exact=sender)
 
-    if len(email_search) == 1:
-        user_id = email_search[0].id
-    elif len(alt_email_search) == 1:
-        user_id = alt_email_search[0].user_id
+            if len(email_search) == 1:
+                user_id = email_search[0].id
+            elif len(alt_email_search) == 1:
+                user_id = alt_email_search[0].user_id
+            else:
+                resp += "User %s not found\n" % sender
+            
+            for prod in comm_prods:
+                cp = CommProd(content=content, comm_prod=prod, author=user_id)
+                cp.save() 
     else:
-        logger.info("User not found with email address %s" % sender)
-        return 
-        
-    parsed_content = parseProd(content)
-    if parsed_content:
-        for prod in parsed_content:
-            cp = CommProd(content=content, comm_prod=prod, author=user_id)
-            cp.save()
-            logger.info("Commprod found from email %s with commprod '%s'" % (sender, prod))
-        return 
+        resp = "No data"
+    return HttpResponse(resp, mimetype="text/plain")
 
-    logger.info("No commprod found from email %s with content %s" % (sender, content))
-    
-    return 
-
-
-mail_handler = MailHandler()
-
-mail_handler.register_address(
-    address='00a95f15950afd5d7e13@cloudmailin.net',
-    callback=processMail
-)
 

@@ -107,6 +107,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'commerical_production.urls'
 
+APPEND_SLASH=False
+
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'commerical_production.wsgi.application'
 
@@ -125,7 +127,6 @@ INSTALLED_APPS = (
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'cloudmailin',
     'commProd',
 )
 
