@@ -3,7 +3,6 @@ from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
 from commProd.models import CommProd, Rating, UserInfo
-from cloudmailin.views import MailHandler
 import re
 
 """
