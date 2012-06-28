@@ -2,6 +2,10 @@
 from config import ADMIN_INFO, NAME, USER, PASSWORD, HOST, KEY
 import os
 
+#custom auth by max
+AUTH_PROFILE_MODULE = 'commProd.UserProfile'
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
