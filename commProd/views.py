@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from commProd.models import CommProd, Rating, UserProfile
 import re
 from django.shortcuts import redirect
+import datetime
 
 """
 Landing page, top ten rated comm prods + ten newest commprods 
@@ -62,6 +63,35 @@ def search(request):
     return HttpResponse(data, mimetype='application/json')
 
 
+
+
+###### request endpoints #######
+@login_required
+def vote (request):
+    vote = request.POST["vote"]
+    cp_id = request.POST["id"]
+    user_id = requset.user.id
+    valid_votes = [0, 0.5, 1, 1.5, 2, 2.5, 3]
+    comm_prod = CommProd.objects.filter(cp_id__exact=cp_id)
+    rating = Rating.objects.filter(cp_id__exact=cp_id, user_id__exact=user_id)
+    avg = None
+    if vote_val in valid_votes and comm_prod.exists():
+        if rating.exists():
+            rating.update(vote=vote, date=datetime.datetime.now())
+        else:
+            rating = Rating(cp_id=cp_id, user_id=user_id, vote=vote)
+        avg = getAvg(cp_id)        
+
+        success = True
+    else:
+        success = False
+    
+    payload = {"success": success, "cp_id": 
+        cp_id, "vote": vote, "avg": avg}
+    data = json.dumps(payload)
+    return HttpResponse(data, mimetype='application/json') 
+
+
 def processMail(request):
     data = request.POST["data"]
     resp = ""
@@ -71,22 +101,27 @@ def processMail(request):
             sender = dic.keys()[0]
             content = dic[sender][0]
             comm_prods = dic[sender][1]
-
+            user_id = None
             email_search = User.objects.filter(email__exact=sender)
-            alt_email_search = UserInfo.objects.filter(alt_email__exact=sender)
+            alt_email_search = UserProfile.objects.filter(alt_email__exact=sender)
 
-            if len(email_search) == 1:
+            if email_search.exists():
                 user_id = email_search[0].id
-            elif len(alt_email_search) == 1:
-                user_id = alt_email_search[0].user_id
+            elif alt_email_search.exists():
+                user_id = alt_email_search[0].user.id
             else:
                 resp += "User %s not found\n" % sender
             
-            for prod in comm_prods:
-                cp = CommProd(content=content, comm_prod=prod, author=user_id)
-                cp.save() 
+            if user_id:
+                for prod in comm_prods:
+                    cp = CommProd(content=content, comm_prod=prod, author=user_id)
+                    cp.save() 
     else:
         resp = "No data"
     return HttpResponse(resp, mimetype="text/plain")
 
+def getAvg(cp_id):
+    rating_query =  Rating.objects.filter(cp_id__exact=cp_id))
+    total = sum(row.vote for row in rating_query)
+    return total/len(rating_query)
 
