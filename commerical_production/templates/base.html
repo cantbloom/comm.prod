@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{%block pagetitle %}{% endblock %}</title>
+    <title>{{ page_title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -48,9 +48,23 @@
           </a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li class={{ home }}>
+                <a href="#">Home</a>
+              </li>
+              <li class={{ popular }}>
+                <a href="#">Popular</a>
+              </li>
+              <li class={{ recent }}>
+                <a href="#">Recent</a>
+              </li>
+              <li class={{ profile }}>
+                <a href="#contact">Profile</a>
+              </li>
+            </ul>
+            <ul class="nav pull-right">
+              <form class="navbar-search pull-right">
+                <input type="text" class="search-query" placeholder="Find people...">
+              </form>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

@@ -1,5 +1,5 @@
-bombers.txt
 .DS_Store
 .dropbox
 *.pyc
 venv
+*.log
