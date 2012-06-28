@@ -2,8 +2,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
-from commProd.models import CommProd, Rating, UserInfo
+from commProd.models import CommProd, Rating, UserProfile
 import re
+from django.shortcuts import redirect
 
 """
 Landing page, top ten rated comm prods + ten newest commprods 
@@ -16,6 +17,29 @@ def home(request):
 
     }
     return render_to_response('home.html', template_values)
+
+"""
+Registration page. Visitor arrives wih activation key
+"""
+def register(request, key):
+    #check if key is valid and unregistered
+    try:
+        profile = UserProfile.objects.get(activation_key=key)
+        user = profile.user
+        if user.is_active:
+            return redirect('/')
+
+    except:
+        return redirect('/')
+
+
+    template_values = {
+        'key': key,
+        'email' : user.email
+    }
+    return render_to_response('register.html', template_values)
+
+
 
 """
 User profile page, 

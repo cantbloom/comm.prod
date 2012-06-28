@@ -24,9 +24,9 @@ def add_users(filePath):
             
             #user = User.objects.get(username=username)
             init_data = {
-                username : username,
-                email : email,
-                activation_key : sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
+                'username' : username,
+                'email' : email,
+                'activation_key' : sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
             }
             print init_data
             user = createUser(**init_data)
@@ -38,14 +38,14 @@ def add_users(filePath):
         print "What is the actual path?"
 
 def createUser(username, email, activation_key):
-    u = User.objects.create_user(username, email)
-    u.is_active = False
-    u.save()
-    user.profile.activation_key = sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
-    user.profile.save()
-    return u
-
-def createExtenedUser(init_data):
-    pass
-
-add_users('bombers.txt')
+    try:
+        user, created = User.objects.get_or_create(username=username, email=email)
+        if created:
+            user.is_active = False
+            user.save()
+            user.profile.activation_key = sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
+            user.profile.save()
+        print user,created
+        return user
+    except IntegrityError:
+        return None

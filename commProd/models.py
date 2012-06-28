@@ -22,14 +22,6 @@ class Rating(models.Model):
 
 	def __unicode__(self):
 		return "cp_id %s, user_id %s, vote %s" % (self.cp_id, self.user_id, self.vote)
-
-class UserInfo(models.Model):
-	user_id = models.IntegerField()
-	alt_email = models.EmailField()
-	shirt_names = models.TextField(default=json.dumps(['Human Jizz Rag']))
-
-	def __unicode__(self):
-		return "cp_id %s, user_id %s, vote %s" % (self.cp_id, self.user_id, self.vote)
  
 class UserProfile(models.Model):  
     user = models.OneToOneField(User)  
