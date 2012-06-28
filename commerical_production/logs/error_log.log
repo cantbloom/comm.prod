@@ -291,3 +291,41 @@ Traceback (most recent call last):
   File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 396, in _reverse_with_prefix
     "arguments '%s' not found." % (lookup_view_s, args, kwargs))
 NoReverseMatch: Reverse for 'home' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /admin/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/admin/sites.py", line 213, in wrapper
+    return self.admin_view(view, cacheable)(*args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/cache.py", line 89, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/admin/sites.py", line 196, in inner
+    return view(request, *args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/cache.py", line 89, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/admin/sites.py", line 353, in index
+    model_dict['admin_url'] = reverse('admin:%s_%s_changelist' % info, current_app=self.name)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 447, in reverse
+    app_list = resolver.app_dict[ns]
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 290, in app_dict
+    self._populate()
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 253, in _populate
+    for name in pattern.reverse_dict:
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 276, in reverse_dict
+    self._populate()
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 265, in _populate
+    lookups.appendlist(pattern.callback, (bits, p_pattern, pattern.default_args))
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 124
+    rating_query =  Rating.objects.filter(cp_id__exact=cp_id))
+                                                             ^
+SyntaxError: invalid syntax
