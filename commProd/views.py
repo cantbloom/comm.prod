@@ -121,7 +121,7 @@ def processMail(request):
     return HttpResponse(resp, mimetype="text/plain")
 
 def getAvg(cp_id):
-    rating_query =  Rating.objects.filter(cp_id__exact=cp_id))
+    rating_query =  Rating.objects.filter(cp_id__exact=cp_id)
     total = sum(row.vote for row in rating_query)
     return total/len(rating_query)
 
