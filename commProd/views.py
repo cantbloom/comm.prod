@@ -4,7 +4,9 @@ from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
 from commProd.models import CommProd, Rating, UserProfile
+from commProd.forms import RegForm
 import re
+from django.core.context_processors import csrf
 from django.shortcuts import redirect
 import datetime
 from commerical_production.config import KEY
@@ -24,22 +26,42 @@ def home(request):
 """
 Registration page. Visitor arrives wih activation key
 """
+@csrf_exempt
 def register(request, key):
-    #check if key is valid and unregistered
-    try:
-        profile = UserProfile.objects.get(activation_key=key)
-        user = profile.user
-        if user.is_active:
-            return redirect('/')
+    #crf shit
+    #c = {}
+    #c.update(csrf(request))
 
-    except:
+    #check if key is valid and unregistered
+    profile = UserProfile.objects.filter(activation_key=key)
+    ##switch BACK DONT FORGET
+    if not profile.exists() or not profile[0].user.is_active:
         return redirect('/')
 
+    user = profile[0].user
+
+    if request.POST:
+        reg_form = RegForm(request.POST)
+        if reg_form.is_valid():
+            user.first_name = request.POST['first_name']
+            user.last_name = request.POST['last_name']
+            user.set_password(request.POST['password1'])
+            user.profile.alt_email = request.POST['alt_email']
+            user.profile.shirt_names = request.POST['shirt_name']
+            
+            user.save()
+            user.profile.save()
+            
+            return HttpResponse('valid', mimetype='text/plain')
+        
+    else:
+        reg_form = RegForm({})
 
     template_values = {
-        'key': key,
-        'email' : user.email
+        'form' : reg_form.as_ul(),
+        'user' : profile[0].user,
     }
+
     return render_to_response('register.html', template_values)
 
 
@@ -134,4 +156,3 @@ def getAvg(cp_id):
     rating_query =  Rating.objects.filter(cp_id__exact=cp_id)
     total = sum(row.vote for row in rating_query)
     return total/len(rating_query)
-
