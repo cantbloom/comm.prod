@@ -5,22 +5,25 @@ from commProd.models import UserProfile
  
 
 class RegForm(forms.Form):
-    first = forms.CharField()
-    last = forms.CharField()
-    shirt_name = forms.CharField()
-    alt_email = forms.EmailField(required=False)
-    password1 = forms.CharField( widget=forms.PasswordInput, label="Your Password" )
-    password2 = forms.CharField( widget=forms.PasswordInput, label="Your Password")
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label="")
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Last Name'}), label="")
+    shirt_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Shirt Names'}), label="")
+    alt_email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder' : 'Alternative Email'}), label="",
+        required=False)
+    password = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Password'}), label="" )
+    password_confirm = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Confirm Password'}), label="")
+
+    #first_name.widget.attrs.update({'placeholder' : 'First Name'})
 
     def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
+        password = self.cleaned_data.get('password')
+        password_confirm = self.cleaned_data.get('password_confirm')
 
-        if not password2:
+        if not password_confirm:
             raise forms.ValidationError("You must confirm your password")
-        if password1 != password2:
+        if password != password_confirm:
             raise forms.ValidationError("Your passwords do not match")
-        return password2
+        return password
 
     def clean_alt_email(self):
         data = self.cleaned_data['alt_email']

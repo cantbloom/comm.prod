@@ -1,0 +1,149 @@
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/public/js/jquery.min.js
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 41, in register
+    user = profile.user
+AttributeError: 'QuerySet' object has no attribute 'user'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/public/js/bootstrap-transition.js
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 41, in register
+    user = profile.user
+AttributeError: 'QuerySet' object has no attribute 'user'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/public/js/bootstrap-modal.js
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 41, in register
+    user = profile.user
+AttributeError: 'QuerySet' object has no attribute 'user'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/public/js/bootstrap-alert.js
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 41, in register
+    user = profile.user
+AttributeError: 'QuerySet' object has no attribute 'user'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/public/js/bootstrap-dropdown.js
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 41, in register
+    user = profile.user
+AttributeError: 'QuerySet' object has no attribute 'user'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/public/js/bootstrap-scrollspy.js
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 41, in register
+    user = profile.user
+AttributeError: 'QuerySet' object has no attribute 'user'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 41, in register
+    user = profile.user
+AttributeError: 'QuerySet' object has no attribute 'user'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 48, in register
+    user.password = request.POST['password']
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/datastructures.py", line 258, in __getitem__
+    raise MultiValueDictKeyError("Key %r not found in %r" % (key, self))
+MultiValueDictKeyError: "Key 'password' not found in <QueryDict: {u'shirt_name': [u'max'], u'password1': [u'abc'], u'first_name': [u'Max'], u'last_name': [u'Kanter'], u'password2': [u'abc'], u'alt_email': [u'm@m.om']}>"
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 7, in <module>
+    from commProd.forms import RegForm
+  File "/home/max/Desktop/comm-prod/commProd/forms.py", line 7, in <module>
+    class RegForm(forms.Form):
+  File "/home/max/Desktop/comm-prod/commProd/forms.py", line 12, in RegForm
+    password1 = forms.CharField( widget=forms.PasswordInput, placeholder="Your Password" )
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/fields.py", line 187, in __init__
+    super(CharField, self).__init__(*args, **kwargs)
+TypeError: __init__() got an unexpected keyword argument 'placeholder'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 7, in <module>
+    from commProd.forms import RegForm
+  File "/home/max/Desktop/comm-prod/commProd/forms.py", line 8
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label=""))
+                                                                                                        ^
+SyntaxError: invalid syntax
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/usr/local/lib/python2.7/dist-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/home/max/Desktop/comm-prod/commProd/views.py", line 7, in <module>
+    from commProd.forms import RegForm
+  File "/home/max/Desktop/comm-prod/commProd/forms.py", line 8
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'})), label="")
+                                                                                                        ^
+SyntaxError: invalid syntax

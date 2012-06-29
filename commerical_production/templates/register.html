@@ -3,9 +3,9 @@
 {% block content %} 
 	<p> Username: {{ user.username }} </p>
 	<p> email: {{ user.email }} </p>
-	<form method='post' action='/register/{{ user.profile.activation_key }}/' >
+	<form method='post' class="well form-inline" action='/register/{{ user.profile.activation_key }}/' >
 		{{ form }}
-		<input type="submit" value="Send" id="submit"/>
-	</form
+		<input class="btn btn-warning" type="submit" value="Submit" id="submit"/>
+	</form>
 	{{ test }}
 {% endblock%}

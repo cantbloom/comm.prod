@@ -38,13 +38,22 @@ def register(request, key):
     if not profile.exists() or not profile[0].user.is_active:
         return redirect('/')
 
+    user = profile[0].user
+
     if request.POST:
         reg_form = RegForm(request.POST)
         if reg_form.is_valid():
+            user.first_name = request.POST['first_name']
+            user.last_name = request.POST['last_name']
+            user.set_password(request.POST['password1'])
+            user.profile.alt_email = request.POST['alt_email']
+            user.profile.shirt_names = request.POST['shirt_name']
+            
+            user.save()
+            user.profile.save()
+            
             return HttpResponse('valid', mimetype='text/plain')
         
-        return HttpResponse('invalid', mimetype='text/plain')
-
     else:
         reg_form = RegForm({})
 
