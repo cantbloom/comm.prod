@@ -1,4 +1,4 @@
-#logo {
+.logo {
 	width:32px;
 	height:32px;
 }
@@ -19,4 +19,7 @@ body {
 	background: url(/public/images/bg_body.png) repeat top left;
 	padding-top: 40px;
 }
- 
+
+.footer {
+	font-size:12px;
+}
