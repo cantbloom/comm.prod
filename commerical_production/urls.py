@@ -9,7 +9,8 @@ urlpatterns = patterns('',
     url(r'^admin', include(admin.site.urls)),
 	url(r'^public/(?P<path>.*)$', 'django.views.static.serve',
 	 {'document_root': settings.MEDIA_ROOT}),
-    
+    (r'^login$', 'django.contrib.auth.views.login',
+     {'template_name': 'login.html'}),
 
     url(r'', include('commProd.urls')),
 )

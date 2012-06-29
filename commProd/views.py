@@ -49,7 +49,7 @@ User profile page,
 displays avg. overall score + list of commprods
 """
 @login_required
-def user(request, user_id):
+def profile(request, user_id=None, username=None):
     ##TODO
 
     template_values = {

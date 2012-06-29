@@ -525,3 +525,36 @@ Traceback (most recent call last):
   File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 10, in <module>
     from config import KEY
 ImportError: No module named config
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for ''django.contrib.auth.views.login'' with arguments '()' and keyword arguments '{}' not found.
