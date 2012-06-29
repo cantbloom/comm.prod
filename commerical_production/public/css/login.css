@@ -1,0 +1,27 @@
+#login {
+	background-color: #DDD;
+	padding: 15px;
+	border-radius: 5px;
+}
+input:focus{
+	box-shadow: 0px 0px 10px rgba(254,114,39, 0.6) !important;
+}
+input {
+	border:none !important;
+}
+
+#top_secret{
+	height:200px;
+	width: 200px;
+	background: url(/public/images/btb_confidential.jpg);
+	background-size: 200px 200px;
+	margin: 10px auto;
+}
+
+.well {
+	background-color: #fe7227;
+}
+
+.login_text {
+	padding-right:5px;
+}

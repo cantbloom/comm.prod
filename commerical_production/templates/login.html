@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+ 
+
+{% block styles %}
+
+{%  endblock %}
+{% block content %}
+    <link href="/public/css/login.css" rel="stylesheet">
+<div id="login_container" class="span4 offset4">
+	<div class="row">
+		<div id="top_secret"> </div>
+	</div>
+	<div class="row">
+		<form id="login" method="post" action="{% url django.contrib.auth.views.login %}">
+			{% csrf_token %}
+			{% if form.errors %}
+					<div class="alert alert-error">
+						Your username and password didn't match. <br> <strong> Please  try again.
+					</div>
+				{% endif %}
+
+			<table>
+			<tr>
+			    <td class="login_text">{{ form.username.label_tag }}</td>
+			    <td>{{ form.username }}</td>
+			</tr>
+			<tr>
+			    <td class="login_text">{{ form.password.label_tag }}</td>
+			    <td>{{ form.password }}</td>
+			</tr>
+				
+			</table>	
+
+			<input class="btn btn-warning"  type="submit" value="Login" />
+
+			<input type="hidden" name="next" value="{{ next }}" />
+		</form>
+	</div>
+
+</div>
+
+{% endblock %}
