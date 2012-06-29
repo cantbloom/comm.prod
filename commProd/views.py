@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
@@ -6,6 +7,7 @@ from commProd.models import CommProd, Rating, UserProfile
 import re
 from django.shortcuts import redirect
 import datetime
+from commerical_production.config import KEY
 
 """
 Landing page, top ten rated comm prods + ten newest commprods 
@@ -47,20 +49,21 @@ User profile page,
 displays avg. overall score + list of commprods
 """
 @login_required
-def user(request):
+def user(request, user_id):
     ##TODO
 
     template_values = {
 
     }
-    return render_to_response('commProd/user.html', template_values)
+    return render_to_response('profile.html', template_values)
 
 @login_required
 def search(request):
-    data  = 'a'
-    data = json.dumps(data)
 
-    return HttpResponse(data, mimetype='application/json')
+    template_values = {
+
+    }
+    return render_to_response('nothing.html', template_values)
 
 
 
@@ -92,10 +95,12 @@ def vote (request):
     return HttpResponse(data, mimetype='application/json') 
 
 
+@csrf_exempt
 def processMail(request):
-    data = request.POST["data"]
+    data = request.POST.get("data", None)
+    key = request.POST.get("key", None)
     resp = ""
-    if data:
+    if data and str(key) == KEY:
         data = json.loads(data) #[{sender : (content, comm_prods)}]
         for dic in data:
             sender = dic.keys()[0]
@@ -110,14 +115,19 @@ def processMail(request):
             elif alt_email_search.exists():
                 user_id = alt_email_search[0].user.id
             else:
-                resp += "User %s not found\n" % sender
+                resp += "\nUser %s not found\n" % sender
             
             if user_id:
+                resp += "\nUser %s found with comm prods:\n %s" % (sender, comm_prods)
                 for prod in comm_prods:
                     cp = CommProd(content=content, comm_prod=prod, author=user_id)
                     cp.save() 
+            
+    
     else:
         resp = "No data"
+        if str(key) != KEY:
+            resp = "Success!"
     return HttpResponse(resp, mimetype="text/plain")
 
 def getAvg(cp_id):
