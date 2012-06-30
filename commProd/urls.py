@@ -5,7 +5,6 @@ urlpatterns = patterns('commProd.views',
 		url(r'^processprod$', 'processMail'),
     url(r'^users/(?P<user_id>\d+)/$', 'profile'),
     url(r'^users/(?P<username>\w+)/$', 'profile'),
-    url(r'^invalid_reg$', 'invalid_reg'),
     url(r'^home$', 'home'),
     url(r'^$', 'home')
 )
