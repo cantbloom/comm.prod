@@ -1,7 +1,6 @@
 # Django settings for commerical_production project.
-from config import ADMIN_INFO, NAME, USER, PASSWORD, HOST, KEY
+from config import ADMIN_INFO, NAME, USER, PASSWORD, HOST, KEY, SENDGRID
 import os
-
 #custom auth by max
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
@@ -134,6 +133,14 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'commProd',
 )
+
+
+#email settings from sendgrid.com
+EMAIL_HOST = SENDGRID['EMAIL_HOST']
+EMAIL_HOST_USER = SENDGRID['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = SENDGRID['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = SENDGRID['EMAIL_PORT']
+EMAIL_USE_TLS = SENDGRID['EMAIL_USE_TLS']
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
