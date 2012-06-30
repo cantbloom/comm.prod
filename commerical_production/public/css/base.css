@@ -3,6 +3,7 @@
 }
 html, body {
 	height: 100%;
+	padding: 40px 0 0 0 ;
 }
 .wrapper {
 	min-height: 100%;
@@ -55,4 +56,8 @@ input {
 	background-color: #DDD;
     padding: 15px;
     border-radius: 5px;
+}
+
+.center-text{
+	text-align: center;
 }
