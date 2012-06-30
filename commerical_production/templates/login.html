@@ -2,11 +2,10 @@
  
 
 {% block styles %}
-
+    <link href="/public/css/login.css" rel="stylesheet">
 {%  endblock %}
 {% block content %}
-    <link href="/public/css/login.css" rel="stylesheet">
-<div id="login_container" class="span4 offset4">
+<div id="login_container" class="span3 offset4">
 	<div class="row">
 		<div id="top_secret"> </div>
 	</div>
@@ -17,26 +16,30 @@
 					<div class="alert alert-error">
 						Your username and password didn't match. <br> <strong> Please  try again.
 					</div>
-				{% endif %}
-
-			<table>
-			<tr>
-			    <td class="login_text">{{ form.username.label_tag }}</td>
-			    <td>{{ form.username }}</td>
-			</tr>
-			<tr>
-			    <td class="login_text">{{ form.password.label_tag }}</td>
-			    <td>{{ form.password }}</td>
-			</tr>
+			{% else %}
 				
-			</table>	
+			{% endif %}
 
-			<input class="btn btn-warning"  type="submit" value="Login" />
+			{{ form.username }}
+			{{ form.password }}
+			<br>
+			<input class="btn btn-warning" type="submit" value="Login" />
 
 			<input type="hidden" name="next" value="{{ next }}" />
 		</form>
 	</div>
 
 </div>
+
+{% endblock %}
+{% block scripts %} 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#id_username').attr('placeholder', 'Username');
+		$('#id_password').attr('placeholder', 'Password');
+		$('#page_title').html("Bomber Login");
+	});
+	
+</script>
 
 {% endblock %}

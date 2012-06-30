@@ -3,3 +3,5 @@
 *.pyc
 venv
 *.log
+bombers.txt
+config.py

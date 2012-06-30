@@ -15,6 +15,7 @@
 .nav_bg{
 	background: url(/public/images/bg_nav.png) repeat top left;
 }
+
 body {
 	background: url(/public/images/bg_body.png) repeat top left;
 	padding-top: 40px;
@@ -22,4 +23,8 @@ body {
 
 .footer {
 	font-size:12px;
+}
+
+.nav {
+	padding-top:2px;
 }

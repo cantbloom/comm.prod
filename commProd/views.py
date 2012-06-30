@@ -5,11 +5,12 @@ from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
 from commProd.models import CommProd, Rating, UserProfile
 from commProd.forms import RegForm
-import re
+from commerical_production.config import KEY
+from django.contrib.auth.views import login
 from django.core.context_processors import csrf
 from django.shortcuts import redirect
+import re
 import datetime
-from commerical_production.config import KEY
 
 """
 Landing page, top ten rated comm prods + ten newest commprods 
@@ -48,7 +49,7 @@ def register(request, key):
             user.set_password(request.POST['password1'])
             user.profile.alt_email = request.POST['alt_email']
             user.profile.shirt_names = request.POST['shirt_name']
-            
+            user.is_active = True
             user.save()
             user.profile.save()
             
