@@ -1,8 +1,10 @@
-{% extends "base.html" %}
+{% extends "hero_msg_template.html" %}
 
-{% block content %}
-<div class="hero-unit span4 offset3" style="position:relative;top:125px;">
-  <h2 id="hero"> Hmm... that registration key is invalid. </h2>
+{% block hero_title %} 
+ <h2> Hmm... that registration key is invalid. <h2>
+{% endblock %}
+
+{% block hero_content %} 
   <p> 
   	You can <a href="mailto:cantbloom@mit.edu"> email us </a> if you think this is an error.
    </p>
@@ -12,6 +14,7 @@
       Login
     </a>
   </p>
-</div>
+{% endblock %}
 
+{% block helper %}
 {% endblock %}

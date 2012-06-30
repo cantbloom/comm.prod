@@ -105,7 +105,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
@@ -113,6 +112,7 @@ ROOT_URLCONF = 'commerical_production.urls'
 LOGIN_REDIRECT_URL = "/home"
 LOGIN_URL = '/login'
 APPEND_SLASH=True
+SESSION_COOKIE_AGE = 31556926000 # 1 year in milliseconds so basically forever
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'commerical_production.wsgi.application'

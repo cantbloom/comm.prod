@@ -61,7 +61,13 @@ def register(request, key):
     return render_to_response('register.html', 
         template_values, context_instance=RequestContext(request))
 
+"""
+Helpful message for the retards of the world
+"""
 def invalid_reg(request):
+    if request.user.is_authenticated:
+        return redirect("/")
+
     template_values = {
         'page_title': "Oops",
         'user_profile' : "/users/" + request.user.username,
@@ -69,6 +75,7 @@ def invalid_reg(request):
 
     return render_to_response('invalid_reg.html', 
         template_values, context_instance=RequestContext(request))
+
 """
 Landing page, top ten rated comm prods + ten newest commprods 
 """
@@ -189,4 +196,6 @@ def processMail(request):
 def getAvg(cp_id):
     rating_query =  Rating.objects.filter(cp_id__exact=cp_id)
     total = sum(row.vote for row in rating_query)
-    return float(total/len(rating_query))
+    if len(rating_query) != 0:
+        return float(total/len(rating_query))
+    return 0
