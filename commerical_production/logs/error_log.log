@@ -1329,3 +1329,12 @@ Traceback (most recent call last):
   File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 3, in <module>
     from django.shortcuts import render_to_response, get_object_or_404, HttpResponse, HttpResponseNotFound
 ImportError: cannot import name HttpResponseNotFound
+Internal Server Error: /users/joshblum/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 103, in profile
+    "page_title": user.username +"'s Profile",
+AttributeError: 'QuerySet' object has no attribute 'username'
