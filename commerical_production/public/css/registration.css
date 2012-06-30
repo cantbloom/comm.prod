@@ -1,0 +1,10 @@
+#reg_div {
+	margin-top:150px;
+    font-size:15px;
+}
+ul.errorlist {
+    display:none;
+}
+ul, li {
+    list-style-type: none;
+}
