@@ -1,13 +1,29 @@
-{% extends "base.html" %}
+{% extends "hero_msg_template.html" %}
 
-{% block content %}
-<div class="hero-unit span6 offset2 row">
-  <h1>Sorry to see you...</h1>
-  <p>Go that is. Come back soon.</p>
-  <p>
-    <a class="btn btn-primary btn-large" href="/login">
-      Login Again
-    </a>
-  </p>
-</div>
+    {% block hero_content %} 
+        <p> Come back soon. </p>
+          <p>
+            <a class="btn btn-primary btn-large" href="/login">
+              Login Again
+            </a>
+          </p>
+     {% endblock %}
+
+{% block scripts %} 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#page_title').html("Logged Out");
+		$('#hero').html(setHero());
+	});
+
+	function setHero() {
+		var byes = ['Godspeed ', 'Buhbyes', 'Talk to you later', 'Ta ta for now', 'Ciao', 'Sayanora', 'See ya', 'Live long and prosper', 'Cheerio', "Y'all come back soon now", 'So long', 'Farewell', 'Bon voyage', 'May the Force be with you', 'Shalom', 'Peace out', 'Be well, fellow citizen', 'Adios', 'Kkkkk...out', 'Stay cool, home-brotha', 'Avrio', 'That is all', 'No more of you'];
+			
+			return byes[Math.floor(Math.random()*byes.length)];
+	}
+
+</script>
+
 {% endblock %}
+
+

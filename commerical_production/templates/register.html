@@ -1,11 +1,46 @@
 {% extends "base.html" %}
 
+
+{% block styles %}
+    <link href="/public/css/registration.css" rel="stylesheet">
+{%  endblock %}
 {% block content %} 
-	<p> Username: {{ user.username }} </p>
-	<p> email: {{ user.email }} </p>
-	<form method='post' class="well form-inline" action='/register/{{ user.profile.activation_key }}/' >
-		{{ form }}
-		<input class="btn btn-warning" type="submit" value="Submit" id="submit"/>
-	</form>
-	{{ test }}
+
+    <div id="reg_div" class="row">
+        <div class="span3 offset4 form">
+            <p> <strong> Username: </strong> {{ user.username }} </p>
+            <p> <strong> Email: </strong> {{ user.email }} </p>
+            <form method='post' action='/register/{{ user.profile.activation_key }}/' >
+                {{ form.as_ul }}
+                <input class="btn btn-warning" type="submit" value="Submit" id="submit"/>
+            </form>
+        </div>
+        {% if form.errors %}
+            <div class="alert alert-error span2">
+                {% for key, value in form.errors.items %}
+                    <p> {{  key }} : {{ value }} </p>
+                {% endfor %}
+            </div>
+
+        {% endif %}
+    </div>
+
 {% endblock%}
+
+{% block scripts %} 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#id_alt_email').tooltip({
+            "placement" : "right",
+            "title" : "Important! Put your gmail or anything you use to send emails to the floor.",
+            "trigger" : "focus"
+        });
+        $('#id_shirt_name').tooltip({
+            "placement" : "right",
+            "title" : "Be Honest :)",
+            "trigger" : "focus"
+        });
+    });
+    
+</script>
+{% endblock %}
