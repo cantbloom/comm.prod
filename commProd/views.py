@@ -93,15 +93,16 @@ def profile(request, user_id=None, username=None):
     if user_id and User.objects.filter(id=user_id).exists():
         user = User.objects.filter(id=user_id)[0]
     elif username and User.objects.filter(username=username).exists():
-        user = User.objects.filter(username=username)
+        user = User.objects.filter(username=username)[0]
     else:
         raise Http404
     
-    
+    commprods = CommProd.objects.filter(author=user.id)
 
     template_values = {
         "page_title": user.username +"'s Profile",
         'user_profile' : "/users/" + request.user.username,
+        'commprods' : commprods,
 
     }
     return render_to_response('profile.html', 

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import simplejson as json
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from datetime import date
 # Create your models here.
 
 class CommProd(models.Model):
@@ -12,7 +13,7 @@ class CommProd(models.Model):
 	date = models.DateTimeField(auto_now=True)
 
 	def __unicode__(self):
-		return 'a btb "%s" comm.prod by %s on %s' % (self.comm_prod, self.author, self.date)
+		return 'a btb "%s" comm.prod by %s on %s' % (self.comm_prod, self.author, str(self.date))
 
 class Rating(models.Model):
 	cp_id = models.IntegerField() # comm prod id
