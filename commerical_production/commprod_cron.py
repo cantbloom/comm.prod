@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#! /usr/bin/env python
 
 ##cron tab prefs
 #* * * * * /path/to/commprod_cron.py
@@ -121,4 +121,4 @@ def get_first_text_block(email_message_instance):
     elif maintype == 'text':
         return email_message_instance.get_payload()
 
-post_prods()
+#post_prods()
