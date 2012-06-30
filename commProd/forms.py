@@ -1,12 +1,11 @@
 from django import forms
 from django.core import validators
 from commProd.models import UserProfile
- 
 
 class RegForm(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label="")
     last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Last Name'}), label="")
-    shirt_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Comma, eparated, shirt names'}), label="")
+    shirt_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Comma separated, shirt names'}), label="")
     alt_email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder' : 'Alternative Email'}), label="",
         required=False)
     password = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Password'}), label="" )
