@@ -12,6 +12,7 @@ from django.template import RequestContext
 from django.http import Http404
 import re
 import datetime
+import random
 
 
 """
@@ -62,7 +63,7 @@ def register(request, key):
         template_values, context_instance=RequestContext(request))
 
 """
-Helpful message for the retards of the world
+Helpful message for the retards
 """
 def invalid_reg(request):
     if request.user.is_authenticated:
@@ -70,7 +71,7 @@ def invalid_reg(request):
 
     template_values = {
         'page_title': "Oops",
-        'user_profile' : "/users/" + request.user.username,
+        'user_profile' : "/",
     }
 
     return render_to_response('invalid_reg.html', 
@@ -106,10 +107,13 @@ def profile(request, user_id=None, username=None):
     
     commprods = CommProd.objects.filter(author=user.id)
 
+
+    page_username = getUsername(user)
     template_values = {
         "page_title": user.username +"'s Profile",
         'user_profile' : "/users/" + request.user.username,
         'commprods' : commprods,
+        'username' : page_username
 
     }
     return render_to_response('profile.html', 
@@ -192,10 +196,41 @@ def processMail(request):
             resp = "Success!"
     return HttpResponse(resp, mimetype="text/plain")
 
+#########HELPERS###################
 
+"""
+Returns a username to be rendered choosing randomly between
+first + last, username, and a shirt first_name.
+"""
+def getUsername(user):
+    potentials = json.loads(user.shirt_names)
+    potentials.append(user.first_name + user.last_name)
+    potentials.append(user.username)
+    return random.choice(potentials)
+
+"""
+Gets the avg rating of the commprod.
+Updates the CommProd object to reflect the
+latest average. cp_id is assumed to be
+a valid id (object exists)
+"""
 def getAvg(cp_id):
     rating_query =  Rating.objects.filter(cp_id__exact=cp_id)
     total = sum(row.vote for row in rating_query)
     if len(rating_query) != 0:
-        return float(total/len(rating_query))
-    return 0
+        avg = float(total/len(rating_query))
+    else:
+        avg = 0
+
+    prod = CommProd.objects.filter(cp_id=cp_id)[0]
+    prod.update(score=avg)
+    prod.save()
+    return avg
+"""
+Returns a tuple of (user, prod, date)
+With the username given and the date formatted
+as mm-dd
+"""
+def getCommProd(cp_id):
+    pass
+
