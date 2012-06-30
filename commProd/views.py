@@ -6,23 +6,13 @@ from django.contrib.auth.decorators import login_required
 from commProd.models import CommProd, Rating, UserProfile
 from commProd.forms import RegForm
 from commerical_production.config import KEY
-from django.contrib.auth.views import login
 from django.core.context_processors import csrf
 from django.shortcuts import redirect
+from django.template import RequestContext
+from django.http import Http404
 import re
 import datetime
 
-"""
-Landing page, top ten rated comm prods + ten newest commprods 
-"""
-@login_required
-def home(request):
-
-    ##TODO
-    template_values = {
-
-    }
-    return render_to_response('home.html', template_values)
 
 """
 Registration page. Visitor arrives wih activation key
@@ -33,11 +23,14 @@ def register(request, key):
     #c = {}
     #c.update(csrf(request))
 
+    ##switch BACK DONT FORGET
+    if not request.user.is_authenticated:
+        return redirect("/")
     #check if key is valid and unregistered
     profile = UserProfile.objects.filter(activation_key=key)
     ##switch BACK DONT FORGET
-    if not profile.exists() or not profile[0].user.is_active:
-        return redirect('/')
+    if not profile.exists() or profile[0].user.is_active:
+        return redirect('/invalid_reg')
 
     user = profile[0].user
 
@@ -46,7 +39,7 @@ def register(request, key):
         if reg_form.is_valid():
             user.first_name = request.POST['first_name']
             user.last_name = request.POST['last_name']
-            user.set_password(request.POST['password1'])
+            user.set_password(request.POST['password'])
             user.profile.alt_email = request.POST['alt_email']
             user.profile.shirt_names = request.POST['shirt_name']
             user.is_active = True
@@ -56,15 +49,39 @@ def register(request, key):
             return HttpResponse('valid', mimetype='text/plain')
         
     else:
-        reg_form = RegForm({})
+        reg_form = RegForm()
 
     template_values = {
-        'form' : reg_form.as_ul(),
-        'user' : profile[0].user,
+        'page_title': "Registration",
+        'form' : reg_form,
+        'user' : user,
+        'user_profile' : "/users/" + request.user.username,
     }
 
-    return render_to_response('register.html', template_values)
+    return render_to_response('register.html', 
+        template_values, context_instance=RequestContext(request))
 
+def invalid_reg(request):
+    template_values = {
+        'page_title': "Oops",
+        'user_profile' : "/users/" + request.user.username,
+    }
+
+    return render_to_response('invalid_reg.html', 
+        template_values, context_instance=RequestContext(request))
+"""
+Landing page, top ten rated comm prods + ten newest commprods 
+"""
+@login_required
+def home(request):
+
+    
+    template_values = {
+        'page_title' : "Home",
+        'user_profile' : "/users/" + request.user.username,
+    }
+    return render_to_response('home.html', 
+        template_values, context_instance=RequestContext(request))
 
 
 """
@@ -73,20 +90,36 @@ displays avg. overall score + list of commprods
 """
 @login_required
 def profile(request, user_id=None, username=None):
-    ##TODO
+    if user_id and User.objects.filter(id=user_id).exists():
+        user = User.objects.filter(id=user_id)[0]
+    elif username and User.objects.filter(username=username).exists():
+        user = User.objects.filter(username=username)
+    else:
+        raise Http404
+    
+    
 
     template_values = {
+        "page_title": user.username +"'s Profile",
+        'user_profile' : "/users/" + request.user.username,
 
     }
-    return render_to_response('profile.html', template_values)
+    return render_to_response('profile.html', 
+        template_values, context_instance=RequestContext(request))
+
+
 
 @login_required
 def search(request):
 
     template_values = {
 
+        "page_title": request.users.username +"'s Profile",
+        'user_profile' : "/users/" + request.user.username,
+
     }
-    return render_to_response('nothing.html', template_values)
+    return render_to_response('nothing.html',
+     template_values, context_instance=RequestContext(request))
 
 
 
@@ -145,15 +178,14 @@ def processMail(request):
                 for prod in comm_prods:
                     cp = CommProd(content=content, comm_prod=prod, author=user_id)
                     cp.save() 
-            
-    
     else:
         resp = "No data"
         if str(key) != KEY:
             resp = "Success!"
     return HttpResponse(resp, mimetype="text/plain")
 
+
 def getAvg(cp_id):
     rating_query =  Rating.objects.filter(cp_id__exact=cp_id)
     total = sum(row.vote for row in rating_query)
-    return total/len(rating_query)
+    return float(total/len(rating_query))

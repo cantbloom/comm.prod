@@ -1,3 +1,19 @@
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -3em;
+}
+.footer, .push {
+	height: 2em;
+}
+
 .logo {
 	width:32px;
 	height:32px;
@@ -13,12 +29,12 @@
 }
 
 .nav_bg{
-	background: url(/public/images/bg_nav.png) repeat top left;
+	background: url(/public/img/bg_nav.png) repeat top left;
 }
 
 body {
-	background: url(/public/images/bg_body.png) repeat top left;
-	padding-top: 40px;
+	background: url(/public/img/bg_body.png) repeat top left;
+	
 }
 
 .footer {
@@ -27,4 +43,16 @@ body {
 
 .nav {
 	padding-top:2px;
+}
+
+input:focus{
+	box-shadow: 0px 0px 10px rgba(254,114,39, 0.6) !important;
+}
+input {
+	border:none !important;
+}
+.form {
+	background-color: #DDD;
+    padding: 15px;
+    border-radius: 5px;
 }

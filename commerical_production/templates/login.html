@@ -5,41 +5,43 @@
     <link href="/public/css/login.css" rel="stylesheet">
 {%  endblock %}
 {% block content %}
+{% if user.is_authenticated %}
+     <meta http-equiv="REFRESH" content="0;url=/home">
+{% endif %}
 <div id="login_container" class="span3 offset4">
-	<div class="row">
-		<div id="top_secret"> </div>
-	</div>
-	<div class="row">
-		<form id="login" method="post" action="{% url django.contrib.auth.views.login %}">
-			{% csrf_token %}
-			{% if form.errors %}
-					<div class="alert alert-error">
-						Your username and password didn't match. <br> <strong> Please  try again.
-					</div>
-			{% else %}
-				
-			{% endif %}
+    <div class="row">
+        <div id="top_secret"> </div>
+    </div>
+    <div class="row">
+        <form class="form" method="post" action="{% url django.contrib.auth.views.login %}">
+            {% csrf_token %}
+            {% if form.errors %}
+                    <div class="alert alert-error">
+                        Your username and password didn't match. Please try again.
+                    </div>
 
-			{{ form.username }}
-			{{ form.password }}
-			<br>
-			<input class="btn btn-warning" type="submit" value="Login" />
+            {% endif %}
 
-			<input type="hidden" name="next" value="{{ next }}" />
-		</form>
-	</div>
+            {{ form.username }}
+            {{ form.password }}
+            <br>
+            <input class="btn btn-warning" type="submit" value="Login" />
+
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+    </div>
 
 </div>
 
 {% endblock %}
 {% block scripts %} 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#id_username').attr('placeholder', 'Username');
-		$('#id_password').attr('placeholder', 'Password');
-		$('#page_title').html("Bomber Login");
-	});
-	
+    $(document).ready(function() {
+        $('#id_username').attr('placeholder', 'Username');
+        $('#id_password').attr('placeholder', 'Password');
+        $('#page_title').html("CommProd Login");
+    });
+    
 </script>
 
 {% endblock %}
