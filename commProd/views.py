@@ -24,13 +24,15 @@ def register(request, key):
     #c = {}
     #c.update(csrf(request))
 
-    ##switch BACK DONT FORGET
+    #check if user is logged in
     if not request.user.is_authenticated:
         return redirect("/")
-    #check if key is valid and unregistered
+
+
+    #grab user profile, check if they are already registeded
     profile = UserProfile.objects.filter(activation_key=key)
     ##switch BACK DONT FORGET
-    if not profile.exists() or profile[0].user.is_active:
+    if not profile.exists() or not profile[0].user.is_active:
         return redirect('/invalid_reg')
 
     user = profile[0].user
