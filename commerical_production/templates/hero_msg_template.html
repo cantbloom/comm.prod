@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-unit span4 offset3" style="position:relative;top:200px;background-color:#DDD;">
+  <h1 id="hero"> {% block hero_title %} {% endblock%} </h1>
+  {% block hero_content %} 
+  <p> 
+    Looks like an error. We couldn't find the page you requested.
+   </p>
+   <p> 
+    Head back <a href="/"> home</a> or <a href="mailto:cantbloom@mit.edu"> email us </a> if this is a bug.
+   </p>
+   {% endblock %}
+</div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var error_val = $("#hero").text(); 
+    $('#page_title').html(error_val + " Error");
+    $('#user_prof').attr("href", "/");
+  });
+
+</script>
+{% endblock %}
