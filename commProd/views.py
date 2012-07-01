@@ -128,7 +128,8 @@ def profile(request, user_id=None, username=None):
 def search(request, title, **kwargs):
     template_values = {
         "page_title": title,
-        'commprods' : commprod_search(**kwards)
+        "user": request.user,
+        'commprods' : commprod_search(**kwargs)
     }
 
     return render_to_response('search.html', template_values, context_instance=RequestContext(request))

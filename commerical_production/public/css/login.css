@@ -1,6 +1,4 @@
 #login_container {
-    position:relative;
-    left:30px;
 }
 
 
@@ -10,9 +8,17 @@
     background: url(/public/img/btb_confidential.jpg);
     background-size: 200px 200px;
     margin: 10px auto;
-    margin-top: 100px;
 }
 
 .login_text {
     padding-right:5px;
+}
+
+.form>p {
+	padding: 0px;
+	margin: 0px;
+}
+
+.form input{
+	width:90%;
 }

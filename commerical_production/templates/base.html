@@ -1,158 +1,154 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title id="page_title">{{ page_title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <head>
+        <meta charset="utf-8">
+        <title id="page_title">{{ page_title }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <!--  styles -->
-    {% load staticfiles %}
-    <link href="/public/css/bootstrap.css" rel="stylesheet">
-    <link href="/public/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="/public/css/base.css" rel="stylesheet">
-    {% block styles %} {% endblock%}
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+        <!--  styles -->
+        {% load staticfiles %}
+        <link href="/public/css/bootstrap.css" rel="stylesheet">
+        <link href="/public/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="/public/css/base.css" rel="stylesheet">
+        {% block styles %} {% endblock%}
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
 
-    <link rel="shortcut icon" href="/public/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/img/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/public/img/apple-touch-icon-114-precomposed.png">
-    <link rel="public/apple-touch-icon-precomposed" sizes="72x72" href="/public/img/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="public/img/apple-touch-icon-57-precomposed.png">
-  </head>
+        <link rel="shortcut icon" href="/public/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/img/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/public/img/apple-touch-icon-114-precomposed.png">
+        <link rel="public/apple-touch-icon-precomposed" sizes="72x72" href="/public/img/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="public/img/apple-touch-icon-57-precomposed.png">
+    </head>
 
-  <body>
+    <body>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner nav_bg">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="/">
-            a
-            <img class="logo" src="/public/img/btb.png"/>
-            comm.prod 
-          </a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class={{ home }}>
-                <a href="#">Home</a>
-              </li>
-              <li class={{ popular }}>
-                <a href="#">Popular</a>
-              </li>
-              <li class={{ recent }}>
-                <a href="#">Recent</a>
-              </li>
-              <li class={{ profile }}>
-                 <a id="user_prof" href={{user_profile}}>Profile </a>
-              </li>
-
-               {% if not user.is_authenticated %}
-                <li>
-                  <a href={% url django.contrib.auth.views.login %}> Login </a>
-                </li>
-              {% endif %}
-            </ul>
-            <ul class="nav pull-right">
-              <li>
-                <form class="navbar-search  ">
-                  <input type="text" class="search-query" placeholder="Find people...">
-                </form>
-              </li>
-              <li class="divider-vertical"></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      Account
-                      <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                     <a href="/">
-                      <i class="icon-wrench"></i> 
-                      Edit Profile
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner nav_bg">
+                <div class="container">
+                    <a class="brand" href="/">
+                        a
+                        <img class="logo" src="/public/img/btb.png"/>
+                        comm.prod 
                     </a>
-                  </li>
-                  <li>
-                     <a href="mailto:cantbloom@mit.edu">
-                      <i class="icon-envelope"></i> 
-                      Send Feedback
-                    </a>
-                  </li>
                     {% if user.is_authenticated %}
-                      <li class="divider"></li>
-                      <li>
-                        <a href={% url django.contrib.auth.views.logout %}> Logout </a>
-                      </li>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class={{ home }}>
+                                <a href="/">Home</a>
+                            </li>
+                            <li class={{ popular }}>
+                                <a href="/popular">Popular</a>
+                            </li>
+                            <li class={{ recent }}>
+                                <a href="/recent">Recent</a>
+                            </li>
+                            <li class={{ profile }}>
+                                 <a id="user_prof" href=/{{user.username}}>Profile </a>
+                            </li>
+                        </ul>
+                        <ul class="nav pull-right">
+                            <li>
+                                <form class="navbar-search  ">
+                                    <input type="text" class="search-query" placeholder="Find people...">
+                                </form>
+                            </li>
+                            <li class="divider-vertical"></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            Account
+                                            <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                         <a href="/">
+                                            <i class="icon-wrench"></i> 
+                                            Edit Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                         <a href="mailto:cantbloom@mit.edu">
+                                            <i class="icon-envelope"></i> 
+                                            Send Feedback
+                                        </a>
+                                    </li>
+                                        {% if user.is_authenticated %}
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href={% url django.contrib.auth.views.logout %}> Logout </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
                     {% endif %}
-                  </ul>
-              </li>
-            </ul>
-          </div><!--/.nav-collapse -->
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="container wrapper">
-      {% block content %} {% endblock%}
-    
-    <div class="push"></div>
-    </div> <!-- /container -->
+        <div class="container wrapper">
+            {% block content %} {% endblock%}
+        
+        <!-- <div class="push"></div> -->
+        </div> <!-- /container -->
 
-    <div class="navbar footer">
-      <div class="navbar-inner">
-        <div class="container pull-right">
-            <ul class="nav">
-              <li>
-                <a href="http://github.com/cantbloom">
-                  A CantBloom Project
-                </a>
-              </li>
-              <li> <a>|</a> </li>
-              <li>
-                <a href="mailto:avianap@mit.edu">
-                  Avi Ideas
-                </a>
-              </li>
-              <li> <a>|</a> </li>
-              <li>
-                <a href="mailto:cantbloom@mit.edu">
-                  Contact
-                </a>
-              </li>
-              <li> <a>|</a> </li>
-              <li>
-                <a href="twitter.com/cantbloom">
-                  @cantbloom
-                </a>
-              </li>
-            </ul>
-        </div>
-      </div>
-    </div>
-    <!--  javascript leave everything imported for dev,
-    cleanup for production-->
-    <script src="/public/js/jquery.min.js"></script>
-    <script src="/public/js/bootstrap-transition.js"></script>
-    <script src="/public/js/bootstrap-alert.js"></script>
-    <script src="/public/js/bootstrap-modal.js"></script>
-    <script src="/public/js/bootstrap-dropdown.js"></script>
-    <script src="/public/js/bootstrap-scrollspy.js"></script>
-    <script src="/public/js/bootstrap-tab.js"></script>
-    <script src="/public/js/bootstrap-tooltip.js"></script>
-    <script src="/public/js/bootstrap-popover.js"></script>
-    <script src="/public/js/bootstrap-button.js"></script>
-    <script src="/public/js/bootstrap-collapse.js"></script>
-    <script src="/public/js/bootstrap-carousel.js"></script>
-    <script src="/public/js/bootstrap-typeahead.js"></script>
-    {% block scripts %} {% endblock %}
-  </body>
+        <!-- <div class="navbar footer">
+            <div class="navbar-inner">
+                <div class="container pull-right">
+                        <ul class="nav">
+                            <li>
+                                <a href="http://github.com/cantbloom">
+                                    A CantBloom Project
+                                </a>
+                            </li>
+                            <li> <a>|</a> </li>
+                            <li>
+                                <a href="mailto:avianap@mit.edu">
+                                    Avi Ideas
+                                </a>
+                            </li>
+                            <li> <a>|</a> </li>
+                            <li>
+                                <a href="mailto:cantbloom@mit.edu">
+                                    Contact
+                                </a>
+                            </li>
+                            <li> <a>|</a> </li>
+                            <li>
+                                <a href="twitter.com/cantbloom">
+                                    @cantbloom
+                                </a>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </div> -->
+        <!--  javascript leave everything imported for dev,
+        cleanup for production-->
+        <script src="/public/js/jquery.min.js"></script>
+        <script src="/public/js/bootstrap-transition.js"></script>
+        <script src="/public/js/bootstrap-alert.js"></script>
+        <script src="/public/js/bootstrap-modal.js"></script>
+        <script src="/public/js/bootstrap-dropdown.js"></script>
+        <script src="/public/js/bootstrap-scrollspy.js"></script>
+        <script src="/public/js/bootstrap-tab.js"></script>
+        <script src="/public/js/bootstrap-tooltip.js"></script>
+        <script src="/public/js/bootstrap-popover.js"></script>
+        <script src="/public/js/bootstrap-button.js"></script>
+        <script src="/public/js/bootstrap-collapse.js"></script>
+        <script src="/public/js/bootstrap-carousel.js"></script>
+        <script src="/public/js/bootstrap-typeahead.js"></script>
+        {% block scripts %} {% endblock %}
+    </body>
 </html>
