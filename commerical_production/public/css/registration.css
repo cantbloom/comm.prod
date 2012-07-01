@@ -1,20 +1,16 @@
 #reg-header-text{
 	margin-bottom:20px;
 }
-#reg_div {
-    font-size:15px;
-}
 
 #known-info{
-	font-size: 2em;
+	font-size: 1.5em;
 	margin-top: 10px;
 }
 
 #reg-form input {
 	width:80%;
-	margin: 5px 10%;
-	height:1.5em;
-	font-size: 1.5em;
+	margin: 3px 10%;
+	font-size: 1.1em;
 }
 
 ul.errorlist {
