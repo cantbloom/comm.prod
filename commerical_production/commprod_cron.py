@@ -20,8 +20,8 @@ are present. Logs endpoint response
 """
 def post_prods():
     prods = fetch_mail()
-    #url = "http://localhost:5000/processprod"
-    url = "http://comm-prod.herokuapp.com/processprod"
+    url = "http://localhost:5000/processprod"
+    #url = "http://comm-prod.herokuapp.com/processprod"
     if prods:
         data = json.dumps(prods)
         r = requests.post(url, data={'data' : data, 'key' : SECRET_KEY})

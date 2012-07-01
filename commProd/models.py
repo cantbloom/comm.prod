@@ -61,6 +61,6 @@ def update_commprod_avg (sender, instance, **kwargs):
 	instance.commprod.update_avg()
 
 
-post_save.connect(update_commprod_avg, sender=Rating)
+#post_save.connect(update_commprod_avg, sender=Rating)
 
 User.profile = property(lambda u: u.get_profile() )
