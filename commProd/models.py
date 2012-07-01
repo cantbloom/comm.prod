@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     avg_score = models.FloatField(default=0.0)
 
     def update_avg(self):
-        self.avg_score = Rating.objects.get(user=self.user).aggregate(Avg('score'))
+        self.avg_score = Rating.objects.filter(commprod__user=self.user).aggregate(Avg('score'))['score__avg']
         self.save()
 
     """
@@ -52,7 +52,7 @@ class CommProd(models.Model):
 	date = models.DateTimeField(auto_now=True)
 
 	def update_avg(self):
-		self.avg_score = Rating.objects.get(commprod=self).aggregate(Avg('score'))
+		self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
 		self.save()
 
 	def __unicode__(self):
