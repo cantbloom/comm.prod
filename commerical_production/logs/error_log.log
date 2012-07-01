@@ -367,3 +367,179 @@ Traceback (most recent call last):
   File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/helpers/admin/utils.py", line 6, in <module>
     from commerical_production.email_templates import registration
 ImportError: No module named email_templates
+Internal Server Error: /admincommProd/rating/add/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 366, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/cache.py", line 89, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/sites.py", line 196, in inner
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 21, in bound_func
+    return func(self, *args2, **kwargs2)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/transaction.py", line 209, in inner
+    return func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 955, in add_view
+    self.save_model(request, new_object, form, False)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 709, in save_model
+    obj.save()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 463, in save
+    self.save_base(using=using, force_insert=force_insert, force_update=force_update)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 565, in save_base
+    created=(not record_exists), raw=raw, using=using)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/dispatch/dispatcher.py", line 172, in send
+    response = receiver(signal=self, sender=sender, **named)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/signals.py", line 11, in post_save_ratings
+    instance.commprod.update_avg()
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/models.py", line 55, in update_avg
+    self.avg_score = Rating.objects.get(commprod=self).aggregate(Avg('score'))
+AttributeError: 'Rating' object has no attribute 'aggregate'
+Internal Server Error: /admincommProd/rating/add/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 366, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/cache.py", line 89, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/sites.py", line 196, in inner
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 21, in bound_func
+    return func(self, *args2, **kwargs2)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/transaction.py", line 209, in inner
+    return func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 955, in add_view
+    self.save_model(request, new_object, form, False)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 709, in save_model
+    obj.save()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 463, in save
+    self.save_base(using=using, force_insert=force_insert, force_update=force_update)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 565, in save_base
+    created=(not record_exists), raw=raw, using=using)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/dispatch/dispatcher.py", line 172, in send
+    response = receiver(signal=self, sender=sender, **named)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/signals.py", line 11, in post_save_ratings
+    instance.commprod.update_avg()
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/models.py", line 56, in update_avg
+    self.save()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 463, in save
+    self.save_base(using=using, force_insert=force_insert, force_update=force_update)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 529, in save_base
+    rows = manager.using(using).filter(pk=pk_val)._update(values)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py", line 557, in _update
+    return query.get_compiler(self.db).execute_sql(None)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 986, in execute_sql
+    cursor = super(SQLUpdateCompiler, self).execute_sql(result_type)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 808, in execute_sql
+    sql, params = self.as_sql()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 951, in as_sql
+    val = field.get_db_prep_save(val, connection=self.connection)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 292, in get_db_prep_save
+    prepared=False)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 284, in get_db_prep_value
+    value = self.get_prep_value(value)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/fields/__init__.py", line 937, in get_prep_value
+    return float(value)
+TypeError: float() argument must be a string or a number
+Internal Server Error: /admincommProd/rating/add/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 366, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/cache.py", line 89, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/sites.py", line 196, in inner
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 21, in bound_func
+    return func(self, *args2, **kwargs2)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/transaction.py", line 209, in inner
+    return func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 955, in add_view
+    self.save_model(request, new_object, form, False)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 709, in save_model
+    obj.save()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 463, in save
+    self.save_base(using=using, force_insert=force_insert, force_update=force_update)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 565, in save_base
+    created=(not record_exists), raw=raw, using=using)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/dispatch/dispatcher.py", line 172, in send
+    response = receiver(signal=self, sender=sender, **named)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/signals.py", line 11, in post_save_ratings
+    instance.commprod.update_avg()
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/models.py", line 55, in update_avg
+    self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score']
+KeyError: 'score'
+Internal Server Error: /admincommProd/rating/5/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 366, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/cache.py", line 89, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/sites.py", line 196, in inner
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 25, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 21, in bound_func
+    return func(self, *args2, **kwargs2)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/transaction.py", line 209, in inner
+    return func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 1054, in change_view
+    self.save_model(request, new_object, form, True)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/admin/options.py", line 709, in save_model
+    obj.save()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 463, in save
+    self.save_base(using=using, force_insert=force_insert, force_update=force_update)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 565, in save_base
+    created=(not record_exists), raw=raw, using=using)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/dispatch/dispatcher.py", line 172, in send
+    response = receiver(signal=self, sender=sender, **named)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/signals.py", line 12, in post_save_ratings
+    instance.user.profile.update_avg()
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/models.py", line 20, in update_avg
+    self.save()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 463, in save
+    self.save_base(using=using, force_insert=force_insert, force_update=force_update)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py", line 529, in save_base
+    rows = manager.using(using).filter(pk=pk_val)._update(values)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py", line 557, in _update
+    return query.get_compiler(self.db).execute_sql(None)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 986, in execute_sql
+    cursor = super(SQLUpdateCompiler, self).execute_sql(result_type)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 818, in execute_sql
+    cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/backends/util.py", line 40, in execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/backends/mysql/base.py", line 114, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/cursors.py", line 176, in execute
+    if not self._defer_warnings: self._warning_check()
+  File "/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/cursors.py", line 92, in _warning_check
+    warn(w[-1], self.Warning, 3)
+Warning: Column 'avg_score' cannot be null
