@@ -3,9 +3,12 @@ from django.db import IntegrityError
 import os, sha, random
 
 """
-ssh to athena and blanche bombers > bombers.txt
+ssh to athena and:
 
-use this to add new users the database each year
+blanche bombers > bombers.txt
+blanche btb-alum >> bombers.txt
+
+Use this to add new users the database each year:
 
 python manage.py shell
 
