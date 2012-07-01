@@ -1,29 +1,38 @@
+########## Django settings ###########
+
 ADMIN_INFO = (
     ('Joshua Blum', 'joshblum@mit.edu'),
     ('Max Kanter', 'kanter@mit.edu'),
 )
 
-
-##DATABASE INFO
-NAME = 'joshblum+comm.prod'
-USER = 'joshblum'
-PASSWORD = 'sfbombers'
-HOST = 'sql.mit.edu'
-
 SECRET_KEY = 'mya95^-vjyf5q*8_=6xpgizqbxb*l73%9@ddj3t28*t2avsmma'
+PASSWORD = 'sfbombers'
 
-EMAIL = "commericalproduction@gmail.com"
 
+######## MYSQL #########
+
+MYSQL = {
+    'NAME' : 'joshblum+comm.prod',
+    'USER' : 'joshblum',
+    'PASSWORD' : PASSWORD,
+    'HOST' : 'sql.mit.edu',
+}
 
 
 ############## xvm server #############
 XVM = {
     'XVM_ADDR' : 'commprod.xvm.mit.edu',
     'XVM_USER' : 'cantbloom',
-    'XVM_PASSWORD' : 'sfbombers'  
+    'XVM_PASSWORD' : 'sfbombers' , 
 }
 
+########### parseProd settings #########
 
+CRON = {
+    'EMAIL' : "commericalproduction@gmail.com",
+    'PASSWORD' : PASSWORD,
+    'SECRET_KEY': SECRET_KEY, 
+}
 
 ########## SENDGRID ###############
 
@@ -32,5 +41,12 @@ SENDGRID = {
     'EMAIL_HOST_USER': 'commprod',
     'EMAIL_HOST_PASSWORD': 'sfbombers',
     'EMAIL_PORT': 587,
-    'EMAIL_USE_TLS': True
+    'EMAIL_USE_TLS': True,
+}
+
+
+###### Filepicker.io ##########
+
+FILEPICKER = {
+    'API_KEY' : 'A1Os2AsKsRgK8t0gbEHcAz',
 }
