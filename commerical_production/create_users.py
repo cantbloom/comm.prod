@@ -30,6 +30,7 @@ def add_users(filePath):
             init_data = {
                 'username' : username,
                 'email' : email,
+                'send_mail' : True,
             }
             print init_data
             print createUser(**init_data)
@@ -40,16 +41,16 @@ def add_users(filePath):
         print "Tried path:", os.getcwd() + "/" +filePath
         print "What is the actual path?"
 
-def createUser(username, email, send_mail=None):
+def createUser(username, email, send_mail=False):
     try:
         user, created = User.objects.get_or_create(username=username, email=email)
         if created:
             user.is_active = False
             user.save()
-            user.profile.activation_key = sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
             if send_mail:
+                user.profile.activation_key = sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
                 user.profile.send_mail = send_mail
-            user.profile.save()
+                user.profile.save()
         return user, created
     except IntegrityError:
         return None

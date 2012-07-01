@@ -38,8 +38,20 @@ class UserProfile(models.Model):
 
     activation_key = models.CharField(max_length=40, default='')
     alt_email = models.EmailField(default='')
-    send_mail = models.BooleanField(default=True)
+    send_mail = models.BooleanField(default=False)
     
+    """
+    Takes an email, updates commprod objects 
+    associatd with the alt_email user to self. 
+    Also updates Rating objects to self
+    """
+    def mergeAndDelete(self, email):
+        to_delete = User.objects.filter(user__email=email)
+        if to_delete.exists():
+            CommProd.objects.filter(user=to_delete).update(user=self)
+            Rating.objects.filter(user=to_delete).update(user=self)
+            to_delete.delete()
+
     def __str__(self):  
           return "%s's profile" % self.user  
 

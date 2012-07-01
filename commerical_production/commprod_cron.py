@@ -32,7 +32,7 @@ Returns an array of dictionarys of new messages [{sender : (content, comm_prods)
 or None if no new messages exist or no comm_prod was found.
 """
 def fetch_mail():
-    #EMAIL = "abtbcommprod@gmail.com"
+    EMAIL = "abtbcommprod@gmail.com"
     messages = []
     valid_senders = {'bombers@mit.edu': 0, 'bombers-minus-facists@mit.edu': 0}
     dev_send = {'joshblum@mit.edu': 0, 'kanter@mit.edu' : 0, 'abtbcommprod@gmail.com' : 0, 'jblum18@gmail.com' :0}
