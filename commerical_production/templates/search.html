@@ -5,6 +5,13 @@
     <link href="/public/css/search.css" rel="stylesheet">
 {%  endblock %}
 {% block content %} 
+    <h1>{{page_title}}</h1>
+    
+    <ul>
+    {% for commprod in commprods %}
+        <li>{{commprod}} | {{commprod.avg_score}} || {{commprod.id}} </li>
+    {% endfor %}
+    </ul>
 
 {% endblock%}
 {% block scripts %} 
