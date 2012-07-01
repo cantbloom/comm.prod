@@ -17,6 +17,7 @@ from helpers.view_helpers import getRandomUsername, renderErrorMessage
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 
+import  time
 """
 Registration page. Visitor arrives wih activation key
 """
@@ -126,15 +127,16 @@ def profile(request, user_id=None, username=None):
 
 @login_required
 def search(request, title, **kwargs):
+    c = commprod_search(**kwargs)
+
     template_values = {
         "page_title": title,
         "user": request.user,
-        'commprods' : commprod_search(**kwargs)
+        'commprods' :c
     }
-
     return render_to_response('search.html', template_values, context_instance=RequestContext(request))
 
-
+#SELECT `commProd_commprod`.`id`, `commProd_commprod`.`user_id`, `commProd_commprod`.`commprod_content`, `commProd_commprod`.`email_content`, `commProd_commprod`.`avg_score`, `commProd_commprod`.`date` FROM `commProd_commprod` ORDER BY `commProd_commprod`.`avg_score` DESC
 
 
 ###### request endpoints #######
