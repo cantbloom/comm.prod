@@ -198,7 +198,7 @@ def getUsername(user):
     first_last = user.first_name + " " +user.last_name
     if (first_last.strip() != ""):
         potentials.append(first_last)
-    return random.choice(potentials)
+    return random.choice(potentials)-=
 
 """
 Gets the avg rating of the commprod.
