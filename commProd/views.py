@@ -27,19 +27,19 @@ def register(request, key):
     #c = {}
     #c.update(csrf(request))
 
-    #check if user is logged in
-    if request.user.is_authenticated:
-        page_title = "Oops"
-        hero_title ="It seems you've already registered..." 
-        return renderErrorMessage(request, page_title, hero_title)
-    #grab user profile, check if they are already registeded
+    # #check if user is logged in
+    # if not request.user.is_authenticated:
+    #     page_title = "Oops"
+    #     hero_title ="It seems you've already registered..." 
+    #     return renderErrorMessage(request, page_title, hero_title)
+    # #grab user profile, check if they are already registeded
     profile = UserProfile.objects.filter(activation_key=key)
     
-    ##switch BACK DONT FORGET
-    if not profile.exists() or not profile[0].user.is_active:
-        page_title = "Oops"
-        hero_title ="Hmm... that registration key is invalid."
-        return renderErrorMessage(request, page_title, hero_title)
+    # ##switch BACK DONT FORGET
+    # if not profile.exists() or not profile[0].user.is_active:
+    #     page_title = "Oops"
+    #     hero_title ="Hmm... that registration key is invalid."
+    #     return renderErrorMessage(request, page_title, hero_title)
 
     user = profile[0].user
 
@@ -75,7 +75,6 @@ def register(request, key):
         'page_title': "Registration",
         'form' : reg_form,
         'user' : user,
-        'user_profile' : "/users/" + request.user.username,
     }
 
     return render_to_response('register.html', 
@@ -90,7 +89,6 @@ def home(request):
     
     template_values = {
         'page_title' : "Home",
-        'user_profile' : "/users/" + request.user.username,
     }
     return render_to_response('home.html', 
         template_values, context_instance=RequestContext(request))
@@ -115,7 +113,6 @@ def profile(request, user_id=None, username=None):
     page_username = getRandomUsername(user)
     template_values = {
         "page_title": user.username +"'s Profile",
-        'user_profile' : "/users/" + request.user.username,
         'commprods' : commprods,
         'user_name' : page_username
 
