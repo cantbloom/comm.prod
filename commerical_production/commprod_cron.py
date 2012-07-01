@@ -40,7 +40,7 @@ def fetch_mail():
         mail.login(EMAIL,PASSWORD)
         mail.select("inbox") # connect to inbox.
 
-        result, data = mail.uid('search', None, "UNSEEN") #get unread messages
+        result, data = mail.uid('search', None, "SEEN") #get unread messages
         unread_mail = data[0].split() #list of unread uids
 
         for msg_id in unread_mail:
