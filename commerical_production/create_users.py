@@ -8,6 +8,7 @@ ssh to athena and:
 blanche bombers > bombers.txt
 blanche btb-alum >> bombers.txt
 
+Replace bombers.txt that lives in comm.prod
 Use this to add new users the database each year:
 
 python manage.py shell
@@ -29,10 +30,9 @@ def add_users(filePath):
             init_data = {
                 'username' : username,
                 'email' : email,
-                'activation_key' : sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
             }
             print init_data
-            createUser(**init_data)
+            print createUser(**init_data)
                                     
         f.close()
     except IOError:
@@ -40,15 +40,16 @@ def add_users(filePath):
         print "Tried path:", os.getcwd() + "/" +filePath
         print "What is the actual path?"
 
-def createUser(username, email, activation_key):
+def createUser(username, email, send_mail=None):
     try:
         user, created = User.objects.get_or_create(username=username, email=email)
         if created:
             user.is_active = False
             user.save()
             user.profile.activation_key = sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
+            if send_mail:
+                user.profile.send_mail = send_mail
             user.profile.save()
-        print user,created
-        return user
+        return user, created
     except IntegrityError:
         return None

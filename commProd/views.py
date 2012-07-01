@@ -13,6 +13,7 @@ from commProd.models import CommProd, Rating, UserProfile, ShirtName
 from commProd.forms import RegForm
 from commerical_production import config
 from commerical_production.commprod_search import commprod_search
+from commerical_production.create_users import createUser
 
 import re
 import datetime
@@ -188,14 +189,12 @@ def processProd(request):
             elif alt_email_search.exists():
                 user = alt_email_search[0].user
             else:
-                resp += "\nUser %s not found\n" % sender
-
+                user, created = createUser(sender, sender, False)
             
-            if user:
-                resp += "\nUser %s found with comm prods:\n %s" % (sender, commprods)
-                
-                for commprod in commprods:
-                    CommProd(email_content=content, commprod_content=commprod, user=user).save() 
+            resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
+            
+            for commprod in commprods:
+                CommProd(email_content=content, commprod_content=commprod, user=user).save() 
     else:
         resp = "No data"
         if str(key) != config.SECRET_KEY: #patlsotw
