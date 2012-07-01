@@ -124,16 +124,13 @@ def profile(request, user_id=None, username=None):
 
 
 @login_required
-def search(request):
-
+def search(request, title, **kwargs):
     template_values = {
-
-        "page_title": request.users.username +"'s Profile",
-        'user_profile' : "/users/" + request.user.username,
-
+        "page_title": title,
+        'commprods' : commprod_search(**kwards)
     }
-    return render_to_response('nothing.html',
-     template_values, context_instance=RequestContext(request))
+
+    return render_to_response('search.html', template_values, context_instance=RequestContext(request))
 
 
 
