@@ -184,7 +184,7 @@ def processMail(request):
 
             user = None
             email_search = User.objects.filter(email=sender)
-            alt_email_search = UserProfile.objects.filter(alt_email__exact=sender)
+            alt_email_search = UserProfile.objects.filter(alt_email=sender)
 
             if email_search.exists():
                 user = email_search[0]
@@ -222,7 +222,7 @@ def getRandomUsername(user):
 
 """ 
 Give helpful messages for the retards.
-Returns a hero_msg_template with the given data.
+Returns a hero_err_template with the given data.
 Return this function to give user back an error page.
 """
 def renderErrorMessage(request, page_title, hero_title):
@@ -231,10 +231,10 @@ def renderErrorMessage(request, page_title, hero_title):
     else:
         prof_href = "/"
     template_values = {
-    'page_title': page_title,
-    'user_profile' : prof_href,
-    'hero_msg_title' : hero_title,
+        'page_title': page_title,
+        'user_profile' : prof_href,
+        'hero_err_title' : hero_title,
     }
-    return render_to_response('hero_msg_template.html', 
+    return render_to_response('hero_err_template.html', 
         template_values, context_instance=RequestContext(request)) 
 
