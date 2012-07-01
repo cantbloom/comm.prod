@@ -38,6 +38,7 @@ class UserProfile(models.Model):
 
     activation_key = models.CharField(max_length=40, default='')
     alt_email = models.EmailField(default='')
+    send_mail = models.BooleanField(default=True)
     
     def __str__(self):  
           return "%s's profile" % self.user  
