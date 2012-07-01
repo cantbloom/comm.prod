@@ -30,14 +30,17 @@ def register(request, key):
 
     #check if user is logged in
     if request.user.is_authenticated:
-        return redirect("/")
-
-
+        page_title = "Oops"
+        hero_title ="It seems you've already registered..." 
+        return renderErrorMessage(request, page_title, hero_title)
     #grab user profile, check if they are already registeded
     profile = UserProfile.objects.filter(activation_key=key)
+    
     ##switch BACK DONT FORGET
     if not profile.exists() or not profile[0].user.is_active:
-        return redirect('/invalid_reg')
+        page_title = "Oops"
+        hero_title ="Hmm... that registration key is invalid."
+        return renderErrorMessage(request, page_title, hero_title)
 
     user = profile[0].user
 
@@ -77,21 +80,6 @@ def register(request, key):
         template_values, context_instance=RequestContext(request))
 
 """
-Helpful message for the retards
-"""
-def invalid_reg(request):
-    if request.user.is_authenticated:
-        return redirect("/")
-
-    template_values = {
-        'page_title': "Oops",
-        'user_profile' : "/",
-    }
-
-    return render_to_response('invalid_reg.html', 
-        template_values, context_instance=RequestContext(request))
-
-"""
 Landing page, top ten rated comm prods + ten newest commprods 
 """
 @login_required
@@ -127,7 +115,7 @@ def profile(request, user_id=None, username=None):
         "page_title": user.username +"'s Profile",
         'user_profile' : "/users/" + request.user.username,
         'commprods' : commprods,
-        'username' : page_username
+        'user_name' : page_username
 
     }
     return render_to_response('profile.html', 
@@ -217,7 +205,7 @@ def processMail(request):
             resp = "Success!"
     return HttpResponse(resp, mimetype="text/plain")
 
-#########HELPERS###################
+###########HELPERS#############
 
 """
 Returns a username to be rendered choosing randomly between
@@ -227,5 +215,26 @@ def getRandomUsername(user):
     potentials = ShirtName.objects.filter(user=user)
     potentials.append(user.first_name + user.last_name)
     potentials.append(user.username)
+    first_last = user.first_name + " " +user.last_name
+    if (first_last.strip() != ""):
+        potentials.append(first_last)
     return random.choice(potentials)
+
+""" 
+Give helpful messages for the retards.
+Returns a hero_msg_template with the given data.
+Return this function to give user back an error page.
+"""
+def renderErrorMessage(request, page_title, hero_title):
+    if request.user.is_authenticated:
+        prof_href = "user/" + request.user.username
+    else:
+        prof_href = "/"
+    template_values = {
+    'page_title': page_title,
+    'user_profile' : prof_href,
+    'hero_msg_title' : hero_title,
+    }
+    return render_to_response('hero_msg_template.html', 
+        template_values, context_instance=RequestContext(request)) 
 
