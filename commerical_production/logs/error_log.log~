@@ -1,0 +1,1541 @@
+<<<<<<< Updated upstream
+=======
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 2
+    from commercial_production.forms impor MyAuthenticationForm
+                                         ^
+SyntaxError: invalid syntax
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 2
+    from commercial_production.forms impor MyAuthenticationForm
+                                         ^
+SyntaxError: invalid syntax
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 2
+    from commerical_production.forms impor MyAuthenticationForm
+                                         ^
+SyntaxError: invalid syntax
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 2
+    from commerical_production.forms impor MyAuthenticationForm
+                                         ^
+SyntaxError: invalid syntax
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 2, in <module>
+    from commerical_production.forms import MyAuthenticationForm
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/forms.py", line 3
+    username.widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label=""}
+                                                                                   ^
+SyntaxError: invalid syntax
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 2, in <module>
+    from commerical_production.forms import MyAuthenticationForm
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/forms.py", line 3
+    self.username.widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label=""}
+                                                                                        ^
+SyntaxError: invalid syntax
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 2, in <module>
+    from commerical_production.forms import MyAuthenticationForm
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/forms.py", line 3
+    username.widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label=""})
+                                                                                   ^
+SyntaxError: invalid syntax
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 2, in <module>
+    from commerical_production.forms import MyAuthenticationForm
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/forms.py", line 3, in <module>
+    class MyAuthenticationForm(AuthenticationForm):
+NameError: name 'AuthenticationForm' is not defined
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/debug.py", line 69, in wrapper
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/decorators.py", line 91, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/cache.py", line 89, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/auth/views.py", line 58, in login
+    request.session.set_test_cookie()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/sessions/backends/base.py", line 65, in set_test_cookie
+    self[self.TEST_COOKIE_NAME] = self.TEST_COOKIE_VALUE
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/sessions/backends/base.py", line 42, in __setitem__
+    self._session[key] = value
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/sessions/backends/base.py", line 165, in _get_session
+    self._session_cache = self.load()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/sessions/backends/db.py", line 19, in load
+    expire_date__gt=timezone.now()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/manager.py", line 131, in get
+    return self.get_query_set().get(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py", line 361, in get
+    num = len(clone)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py", line 85, in __len__
+    self._result_cache = list(self.iterator())
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py", line 291, in iterator
+    for row in compiler.results_iter():
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 763, in results_iter
+    for rows in self.execute_sql(MULTI):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py", line 817, in execute_sql
+    cursor = self.connection.cursor()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/backends/__init__.py", line 306, in cursor
+    cursor = self.make_debug_cursor(self._cursor())
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/backends/mysql/base.py", line 387, in _cursor
+    self.connection = Database.connect(**kwargs)
+  File "/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/__init__.py", line 81, in Connect
+    return Connection(*args, **kwargs)
+  File "/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/connections.py", line 187, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+OperationalError: (2013, "Lost connection to MySQL server at 'reading initial communication packet', system error: 54")
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'logout' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'logout' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 24, in home
+    return render_to_response('home.html', template_values)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/shortcuts/__init__.py", line 20, in render_to_response
+    return HttpResponse(loader.render_to_string(*args, **kwargs), **httpresponse_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 171, in render_to_string
+    return t.render(Context(dictionary))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /logout
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 17
+    url(r'', include('commProd.urls')),
+   ^
+IndentationError: unexpected indent
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 17
+    url(r'', include('commProd.urls')),
+   ^
+IndentationError: unexpected indent
+Internal Server Error: /logout
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 79, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 57, in resolve_template
+    return loader.get_template(template)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 138, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: logout.html
+Internal Server Error: /logout
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 12, in <module>
+    url(r'^login$', custom_login,
+NameError: name 'custom_login' is not defined
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 12, in <module>
+    url(r'^login$', custom_login,
+NameError: name 'custom_login' is not defined
+Internal Server Error: /logout
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: 'str' object is not callable
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 79, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 57, in resolve_template
+    return loader.get_template(template)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 138, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: registration/login.html
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for '/login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /logout
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 3, in <module>
+    from commProd.views import custom_login
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 17
+    return HttpResponseRedirect(...)
+                                ^
+SyntaxError: invalid syntax
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 3, in <module>
+    from commProd.views import custom_login
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 17
+    return HttpResponseRedirect(...)
+                                ^
+SyntaxError: invalid syntax
+Internal Server Error: /logout
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /logout
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 79, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 57, in resolve_template
+    return loader.get_template(template)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 138, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: registration/login.html
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+TypeError: custom_login() got an unexpected keyword argument 'template_name'
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 79, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 57, in resolve_template
+    return loader.get_template(template)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 138, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: registration/login.html
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 281, in render
+    return nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 123, in render
+    return compiled_parent._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 62, in render
+    result = block.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 424, in render
+    raise e
+NoReverseMatch: Reverse for 'django.contrib.auth.views.login' with arguments '()' and keyword arguments '{}' not found.
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 3, in <module>
+    from commProd.views import custom_login
+ImportError: cannot import name custom_login
+Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/middleware/common.py", line 67, in process_request
+    if (not urlresolvers.is_valid_path(request.path_info, urlconf) and
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 298, in resolve
+    for pattern in self.url_patterns:
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 328, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 323, in urlconf_module
+    self._urlconf_module = import_module(self.urlconf_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/urls.py", line 3, in <module>
+    from commProd.views import custom_login
+ImportError: cannot import name custom_login
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 79, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 57, in resolve_template
+    return loader.get_template(template)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 148, in get_template
+    template = get_template_from_string(template, origin, template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 156, in get_template_from_string
+    return Template(source, origin, name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 214, in do_extends
+    nodelist = parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 189, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 898, in do_if
+    nodelist = parser.parse(('elif', 'else', 'endif'))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 262, in do_include
+    isolated_context=isolated_context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 145, in __init__
+    t = get_template(template_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 138, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: /public/home.html
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 79, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 57, in resolve_template
+    return loader.get_template(template)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 148, in get_template
+    template = get_template_from_string(template, origin, template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 156, in get_template_from_string
+    return Template(source, origin, name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 214, in do_extends
+    nodelist = parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 189, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 898, in do_if
+    nodelist = parser.parse(('elif', 'else', 'endif'))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 262, in do_include
+    isolated_context=isolated_context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 145, in __init__
+    t = get_template(template_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 138, in find_template
+    raise TemplateDoesNotExist(name)
+TemplateDoesNotExist: /templates/home.html
+Internal Server Error: /login
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 79, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 57, in resolve_template
+    return loader.get_template(template)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 134, in find_template
+    source, display_name = loader(name, dirs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 42, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 48, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 156, in get_template_from_string
+    return Template(source, origin, name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 214, in do_extends
+    nodelist = parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 189, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 898, in do_if
+    nodelist = parser.parse(('elif', 'else', 'endif'))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 265, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 320, in invalid_block_tag
+    (command, get_text_list(["'%s'" % p for p in parse_until])))
+TemplateSyntaxError: Invalid block tag: 'endblock', expected 'elif', 'else' or 'endif'
+Internal Server Error: /register/asdf
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 89, in get_response
+    response = middleware_method(request)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/middleware/common.py", line 68, in process_request
+    urlresolvers.is_valid_path("%s/" % request.path_info, urlconf)):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 531, in is_valid_path
+    resolve(path, urlconf)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 420, in resolve
+    return get_resolver(urlconf).resolve(path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 64
+    'form' : reg_form.as_ul(),
+           ^
+SyntaxError: invalid syntax
+Internal Server Error: /invalid_reg
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 65, in invalid_reg
+    template_values, context_instance=RequestContext(request))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/shortcuts/__init__.py", line 20, in render_to_response
+    return HttpResponse(loader.render_to_string(*args, **kwargs), **httpresponse_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 176, in render_to_string
+    return t.render(context_instance)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 101, in render
+    compiled_parent = self.get_parent(context)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 95, in get_parent
+    raise TemplateSyntaxError(error_msg)
+TemplateSyntaxError: Invalid template name in 'extends' tag: ''. Got this from the 'base.html' variable.
+Internal Server Error: /register/f3c784cc6f1b7101c69195eac98bfcee61477ccf/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 60, in register
+    template_values, context_instance=RequestContext(request))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/shortcuts/__init__.py", line 20, in render_to_response
+    return HttpResponse(loader.render_to_string(*args, **kwargs), **httpresponse_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 169, in render_to_string
+    t = get_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 134, in find_template
+    source, display_name = loader(name, dirs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 42, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 48, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 156, in get_template_from_string
+    return Template(source, origin, name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 214, in do_extends
+    nodelist = parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 189, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 898, in do_if
+    nodelist = parser.parse(('elif', 'else', 'endif'))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/defaulttags.py", line 762, in do_for
+    nodelist_loop = parser.parse(('empty', 'endfor',))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 265, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 320, in invalid_block_tag
+    (command, get_text_list(["'%s'" % p for p in parse_until])))
+TemplateSyntaxError: Invalid block tag: 'endif', expected 'empty' or 'endfor'
+Internal Server Error: /register/f3c784cc6f1b7101c69195eac98bfcee61477ccf/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 60, in register
+    template_values, context_instance=RequestContext(request))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/shortcuts/__init__.py", line 20, in render_to_response
+    return HttpResponse(loader.render_to_string(*args, **kwargs), **httpresponse_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 169, in render_to_string
+    t = get_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 134, in find_template
+    source, display_name = loader(name, dirs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 42, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 48, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 156, in get_template_from_string
+    return Template(source, origin, name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 214, in do_extends
+    nodelist = parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 189, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 246, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 346, in compile_filter
+    return FilterExpression(token, self)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 563, in __init__
+    "from '%s'" % (token[upto:], token))
+TemplateSyntaxError: Could not parse the remainder: '()' from 'form.as_ul()'
+Internal Server Error: /logout
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 79, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/response.py", line 57, in resolve_template
+    return loader.get_template(template)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 134, in find_template
+    source, display_name = loader(name, dirs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 42, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 48, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader.py", line 156, in get_template_from_string
+    return Template(source, origin, name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 214, in do_extends
+    nodelist = parser.parse()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/loader_tags.py", line 189, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/base.py", line 274, in parse
+    self.unclosed_block_tag(parse_until)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/template/debug.py", line 65, in unclosed_block_tag
+    raise self.source_error(source, msg)
+TemplateSyntaxError: Unclosed tag 'block'. Looking for one of: endblock 
+Internal Server Error: /users/joshblum/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 94, in profile
+    "page_title": request.users.username +"'s Profile",
+AttributeError: 'WSGIRequest' object has no attribute 'users'
+Internal Server Error: /users/4222/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 97, in profile
+    return HttpResponseNotFound()
+NameError: global name 'HttpResponseNotFound' is not defined
+Internal Server Error: /users/4222/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 3, in <module>
+    from django.shortcuts import render_to_response, get_object_or_404, HttpResponse, HttpResponseNotFound
+ImportError: cannot import name HttpResponseNotFound
+Internal Server Error: /users/4222/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 3, in <module>
+    from django.shortcuts import render_to_response, get_object_or_404, HttpResponse, HttpResponseNotFound
+ImportError: cannot import name HttpResponseNotFound
+Internal Server Error: /users/4222/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 3, in <module>
+    from django.shortcuts import render_to_response, get_object_or_404, HttpResponse, HttpResponseNotFound
+ImportError: cannot import name HttpResponseNotFound
+Internal Server Error: /users/4222/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 3, in <module>
+    from django.shortcuts import render_to_response, get_object_or_404, HttpResponse, HttpResponseNotFound
+ImportError: cannot import name HttpResponseNotFound
+Internal Server Error: /users/joshblum/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/contrib/auth/decorators.py", line 20, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 103, in profile
+    "page_title": user.username +"'s Profile",
+AttributeError: 'QuerySet' object has no attribute 'username'
+Internal Server Error: /logout
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 136, in get_response
+    response = response.render()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/response.py", line 104, in render
+    self._set_content(self.rendered_content)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/response.py", line 81, in rendered_content
+    content = template.render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 140, in render
+    return self._render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 134, in _render
+    return self.nodelist.render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 823, in render
+    bit = self.render_node(node, context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/debug.py", line 74, in render_node
+    return node.render(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 101, in render
+    compiled_parent = self.get_parent(context)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 98, in get_parent
+    return get_template(parent)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 134, in find_template
+    source, display_name = loader(name, dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 42, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 48, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 156, in get_template_from_string
+    return Template(source, origin, name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 214, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 265, in parse
+    self.invalid_block_tag(token, command, parse_until)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 321, in invalid_block_tag
+    raise self.error(token, "Invalid block tag: '%s'" % command)
+TemplateSyntaxError: Invalid block tag: 'endblock'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Documents/projects/comm.prod/commProd/views.py", line 64, in register
+    template_values, context_instance=RequestContext(request))
+  File "/usr/local/lib/python2.7/dist-packages/django/shortcuts/__init__.py", line 20, in render_to_response
+    return HttpResponse(loader.render_to_string(*args, **kwargs), **httpresponse_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 169, in render_to_string
+    t = get_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 145, in get_template
+    template, origin = find_template(template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 134, in find_template
+    source, display_name = loader(name, dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 42, in __call__
+    return self.load_template(template_name, template_dirs)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 48, in load_template
+    template = get_template_from_string(source, origin, template_name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader.py", line 156, in get_template_from_string
+    return Template(source, origin, name)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 125, in __init__
+    self.nodelist = compile_string(template_string, origin)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 153, in compile_string
+    return parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 214, in do_extends
+    nodelist = parser.parse()
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/loader_tags.py", line 189, in do_block
+    nodelist = parser.parse(('endblock',))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 898, in do_if
+    nodelist = parser.parse(('elif', 'else', 'endif'))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 267, in parse
+    compiled_result = compile_func(self, token)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/defaulttags.py", line 762, in do_for
+    nodelist_loop = parser.parse(('empty', 'endfor',))
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 246, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 346, in compile_filter
+    return FilterExpression(token, self)
+  File "/usr/local/lib/python2.7/dist-packages/django/template/base.py", line 563, in __init__
+    "from '%s'" % (token[upto:], token))
+TemplateSyntaxError: Could not parse the remainder: '[0]' from 'key[0]'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Documents/projects/comm.prod/commProd/views.py", line 41, in register
+    if reg_form.is_valid():
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 124, in is_valid
+    return self.is_bound and not bool(self.errors)
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 115, in _get_errors
+    self.full_clean()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 270, in full_clean
+    self._clean_fields()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 290, in _clean_fields
+    value = getattr(self, 'clean_%s' % name)()
+  File "/home/max/Documents/projects/comm.prod/commProd/forms.py", line 26, in clean_alt_email
+    if UserProfile.objects.filter(alt_email=data).exists() or User.objects.filter(email=data).exists():
+NameError: global name 'User' is not defined
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Documents/projects/comm.prod/commProd/views.py", line 41, in register
+    if reg_form.is_valid():
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 124, in is_valid
+    return self.is_bound and not bool(self.errors)
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 115, in _get_errors
+    self.full_clean()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 270, in full_clean
+    self._clean_fields()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 290, in _clean_fields
+    value = getattr(self, 'clean_%s' % name)()
+  File "/home/max/Documents/projects/comm.prod/commProd/forms.py", line 16, in clean_password
+    password_confirm = self.cleaned_data['password_confirm']
+KeyError: 'password_confirm'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Documents/projects/comm.prod/commProd/views.py", line 41, in register
+    if reg_form.is_valid():
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 124, in is_valid
+    return self.is_bound and not bool(self.errors)
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 115, in _get_errors
+    self.full_clean()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 270, in full_clean
+    self._clean_fields()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 290, in _clean_fields
+    value = getattr(self, 'clean_%s' % name)()
+  File "/home/max/Documents/projects/comm.prod/commProd/forms.py", line 16, in clean_password
+    password_confirm = self.cleaned_data['password_confirm']
+KeyError: 'password_confirm'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Documents/projects/comm.prod/commProd/views.py", line 41, in register
+    if reg_form.is_valid():
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 124, in is_valid
+    return self.is_bound and not bool(self.errors)
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 115, in _get_errors
+    self.full_clean()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 270, in full_clean
+    self._clean_fields()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 290, in _clean_fields
+    value = getattr(self, 'clean_%s' % name)()
+  File "/home/max/Documents/projects/comm.prod/commProd/forms.py", line 16, in clean_password
+    password_confirm = self.cleaned_data['password_confirm']
+KeyError: 'password_confirm'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Documents/projects/comm.prod/commProd/views.py", line 41, in register
+    if reg_form.is_valid():
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 124, in is_valid
+    return self.is_bound and not bool(self.errors)
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 115, in _get_errors
+    self.full_clean()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 270, in full_clean
+    self._clean_fields()
+  File "/usr/local/lib/python2.7/dist-packages/django/forms/forms.py", line 290, in _clean_fields
+    value = getattr(self, 'clean_%s' % name)()
+  File "/home/max/Documents/projects/comm.prod/commProd/forms.py", line 16, in clean_password
+    password_confirm = self.cleaned_data['password_confirm']
+KeyError: 'password_confirm'
+Internal Server Error: /register/c81b4b240d7f0480b59b4622a817f9a584db5d35/
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/usr/local/lib/python2.7/dist-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/max/Documents/projects/comm.prod/commProd/views.py", line 54, in register
+    login(request, user)
+  File "/usr/local/lib/python2.7/dist-packages/django/contrib/auth/__init__.py", line 73, in login
+    request.session[BACKEND_SESSION_KEY] = user.backend
+AttributeError: 'User' object has no attribute 'backend'
+>>>>>>> Stashed changes

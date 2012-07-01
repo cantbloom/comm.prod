@@ -1,5 +1,5 @@
 # Django settings for commerical_production project.
-from config import ADMIN_INFO, NAME, USER, PASSWORD, HOST, KEY, SENDGRID
+from config import ADMIN_INFO, NAME, USER, PASSWORD, HOST, SENDGRID, SECRET_KEY
 import os
 #custom auth by max
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
@@ -83,7 +83,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = KEY
+SECRET_KEY = SECRET_KEY
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -111,7 +111,7 @@ ROOT_URLCONF = 'commerical_production.urls'
 LOGIN_REDIRECT_URL = "/home"
 LOGIN_URL = '/login'
 APPEND_SLASH=True
-SESSION_COOKIE_AGE = 31556926000 # 1 year in milliseconds so basically forever
+SESSION_COOKIE_AGE = 1000*60*60*24*7 #a week #31556926000 # 1 year in milliseconds so basically forever
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'commerical_production.wsgi.application'
