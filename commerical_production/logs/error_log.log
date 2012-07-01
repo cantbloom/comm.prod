@@ -71,3 +71,299 @@ Traceback (most recent call last):
   File "/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
     raise errorclass, errorvalue
 DatabaseError: (1054, "Unknown column 'commProd_userprofile.send_mail' in 'field list'")
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 15, in <module>
+    from commerical_production.commprod_search import commprod_search
+ImportError: No module named commprod_search
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from helpers.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers.view_helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 17, in <module>
+    from helpers.commprod_search import commprod_search
+ImportError: No module named helpers.commprod_search
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from helpers.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers.view_helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from commerical_production.helpers.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers.view_helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from commerical_production.helpers.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers.view_helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from commerical_production.helpers.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers.view_helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from commerical_production.helpers import * #.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from helpers import * #.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from helpers import * #.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from commProd.helpers import * #.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 16, in <module>
+    from commProd.helpers import * #.view_helpers import getRandomUsername, renderErrorMessage
+ImportError: No module named helpers
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 17, in <module>
+    from commerical_production.helpers.commprod_search import commprod_search
+ImportError: No module named helpers.commprod_search
+Internal Server Error: /
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 18, in <module>
+    from helpers.admin.utils import createUser
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/helpers/admin/utils.py", line 6, in <module>
+    from commerical_production.email_templates import registration
+ImportError: No module named email_templates
