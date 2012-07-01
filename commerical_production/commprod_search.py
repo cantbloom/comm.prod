@@ -1,8 +1,6 @@
 from commProd.models import CommProd, Rating, UserProfile
 
-"""
-to test from commerical_production.commprod_search import commprod_search
-"""
+#to test from commerical_production.commprod_search import commprod_search
 def commprod_search(cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None ):
 	commprods = CommProd.objects.all()
 
@@ -16,7 +14,7 @@ def commprod_search(cp_id=None, query=None, orderBy='date', direction='hl', user
 		commprods = commprods.filter(content__contains=query)
 
 	if orderBy:
-		#django defaults to high to low, so just handle low to high option 
+		#django defaults to high to low, so just andle low to high option 
 		if direction == 'lh':
 			orderBy = '-' + orderBy
 		commprods = commprods.order_by(orderBy)
@@ -27,5 +25,5 @@ def commprod_search(cp_id=None, query=None, orderBy='date', direction='hl', user
 	if endDate:
 		commprods = commprods.objects.filter(date__lte=endDate)
 
-	return commprods.select_related('user')
+	return commprods
 
