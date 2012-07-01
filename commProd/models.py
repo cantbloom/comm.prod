@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import simplejson as json
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 from django.db.models import Avg
 from datetime import date
 
@@ -12,7 +13,7 @@ class UserProfile(models.Model):
     activation_key = models.CharField(max_length=40, default='')
     alt_email = models.EmailField(default='')
     send_mail = models.BooleanField(default=False)
-    avg_score = models.FloatField()
+    avg_score = models.FloatField(default=0.0)
 
     def update_avg(self):
         self.avg_score = Rating.objects.get(user=self.user).aggregate(Avg('score'))
@@ -61,10 +62,12 @@ class Rating(models.Model):
 	commprod = models.ForeignKey(CommProd)
 	user = models.ForeignKey(User)
 
-	score = models.FloatField() 
+	score = models.FloatField(default=0.0) 
 	date = models.DateTimeField(auto_now=True)
 
 	def __unicode__(self):
 		return "%s voted a %s on commprod_id %s on %s " % (self.user.username, self.score, self.commprod.id, self.date)
 
-
+#fuck.
+import signals
+signals.setup()
