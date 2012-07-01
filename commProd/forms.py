@@ -1,6 +1,6 @@
 from django import forms
 from django.core import validators
-from commProd.models import UserProfile
+from commProd.models import UserProfile, User
 
 class RegForm(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label="")
@@ -11,10 +11,10 @@ class RegForm(forms.Form):
     password = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Password'}), label="" )
     password_confirm = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Confirm Password'}), label="")
 
-    def clean_password(self):
-        password = self.cleaned_data.get('password')
-        password_confirm = self.cleaned_data.get('password_confirm')
-
+    def clean_password_confirm(self):
+        password = self.cleaned_data['password']
+        password_confirm = self.cleaned_data['password_confirm']
+        
         if not password_confirm:
             raise forms.ValidationError("You must confirm your password")
         if password != password_confirm:

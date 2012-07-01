@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.db import IntegrityError
 import os, sha, random
 
 """
@@ -20,16 +21,15 @@ def add_users(filePath):
             if '@' not in email:
                 email += '@mit.edu'
 
-            username , host = email.split('@')
+            username, host = email.split('@')
             
-            #user = User.objects.get(username=username)
             init_data = {
                 'username' : username,
                 'email' : email,
                 'activation_key' : sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
             }
             print init_data
-            user = createUser(**init_data)
+            createUser(**init_data)
                                     
         f.close()
     except IOError:

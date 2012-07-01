@@ -2,30 +2,38 @@ from django.db import models
 from django.utils import simplejson as json
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from django.db.models import Avg
+
 from datetime import date
 # Create your models here.
 
 class CommProd(models.Model):
-	comm_prod = models.TextField() 
-	content = models.TextField()
-	author = models.IntegerField() # user id of author
-	score = models.FloatField(default=0.0)
+	user = models.ForeignKey(User)
+
+	commprod_content = models.TextField() 
+	email_content = models.TextField()
+	avg_score = models.FloatField(default=0.0)
 	date = models.DateTimeField(auto_now=True)
 
+	def update_avg(self):
+		self.avg_score = Rating.objects.get(commprod=self).aggregate(Avg('score'))
+		self.save()
+
 	def __unicode__(self):
-		return 'a btb "%s" comm.prod by %s on %s' % (self.comm_prod, self.author, str(self.date))
+		return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user.username, str(self.date))
 
 class Rating(models.Model):
-	cp_id = models.IntegerField() # comm prod id
-	user_id = models.IntegerField()
-	vote = models.FloatField() 
+	commprod = models.ForeignKey(CommProd)
+	user = models.ForeignKey(User)
+
+	score = models.FloatField() 
 	date = models.DateTimeField(auto_now=True)
 
 	def __unicode__(self):
-		return "cp_id %s, user_id %s, vote %s" % (self.cp_id, self.user_id, self.vote)
+		return "%s voted a %s on commprod_id %s on %s " % (self.user.username, self.score, self.commprod.id, self.date)
  
 class UserProfile(models.Model):  
-    user = models.OneToOneField(User)  
+    user = models.OneToOneField(User)
     #other fields here
 
     activation_key = models.CharField(max_length=40, default='')
@@ -35,10 +43,25 @@ class UserProfile(models.Model):
     def __str__(self):  
           return "%s's profile" % self.user  
 
+class ShirtName(models.Model):
+	user = models.ForeignKey(User)
+
+	number = models.CharField(max_length=40, default='')
+	name = models.CharField(max_length=40, default='Human Jizz Rag')
+	year = models.IntegerField()
+
+
+
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:  
        profile, created = UserProfile.objects.get_or_create(user=instance)  
 
 post_save.connect(create_user_profile, sender=User) 
+
+def update_commprod_avg (sender, instance, **kwargs):
+	instance.commprod.update_avg()
+
+
+post_save.connect(update_commprod_avg, sender=Rating)
 
 User.profile = property(lambda u: u.get_profile() )
