@@ -1,5 +1,5 @@
 # Django settings for commerical_production project.
-from config import ADMIN_INFO, NAME, USER, PASSWORD, HOST, SENDGRID, SECRET_KEY
+from config import ADMIN_INFO, MYSQL, SENDGRID, SECRET_KEY
 import os
 #custom auth by max
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
@@ -14,10 +14,10 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': NAME,    # Or path to database file if using sqlite3.
-        'USER': USER,                      # Not used with sqlite3.
-        'PASSWORD': PASSWORD,                  # Not used with sqlite3.
-        'HOST': HOST,                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': MYSQL['NAME'],    # Or path to database file if using sqlite3.
+        'USER': MYSQL['USER'],                      # Not used with sqlite3.
+        'PASSWORD': MYSQL['PASSWORD'],                  # Not used with sqlite3.
+        'HOST': MYSQL['HOST'],                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }

@@ -43,24 +43,5 @@
 {% endblock%}
 
 {% block scripts %} 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#id_alt_email').tooltip({
-            "placement" : "right",
-            "title" : "Important! Put your gmail or anything you use to send emails to the floor.",
-            "trigger" : "focus"
-        });
-        $('#id_shirt_name').tooltip({
-            "placement" : "right",
-            "title" : "Be Honest :)",
-            "trigger" : "focus"
-        });
-        $('#id_password').tooltip({
-            "placement" : "right",
-            "title" : "Your password will be encrypted",
-            "trigger" : "focus"
-        });
-    });
-    
-</script>
+<script src="/public/js/register.js"></script>
 {% endblock %}
