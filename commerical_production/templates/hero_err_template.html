@@ -3,12 +3,13 @@
 {% block content %}
 
 <div class="hero-unit span6 offset2" style="background-color:#DDD;">
-
-  <h1 id="hero"> {% block hero_title %} {% endblock%} {{ hero_err_title }} </h1>
-  {% block hero_content %} 
   <p> 
     Looks like an error.
    </p>
+   
+  <h1 id="hero"> {% block hero_title %} {% endblock%} {{ hero_err_title }} </h1>
+  {% block hero_content %} 
+  
    <p> 
     Head back <a href="/"> home</a> or <a href="mailto:cantbloom@mit.edu"> email us </a> if this is a bug.
    </p>
@@ -28,4 +29,3 @@
 
 </script>
 {% endblock %}
-
