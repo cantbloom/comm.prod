@@ -2,7 +2,7 @@
 
 ##cron tab prefs
 #* * * * * /path/to/commprod_cron.py
-from config import EMAIL, PASSWORD, KEY
+from config import EMAIL, PASSWORD, SECRET_KEY
 import email
 import imaplib
 import re
@@ -21,10 +21,10 @@ are present. Logs endpoint response
 def post_prods():
     prods = fetch_mail()
     url = "http://localhost:5000/processprod"
-    #url = "http://comm-prod.herokuapp.com/processprod/"
+    #url = "http://comm-prod.herokuapp.com/processprod"
     if prods:
         data = json.dumps(prods)
-        r = requests.post(url, data={'data' : data, 'key' : KEY})
+        r = requests.post(url, data={'data' : data, 'key' : SECRET_KEY})
         logging.info(r.text)
 
 """
@@ -121,4 +121,4 @@ def get_first_text_block(email_message_instance):
     elif maintype == 'text':
         return email_message_instance.get_payload()
 
-#post_prods()
+post_prods()

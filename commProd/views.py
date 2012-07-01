@@ -3,15 +3,20 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
-from commProd.models import CommProd, Rating, UserProfile
-from commProd.forms import RegForm
-from commerical_production.config import KEY
 from django.core.context_processors import csrf
 from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
+from django.contrib.auth import authenticate, login
+
+from commProd.models import CommProd, Rating, UserProfile, ShirtName
+from commProd.forms import RegForm
+from commerical_production import config
+from commerical_production.commprod_search import commprod_search
+
 import re
 import datetime
+import random
 
 
 """
@@ -23,14 +28,19 @@ def register(request, key):
     #c = {}
     #c.update(csrf(request))
 
-    ##switch BACK DONT FORGET
-    if not request.user.is_authenticated:
-        return redirect("/")
-    #check if key is valid and unregistered
+    #check if user is logged in
+    if request.user.is_authenticated:
+        page_title = "Oops"
+        hero_title ="It seems you've already registered..." 
+        return renderErrorMessage(request, page_title, hero_title)
+    #grab user profile, check if they are already registeded
     profile = UserProfile.objects.filter(activation_key=key)
+    
     ##switch BACK DONT FORGET
-    if not profile.exists() or profile[0].user.is_active:
-        return redirect('/invalid_reg')
+    if not profile.exists() or not profile[0].user.is_active:
+        page_title = "Oops"
+        hero_title ="Hmm... that registration key is invalid."
+        return renderErrorMessage(request, page_title, hero_title)
 
     user = profile[0].user
 
@@ -41,12 +51,20 @@ def register(request, key):
             user.last_name = request.POST['last_name']
             user.set_password(request.POST['password'])
             user.profile.alt_email = request.POST['alt_email']
-            user.profile.shirt_names = request.POST['shirt_name']
+            
+            ShirtName(user=user, name=request.POST['shirt_name']).save()
+            
             user.is_active = True
             user.save()
             user.profile.save()
             
-            return HttpResponse('valid', mimetype='text/plain')
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    # Redirect to a success page.
+                    return redirect('/')
+
+            return redirect('/invalid_reg')
         
     else:
         reg_form = RegForm()
@@ -61,14 +79,6 @@ def register(request, key):
     return render_to_response('register.html', 
         template_values, context_instance=RequestContext(request))
 
-def invalid_reg(request):
-    template_values = {
-        'page_title': "Oops",
-        'user_profile' : "/users/" + request.user.username,
-    }
-
-    return render_to_response('invalid_reg.html', 
-        template_values, context_instance=RequestContext(request))
 """
 Landing page, top ten rated comm prods + ten newest commprods 
 """
@@ -97,12 +107,15 @@ def profile(request, user_id=None, username=None):
     else:
         raise Http404
     
-    commprods = CommProd.objects.filter(author=user.id)
+    commprods = CommProd.objects.filter(user=user)
 
+
+    page_username = getRandomUsername(user)
     template_values = {
         "page_title": user.username +"'s Profile",
         'user_profile' : "/users/" + request.user.username,
         'commprods' : commprods,
+        'user_name' : page_username
 
     }
     return render_to_response('profile.html', 
@@ -128,65 +141,100 @@ def search(request):
 ###### request endpoints #######
 @login_required
 def vote (request):
-    vote = request.POST["vote"]
-    cp_id = request.POST["id"]
-    user_id = requset.user.id
-    valid_votes = [0, 0.5, 1, 1.5, 2, 2.5, 3]
-    comm_prod = CommProd.objects.filter(cp_id__exact=cp_id)
-    rating = Rating.objects.filter(cp_id__exact=cp_id, user_id__exact=user_id)
-    avg = None
-    if vote_val in valid_votes and comm_prod.exists():
-        if rating.exists():
-            rating.update(vote=vote, date=datetime.datetime.now())
-        else:
-            rating = Rating(cp_id=cp_id, user_id=user_id, vote=vote)
-        avg = getAvg(cp_id)        
+    valid_votes = [0, 0.5, 1, 1.5, 2, 2.5, 3] #patlsotw 
 
-        success = True
-    else:
-        success = False
+    score = request.POST["score"]
+    cp_id = request.POST["id"]
+    user = requset.user
+
+    commprod = commprod_search(id=cp_id)
+
+    if not commprod:
+        return HttpResponse(json.dumps({'success':False}), mimetype='application/json')
+
+    rating = Rating.objects.get_or_create(commprod=commprod, user=user)
+
+    if vote_val in valid_votes:
+        rating.score = score
+        rating.save() #updates commprod avg automatically with postsave signal
     
-    payload = {"success": success, "cp_id": 
-        cp_id, "vote": vote, "avg": avg}
-    data = json.dumps(payload)
-    return HttpResponse(data, mimetype='application/json') 
+    payload = {
+        "success": True,
+        "cp_id": cp_id,
+        "score": score,
+        "avg": commprod.avg_score
+    }
+
+    return_data = json.dumps(payload)
+
+    return HttpResponse(return_data, mimetype='application/json') 
 
 
 @csrf_exempt
-def processMail(request):
+def processProd(request):
     data = request.POST.get("data", None)
     key = request.POST.get("key", None)
+    
     resp = ""
-    if data and str(key) == KEY:
-        data = json.loads(data) #[{sender : (content, comm_prods)}]
+    if data and str(key) == config.SECRET_KEY:
+        data = json.loads(data) #[{sender : (content, [comm_prods])}]
         for dic in data:
             sender = dic.keys()[0]
-            content = dic[sender][0]
-            comm_prods = dic[sender][1]
-            user_id = None
-            email_search = User.objects.filter(email__exact=sender)
-            alt_email_search = UserProfile.objects.filter(alt_email__exact=sender)
+            content, commprods = dic[sender]
+
+            user = None
+            email_search = User.objects.filter(email=sender)
+            alt_email_search = UserProfile.objects.filter(alt_email=sender)
 
             if email_search.exists():
-                user_id = email_search[0].id
+                user = email_search[0]
             elif alt_email_search.exists():
-                user_id = alt_email_search[0].user.id
+                user = alt_email_search[0].user
             else:
                 resp += "\nUser %s not found\n" % sender
+
             
-            if user_id:
-                resp += "\nUser %s found with comm prods:\n %s" % (sender, comm_prods)
-                for prod in comm_prods:
-                    cp = CommProd(content=content, comm_prod=prod, author=user_id)
-                    cp.save() 
+            if user:
+                resp += "\nUser %s found with comm prods:\n %s" % (sender, commprods)
+                
+                for commprod in commprods:
+                    CommProd(email_content=content, commprod_content=commprod, user=user).save() 
     else:
         resp = "No data"
-        if str(key) != KEY:
+        if str(key) != config.SECRET_KEY: #patlsotw
             resp = "Success!"
     return HttpResponse(resp, mimetype="text/plain")
 
+###########HELPERS#############
 
-def getAvg(cp_id):
-    rating_query =  Rating.objects.filter(cp_id__exact=cp_id)
-    total = sum(row.vote for row in rating_query)
-    return float(total/len(rating_query))
+"""
+Returns a username to be rendered choosing randomly between
+first + last, username, and a shirt first_name.
+"""
+def getRandomUsername(user):
+    potentials = list(ShirtName.objects.filter(user=user))
+    potentials.append(user.first_name + user.last_name)
+    potentials.append(user.username)
+    first_last = user.first_name + " " +user.last_name
+    if (first_last.strip() != ""):
+        potentials.append(first_last)
+    return random.choice(potentials)
+
+""" 
+Give helpful messages for the retards.
+Returns a hero_err_template with the given data.
+Return this function to give user back an error page.
+"""
+def renderErrorMessage(request, page_title, hero_title):
+    if request.user.is_authenticated:
+        prof_href = "user/" + request.user.username
+    else:
+        prof_href = "/"
+    template_values = {
+        'page_title': page_title,
+        'user_profile' : prof_href,
+        'hero_err_title' : hero_title,
+    }
+    return render_to_response('hero_err_template.html', 
+        template_values, context_instance=RequestContext(request)) 
+
