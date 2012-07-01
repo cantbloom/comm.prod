@@ -5,7 +5,7 @@ from django.utils.html import strip_tags
 
 from email_templates import registration
 
-import os, re, random
+import os, sha, re, random
 
 
 """
@@ -19,8 +19,8 @@ Use this to add new users the database each year:
 
 python manage.py shell
 
-import commerical_production.create_users as create_users
-create_users.add_users('bombers.txt')
+import helpers.admin.utils as admin
+admin.add_users('bombers.txt')
 """
 def add_users(filePath):
     try:
