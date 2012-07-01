@@ -1,18 +1,12 @@
 #! /usr/bin/env python
 
-##cron tab prefs
-#* * * * * /path/to/commprod_cron.py
+## crontab prefs
+## * * * * * /path/to/commprod_cron.py >/dev/null 2>&1
 from config import EMAIL, PASSWORD, SECRET_KEY
-import email
-import imaplib
-import re
-import logging
-import requests
-import simplejson as json
-import os
+import email, imaplib, re, logging, requests, os, simplejson as json
 
 ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
-logging.basicConfig(filename=os.path.join(ROOT_PATH, 'logs/commprod.log'),level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+logging.basicConfig(filename=os.path.join(ROOT_PATH, 'commprod.log'),level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 """
 Gets new comm prods and posts to endpoint if any new ones
