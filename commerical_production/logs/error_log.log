@@ -1002,4 +1002,29 @@ Traceback (most recent call last):
   File "/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/connections.py", line 187, in __init__
     super(Connection, self).__init__(*args, **kwargs2)
 OperationalError: (2003, "Can't connect to MySQL server on 'sql.mit.edu' (60)")
+<<<<<<< HEAD
 >>>>>>> 49c8002f0bb07fe25116cba4727d3d00027408a8
+=======
+Internal Server Error: /register/f3c784cc6f1b7101c69195eac98bfcee61477ccf/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 101, in get_response
+    request.path_info)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 300, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 209, in resolve
+    return ResolverMatch(self.callback, args, kwargs, self.name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 216, in callback
+    self._callback = get_callable(self._callback_str)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/functional.py", line 27, in wrapper
+    result = func(*args)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.py", line 92, in get_callable
+    lookup_view = getattr(import_module(mod_name), func_name)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/utils/importlib.py", line 35, in import_module
+    __import__(name)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 201
+    return random.choice(potentials)-=
+                                     ^
+SyntaxError: invalid syntax
+>>>>>>> 80b9c324808fefff584f6119b73f3e02f5c5f0d2
