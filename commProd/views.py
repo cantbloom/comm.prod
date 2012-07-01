@@ -48,14 +48,17 @@ def register(request, key):
     if request.POST:
         reg_form = RegForm(request.POST)
         if reg_form.is_valid():
+            user.is_active = True
             user.first_name = request.POST['first_name']
             user.last_name = request.POST['last_name']
             user.set_password(request.POST['password'])
-            user.profile.alt_email = request.POST['alt_email']
+
+            alt_email = request.POST['alt_email']
+            user.profile.mergeAndDelete(alt_email)
+            user.profile.alt_email = alt_email
             
             ShirtName(user=user, name=request.POST['shirt_name']).save()
             
-            user.is_active = True
             user.save()
             user.profile.save()
             
@@ -189,7 +192,7 @@ def processProd(request):
             elif alt_email_search.exists():
                 user = alt_email_search[0].user
             else:
-                user, created = createUser(sender, sender, False)
+                user, created = createUser(sender, sender)
             
             resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
             
