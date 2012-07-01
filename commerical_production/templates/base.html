@@ -20,10 +20,6 @@
         <![endif]-->
 
         <link rel="shortcut icon" href="/public/favicon.ico">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/img/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/public/img/apple-touch-icon-114-precomposed.png">
-        <link rel="public/apple-touch-icon-precomposed" sizes="72x72" href="/public/img/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="public/img/apple-touch-icon-57-precomposed.png">
     </head>
 
     <body>
@@ -54,7 +50,7 @@
                                 <a href="/recent">Recent</a>
                             </li>
                             <li class={{ profile }}>
-                                 <a id="user_prof" href=/{{user.username}}>Profile </a>
+                                 <a id="user_prof" href=/users/{{user.username}}>Profile </a>
                             </li>
                         </ul>
                         <ul class="nav pull-right">
@@ -135,20 +131,26 @@
             </div>
         </div> -->
         <!--  javascript leave everything imported for dev,
-        cleanup for production-->
-        <script src="/public/js/jquery.min.js"></script>
-        <script src="/public/js/bootstrap-transition.js"></script>
-        <script src="/public/js/bootstrap-alert.js"></script>
-        <script src="/public/js/bootstrap-modal.js"></script>
-        <script src="/public/js/bootstrap-dropdown.js"></script>
-        <script src="/public/js/bootstrap-scrollspy.js"></script>
-        <script src="/public/js/bootstrap-tab.js"></script>
-        <script src="/public/js/bootstrap-tooltip.js"></script>
-        <script src="/public/js/bootstrap-popover.js"></script>
-        <script src="/public/js/bootstrap-button.js"></script>
-        <script src="/public/js/bootstrap-collapse.js"></script>
-        <script src="/public/js/bootstrap-carousel.js"></script>
-        <script src="/public/js/bootstrap-typeahead.js"></script>
-        {% block scripts %} {% endblock %}
+        cleanup for production--> 
+        <script src="https://api.filepicker.io/v0/filepicker.js"></script>
+        <script src="/public/js/lib/jquery.min.js"></script>
+        
+        <script src="/public/js/lib/bootstrap-transition.js"></script>
+        <script src="/public/js/lib/bootstrap-alert.js"></script>
+        <script src="/public/js/lib/bootstrap-modal.js"></script>
+        <script src="/public/js/lib/bootstrap-dropdown.js"></script>
+        <script src="/public/js/lib/bootstrap-scrollspy.js"></script>
+        <script src="/public/js/lib/bootstrap-tab.js"></script>
+        <script src="/public/js/lib/bootstrap-tooltip.js"></script>
+        <script src="/public/js/lib/bootstrap-popover.js"></script>
+        <script src="/public/js/lib/bootstrap-button.js"></script>
+        <script src="/public/js/lib/bootstrap-collapse.js"></script>
+        <script src="/public/js/lib/bootstrap-carousel.js"></script>
+        <script src="/public/js/lib/bootstrap-typeahead.js"></script>
+         <!-- Adds the Filepicker.io javascript library to the page -->
+
+         
+        {% block scripts %} 
+        {% endblock %}
     </body>
 </html>
