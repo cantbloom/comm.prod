@@ -9,9 +9,9 @@ from django.template import RequestContext
 from django.http import Http404
 from django.contrib.auth import authenticate, login
 
-from commProd.models import CommProd, Rating, UserProfile
+from commProd.models import CommProd, Rating, UserProfile, ShirtName
 from commProd.forms import RegForm
-import commerical_production.config
+from commerical_production import config
 from commerical_production.commprod_search import commprod_search
 
 import re
@@ -107,7 +107,7 @@ def profile(request, user_id=None, username=None):
     else:
         raise Http404
     
-    commprods = CommProd.objects.filter(author=user.id)
+    commprods = CommProd.objects.filter(user=user)
 
 
     page_username = getRandomUsername(user)
@@ -171,7 +171,7 @@ def vote (request):
 
 
 @csrf_exempt
-def processMail(request):
+def processProd(request):
     data = request.POST.get("data", None)
     key = request.POST.get("key", None)
     
@@ -201,7 +201,7 @@ def processMail(request):
                     CommProd(email_content=content, commprod_content=commprod, user=user).save() 
     else:
         resp = "No data"
-        if str(key) != config.SECRET_KEY:
+        if str(key) != config.SECRET_KEY: #patlsotw
             resp = "Success!"
     return HttpResponse(resp, mimetype="text/plain")
 
@@ -212,7 +212,7 @@ Returns a username to be rendered choosing randomly between
 first + last, username, and a shirt first_name.
 """
 def getRandomUsername(user):
-    potentials = ShirtName.objects.filter(user=user)
+    potentials = list(ShirtName.objects.filter(user=user))
     potentials.append(user.first_name + user.last_name)
     potentials.append(user.username)
     first_last = user.first_name + " " +user.last_name
