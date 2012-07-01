@@ -38,8 +38,7 @@ class UserProfile(models.Model):
 
     activation_key = models.CharField(max_length=40, default='')
     alt_email = models.EmailField(default='')
-    shirt_names = models.TextField(default=json.dumps(['Human Jizz Rag']))
-
+    
     def __str__(self):  
           return "%s's profile" % self.user  
 
