@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    addTips();
     $('#upload').click(getImg);
+    addTips();
 });
  
 
@@ -22,7 +22,9 @@ function getImg() {
                     ]
         },
          function(url, metadata){
-             $('#id_pic_url').attr("value", url);
+            url += "/resize?w=40&h=40"; //image resize:
+            $('#profile_pic').attr("src", url);
+            $('#id_pic_url').attr("value", url);
          }
      );
 }

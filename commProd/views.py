@@ -54,6 +54,7 @@ def register(request, key):
             alt_email = request.POST['alt_email']
             user.profile.mergeAndDelete(alt_email)
             user.profile.alt_email = alt_email
+            user.profile.pic_url = request.POST['pic_url']
             
             ShirtName(user=user, name=request.POST['shirt_name']).save()
             
