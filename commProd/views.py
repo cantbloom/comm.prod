@@ -179,6 +179,16 @@ def vote (request):
 
     return HttpResponse(return_data, mimetype='application/json') 
 
+@login_required
+@csrf_exempt
+def get_users(request):
+    user_list = UserProfile.objects.all().select_related()
+    users = [user.to_json() for user in user_list] 
+    payload = {'users' : users}
+    return_data = json.dumps(payload)
+
+    return HttpResponse(return_data, mimetype='application/json') 
+
 
 @csrf_exempt
 def processProd(request):
