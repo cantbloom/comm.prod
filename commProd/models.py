@@ -39,35 +39,38 @@ User.profile = property(lambda u: u.get_profile())
 
 class ShirtName(models.Model):
     user = models.ForeignKey(User)
+    user_profile = models.ForeignKey(UserProfile)
 
     number = models.CharField(max_length=40, default='')
     name = models.CharField(max_length=40, default='Human Jizz Rag')
     year = models.IntegerField()
 
 class CommProd(models.Model):
-	user = models.ForeignKey(User)
+    user = models.ForeignKey(User)
+    user_profile = models.ForeignKey(UserProfile)
 
-	commprod_content = models.TextField() 
-	email_content = models.TextField()
-	avg_score = models.FloatField(default=0.0)
-	date = models.DateTimeField(auto_now=True)
+    commprod_content = models.TextField()
+    email_content = models.TextField()
+    avg_score = models.FloatField(default=0.0)
+    date = models.DateTimeField(auto_now=True)
 
-	def update_avg(self):
-		self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
-		self.save()
+    def update_avg(self):
+    	self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
+    	self.save()
 
 	def __unicode__(self):
 		return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user.username, str(self.date))
 
 class Rating(models.Model):
-	commprod = models.ForeignKey(CommProd)
-	user = models.ForeignKey(User)
+    commprod = models.ForeignKey(CommProd)
+    user = models.ForeignKey(User)
+    user_profile = models.ForeignKey(UserProfile)
 
-	score = models.FloatField(default=0.0) 
-	date = models.DateTimeField(auto_now=True)
+    score = models.FloatField(default=0.0) 
+    date = models.DateTimeField(auto_now=True)
 
-	def __unicode__(self):
-		return "%s voted a %s on commprod_id %s on %s " % (self.user.username, self.score, self.commprod.id, self.date)
+    def __unicode__(self):
+    	return "%s voted a %s on commprod_id %s on %s " % (self.user.username, self.score, self.commprod.id, self.date)
 
 #fuck.
 import signals
