@@ -5,9 +5,10 @@ from commProd.models import UserProfile, User
 class RegForm(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label="")
     last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Last Name'}), label="")
-    shirt_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Comma separated, shirt names'}), label="")
+    shirt_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Shirt names!'}), label="")
     alt_email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder' : 'Alternative Email'}), label="",
         required=False)
+    pic_url = forms.CharField(label="", required=False)
     password = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Password'}), label="" )
     password_confirm = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Confirm Password'}), label="")
 

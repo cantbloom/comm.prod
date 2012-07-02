@@ -20,3 +20,24 @@ ul.errorlist {
 .form-errors {
 	margin-right:-30px;
 }
+
+#filepicker_dialog_container {
+    top:90px !important;
+}
+
+#id_pic_url {
+    display:none;
+}
+
+#upload {
+    width:auto !important;
+    margin:0px !important;
+}
+
+#profile_pic {
+    margin-left:35px;
+    margin-right: 10px;
+    padding:3px;
+    border:1px solid #666;
+    background-color:#FFFFFF;
+}

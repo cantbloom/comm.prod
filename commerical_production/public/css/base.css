@@ -20,6 +20,11 @@
 	height:32px;
 }
 
+.icon {
+	width:40px;
+	height:40px;
+}
+
 .brand {
 	padding-top:7px !important;
 	padding-bottom:5px !important;  
@@ -30,11 +35,11 @@
 }
 
 .nav_bg{
-	background: url(/public/img/bg_nav.png) repeat top left;
+	background: url(/public/img/bg-nav.png) repeat top left;
 }
 
 body {
-	background: url(/public/img/bg_body.png) repeat top left;	
+	background: url(/public/img/bg-body.png) repeat top left;	
 }
 
 .footer {
