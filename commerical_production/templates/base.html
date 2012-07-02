@@ -95,7 +95,7 @@
 
         <div class="container wrapper">
             {% block content %} {% endblock%}
-        {% if is_paginated %}{% load paginator %}{% paginator 3 %}{% endif %}
+        
         <!-- <div class="push"></div> -->
         </div> <!-- /container -->
 
@@ -150,7 +150,7 @@
         <script src="/public/js/lib/bootstrap-typeahead.js"></script>
          <!-- Adds the Filepicker.io javascript library to the page -->
 
-         
+        <script src="/public/js/base.js"></script>         
         {% block scripts %} 
         {% endblock %}
     </body>
