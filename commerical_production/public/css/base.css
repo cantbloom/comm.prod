@@ -107,3 +107,7 @@ input {
 .commprod-container .date {
 	font-size: .8em;
 }
+
+.disabled {
+	display: none;
+}

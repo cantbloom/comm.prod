@@ -128,7 +128,7 @@ def profile(request, user_id=None, username=None):
 def search(request, title, **kwargs):
     commprod_list = commprod_search(**kwargs)
 
-    paginator = Paginator(commprod_list, 10) # Show 25 commprods per page
+    paginator = Paginator(commprod_list, 10) # Show 10 commprods per page
 
     page = request.GET.get('page')
     
