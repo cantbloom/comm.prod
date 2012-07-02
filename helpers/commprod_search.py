@@ -27,5 +27,5 @@ def commprod_search(cp_id=None, query=None, orderBy='date', direction='hl', user
 	if endDate:
 		commprods = commprods.objects.filter(date__lte=endDate)
 
-	return list(commprods)
+	return commprods.select_related('user')
 
