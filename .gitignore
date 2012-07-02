@@ -4,5 +4,3 @@
 venv
 *.log
 bombers.txt
-config.py
-parseprod_prod.py
