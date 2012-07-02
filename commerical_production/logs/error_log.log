@@ -1,0 +1,11 @@
+Internal Server Error: /register/f3c784cc6f1b7101c69195eac98bfcee61477ccf/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 77, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py", line 44, in register
+    user = profile[0].user
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py", line 207, in __getitem__
+    return list(qs)[0]
+IndexError: list index out of range

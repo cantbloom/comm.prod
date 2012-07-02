@@ -5,7 +5,7 @@ import os
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ADMIN_INFO

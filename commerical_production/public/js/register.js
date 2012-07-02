@@ -26,20 +26,20 @@ $(document).ready(function() {
  //Get your first file - How exciting!
  //This call asks for any type of file, and makes an alert window stating
  //the name of the file and where to download it from.
- // filepicker.getFile("image/*", 
- //    {
- //    'modal': true, 
- //    'multiple' : false,
- //    'services' : [filepicker.SERVICES.COMPUTER,
- //                filepicker.SERVICES.DROPBOX,
- //                filepicker.SERVICES.FACEBOOK,
- //                filepicker.SERVICES.IMAGE_SEARCH,
- //                filepicker.SERVICES.URL,
- //                filepicker.SERVICES.WEBCAM,
- //                filepicker.SERVICES.GMAIL,]
- //    },
- //     function(url, metadata){
- //         alert('You just uploaded '+metadata.filename+'! '+
- //               'You can access the file at '+url);
- //     }
- // );
+ filepicker.getFile("image/*", 
+    {
+    'modal': true, 
+    'multiple' : false,
+    'services' : [filepicker.SERVICES.COMPUTER,
+                filepicker.SERVICES.DROPBOX,
+                filepicker.SERVICES.FACEBOOK,
+                filepicker.SERVICES.IMAGE_SEARCH,
+                filepicker.SERVICES.URL,
+                filepicker.SERVICES.WEBCAM,
+                filepicker.SERVICES.GMAIL,]
+    },
+     function(url, metadata){
+         alert('You just uploaded '+metadata.filename+'! '+
+               'You can access the file at '+url);
+     }
+ );
