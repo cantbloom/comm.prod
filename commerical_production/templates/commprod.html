@@ -1,5 +1,5 @@
 <!--commprod variable should ref commprodd model -->
-<div class='row commprod-container'>
+<div id="commprod_{{commprod.id}}" class='row commprod-container' data-id="{{commprod.id}}">
 	<div class="author-container">
 		<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
 		<span class="author-name">
@@ -9,9 +9,13 @@
 			{{commprod.user_profile.user.username}}
 			{% endif %}
 		</span>
+		<div class="vote-container" style="float:right">
+			<span class='score'>{{commprod.avg_score}}</span>
+			<span class="raty-container" data-id="{{commprod.id}}" data-rating="{{commprod.avg_score}}"> </span>
+		</div>
 	</div>
 	<div class="commprod-content">
-		a btb "{{ commprod.commprod_content }}" comm.prod
+		a btb <b>"{{ commprod.commprod_content }}"</b> comm.prod
 	</div>
 	<div class="commprod-footer">
 		<span class="date">{{commprod.date}}</span>

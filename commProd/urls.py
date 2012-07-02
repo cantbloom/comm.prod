@@ -8,5 +8,6 @@ urlpatterns = patterns('commProd.views',
     url(r'^home$', 'home'),
     url(r'^popular$', 'search', {'title':'Popular comm.prods', 'orderBy': 'avg_score', 'direction': 'lh'}),
     url(r'^recent$', 'search', {'title':'Recent comm.prods', 'orderBy': 'date', 'direction':'lh'}),
-    url(r'^$', 'home'),
+    url(r'^vote$', 'vote'),
+    url(r'^$', 'home')
 )

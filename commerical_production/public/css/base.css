@@ -91,19 +91,47 @@ input {
 .commprod-container .author-pic {
 	width:40px;
 	height:40px;
+	-webkit-border-radius: 3px!important;
+	-moz-border-radius: 3px!important;
+	border-radius: 3px!important;
 }
 
 .commprod-container .commprod-content{
 	color:#000;
-
+	margin: 5px 3px;
+	font-size: 1.3em;
 }
 
 .commprod-container .author-name{
-	vertical-align: bottom;
+	vertical-align: middle;
 	font-size: 1.2em;
 	font-weight: bold;
 }
 
 .commprod-container .date {
 	font-size: .8em;
+}
+
+.vote-container img {
+	width:40px;
+	height:40px;
+}
+
+.vote-container>.raty-container{
+	float:right;
+}
+
+.vote-container>.score{
+	float:right;
+	height: 20px;
+	background: #666;
+	color: #EEE;
+	padding: 10px 5px;
+	font-size: 20px;
+	vertical-align: middle;
+	text-align: center;
+	margin: 0px 5px;
+	-webkit-border-radius: 3px!important;
+	-moz-border-radius: 3px!important;
+	border-radius: 3px!important;
 }
