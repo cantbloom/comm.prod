@@ -13,5 +13,5 @@ def post_save_ratings (sender, instance, **kwargs):
 
 def setup():
     post_save.connect(create_user_profile, sender=User) 
-    post_save.connect(post_save_ratings, sender=Rating)
+    #accomplished by overriding save method # post_save.connect(post_save_ratings, sender=Rating)
 

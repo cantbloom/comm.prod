@@ -98,14 +98,13 @@ input {
 
 .commprod-container .commprod-content{
 	color:#000;
-	margin: 5px 3px;
-	font-size: 1.3em;
+	margin: 8px 10px 0px 10px;
+	font-size: 1.1em;
 }
 
 .commprod-container .author-name{
 	vertical-align: middle;
-	font-size: 1.2em;
-	font-weight: bold;
+	font-size: 1.5em;
 }
 
 .commprod-container .date {
@@ -113,8 +112,8 @@ input {
 }
 
 .vote-container img {
-	width:40px;
-	height:40px;
+	width:32px;
+	height:32px;
 }
 
 .vote-container>.raty-container{
@@ -123,14 +122,13 @@ input {
 
 .vote-container>.score{
 	float:right;
-	height: 20px;
 	background: #666;
 	color: #EEE;
-	padding: 10px 5px;
+	padding: 5px 5px;
 	font-size: 20px;
 	vertical-align: middle;
 	text-align: center;
-	margin: 0px 5px;
+	margin: 3px 5px;
 	-webkit-border-radius: 3px!important;
 	-moz-border-radius: 3px!important;
 	border-radius: 3px!important;

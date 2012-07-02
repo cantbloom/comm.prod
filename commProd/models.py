@@ -19,7 +19,7 @@ class UserProfile(models.Model):
     def update_avg(self):
 
         #self.avg_score = self.user.ratings__set.aggregate(Avg('score'))['score__avg']
-        self.avg_score = Rating.objects.filter(commprod__user=self.user).aggregate(Avg('score'))['score__avg']
+        self.avg_score = Rating.objects.filter(commprod__user_profile=self).aggregate(Avg('score'))['score__avg']
         self.save()
 
     """
@@ -73,6 +73,11 @@ class Rating(models.Model):
 
     score = models.FloatField(default=0.0) 
     date = models.DateTimeField(auto_now=True)
+
+    def save(self, force_insert=False, force_update=False, **kwargs):
+        super(Rating, self).save(force_insert, force_update)
+        self.commprod.update_avg()
+        self.commprod.user_profile.update_avg()
 
     def __unicode__(self):
     	return "%s voted a %s on commprod_id %s on %s " % (self.user_profile.user.username, self.score, self.commprod.id, self.date)
