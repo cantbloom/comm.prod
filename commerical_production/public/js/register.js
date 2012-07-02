@@ -5,21 +5,15 @@ $(document).ready(function() {
  
 
 function getImg() {
-
-     //Seting up Filepicker.io with your api key
-    filepicker.setKey('A1Os2AsKsRgK8t0gbEHcAz');
-     //Get your first file - How exciting!
-     //This call asks for any type of file, and makes an alert window stating
-     //the name of the file and where to download it from.
+    filepicker.setKey('A1Os2AsKsRgK8t0gbEHcAz')
     filepicker.getFile("image/*", 
-        {
+    {
         'modal': true, 
         'multiple' : false,
         'services' : [filepicker.SERVICES.WEBCAM,
                     filepicker.SERVICES.COMPUTER,
                     filepicker.SERVICES.FACEBOOK,
-                    filepicker.SERVICES.DROPBOX,
-                    ]
+                    filepicker.SERVICES.DROPBOX,]
         },
          function(url, metadata){
             url += "/resize?w=40&h=40"; //image resize:
@@ -30,33 +24,21 @@ function getImg() {
 }
 
 function addTips(){
-    $('#id_alt_email').tooltip({
-        "placement" : "right",
-        "title" : "Important! Put your gmail or anything you use to send emails to the floor.",
-        "trigger" : "focus"
-    });
+    makeTip('id_alt_email', "Important! Put your gmail or anything you use to send emails to the floor.");
+    makeTip('id_shirt_name', 'Be Honest :)');
+    makeTip('id_password', "Your password will be encrypted.");
+    makeTip('id_password_confirm',  "We promise.");
+    makeTip('upload',  "Be orginal. Upload your own profile picture!", null, 'hover');
+}
 
-    $('#id_shirt_name').tooltip({
-        "placement" : "right",
-        "title" : "Be Honest :)",
-        "trigger" : "focus"
-    });
-
-    $('#id_password').tooltip({
-        "placement" : "right",
-        "title" : "Your password will be encrypted.",
-        "trigger" : "focus"
-    });
-
-    $('#id_password_confirm').tooltip({
-        "placement" : "right",
-        "title" : "We promise.",
-        "trigger" : "focus"
-    });
-
-    $('#upload').tooltip({
-        "placement" : "right",
-        "title" : "Be orginal. Upload your own profile picture!",
-        "trigger" : "hover"
+//defaults to placing right and focus trigger if 
+//no values given.
+function makeTip(div,title, placement, trigger) {
+    placement = placement || 'right';
+    trigger = trigger || 'focus'
+    $('#' + div).tooltip({
+        "placement" : placement,
+        "title" : title,
+        "trigger" : trigger,
     });
 }

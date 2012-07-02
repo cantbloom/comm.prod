@@ -12,7 +12,7 @@ def commprod_search(cp_id=None, query=None, orderBy='date', direction='hl', user
 		commprods = commprods.filter(id=cp_id)
 
 	if username:
-		commprods = commprods.filter(user__username=username)
+		commprods = commprods.filter(user_profile__user__username=username)
 
 	if query:
 		commprods = commprods.filter(content__contains=query)

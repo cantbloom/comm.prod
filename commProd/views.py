@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
 from django.contrib.auth import authenticate, login
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from commProd.models import CommProd, Rating, UserProfile, ShirtName
 from commProd.forms import RegForm
@@ -56,7 +57,7 @@ def register(request, key):
             user.profile.alt_email = alt_email
             user.profile.pic_url = request.POST['pic_url']
             
-            ShirtName(user=user, name=request.POST['shirt_name']).save()
+            ShirtName(user_profile=user.profile, name=request.POST['shirt_name']).save()
             
             user.save()
             user.profile.save()
@@ -108,7 +109,7 @@ def profile(request, user_id=None, username=None):
     else:
         raise Http404
     
-    commprods = CommProd.objects.filter(user=user)
+    commprods = CommProd.objects.filter(user_profile=user.profile)
 
 
     page_username = getRandomUsername(user)
@@ -125,17 +126,26 @@ def profile(request, user_id=None, username=None):
 
 @login_required
 def search(request, title, **kwargs):
-    c = commprod_search(**kwargs)
+    commprod_list = commprod_search(**kwargs)
 
+    paginator = Paginator(commprod_list, 10) # Show 25 commprods per page
+
+    page = request.GET.get('page')
+    
+    try:
+        commprods = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        commprods = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        commprods = paginator.page(paginator.num_pages)
     template_values = {
         "page_title": title,
         "user": request.user,
-        'commprods' :c
+        'commprods' :commprods
     }
     return render_to_response('search.html', template_values, context_instance=RequestContext(request))
-
-#SELECT `commProd_commprod`.`id`, `commProd_commprod`.`user_id`, `commProd_commprod`.`commprod_content`, `commProd_commprod`.`email_content`, `commProd_commprod`.`avg_score`, `commProd_commprod`.`date` FROM `commProd_commprod` ORDER BY `commProd_commprod`.`avg_score` DESC
-
 
 ###### request endpoints #######
 @login_required
@@ -151,7 +161,7 @@ def vote (request):
     if not commprod:
         return HttpResponse(json.dumps({'success':False}), mimetype='application/json')
 
-    rating = Rating.objects.get_or_create(commprod=commprod, user=user)
+    rating = Rating.objects.get_or_create(commprod=commprod, user_profile=user.profile)
 
     if vote_val in valid_votes:
         rating.score = score

@@ -30,12 +30,13 @@ class UserProfile(models.Model):
     def mergeAndDelete(self, email):
         to_delete = User.objects.filter(user__email=email)
         if to_delete.exists():
+            to_delete = to_delete[0].profile
             #to_delete.commprod__set.update(user=self)
             #to_delete.rating__set.update(user=self)
 
             #delete when above is confirmed to work
-            CommProd.objects.filter(user=to_delete).update(user=self)
-            Rating.objects.filter(user=to_delete).update(user=self)
+            CommProd.objects.filter(user_profile=to_delete).update(user_profile=self)
+            Rating.objects.filter(user_profile=to_delete).update(user_profile=self)
             
             to_delete.delete()
 
@@ -45,7 +46,6 @@ class UserProfile(models.Model):
 User.profile = property(lambda u: u.get_profile())
 
 class ShirtName(models.Model):
-    user = models.ForeignKey(User)
     user_profile = models.ForeignKey(UserProfile)
 
     number = models.CharField(max_length=40, default='')
@@ -53,7 +53,6 @@ class ShirtName(models.Model):
     year = models.IntegerField()
 
 class CommProd(models.Model):
-    user = models.ForeignKey(User)
     user_profile = models.ForeignKey(UserProfile)
 
     commprod_content = models.TextField()
@@ -70,14 +69,13 @@ class CommProd(models.Model):
 
 class Rating(models.Model):
     commprod = models.ForeignKey(CommProd)
-    user = models.ForeignKey(User)
     user_profile = models.ForeignKey(UserProfile)
 
     score = models.FloatField(default=0.0) 
     date = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-    	return "%s voted a %s on commprod_id %s on %s " % (self.user.username, self.score, self.commprod.id, self.date)
+    	return "%s voted a %s on commprod_id %s on %s " % (self.user_profile.user.username, self.score, self.commprod.id, self.date)
 
 #fuck.
 import signals
