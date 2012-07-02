@@ -1,0 +1,19 @@
+<!--commprod variable should ref commprodd model -->
+<div class='row commprod-container'>
+	<div class="author-container">
+		<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
+		<span class="author-name">
+			{% if commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}	
+			{{ commprod.user_profile.user.first_name }} {{ commprod.user_profile.user.last_name}}
+			{% else %}
+			{{commprod.user_profile.user.username}}
+			{% endif %}
+		</span>
+	</div>
+	<div class="commprod-content">
+		a btb "{{ commprod.commprod_content }}" comm.prod
+	</div>
+	<div class="commprod-footer">
+		<span class="date">{{commprod.date}}</span>
+	</div>
+</div>
