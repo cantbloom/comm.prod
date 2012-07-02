@@ -65,3 +65,45 @@ input {
 .center-text{
 	text-align: center;
 }
+
+.commprod-timeline{
+}
+
+.commprod-container{
+	padding:10px;
+	margin: 5px;
+	color: #555;
+	word-wrap: break-word;
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15)!important;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.15)!important;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15)!important;
+	border: #DDD 1px solid!important;
+	border-top-color: #EEE!important;
+	border-bottom-color: #BBB!important;
+	background-color: white!important;
+	-webkit-border-radius: 5px!important;
+	-moz-border-radius: 5px!important;
+	border-radius: 5px!important;
+}
+.commprod-container .author-container{
+	margin-bottom: 5px;
+}
+.commprod-container .author-pic {
+	width:40px;
+	height:40px;
+}
+
+.commprod-container .commprod-content{
+	color:#000;
+
+}
+
+.commprod-container .author-name{
+	vertical-align: bottom;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.commprod-container .date {
+	font-size: .8em;
+}

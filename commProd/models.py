@@ -17,6 +17,8 @@ class UserProfile(models.Model):
     pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
 
     def update_avg(self):
+
+        #self.avg_score = self.user.ratings__set.aggregate(Avg('score'))['score__avg']
         self.avg_score = Rating.objects.filter(commprod__user=self.user).aggregate(Avg('score'))['score__avg']
         self.save()
 
@@ -28,8 +30,13 @@ class UserProfile(models.Model):
     def mergeAndDelete(self, email):
         to_delete = User.objects.filter(user__email=email)
         if to_delete.exists():
+            #to_delete.commprod__set.update(user=self)
+            #to_delete.rating__set.update(user=self)
+
+            #delete when above is confirmed to work
             CommProd.objects.filter(user=to_delete).update(user=self)
             Rating.objects.filter(user=to_delete).update(user=self)
+            
             to_delete.delete()
 
     def __str__(self):  

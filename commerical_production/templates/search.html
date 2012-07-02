@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
 
+
 {% block styles %}
     <link href="/public/css/search.css" rel="stylesheet">
 {%  endblock %}
 {% block content %} 
-    <h1>{{page_title}}</h1>
+    <h1 class="offset2">{{page_title}}</h1>
     
-    <ul>
+    <div class="commprod-timeline span6 offset3">
     {% for commprod in commprods %}
-        <li>{{commprod}} | {{commprod.avg_score}} || {{commprod.id}} </li>
+        {% include "commprod.html" with commprod=commprod%}
     {% endfor %}
-    </ul>
+    <div>
 
 {% endblock%}
 {% block scripts %} 
