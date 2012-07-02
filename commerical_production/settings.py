@@ -5,7 +5,7 @@ import os
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ADMIN_INFO
@@ -105,6 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'helpers.profiler.ProfileMiddleware'
 )
 
 ROOT_URLCONF = 'commerical_production.urls'

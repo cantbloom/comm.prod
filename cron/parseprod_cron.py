@@ -2,7 +2,11 @@
 
 ## crontab prefs
 ## * * * * * /path/to/commprod_cron.py >/dev/null 2>&1
+<<<<<<< HEAD
 from config import CRON
+=======
+from config import EMAIL, PASSWORD, SECRET_KEY
+>>>>>>> 7589f5dca025952975aef9d7e3fbff43e23fbd69
 import email, imaplib, re, logging, requests, os, simplejson as json
 
 ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
