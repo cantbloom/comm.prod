@@ -21,6 +21,12 @@ class UserProfile(models.Model):
         #self.avg_score = self.user.ratings__set.aggregate(Avg('score'))['score__avg']
         self.avg_score = Rating.objects.filter(commprod__user=self.user).aggregate(Avg('score'))['score__avg']
         self.save()
+    
+    def to_json(self):
+        return json.dumps({
+            'username': self.user.username,
+            'name' : self.user.first_name + " " + self.user.last_name,
+            })
 
     """
     Takes an email, updates commprod objects 

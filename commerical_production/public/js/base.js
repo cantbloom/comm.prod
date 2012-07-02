@@ -9,15 +9,31 @@ function sendVote(id, score){
 	});
 }
 
+// Fill in auto-complete on search bar
+function get_users() {
+	$.get('/get_users', function(res){
+		user_list = [];
+		$.each(res['users'], function(index, user) {
+			var name;
+			if (user['name'] != " ") {
+				name = user['name'];
+			} else {
+				name = user['username']
+			}
+			console.log(user)
+			user_list.push(name);
+		});
+		console.log(user_list[0])
 
-	
-
-
-
-
-
+		$('#search_bar').typeahead({
+			'source' : user_list,
+		});
+	});
+}
 
 $(function(){
+
+	get_users();
 	$('.raty-container').raty({
 	  half       : true,
 	  halfShow   : true,
