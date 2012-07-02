@@ -151,7 +151,7 @@ def search(request, title, **kwargs):
 @login_required
 @csrf_exempt
 def vote (request):
-    valid_votes = [0, 0.5, 1, 1.5, 2, 2.5, 3] #patlsotw 
+    valid_votes = ['0', '0.5', '1', '1.5', '2', '2.5', '3'] #patlsotw 
 
     score = request.POST["score"]
     cp_id = request.POST["id"]
@@ -162,7 +162,7 @@ def vote (request):
     if not commprod:
         return HttpResponse(json.dumps({'success':False}), mimetype='application/json')
 
-    rating = Rating.objects.get_or_create(commprod=commprod, user_profile=user.profile)
+    rating, created = Rating.objects.get_or_create(commprod=commprod, user_profile=user.profile)
 
     if score in valid_votes:
         rating.score = score
@@ -171,8 +171,8 @@ def vote (request):
     payload = {
         "success": True,
         "cp_id": cp_id,
-        "score": score,
-        "avg_score": commprod.avg_score
+        "score": float(score),
+        "avg_score": round(float(commprod.avg_score),2)
     }
 
     return_data = json.dumps(payload)
