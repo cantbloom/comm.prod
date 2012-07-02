@@ -1,7 +1,9 @@
 from commProd.models import CommProd, Rating, UserProfile
 
 """
-to test from commerical_production.commprod_search import commprod_search
+To test:
+python manage.py shell
+from commerical_production.commprod_search import commprod_search
 """
 def commprod_search(cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None ):
 	commprods = CommProd.objects.all()
