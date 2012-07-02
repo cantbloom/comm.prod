@@ -8,7 +8,7 @@ Returns a username to be rendered choosing randomly between
 first + last, username, and a shirt first_name.
 """
 def getRandomUsername(user):
-    potentials = list(ShirtName.objects.filter(user=user))
+    potentials = list(ShirtName.objects.filter(user_profile=user.profile))
     potentials.append(user.first_name + user.last_name)
     potentials.append(user.username)
     first_last = user.first_name + " " +user.last_name
