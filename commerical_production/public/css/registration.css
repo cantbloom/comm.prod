@@ -1,15 +1,15 @@
-#reg-header-text{
-	margin-bottom:20px;
-}
-
 #known-info{
 	font-size: 1.5em;
-	margin-top: 10px;
+	margin-top: 5px;
+    margin-bottom: 10px;
 }
 
+#reg-form {
+    margin-bottom:0px;
+}
 #reg-form input {
 	width:80%;
-	margin: 3px 10%;
+	margin: 5px 10%;
 	font-size: 1.1em;
 }
 
@@ -35,8 +35,7 @@ ul.errorlist {
 }
 
 #profile_pic {
-    margin-left:35px;
-    margin-right: 10px;
+    margin:0px 10px 5px 35px;
     padding:3px;
     border:1px solid #666;
     background-color:#FFFFFF;
