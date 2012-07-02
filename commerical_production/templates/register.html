@@ -5,7 +5,7 @@
     <link href="/public/css/registration.css" rel="stylesheet">
 {%  endblock %}
 {% block content %} 
-    <h1 id="reg-header-text" class=" span6 offset3 center-text">We just need a little more information before you can use the site...</h1>
+    <h2 id="reg-header-text" class=" span6 offset3 center-text">We just need a little more information...</h2>
     <div id="reg_div">
         <div class="row">
             <div id='known-info' class="span4 offset4">
@@ -33,7 +33,10 @@
             <div class="span4 offset4 form">
                 <form id="reg-form" method='post' action='/register/{{ user.profile.activation_key }}/' >
                     {{ form.as_p }}
-                    <input class="btn btn-warning" type="submit" value="Submit" id="submit"/>
+
+                    <img id="profile_pic" class="icon" src="/public/img/btb-placeholder.png">
+                    <input class="btn" name="upload" id="upload"type="button" value="Edit profile picture"/>
+                    <input class="btn btn-warning" type="submit" value="Login" id="submit"/>
                 </form>
             </div>
         </div>
@@ -42,6 +45,6 @@
 
 {% endblock%}
 
-{% block scripts %} 
+{% block scripts %}
 <script src="/public/js/register.js"></script>
 {% endblock %}

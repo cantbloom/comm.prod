@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     alt_email = models.EmailField(default='')
     send_mail = models.BooleanField(default=False)
     avg_score = models.FloatField(default=0.0)
-    #pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
+    pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
 
     def update_avg(self):
         self.avg_score = Rating.objects.filter(commprod__user=self.user).aggregate(Avg('score'))['score__avg']

@@ -5,7 +5,7 @@
 #top_secret{
     height:200px;
     width: 200px;
-    background: url(/public/img/btb_confidential.jpg);
+    background: url(/public/img/btb-confidential.jpg);
     background-size: 200px 200px;
     margin: 10px auto;
 }
