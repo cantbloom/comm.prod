@@ -216,7 +216,7 @@ def processProd(request):
             resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
             
             for commprod in commprods:
-                CommProd(email_content=content, commprod_content=commprod, user=user, date=date).save() 
+                CommProd(email_content=content, commprod_content=commprod, user_profile=user.profile, date=date).save() 
     else:
         resp = "No data"
         if str(key) != config.SECRET_KEY: #patlsotw
