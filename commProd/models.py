@@ -71,7 +71,7 @@ class CommProd(models.Model):
     	self.save()
 
 	def __unicode__(self):
-		return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user.username, str(self.date))
+		return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user_profile.user.username, str(self.date))
 
 class Rating(models.Model):
     commprod = models.ForeignKey(CommProd)
