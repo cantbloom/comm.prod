@@ -3,64 +3,110 @@
 ## crontab prefs
 ## * * * * * /path/to/commprod_cron.py >/dev/null 2>&1  
 from config import CRON
-import email, imaplib, re, logging, requests, os, simplejson as json
+import email, imaplib, re, logging, requests, datetime, time, os, simplejson as json
+
 
 ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
 logging.basicConfig(filename=os.path.join(ROOT_PATH, 'commprod.log'),level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
-"""
-Gets new comm prods and posts to endpoint if any new ones
-are present. Logs endpoint response
-"""
-def post_prods():
-    prods = fetch_mail()
-    url = "http://localhost:5000/processprod"
-    #url = "http://comm-prod.herokuapp.com/processprod"
-    if prods:
-        data = json.dumps(prods)
-        r = requests.post(url, data={'data' : data, 'key' : CRON['SECRET_KEY']})
-        logging.info(r.text)
+# """
+# Gets new comm prods and posts to endpoint if any new ones
+# are present. Logs endpoint response
+# """
+# def post_prods():
+#     prods = fetch_mail()
+#     #url = "http://localhost:5000/processprod"
+#     url = "http://commprod.herokuapp.com/processprod"
+#     if prods:
+#         data = json.dumps(prods)
+#         r = requests.post(url, data={'data' : data, 'key' : CRON['SECRET_KEY']})
+#         logging.info(r.text)
+
+# """
+# Returns an array of dictionarys of new messages [{sender : (content, comm_prods)}]
+# or None if no new messages exist or no comm_prod was found.
+# """
+# def fetch_mail():
+#     messages = []
+#     valid_senders = {'bombers@mit.edu': 0, 'bombers-minus-facists@mit.edu': 0}
+    
+#     try:
+#         mail = imaplib.IMAP4_SSL('imap.gmail.com')
+#         mail.login(EMAIL,PASSWORD)
+#         mail.select("inbox") # connect to inbox.
+
+#         result, data = mail.uid('search', None, "UNSEEN FROM "bombers@mit.edu"") #get unread messages
+#         unread_mail = data[0].split() #list of unread uids
+#         result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-facists@mit.edu"))')
+        #unread_mail.extend(data[0].split())
+
+#         for msg_id in unread_mail:
+#             result, data = mail.uid('fetch', msg_id, '(RFC822)')
+
+#             email_message = email.message_from_string(data[0][1])
+#             date = time.mktime(email.utils.parsedate(email_message['Date'])) # in milliseconds
+#             date = datetime.datetime.fromtimestamp(date).isoformat()
+#             recipient = (email.utils.parseaddr(email_message['To'])[1]).lower()
+#             sender = (email.utils.parseaddr(email_message['From'])[1]).lower()
+#             content = stripOld(get_first_text_block(email_message))
+#             if content == None:
+#                 logging.warn("No content found from sender %s" % str(sender))
+#             else:
+#                 parsed_content = parseProd(content)
+#                 if parsed_content and recipient in valid_senders:
+#                     logging.warning("Commprod found from email %s with commprod\n '%s'" % (sender, parsed_content))
+#                     messages.append({sender : (content, parsed_content, date)})
+
+#                 print "Parsed email from %s with comprods:\n %s" % (str(sender), str(parsed_content))
+#         mail.close()
+#         mail.logout()
+#     except imaplib.IMAP4.error as e:
+#         logging.warning(str(e))
+
+#     return messages
+
 
 """
-Returns an array of dictionarys of new messages [{sender : (content, comm_prods)}]
+Sends a post request to the endpoint of a dictionary of new messages in the form:
+{sender : (content, comm_prods)}
 or None if no new messages exist or no comm_prod was found.
 """
 def fetch_mail():
-    #EMAIL = "abtbcommprod@gmail.com"
-    messages = []
-    valid_senders = {'bombers@mit.edu': 0, 'bombers-minus-facists@mit.edu': 0}
-    dev_send = {'joshblum@mit.edu': 0, 'kanter@mit.edu' : 0, 'abtbcommprod@gmail.com' : 0, 'jblum18@gmail.com' :0}
+
+    url = "http://commprod.herokuapp.com/processprod"
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        mail.login(CRON['EMAIL'],CRON['PASSWORD'])
+        mail.login(EMAIL,PASSWORD)
         mail.select("inbox") # connect to inbox.
-
-        result, data = mail.uid('search', None, "UNSEEN") #get unread messages
+        result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-facists@mit.edu"))')
         unread_mail = data[0].split() #list of unread uids
-
         for msg_id in unread_mail:
             result, data = mail.uid('fetch', msg_id, '(RFC822)')
+
             email_message = email.message_from_string(data[0][1])
-            recipient = (email.utils.parseaddr(email_message['To'])[1]).lower()
+            date = time.mktime(email.utils.parsedate(email_message['Date'])) # in milliseconds
+            date = datetime.datetime.fromtimestamp(date).isoformat()
             sender = (email.utils.parseaddr(email_message['From'])[1]).lower()
             content = stripOld(get_first_text_block(email_message))
             if content == None:
                 logging.warn("No content found from sender %s" % str(sender))
             else:
                 parsed_content = parseProd(content)
-                if parsed_content and (recipient in valid_senders or sender in dev_send):
+                if parsed_content:
                     logging.warning("Commprod found from email %s with commprod\n '%s'" % (sender, parsed_content))
-                    messages.append({sender : (content, parsed_content)})
-                else:
-                    logging.info("No commprod found from email %s with content\n %s" % (sender, content))
-
+                    data = json.dumps({sender : (content, parsed_content, date)})
+                    r = requests.post(url, data={'data' : data, 'key' : CRON['SECRET_KEY']})
+                    time.sleep(2) # don't overload poor heroku
+                    logging.info(r.text)
+                    
                 print "Parsed email from %s with comprods:\n %s" % (str(sender), str(parsed_content))
         mail.close()
         mail.logout()
     except imaplib.IMAP4.error as e:
-        logging.warning("IMAP error({0}): {1}".format(e.errno, e.strerror))
+        logging.warning(str(e))
 
-    return messages
+    return "Done"
+
 
 """
 Returns a list of commprods if any
@@ -116,4 +162,4 @@ def get_first_text_block(email_message_instance):
     elif maintype == 'text':
         return email_message_instance.get_payload()
 
-post_prods()
+fetch_mail()

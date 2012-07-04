@@ -180,6 +180,16 @@ def vote (request):
 
     return HttpResponse(return_data, mimetype='application/json') 
 
+@login_required
+@csrf_exempt
+def get_users(request):
+    user_list = UserProfile.objects.all().select_related()
+    users = [user.to_json() for user in user_list] 
+    payload = {'users' : users}
+    return_data = json.dumps(payload)
+
+    return HttpResponse(return_data, mimetype='application/json') 
+
 
 @csrf_exempt
 def processProd(request):
@@ -188,26 +198,25 @@ def processProd(request):
     
     resp = ""
     if data and str(key) == config.SECRET_KEY:
-        data = json.loads(data) #[{sender : (content, [comm_prods])}]
-        for dic in data:
-            sender = dic.keys()[0]
-            content, commprods = dic[sender]
+        data = json.loads(data) #{sender : (content, [comm_prods], date)}
+        sender = data.keys()[0]
+        content, commprods, date = data[sender]
 
-            user = None
-            email_search = User.objects.filter(email=sender)
-            alt_email_search = UserProfile.objects.filter(alt_email=sender)
+        user = None
+        email_search = User.objects.filter(email=sender)
+        alt_email_search = UserProfile.objects.filter(alt_email=sender)
 
-            if email_search.exists():
-                user = email_search[0]
-            elif alt_email_search.exists():
-                user = alt_email_search[0].user
-            else:
-                user, created = createUser(sender, sender)
-            
-            resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
-            
-            for commprod in commprods:
-                CommProd(email_content=content, commprod_content=commprod, user=user).save() 
+        if email_search.exists():
+            user = email_search[0]
+        elif alt_email_search.exists():
+            user = alt_email_search[0].user
+        else:
+            user, created = createUser(sender, sender)
+        
+        resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
+        
+        for commprod in commprods:
+            CommProd(email_content=content, commprod_content=commprod, user_profile=user.profile, date=date).save() 
     else:
         resp = "No data"
         if str(key) != config.SECRET_KEY: #patlsotw

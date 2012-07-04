@@ -54,8 +54,8 @@
                         </ul>
                         <ul class="nav pull-right">
                             <li>
-                                <form class="navbar-search  ">
-                                    <input type="text" class="search-query" placeholder="Find people...">
+                                <form class="navbar-search">
+                                    <input type="text" id="search_bar" class="search-query" placeholder="Find people...">
                                 </form>
                             </li>
                             <li class="divider-vertical"></li>
@@ -94,6 +94,7 @@
 
         <div class="container wrapper">
             {% block content %} {% endblock%}
+
         <!-- <div class="push"></div> -->
         </div> <!-- /container -->
 
@@ -130,6 +131,7 @@
         </div> -->
         <!--  javascript leave everything imported for dev,
         cleanup for production--> 
+        <script src="/public/js/user_list.js"></script>
         <script src="https://api.filepicker.io/v0/filepicker.js"></script>
         <script src="/public/js/lib/jquery.min.js"></script>
         

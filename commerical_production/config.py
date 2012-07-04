@@ -50,3 +50,12 @@ SENDGRID = {
 FILEPICKER = {
     'API_KEY' : 'A1Os2AsKsRgK8t0gbEHcAz',
 }
+
+############# AWS ################
+## setup instructions http://aws.amazon.com/articles/3998?_encoding=UTF8&jiveRedirect=1
+
+AWS = {
+    'aws_access_key_id' : 'AKIAIJ5BONOWGWS32ALQ',
+    'aws_secret_access_key' : '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',
+    'bucket' : 'commprod',
+}
