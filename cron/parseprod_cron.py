@@ -3,7 +3,8 @@
 ## crontab prefs
 ## * * * * * /path/to/commprod_cron.py >/dev/null 2>&1  
 from config import CRON
-import email, imaplib, re, logging, requests, os, simplejson as json
+import email, imaplib, re, logging, requests, datetime, time, os, simplejson as json
+
 
 ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
 logging.basicConfig(filename=os.path.join(ROOT_PATH, 'commprod.log'),level=logging.DEBUG, format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -14,8 +15,8 @@ are present. Logs endpoint response
 """
 def post_prods():
     prods = fetch_mail()
-    url = "http://localhost:5000/processprod"
-    #url = "http://comm-prod.herokuapp.com/processprod"
+    #url = "http://localhost:5000/processprod"
+    url = "http://commprod.herokuapp.com/processprod"
     if prods:
         data = json.dumps(prods)
         r = requests.post(url, data={'data' : data, 'key' : CRON['SECRET_KEY']})
@@ -29,7 +30,7 @@ def fetch_mail():
     #EMAIL = "abtbcommprod@gmail.com"
     messages = []
     valid_senders = {'bombers@mit.edu': 0, 'bombers-minus-facists@mit.edu': 0}
-    dev_send = {'joshblum@mit.edu': 0, 'kanter@mit.edu' : 0, 'abtbcommprod@gmail.com' : 0, 'jblum18@gmail.com' :0}
+    
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
         mail.login(CRON['EMAIL'],CRON['PASSWORD'])
@@ -40,7 +41,10 @@ def fetch_mail():
 
         for msg_id in unread_mail:
             result, data = mail.uid('fetch', msg_id, '(RFC822)')
+
             email_message = email.message_from_string(data[0][1])
+            date = time.mktime(email.utils.parsedate(email_message['Date'])) # in milliseconds
+            date = datetime.datetime.fromtimestamp(date).isoformat()
             recipient = (email.utils.parseaddr(email_message['To'])[1]).lower()
             sender = (email.utils.parseaddr(email_message['From'])[1]).lower()
             content = stripOld(get_first_text_block(email_message))
@@ -48,9 +52,9 @@ def fetch_mail():
                 logging.warn("No content found from sender %s" % str(sender))
             else:
                 parsed_content = parseProd(content)
-                if parsed_content and (recipient in valid_senders or sender in dev_send):
+                if parsed_content and recipient in valid_senders:
                     logging.warning("Commprod found from email %s with commprod\n '%s'" % (sender, parsed_content))
-                    messages.append({sender : (content, parsed_content)})
+                    messages.append({sender : (content, parsed_content, date)})
                 else:
                     logging.info("No commprod found from email %s with content\n %s" % (sender, content))
 

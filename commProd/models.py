@@ -64,7 +64,7 @@ class CommProd(models.Model):
     commprod_content = models.TextField()
     email_content = models.TextField()
     avg_score = models.FloatField(default=0.0)
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField()
 
     def update_avg(self):
     	self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
