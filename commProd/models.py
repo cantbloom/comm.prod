@@ -20,6 +20,12 @@ class UserProfile(models.Model):
         #self.avg_score = self.user.ratings__set.aggregate(Avg('score'))['score__avg']
         self.avg_score = self.score / CommProd.objects.filter(user_profile=self).count()
         self.save()
+    
+    def to_json(self):
+        return json.dumps({
+            'username': self.user.username,
+            'name' : self.user.first_name + " " + self.user.last_name,
+            })
 
     """
     Takes an email, updates commprod objects 
@@ -57,7 +63,7 @@ class CommProd(models.Model):
     commprod_content = models.TextField()
     email_content = models.TextField()
     avg_score = models.FloatField(default=0.0)
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateTimeField()
 
     def update_avg(self):
     	self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
@@ -67,7 +73,7 @@ class CommProd(models.Model):
         return (votes - 1) / pow((item_hour_age+2), gravity)
 
 	def __unicode__(self):
-		return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user.username, str(self.date))
+		return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user_profile.user.username, str(self.date))
 
 class Rating(models.Model):
     commprod = models.ForeignKey(CommProd)

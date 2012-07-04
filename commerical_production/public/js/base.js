@@ -23,7 +23,7 @@ function sendVote(id, score){
 
 function updateAvgScore(e, data){
 	if (data.success){
-		var $commprod = $('#commprod_'+data.cp_id)
+		var $commprod = $('#commprod_'+data.cp_id);
 
 		//not udpating now because of lag...//update 
 		//$commprod.find('.score').html(data.avg_score.toFixed(2));
@@ -33,12 +33,12 @@ function updateAvgScore(e, data){
 	}
 }
 
-
-
-
-
-
 $(function(){
 	$(document).on('voteResponse', updateAvgScore);
+
 	$(document).on('click', '.vote-container span', voteSelection)
+
+	$('#search_bar').typeahead({
+		'source' : user_list
+	});
 }); 

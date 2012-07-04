@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="robots" content="NONE,NOARCHIVE">
-  <title>DatabaseError at /processprod</title>
+  <title>AttributeError at /processprod</title>
   <style type="text/css">
     html * { padding:0; margin:0; }
     body * { padding:10px 20px; }
@@ -117,8 +117,8 @@
 </head>
 <body>
 <div id="summary">
-  <h1>DatabaseError at /processprod</h1>
-  <pre class="exception_value">(1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre>
+  <h1>AttributeError at /processprod</h1>
+  <pre class="exception_value">&#39;unicode&#39; object has no attribute &#39;keys&#39;</pre>
   <table class="meta">
 
     <tr>
@@ -127,7 +127,7 @@
     </tr>
     <tr>
       <th>Request URL:</th>
-      <td>http://localhost:5000/processprod</td>
+      <td>http://commprod.herokuapp.com/processprod</td>
     </tr>
 
     <tr>
@@ -137,48 +137,49 @@
 
     <tr>
       <th>Exception Type:</th>
-      <td>DatabaseError</td>
+      <td>AttributeError</td>
     </tr>
 
 
     <tr>
       <th>Exception Value:</th>
-      <td><pre>(1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
+      <td><pre>&#39;unicode&#39; object has no attribute &#39;keys&#39;</pre></td>
     </tr>
 
 
     <tr>
       <th>Exception Location:</th>
-      <td>/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/connections.py in defaulterrorhandler, line 36</td>
+      <td>/app/commProd/views.py in processProd, line 202</td>
     </tr>
 
     <tr>
       <th>Python Executable:</th>
-      <td>/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python</td>
+      <td>/app/.heroku/venv/bin/python</td>
     </tr>
     <tr>
       <th>Python Version:</th>
-      <td>2.7.3</td>
+      <td>2.7.2</td>
     </tr>
     <tr>
       <th>Python Path:</th>
-      <td><pre>[&#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload&#39;,
- &#39;/Users/joshblum/Library/Python/2.7/lib/python/site-packages&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages&#39;,
- &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/setuptools-0.6c11-py2.7.egg-info&#39;,
- &#39;/Library/Python/2.7/site-packages&#39;]</pre></td>
+      <td><pre>[&#39;/app&#39;,
+ &#39;/app/.heroku/venv/lib/python2.7/site-packages/distribute-0.6.24-py2.7.egg&#39;,
+ &#39;/app/.heroku/venv/lib/python2.7/site-packages/pip-1.0.2-py2.7.egg&#39;,
+ &#39;/app&#39;,
+ &#39;/app/.heroku/venv/lib/python27.zip&#39;,
+ &#39;/app/.heroku/venv/lib/python2.7&#39;,
+ &#39;/app/.heroku/venv/lib/python2.7/plat-linux2&#39;,
+ &#39;/app/.heroku/venv/lib/python2.7/lib-tk&#39;,
+ &#39;/app/.heroku/venv/lib/python2.7/lib-old&#39;,
+ &#39;/app/.heroku/venv/lib/python2.7/lib-dynload&#39;,
+ &#39;/usr/local/lib/python2.7&#39;,
+ &#39;/usr/local/lib/python2.7/plat-linux2&#39;,
+ &#39;/usr/local/lib/python2.7/lib-tk&#39;,
+ &#39;/app/.heroku/venv/lib/python2.7/site-packages&#39;]</pre></td>
     </tr>
     <tr>
       <th>Server time:</th>
-      <td>Sat, 30 Jun 2012 22:31:34 -0700</td>
+      <td>Wed, 4 Jul 2012 08:21:36 +0000</td>
     </tr>
   </table>
 </div>
@@ -193,16 +194,16 @@
     <ul class="traceback">
       
         <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py</code> in <code>get_response</code>
+          <code>/app/.heroku/venv/lib/python2.7/site-packages/django/core/handlers/base.py</code> in <code>get_response</code>
 
           
-            <div class="context" id="c4330964248">
+            <div class="context" id="c53687864">
               
-                <ol start="104" class="pre-context" id="pre4330964248"><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                    for middleware_method in self._view_middleware:</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                        response = middleware_method(request, callback, callback_args, callback_kwargs)</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                        if response:</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                            break</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre></pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                if response is None:</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                    try:</pre></li></ol>
+                <ol start="104" class="pre-context" id="pre53687864"><li onclick="toggle('pre53687864', 'post53687864')"><pre>                    for middleware_method in self._view_middleware:</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                        response = middleware_method(request, callback, callback_args, callback_kwargs)</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                        if response:</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                            break</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre></pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                if response is None:</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                    try:</pre></li></ol>
               
-              <ol start="111" class="context-line"><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                        response = callback(request, *callback_args, **callback_kwargs)</pre> <span>...</span></li></ol>
+              <ol start="111" class="context-line"><li onclick="toggle('pre53687864', 'post53687864')"><pre>                        response = callback(request, *callback_args, **callback_kwargs)</pre> <span>...</span></li></ol>
               
-                <ol start='112' class="post-context" id="post4330964248"><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                    except Exception, e:</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                        # If the view raised an exception, run it through exception</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                        # middleware, and if the exception middleware returns a</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                        # response, use that. Otherwise, reraise the exception.</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                        for middleware_method in self._exception_middleware:</pre></li><li onclick="toggle('pre4330964248', 'post4330964248')"><pre>                            response = middleware_method(request, e)</pre></li></ol>
+                <ol start='112' class="post-context" id="post53687864"><li onclick="toggle('pre53687864', 'post53687864')"><pre>                    except Exception, e:</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                        # If the view raised an exception, run it through exception</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                        # middleware, and if the exception middleware returns a</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                        # response, use that. Otherwise, reraise the exception.</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                        for middleware_method in self._exception_middleware:</pre></li><li onclick="toggle('pre53687864', 'post53687864')"><pre>                            response = middleware_method(request, e)</pre></li></ol>
               
             </div>
           
@@ -210,10 +211,10 @@
           
             <div class="commands">
                 
-                    <a href="#" onclick="return varToggle(this, '4330964248')"><span>&#x25b6;</span> Local vars</a>
+                    <a href="#" onclick="return varToggle(this, '53687864')"><span>&#x25b6;</span> Local vars</a>
                 
             </div>
-            <table class="vars" id="v4330964248">
+            <table class="vars" id="v53687864">
               <thead>
                 <tr>
                   <th>Variable</th>
@@ -224,12 +225,12 @@
                 
                   <tr>
                     <td>exceptions</td>
-                    <td class="code"><pre>&lt;module &#39;django.core.exceptions&#39; from &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/exceptions.pyc&#39;&gt;</pre></td>
+                    <td class="code"><pre>&lt;module &#39;django.core.exceptions&#39; from &#39;/app/.heroku/venv/lib/python2.7/site-packages/django/core/exceptions.pyc&#39;&gt;</pre></td>
                   </tr>
                 
                   <tr>
                     <td>e</td>
-                    <td class="code"><pre>DatabaseError(1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
+                    <td class="code"><pre>AttributeError(&quot;&#39;unicode&#39; object has no attribute &#39;keys&#39;&quot;,)</pre></td>
                   </tr>
                 
                   <tr>
@@ -239,27 +240,27 @@
                 
                   <tr>
                     <td>settings</td>
-                    <td class="code"><pre>&lt;django.conf.LazySettings object at 0x10076bad0&gt;</pre></td>
+                    <td class="code"><pre>&lt;django.conf.LazySettings object at 0x27b7590&gt;</pre></td>
                   </tr>
                 
                   <tr>
                     <td>middleware_method</td>
-                    <td class="code"><pre>&lt;bound method CsrfViewMiddleware.process_view of &lt;django.middleware.csrf.CsrfViewMiddleware object at 0x10206a190&gt;&gt;</pre></td>
+                    <td class="code"><pre>&lt;bound method ProfileMiddleware.process_view of &lt;helpers.profiler.ProfileMiddleware object at 0x32854d0&gt;&gt;</pre></td>
                   </tr>
                 
                   <tr>
                     <td>self</td>
-                    <td class="code"><pre>&lt;django.core.handlers.wsgi.WSGIHandler object at 0x102064790&gt;</pre></td>
+                    <td class="code"><pre>&lt;django.core.handlers.wsgi.WSGIHandler object at 0x327db50&gt;</pre></td>
                   </tr>
                 
                   <tr>
                     <td>request</td>
-                    <td class="code"><pre>&#39;&lt;WSGIRequest\npath:/processprod,\nGET:&lt;QueryDict: {}&gt;,\nPOST:&lt;QueryDict: {u\&#39;data\&#39;: [u\&#39;[{&quot;jblum18@gmail.com&quot;: [&quot;a btb \\\\&quot;hey there\\\\&quot; comm.prod\\\\r\\\\n&quot;, [&quot;hey there&quot;]]}]\&#39;], u\&#39;key\&#39;: [u\&#39;mya95^-vjyf5q*8_=6xpgizqbxb*l73%9@ddj3t28*t2avsmma\&#39;]}&gt;,\nCOOKIES:{},\nMETA:{\&#39;Apple_PubSub_Socket_Render\&#39;: \&#39;/tmp/launch-Inss5O/Render\&#39;,\n \&#39;Apple_Ubiquity_Message\&#39;: \&#39;/tmp/launch-4QvcAt/Apple_Ubiquity_Message\&#39;,\n \&#39;COMMAND_MODE\&#39;: \&#39;unix2003\&#39;,\n \&#39;CONTENT_LENGTH\&#39;: \&#39;197\&#39;,\n \&#39;CONTENT_TYPE\&#39;: \&#39;application/x-www-form-urlencoded\&#39;,\n \&#39;CSRF_COOKIE\&#39;: \&#39;k2M46T5AXfFcJqrstdOkmQUilj0XOO5y\&#39;,\n \&#39;DISPLAY\&#39;: \&#39;/tmp/launch-ZK6nc2/org.x:0\&#39;,\n \&#39;DJANGO_SETTINGS_MODULE\&#39;: \&#39;commerical_production.settings\&#39;,\n \&#39;GATEWAY_INTERFACE\&#39;: \&#39;CGI/1.1\&#39;,\n \&#39;HOME\&#39;: \&#39;/Users/joshblum\&#39;,\n \&#39;HTTP_ACCEPT\&#39;: \&#39;*/*\&#39;,\n \&#39;HTTP_ACCEPT_ENCODING\&#39;: \&#39;identity, deflate, compress, gzip\&#39;,\n \&#39;HTTP_HOST\&#39;: \&#39;localhost:5000\&#39;,\n \&#39;HTTP_USER_AGENT\&#39;: \&#39;python-requests/0.13.1\&#39;,\n \&#39;LANG\&#39;: \&#39;en_US.UTF-8\&#39;,\n \&#39;LOGNAME\&#39;: \&#39;joshblum\&#39;,\n \&#39;PATH\&#39;: \&#39;/Library/Frameworks/Python.framework/Versions/2.7/bin:/opt/local/bin:/opt/local/sbin:/Users/joshblum/.rvm/gems/ruby-1.9.2-p290/bin:/Users/joshblum/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/joshblum/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/joshblum/.rvm/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin\&#39;,\n \&#39;PATH_INFO\&#39;: u\&#39;/processprod\&#39;,\n \&#39;PWD\&#39;: \&#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod\&#39;,\n \&#39;QUERY_STRING\&#39;: \&#39;\&#39;,\n \&#39;REMOTE_ADDR\&#39;: \&#39;127.0.0.1\&#39;,\n \&#39;REMOTE_HOST\&#39;: \&#39;\&#39;,\n \&#39;REQUEST_METHOD\&#39;: \&#39;POST\&#39;,\n \&#39;RUN_MAIN\&#39;: \&#39;true\&#39;,\n \&#39;SCRIPT_NAME\&#39;: u\&#39;\&#39;,\n \&#39;SECURITYSESSIONID\&#39;: \&#39;186a4\&#39;,\n \&#39;SERVER_NAME\&#39;: \&#39;1.0.0.127.in-addr.arpa\&#39;,\n \&#39;SERVER_PORT\&#39;: \&#39;5000\&#39;,\n \&#39;SERVER_PROTOCOL\&#39;: \&#39;HTTP/1.1\&#39;,\n \&#39;SERVER_SOFTWARE\&#39;: \&#39;WSGIServer/0.1 Python/2.7.3\&#39;,\n \&#39;SHELL\&#39;: \&#39;/bin/bash\&#39;,\n \&#39;SHLVL\&#39;: \&#39;1\&#39;,\n \&#39;SSH_AUTH_SOCK\&#39;: \&#39;/tmp/launch-B8hVMM/Listeners\&#39;,\n \&#39;TERM\&#39;: \&#39;xterm-256color\&#39;,\n \&#39;TERM_PROGRAM\&#39;: \&#39;Apple_Terminal\&#39;,\n \&#39;TERM_PROGRAM_VERSION\&#39;: \&#39;303.2\&#39;,\n \&#39;TERM_SESSION_ID\&#39;: \&#39;DBEB7543-988E-4C0B-8426-33BABC024999\&#39;,\n \&#39;TMPDIR\&#39;: \&#39;/var/folders/ky/l_8hqtp51k727rb_ql0mb1pr0000gp/T/\&#39;,\n \&#39;USER\&#39;: \&#39;joshblum\&#39;,\n \&#39;_\&#39;: \&#39;/Library/Frameworks/Python.framework/Versions/2.7/bin/python\&#39;,\n \&#39;__CF_USER_TEXT_ENCODING\&#39;: \&#39;0x1F6:0:0\&#39;,\n \&#39;wsgi.errors\&#39;: &lt;open file \&#39;&lt;stderr&gt;\&#39;, mode \&#39;w\&#39; at 0x100284270&gt;,\n \&#39;wsgi.file_wrapper\&#39;: &lt;class wsgiref.util.FileWrapper at 0x10166a7a0&gt;,\n \&#39;wsgi.input\&#39;: &lt;socket._fileobject object at 0x10208f950&gt;,\n \&#39;wsgi.multiprocess\&#39;: False,\n \&#39;wsgi.multithread\&#39;: True,\n \&#39;wsgi.run_once\&#39;: False,\n \&#39;wsgi.url_scheme\&#39;: \&#39;http\&#39;,\n \&#39;wsgi.version\&#39;: (1, 0)}&gt;&#39;</pre></td>
+                    <td class="code"><pre>&#39;&lt;WSGIRequest\npath:/processprod,\nGET:&lt;QueryDict: {}&gt;,\nPOST:&lt;QueryDict: {u\&#39;data\&#39;: [u\&#39;{&quot;alisonleighmckenzie@gmail.com&quot;: [&quot;Hey guys,\\\\r\\\\n\\\\r\\\\nI had a down comforter with a dark green cover that was packed into a\\\\r\\\\nlaundry basket along with my pillow and put in the trunk room near the\\\\r\\\\nbeginning of last semester.  The comforter and pillow are now missing,\\\\r\\\\nso if you happen to spot them when you\\\&#39;re getting your stuff out of\\\\r\\\\nthe trunk room, please let me know - I think they may have fallen out\\\\r\\\\nof the laundry basket.\\\\r\\\\n\\\\r\\\\nThanks everyone!\\\\r\\\\n\\\\r\\\\nAlie\\\\r\\\\n\\\\r\\\\na btb \\\\&quot;Trying to convince myself that it\\\&#39;s not already being used as a\\\\r\\\\njacket by a hobo\\\\&quot; comm.prod\\\\r\\\\n\\\\r\\\\n-- \\\\r\\\\nAlison McKenzie\\\\r\\\\nMIT 2011\\\\r\\\\nBrain &amp; Cognitive Sciences\\\\r\\\\naliemck@mit.edu\\\\r\\\\n414.231.0846\\\\r\\\\n&quot;, [&quot;Trying to convince myself that it\\\&#39;s not already being used as a\\\\r\\\\njacket by a hobo&quot;], &quot;2010-09-06T00:28:49&quot;]}\&#39;], u\&#39;key\&#39;: [u\&#39;mya95^-vjyf5q*8_=6xpgizqbxb*l73%9@ddj3t28*t2avsmma\&#39;]}&gt;,\nCOOKIES:{},\nMETA:{\&#39;CONTENT_LENGTH\&#39;: \&#39;1045\&#39;,\n \&#39;CONTENT_TYPE\&#39;: \&#39;application/x-www-form-urlencoded\&#39;,\n \&#39;CSRF_COOKIE\&#39;: \&#39;TTV9NFZw6ou8F4PCXCYYNc2RyIavF3e8\&#39;,\n \&#39;DATABASE_URL\&#39;: \&#39;mysql://joshblum:sfbombers@sql.mit.edu/joshblum+comm.prod\&#39;,\n \&#39;DJANGO_SETTINGS_MODULE\&#39;: \&#39;commerical_production.settings\&#39;,\n \&#39;GATEWAY_INTERFACE\&#39;: \&#39;CGI/1.1\&#39;,\n \&#39;HOME\&#39;: \&#39;/app\&#39;,\n \&#39;HTTP_ACCEPT\&#39;: \&#39;*/*\&#39;,\n \&#39;HTTP_ACCEPT_ENCODING\&#39;: \&#39;identity, deflate, compress, gzip\&#39;,\n \&#39;HTTP_CONNECTION\&#39;: \&#39;keep-alive\&#39;,\n \&#39;HTTP_HOST\&#39;: \&#39;commprod.herokuapp.com\&#39;,\n \&#39;HTTP_USER_AGENT\&#39;: \&#39;python-requests/0.13.1\&#39;,\n \&#39;HTTP_X_FORWARDED_FOR\&#39;: \&#39;67.169.39.105\&#39;,\n \&#39;HTTP_X_FORWARDED_PORT\&#39;: \&#39;80\&#39;,\n \&#39;HTTP_X_FORWARDED_PROTO\&#39;: \&#39;http\&#39;,\n \&#39;HTTP_X_HEROKU_DYNOS_IN_USE\&#39;: \&#39;1\&#39;,\n \&#39;HTTP_X_HEROKU_QUEUE_DEPTH\&#39;: \&#39;0\&#39;,\n \&#39;HTTP_X_HEROKU_QUEUE_WAIT_TIME\&#39;: \&#39;4178\&#39;,\n \&#39;HTTP_X_REQUEST_START\&#39;: \&#39;1341390092255\&#39;,\n \&#39;LANG\&#39;: \&#39;en_US.UTF-8\&#39;,\n \&#39;LD_LIBRARY_PATH\&#39;: \&#39;/app/.heroku/vendor/lib\&#39;,\n \&#39;LIBRARY_PATH\&#39;: \&#39;/app/.heroku/vendor/lib\&#39;,\n \&#39;PATH\&#39;: \&#39;/app/.heroku/venv/bin:/bin:/usr/local/bin:/usr/bin\&#39;,\n \&#39;PATH_INFO\&#39;: u\&#39;/processprod\&#39;,\n \&#39;PORT\&#39;: \&#39;37829\&#39;,\n \&#39;PWD\&#39;: \&#39;/app\&#39;,\n \&#39;PYTHONHASHSEED\&#39;: \&#39;random\&#39;,\n \&#39;PYTHONHOME\&#39;: \&#39;/app/.heroku/venv/\&#39;,\n \&#39;PYTHONPATH\&#39;: \&#39;/app/\&#39;,\n \&#39;PYTHONUNBUFFERED\&#39;: \&#39;true\&#39;,\n \&#39;QUERY_STRING\&#39;: \&#39;\&#39;,\n \&#39;REMOTE_ADDR\&#39;: \&#39;10.92.97.233\&#39;,\n \&#39;REMOTE_HOST\&#39;: \&#39;\&#39;,\n \&#39;REQUEST_METHOD\&#39;: \&#39;POST\&#39;,\n \&#39;SCRIPT_NAME\&#39;: u\&#39;\&#39;,\n \&#39;SERVER_NAME\&#39;: \&#39;5a9dbd3a-bd6e-4459-a69c-05057399a6bb\&#39;,\n \&#39;SERVER_PORT\&#39;: \&#39;37829\&#39;,\n \&#39;SERVER_PROTOCOL\&#39;: \&#39;HTTP/1.1\&#39;,\n \&#39;SERVER_SOFTWARE\&#39;: \&#39;WSGIServer/0.1 Python/2.7.2\&#39;,\n \&#39;SHARED_DATABASE_URL\&#39;: \&#39;postgres://scjoehmqmr:2dA8AGRgpRXRapbqn_hB@ec2-184-73-162-187.compute-1.amazonaws.com/scjoehmqmr\&#39;,\n \&#39;SHLVL\&#39;: \&#39;1\&#39;,\n \&#39;_\&#39;: \&#39;/app/.heroku/venv/bin/python\&#39;,\n \&#39;wsgi.errors\&#39;: &lt;open file \&#39;&lt;stderr&gt;\&#39;, mode \&#39;w\&#39; at 0x7fda4ab1c270&gt;,\n \&#39;wsgi.file_wrapper\&#39;: &lt;class wsgiref.util.FileWrapper at 0x2ce34c8&gt;,\n \&#39;wsgi.input\&#39;: &lt;socket._fileobject object at 0x31eb3d0&gt;,\n \&#39;wsgi.multiprocess\&#39;: False,\n \&#39;wsgi.multithread\&#39;: True,\n \&#39;wsgi.run_once\&#39;: False,\n \&#39;wsgi.url_scheme\&#39;: \&#39;http\&#39;,\n \&#39;wsgi.version\&#39;: (1, 0)}&gt;&#39;</pre></td>
                   </tr>
                 
                   <tr>
                     <td>callback</td>
-                    <td class="code"><pre>&lt;function processProd at 0x10221d6e0&gt;</pre></td>
+                    <td class="code"><pre>&lt;function processProd at 0x33318c0&gt;</pre></td>
                   </tr>
                 
                   <tr>
@@ -269,7 +270,7 @@
                 
                   <tr>
                     <td>urlresolvers</td>
-                    <td class="code"><pre>&lt;module &#39;django.core.urlresolvers&#39; from &#39;/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/urlresolvers.pyc&#39;&gt;</pre></td>
+                    <td class="code"><pre>&lt;module &#39;django.core.urlresolvers&#39; from &#39;/app/.heroku/venv/lib/python2.7/site-packages/django/core/urlresolvers.pyc&#39;&gt;</pre></td>
                   </tr>
                 
                   <tr>
@@ -293,16 +294,16 @@
         </li>
       
         <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/csrf.py</code> in <code>wrapped_view</code>
+          <code>/app/.heroku/venv/lib/python2.7/site-packages/django/views/decorators/csrf.py</code> in <code>wrapped_view</code>
 
           
-            <div class="context" id="c4330964176">
+            <div class="context" id="c53687432">
               
-                <ol start="70" class="pre-context" id="pre4330964176"><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>    &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>    Marks a view function as being exempt from the CSRF view protection.</pre></li><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>    &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>    # We could just do view_func.csrf_exempt = True, but decorators</pre></li><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>    # are nicer if they don&#39;t have side-effects, so we return a new</pre></li><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>    # function.</pre></li><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>    def wrapped_view(*args, **kwargs):</pre></li></ol>
+                <ol start="70" class="pre-context" id="pre53687432"><li onclick="toggle('pre53687432', 'post53687432')"><pre>    &quot;&quot;&quot;</pre></li><li onclick="toggle('pre53687432', 'post53687432')"><pre>    Marks a view function as being exempt from the CSRF view protection.</pre></li><li onclick="toggle('pre53687432', 'post53687432')"><pre>    &quot;&quot;&quot;</pre></li><li onclick="toggle('pre53687432', 'post53687432')"><pre>    # We could just do view_func.csrf_exempt = True, but decorators</pre></li><li onclick="toggle('pre53687432', 'post53687432')"><pre>    # are nicer if they don&#39;t have side-effects, so we return a new</pre></li><li onclick="toggle('pre53687432', 'post53687432')"><pre>    # function.</pre></li><li onclick="toggle('pre53687432', 'post53687432')"><pre>    def wrapped_view(*args, **kwargs):</pre></li></ol>
               
-              <ol start="77" class="context-line"><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>        return view_func(*args, **kwargs)</pre> <span>...</span></li></ol>
+              <ol start="77" class="context-line"><li onclick="toggle('pre53687432', 'post53687432')"><pre>        return view_func(*args, **kwargs)</pre> <span>...</span></li></ol>
               
-                <ol start='78' class="post-context" id="post4330964176"><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>    wrapped_view.csrf_exempt = True</pre></li><li onclick="toggle('pre4330964176', 'post4330964176')"><pre>    return wraps(view_func, assigned=available_attrs(view_func))(wrapped_view)</pre></li></ol>
+                <ol start='78' class="post-context" id="post53687432"><li onclick="toggle('pre53687432', 'post53687432')"><pre>    wrapped_view.csrf_exempt = True</pre></li><li onclick="toggle('pre53687432', 'post53687432')"><pre>    return wraps(view_func, assigned=available_attrs(view_func))(wrapped_view)</pre></li></ol>
               
             </div>
           
@@ -310,10 +311,10 @@
           
             <div class="commands">
                 
-                    <a href="#" onclick="return varToggle(this, '4330964176')"><span>&#x25b6;</span> Local vars</a>
+                    <a href="#" onclick="return varToggle(this, '53687432')"><span>&#x25b6;</span> Local vars</a>
                 
             </div>
-            <table class="vars" id="v4330964176">
+            <table class="vars" id="v53687432">
               <thead>
                 <tr>
                   <th>Variable</th>
@@ -327,52 +328,53 @@
                     <td class="code"><pre>(&lt;WSGIRequest
 path:/processprod,
 GET:&lt;QueryDict: {}&gt;,
-POST:&lt;QueryDict: {u&#39;data&#39;: [u&#39;[{&quot;jblum18@gmail.com&quot;: [&quot;a btb \\&quot;hey there\\&quot; comm.prod\\r\\n&quot;, [&quot;hey there&quot;]]}]&#39;], u&#39;key&#39;: [u&#39;mya95^-vjyf5q*8_=6xpgizqbxb*l73%9@ddj3t28*t2avsmma&#39;]}&gt;,
+POST:&lt;QueryDict: {u&#39;data&#39;: [u&#39;{&quot;alisonleighmckenzie@gmail.com&quot;: [&quot;Hey guys,\\r\\n\\r\\nI had a down comforter with a dark green cover that was packed into a\\r\\nlaundry basket along with my pillow and put in the trunk room near the\\r\\nbeginning of last semester.  The comforter and pillow are now missing,\\r\\nso if you happen to spot them when you\&#39;re getting your stuff out of\\r\\nthe trunk room, please let me know - I think they may have fallen out\\r\\nof the laundry basket.\\r\\n\\r\\nThanks everyone!\\r\\n\\r\\nAlie\\r\\n\\r\\na btb \\&quot;Trying to convince myself that it\&#39;s not already being used as a\\r\\njacket by a hobo\\&quot; comm.prod\\r\\n\\r\\n-- \\r\\nAlison McKenzie\\r\\nMIT 2011\\r\\nBrain &amp; Cognitive Sciences\\r\\naliemck@mit.edu\\r\\n414.231.0846\\r\\n&quot;, [&quot;Trying to convince myself that it\&#39;s not already being used as a\\r\\njacket by a hobo&quot;], &quot;2010-09-06T00:28:49&quot;]}&#39;], u&#39;key&#39;: [u&#39;mya95^-vjyf5q*8_=6xpgizqbxb*l73%9@ddj3t28*t2avsmma&#39;]}&gt;,
 COOKIES:{},
-META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Inss5O/Render&#39;,
- &#39;Apple_Ubiquity_Message&#39;: &#39;/tmp/launch-4QvcAt/Apple_Ubiquity_Message&#39;,
- &#39;COMMAND_MODE&#39;: &#39;unix2003&#39;,
- &#39;CONTENT_LENGTH&#39;: &#39;197&#39;,
+META:{&#39;CONTENT_LENGTH&#39;: &#39;1045&#39;,
  &#39;CONTENT_TYPE&#39;: &#39;application/x-www-form-urlencoded&#39;,
- &#39;CSRF_COOKIE&#39;: &#39;k2M46T5AXfFcJqrstdOkmQUilj0XOO5y&#39;,
- &#39;DISPLAY&#39;: &#39;/tmp/launch-ZK6nc2/org.x:0&#39;,
+ &#39;CSRF_COOKIE&#39;: &#39;TTV9NFZw6ou8F4PCXCYYNc2RyIavF3e8&#39;,
+ &#39;DATABASE_URL&#39;: &#39;mysql://joshblum:sfbombers@sql.mit.edu/joshblum+comm.prod&#39;,
  &#39;DJANGO_SETTINGS_MODULE&#39;: &#39;commerical_production.settings&#39;,
  &#39;GATEWAY_INTERFACE&#39;: &#39;CGI/1.1&#39;,
- &#39;HOME&#39;: &#39;/Users/joshblum&#39;,
+ &#39;HOME&#39;: &#39;/app&#39;,
  &#39;HTTP_ACCEPT&#39;: &#39;*/*&#39;,
  &#39;HTTP_ACCEPT_ENCODING&#39;: &#39;identity, deflate, compress, gzip&#39;,
- &#39;HTTP_HOST&#39;: &#39;localhost:5000&#39;,
+ &#39;HTTP_CONNECTION&#39;: &#39;keep-alive&#39;,
+ &#39;HTTP_HOST&#39;: &#39;commprod.herokuapp.com&#39;,
  &#39;HTTP_USER_AGENT&#39;: &#39;python-requests/0.13.1&#39;,
+ &#39;HTTP_X_FORWARDED_FOR&#39;: &#39;67.169.39.105&#39;,
+ &#39;HTTP_X_FORWARDED_PORT&#39;: &#39;80&#39;,
+ &#39;HTTP_X_FORWARDED_PROTO&#39;: &#39;http&#39;,
+ &#39;HTTP_X_HEROKU_DYNOS_IN_USE&#39;: &#39;1&#39;,
+ &#39;HTTP_X_HEROKU_QUEUE_DEPTH&#39;: &#39;0&#39;,
+ &#39;HTTP_X_HEROKU_QUEUE_WAIT_TIME&#39;: &#39;4178&#39;,
+ &#39;HTTP_X_REQUEST_START&#39;: &#39;1341390092255&#39;,
  &#39;LANG&#39;: &#39;en_US.UTF-8&#39;,
- &#39;LOGNAME&#39;: &#39;joshblum&#39;,
- &#39;PATH&#39;: &#39;/Library/Frameworks/Python.framework/Versions/2.7/bin:/opt/local/bin:/opt/local/sbin:/Users/joshblum/.rvm/gems/ruby-1.9.2-p290/bin:/Users/joshblum/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/joshblum/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/joshblum/.rvm/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin&#39;,
+ &#39;LD_LIBRARY_PATH&#39;: &#39;/app/.heroku/vendor/lib&#39;,
+ &#39;LIBRARY_PATH&#39;: &#39;/app/.heroku/vendor/lib&#39;,
+ &#39;PATH&#39;: &#39;/app/.heroku/venv/bin:/bin:/usr/local/bin:/usr/bin&#39;,
  &#39;PATH_INFO&#39;: u&#39;/processprod&#39;,
- &#39;PWD&#39;: &#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod&#39;,
+ &#39;PORT&#39;: &#39;37829&#39;,
+ &#39;PWD&#39;: &#39;/app&#39;,
+ &#39;PYTHONHASHSEED&#39;: &#39;random&#39;,
+ &#39;PYTHONHOME&#39;: &#39;/app/.heroku/venv/&#39;,
+ &#39;PYTHONPATH&#39;: &#39;/app/&#39;,
+ &#39;PYTHONUNBUFFERED&#39;: &#39;true&#39;,
  &#39;QUERY_STRING&#39;: &#39;&#39;,
- &#39;REMOTE_ADDR&#39;: &#39;127.0.0.1&#39;,
+ &#39;REMOTE_ADDR&#39;: &#39;10.92.97.233&#39;,
  &#39;REMOTE_HOST&#39;: &#39;&#39;,
  &#39;REQUEST_METHOD&#39;: &#39;POST&#39;,
- &#39;RUN_MAIN&#39;: &#39;true&#39;,
  &#39;SCRIPT_NAME&#39;: u&#39;&#39;,
- &#39;SECURITYSESSIONID&#39;: &#39;186a4&#39;,
- &#39;SERVER_NAME&#39;: &#39;1.0.0.127.in-addr.arpa&#39;,
- &#39;SERVER_PORT&#39;: &#39;5000&#39;,
+ &#39;SERVER_NAME&#39;: &#39;5a9dbd3a-bd6e-4459-a69c-05057399a6bb&#39;,
+ &#39;SERVER_PORT&#39;: &#39;37829&#39;,
  &#39;SERVER_PROTOCOL&#39;: &#39;HTTP/1.1&#39;,
- &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.3&#39;,
- &#39;SHELL&#39;: &#39;/bin/bash&#39;,
+ &#39;SERVER_SOFTWARE&#39;: &#39;WSGIServer/0.1 Python/2.7.2&#39;,
+ &#39;SHARED_DATABASE_URL&#39;: &#39;postgres://scjoehmqmr:2dA8AGRgpRXRapbqn_hB@ec2-184-73-162-187.compute-1.amazonaws.com/scjoehmqmr&#39;,
  &#39;SHLVL&#39;: &#39;1&#39;,
- &#39;SSH_AUTH_SOCK&#39;: &#39;/tmp/launch-B8hVMM/Listeners&#39;,
- &#39;TERM&#39;: &#39;xterm-256color&#39;,
- &#39;TERM_PROGRAM&#39;: &#39;Apple_Terminal&#39;,
- &#39;TERM_PROGRAM_VERSION&#39;: &#39;303.2&#39;,
- &#39;TERM_SESSION_ID&#39;: &#39;DBEB7543-988E-4C0B-8426-33BABC024999&#39;,
- &#39;TMPDIR&#39;: &#39;/var/folders/ky/l_8hqtp51k727rb_ql0mb1pr0000gp/T/&#39;,
- &#39;USER&#39;: &#39;joshblum&#39;,
- &#39;_&#39;: &#39;/Library/Frameworks/Python.framework/Versions/2.7/bin/python&#39;,
- &#39;__CF_USER_TEXT_ENCODING&#39;: &#39;0x1F6:0:0&#39;,
- &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x100284270&gt;,
- &#39;wsgi.file_wrapper&#39;: &lt;class wsgiref.util.FileWrapper at 0x10166a7a0&gt;,
- &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x10208f950&gt;,
+ &#39;_&#39;: &#39;/app/.heroku/venv/bin/python&#39;,
+ &#39;wsgi.errors&#39;: &lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x7fda4ab1c270&gt;,
+ &#39;wsgi.file_wrapper&#39;: &lt;class wsgiref.util.FileWrapper at 0x2ce34c8&gt;,
+ &#39;wsgi.input&#39;: &lt;socket._fileobject object at 0x31eb3d0&gt;,
  &#39;wsgi.multiprocess&#39;: False,
  &#39;wsgi.multithread&#39;: True,
  &#39;wsgi.run_once&#39;: False,
@@ -382,7 +384,7 @@ META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Inss5O/Render&#39;,
                 
                   <tr>
                     <td>view_func</td>
-                    <td class="code"><pre>&lt;function processProd at 0x10221d5f0&gt;</pre></td>
+                    <td class="code"><pre>&lt;function processProd at 0x33317d0&gt;</pre></td>
                   </tr>
                 
                   <tr>
@@ -396,16 +398,16 @@ META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Inss5O/Render&#39;,
         </li>
       
         <li class="frame user">
-          <code>/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py</code> in <code>processProd</code>
+          <code>/app/commProd/views.py</code> in <code>processProd</code>
 
           
-            <div class="context" id="c4330955408">
+            <div class="context" id="c53687720">
               
-                <ol start="185" class="pre-context" id="pre4330955408"><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>            alt_email_search = UserProfile.objects.filter(alt_email=sender)</pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre></pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>            if email_search.exists():</pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>                user = email_search[0]</pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>            elif alt_email_search.exists():</pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>                user = alt_email_search[0].user</pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>            else:</pre></li></ol>
+                <ol start="195" class="pre-context" id="pre53687720"><li onclick="toggle('pre53687720', 'post53687720')"><pre>    data = request.POST.get(&quot;data&quot;, None)</pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre>    key = request.POST.get(&quot;key&quot;, None)</pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre>    </pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre>    resp = &quot;&quot;</pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre>    if data and str(key) == config.SECRET_KEY:</pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre>        data = json.loads(data) #[{sender : (content, [comm_prods], date)}]</pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre>        for dic in data:</pre></li></ol>
               
-              <ol start="192" class="context-line"><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>                user, created = createUser(sender, sender, False)</pre> <span>...</span></li></ol>
+              <ol start="202" class="context-line"><li onclick="toggle('pre53687720', 'post53687720')"><pre>            sender = dic.keys()[0]</pre> <span>...</span></li></ol>
               
-                <ol start='193' class="post-context" id="post4330955408"><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>            </pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>            resp += &quot;\nUser %s with comm prods:\n %s&quot; % (sender, commprods)</pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>            </pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>            for commprod in commprods:</pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>                CommProd(email_content=content, commprod_content=commprod, user=user).save() </pre></li><li onclick="toggle('pre4330955408', 'post4330955408')"><pre>    else:</pre></li></ol>
+                <ol start='203' class="post-context" id="post53687720"><li onclick="toggle('pre53687720', 'post53687720')"><pre>            content, commprods, date = dic[sender]</pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre></pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre>            user = None</pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre>            email_search = User.objects.filter(email=sender)</pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre>            alt_email_search = UserProfile.objects.filter(alt_email=sender)</pre></li><li onclick="toggle('pre53687720', 'post53687720')"><pre></pre></li></ol>
               
             </div>
           
@@ -413,10 +415,10 @@ META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Inss5O/Render&#39;,
           
             <div class="commands">
                 
-                    <a href="#" onclick="return varToggle(this, '4330955408')"><span>&#x25b6;</span> Local vars</a>
+                    <a href="#" onclick="return varToggle(this, '53687720')"><span>&#x25b6;</span> Local vars</a>
                 
             </div>
-            <table class="vars" id="v4330955408">
+            <table class="vars" id="v53687720">
               <thead>
                 <tr>
                   <th>Variable</th>
@@ -426,8 +428,8 @@ META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Inss5O/Render&#39;,
               <tbody>
                 
                   <tr>
-                    <td>sender</td>
-                    <td class="code"><pre>u&#39;jblum18@gmail.com&#39;</pre></td>
+                    <td>request</td>
+                    <td class="code"><pre>&#39;&lt;WSGIRequest\npath:/processprod,\nGET:&lt;QueryDict: {}&gt;,\nPOST:&lt;QueryDict: {u\&#39;data\&#39;: [u\&#39;{&quot;alisonleighmckenzie@gmail.com&quot;: [&quot;Hey guys,\\\\r\\\\n\\\\r\\\\nI had a down comforter with a dark green cover that was packed into a\\\\r\\\\nlaundry basket along with my pillow and put in the trunk room near the\\\\r\\\\nbeginning of last semester.  The comforter and pillow are now missing,\\\\r\\\\nso if you happen to spot them when you\\\&#39;re getting your stuff out of\\\\r\\\\nthe trunk room, please let me know - I think they may have fallen out\\\\r\\\\nof the laundry basket.\\\\r\\\\n\\\\r\\\\nThanks everyone!\\\\r\\\\n\\\\r\\\\nAlie\\\\r\\\\n\\\\r\\\\na btb \\\\&quot;Trying to convince myself that it\\\&#39;s not already being used as a\\\\r\\\\njacket by a hobo\\\\&quot; comm.prod\\\\r\\\\n\\\\r\\\\n-- \\\\r\\\\nAlison McKenzie\\\\r\\\\nMIT 2011\\\\r\\\\nBrain &amp; Cognitive Sciences\\\\r\\\\naliemck@mit.edu\\\\r\\\\n414.231.0846\\\\r\\\\n&quot;, [&quot;Trying to convince myself that it\\\&#39;s not already being used as a\\\\r\\\\njacket by a hobo&quot;], &quot;2010-09-06T00:28:49&quot;]}\&#39;], u\&#39;key\&#39;: [u\&#39;mya95^-vjyf5q*8_=6xpgizqbxb*l73%9@ddj3t28*t2avsmma\&#39;]}&gt;,\nCOOKIES:{},\nMETA:{\&#39;CONTENT_LENGTH\&#39;: \&#39;1045\&#39;,\n \&#39;CONTENT_TYPE\&#39;: \&#39;application/x-www-form-urlencoded\&#39;,\n \&#39;CSRF_COOKIE\&#39;: \&#39;TTV9NFZw6ou8F4PCXCYYNc2RyIavF3e8\&#39;,\n \&#39;DATABASE_URL\&#39;: \&#39;mysql://joshblum:sfbombers@sql.mit.edu/joshblum+comm.prod\&#39;,\n \&#39;DJANGO_SETTINGS_MODULE\&#39;: \&#39;commerical_production.settings\&#39;,\n \&#39;GATEWAY_INTERFACE\&#39;: \&#39;CGI/1.1\&#39;,\n \&#39;HOME\&#39;: \&#39;/app\&#39;,\n \&#39;HTTP_ACCEPT\&#39;: \&#39;*/*\&#39;,\n \&#39;HTTP_ACCEPT_ENCODING\&#39;: \&#39;identity, deflate, compress, gzip\&#39;,\n \&#39;HTTP_CONNECTION\&#39;: \&#39;keep-alive\&#39;,\n \&#39;HTTP_HOST\&#39;: \&#39;commprod.herokuapp.com\&#39;,\n \&#39;HTTP_USER_AGENT\&#39;: \&#39;python-requests/0.13.1\&#39;,\n \&#39;HTTP_X_FORWARDED_FOR\&#39;: \&#39;67.169.39.105\&#39;,\n \&#39;HTTP_X_FORWARDED_PORT\&#39;: \&#39;80\&#39;,\n \&#39;HTTP_X_FORWARDED_PROTO\&#39;: \&#39;http\&#39;,\n \&#39;HTTP_X_HEROKU_DYNOS_IN_USE\&#39;: \&#39;1\&#39;,\n \&#39;HTTP_X_HEROKU_QUEUE_DEPTH\&#39;: \&#39;0\&#39;,\n \&#39;HTTP_X_HEROKU_QUEUE_WAIT_TIME\&#39;: \&#39;4178\&#39;,\n \&#39;HTTP_X_REQUEST_START\&#39;: \&#39;1341390092255\&#39;,\n \&#39;LANG\&#39;: \&#39;en_US.UTF-8\&#39;,\n \&#39;LD_LIBRARY_PATH\&#39;: \&#39;/app/.heroku/vendor/lib\&#39;,\n \&#39;LIBRARY_PATH\&#39;: \&#39;/app/.heroku/vendor/lib\&#39;,\n \&#39;PATH\&#39;: \&#39;/app/.heroku/venv/bin:/bin:/usr/local/bin:/usr/bin\&#39;,\n \&#39;PATH_INFO\&#39;: u\&#39;/processprod\&#39;,\n \&#39;PORT\&#39;: \&#39;37829\&#39;,\n \&#39;PWD\&#39;: \&#39;/app\&#39;,\n \&#39;PYTHONHASHSEED\&#39;: \&#39;random\&#39;,\n \&#39;PYTHONHOME\&#39;: \&#39;/app/.heroku/venv/\&#39;,\n \&#39;PYTHONPATH\&#39;: \&#39;/app/\&#39;,\n \&#39;PYTHONUNBUFFERED\&#39;: \&#39;true\&#39;,\n \&#39;QUERY_STRING\&#39;: \&#39;\&#39;,\n \&#39;REMOTE_ADDR\&#39;: \&#39;10.92.97.233\&#39;,\n \&#39;REMOTE_HOST\&#39;: \&#39;\&#39;,\n \&#39;REQUEST_METHOD\&#39;: \&#39;POST\&#39;,\n \&#39;SCRIPT_NAME\&#39;: u\&#39;\&#39;,\n \&#39;SERVER_NAME\&#39;: \&#39;5a9dbd3a-bd6e-4459-a69c-05057399a6bb\&#39;,\n \&#39;SERVER_PORT\&#39;: \&#39;37829\&#39;,\n \&#39;SERVER_PROTOCOL\&#39;: \&#39;HTTP/1.1\&#39;,\n \&#39;SERVER_SOFTWARE\&#39;: \&#39;WSGIServer/0.1 Python/2.7.2\&#39;,\n \&#39;SHARED_DATABASE_URL\&#39;: \&#39;postgres://scjoehmqmr:2dA8AGRgpRXRapbqn_hB@ec2-184-73-162-187.compute-1.amazonaws.com/scjoehmqmr\&#39;,\n \&#39;SHLVL\&#39;: \&#39;1\&#39;,\n \&#39;_\&#39;: \&#39;/app/.heroku/venv/bin/python\&#39;,\n \&#39;wsgi.errors\&#39;: &lt;open file \&#39;&lt;stderr&gt;\&#39;, mode \&#39;w\&#39; at 0x7fda4ab1c270&gt;,\n \&#39;wsgi.file_wrapper\&#39;: &lt;class wsgiref.util.FileWrapper at 0x2ce34c8&gt;,\n \&#39;wsgi.input\&#39;: &lt;socket._fileobject object at 0x31eb3d0&gt;,\n \&#39;wsgi.multiprocess\&#39;: False,\n \&#39;wsgi.multithread\&#39;: True,\n \&#39;wsgi.run_once\&#39;: False,\n \&#39;wsgi.url_scheme\&#39;: \&#39;http\&#39;,\n \&#39;wsgi.version\&#39;: (1, 0)}&gt;&#39;</pre></td>
                   </tr>
                 
                   <tr>
@@ -436,23 +438,10 @@ META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Inss5O/Render&#39;,
                   </tr>
                 
                   <tr>
-                    <td>request</td>
-                    <td class="code"><pre>&#39;&lt;WSGIRequest\npath:/processprod,\nGET:&lt;QueryDict: {}&gt;,\nPOST:&lt;QueryDict: {u\&#39;data\&#39;: [u\&#39;[{&quot;jblum18@gmail.com&quot;: [&quot;a btb \\\\&quot;hey there\\\\&quot; comm.prod\\\\r\\\\n&quot;, [&quot;hey there&quot;]]}]\&#39;], u\&#39;key\&#39;: [u\&#39;mya95^-vjyf5q*8_=6xpgizqbxb*l73%9@ddj3t28*t2avsmma\&#39;]}&gt;,\nCOOKIES:{},\nMETA:{\&#39;Apple_PubSub_Socket_Render\&#39;: \&#39;/tmp/launch-Inss5O/Render\&#39;,\n \&#39;Apple_Ubiquity_Message\&#39;: \&#39;/tmp/launch-4QvcAt/Apple_Ubiquity_Message\&#39;,\n \&#39;COMMAND_MODE\&#39;: \&#39;unix2003\&#39;,\n \&#39;CONTENT_LENGTH\&#39;: \&#39;197\&#39;,\n \&#39;CONTENT_TYPE\&#39;: \&#39;application/x-www-form-urlencoded\&#39;,\n \&#39;CSRF_COOKIE\&#39;: \&#39;k2M46T5AXfFcJqrstdOkmQUilj0XOO5y\&#39;,\n \&#39;DISPLAY\&#39;: \&#39;/tmp/launch-ZK6nc2/org.x:0\&#39;,\n \&#39;DJANGO_SETTINGS_MODULE\&#39;: \&#39;commerical_production.settings\&#39;,\n \&#39;GATEWAY_INTERFACE\&#39;: \&#39;CGI/1.1\&#39;,\n \&#39;HOME\&#39;: \&#39;/Users/joshblum\&#39;,\n \&#39;HTTP_ACCEPT\&#39;: \&#39;*/*\&#39;,\n \&#39;HTTP_ACCEPT_ENCODING\&#39;: \&#39;identity, deflate, compress, gzip\&#39;,\n \&#39;HTTP_HOST\&#39;: \&#39;localhost:5000\&#39;,\n \&#39;HTTP_USER_AGENT\&#39;: \&#39;python-requests/0.13.1\&#39;,\n \&#39;LANG\&#39;: \&#39;en_US.UTF-8\&#39;,\n \&#39;LOGNAME\&#39;: \&#39;joshblum\&#39;,\n \&#39;PATH\&#39;: \&#39;/Library/Frameworks/Python.framework/Versions/2.7/bin:/opt/local/bin:/opt/local/sbin:/Users/joshblum/.rvm/gems/ruby-1.9.2-p290/bin:/Users/joshblum/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/joshblum/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/joshblum/.rvm/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin\&#39;,\n \&#39;PATH_INFO\&#39;: u\&#39;/processprod\&#39;,\n \&#39;PWD\&#39;: \&#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod\&#39;,\n \&#39;QUERY_STRING\&#39;: \&#39;\&#39;,\n \&#39;REMOTE_ADDR\&#39;: \&#39;127.0.0.1\&#39;,\n \&#39;REMOTE_HOST\&#39;: \&#39;\&#39;,\n \&#39;REQUEST_METHOD\&#39;: \&#39;POST\&#39;,\n \&#39;RUN_MAIN\&#39;: \&#39;true\&#39;,\n \&#39;SCRIPT_NAME\&#39;: u\&#39;\&#39;,\n \&#39;SECURITYSESSIONID\&#39;: \&#39;186a4\&#39;,\n \&#39;SERVER_NAME\&#39;: \&#39;1.0.0.127.in-addr.arpa\&#39;,\n \&#39;SERVER_PORT\&#39;: \&#39;5000\&#39;,\n \&#39;SERVER_PROTOCOL\&#39;: \&#39;HTTP/1.1\&#39;,\n \&#39;SERVER_SOFTWARE\&#39;: \&#39;WSGIServer/0.1 Python/2.7.3\&#39;,\n \&#39;SHELL\&#39;: \&#39;/bin/bash\&#39;,\n \&#39;SHLVL\&#39;: \&#39;1\&#39;,\n \&#39;SSH_AUTH_SOCK\&#39;: \&#39;/tmp/launch-B8hVMM/Listeners\&#39;,\n \&#39;TERM\&#39;: \&#39;xterm-256color\&#39;,\n \&#39;TERM_PROGRAM\&#39;: \&#39;Apple_Terminal\&#39;,\n \&#39;TERM_PROGRAM_VERSION\&#39;: \&#39;303.2\&#39;,\n \&#39;TERM_SESSION_ID\&#39;: \&#39;DBEB7543-988E-4C0B-8426-33BABC024999\&#39;,\n \&#39;TMPDIR\&#39;: \&#39;/var/folders/ky/l_8hqtp51k727rb_ql0mb1pr0000gp/T/\&#39;,\n \&#39;USER\&#39;: \&#39;joshblum\&#39;,\n \&#39;_\&#39;: \&#39;/Library/Frameworks/Python.framework/Versions/2.7/bin/python\&#39;,\n \&#39;__CF_USER_TEXT_ENCODING\&#39;: \&#39;0x1F6:0:0\&#39;,\n \&#39;wsgi.errors\&#39;: &lt;open file \&#39;&lt;stderr&gt;\&#39;, mode \&#39;w\&#39; at 0x100284270&gt;,\n \&#39;wsgi.file_wrapper\&#39;: &lt;class wsgiref.util.FileWrapper at 0x10166a7a0&gt;,\n \&#39;wsgi.input\&#39;: &lt;socket._fileobject object at 0x10208f950&gt;,\n \&#39;wsgi.multiprocess\&#39;: False,\n \&#39;wsgi.multithread\&#39;: True,\n \&#39;wsgi.run_once\&#39;: False,\n \&#39;wsgi.url_scheme\&#39;: \&#39;http\&#39;,\n \&#39;wsgi.version\&#39;: (1, 0)}&gt;&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>dic</td>
-                    <td class="code"><pre>{u&#39;jblum18@gmail.com&#39;: [u&#39;a btb &quot;hey there&quot; comm.prod\r\n&#39;, [u&#39;hey there&#39;]]}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>content</td>
-                    <td class="code"><pre>u&#39;a btb &quot;hey there&quot; comm.prod\r\n&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>user</td>
-                    <td class="code"><pre>None</pre></td>
+                    <td>data</td>
+                    <td class="code"><pre>{u&#39;alisonleighmckenzie@gmail.com&#39;: [u&#39;Hey guys,\r\n\r\nI had a down comforter with a dark green cover that was packed into a\r\nlaundry basket along with my pillow and put in the trunk room near the\r\nbeginning of last semester.  The comforter and pillow are now missing,\r\nso if you happen to spot them when you\&#39;re getting your stuff out of\r\nthe trunk room, please let me know - I think they may have fallen out\r\nof the laundry basket.\r\n\r\nThanks everyone!\r\n\r\nAlie\r\n\r\na btb &quot;Trying to convince myself that it\&#39;s not already being used as a\r\njacket by a hobo&quot; comm.prod\r\n\r\n-- \r\nAlison McKenzie\r\nMIT 2011\r\nBrain &amp; Cognitive Sciences\r\naliemck@mit.edu\r\n414.231.0846\r\n&#39;,
+                                    [u&quot;Trying to convince myself that it&#39;s not already being used as a\r\njacket by a hobo&quot;],
+                                    u&#39;2010-09-06T00:28:49&#39;]}</pre></td>
                   </tr>
                 
                   <tr>
@@ -461,1191 +450,8 @@ META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Inss5O/Render&#39;,
                   </tr>
                 
                   <tr>
-                    <td>commprods</td>
-                    <td class="code"><pre>[u&#39;hey there&#39;]</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>alt_email_search</td>
-                    <td class="code"><pre>Error in formatting: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>data</td>
-                    <td class="code"><pre>[{u&#39;jblum18@gmail.com&#39;: [u&#39;a btb &quot;hey there&quot; comm.prod\r\n&#39;, [u&#39;hey there&#39;]]}]</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>email_search</td>
-                    <td class="code"><pre>[&lt;User: jblum18@gmail.com&gt;]</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame user">
-          <code>/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/create_users.py</code> in <code>createUser</code>
-
-          
-            <div class="context" id="c4330955624">
-              
-                <ol start="38" class="pre-context" id="pre4330955624"><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>    except IOError:</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>        print &quot;File not found, your current working directory is&quot;, os.getcwd()</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>        print &quot;Tried path:&quot;, os.getcwd() + &quot;/&quot; +filePath</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>        print &quot;What is the actual path?&quot;</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre></pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>def createUser(username, email, send_mail=None):</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>    try:</pre></li></ol>
-              
-              <ol start="45" class="context-line"><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>        user, created = User.objects.get_or_create(username=username, email=email)</pre> <span>...</span></li></ol>
-              
-                <ol start='46' class="post-context" id="post4330955624"><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>        if created:</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>            user.is_active = False</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>            user.save()</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>            user.profile.activation_key = sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>            if send_mail:</pre></li><li onclick="toggle('pre4330955624', 'post4330955624')"><pre>                user.profile.send_mail = send_mail</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330955624')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330955624">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>username</td>
-                    <td class="code"><pre>u&#39;jblum18@gmail.com&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>send_mail</td>
-                    <td class="code"><pre>False</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>email</td>
-                    <td class="code"><pre>u&#39;jblum18@gmail.com&#39;</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/manager.py</code> in <code>get_or_create</code>
-
-          
-            <div class="context" id="c4330955696">
-              
-                <ol start="127" class="pre-context" id="pre4330955696"><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>    def extra(self, *args, **kwargs):</pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>        return self.get_query_set().extra(*args, **kwargs)</pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre></pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>    def get(self, *args, **kwargs):</pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>        return self.get_query_set().get(*args, **kwargs)</pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre></pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>    def get_or_create(self, **kwargs):</pre></li></ol>
-              
-              <ol start="134" class="context-line"><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>        return self.get_query_set().get_or_create(**kwargs)</pre> <span>...</span></li></ol>
-              
-                <ol start='135' class="post-context" id="post4330955696"><li onclick="toggle('pre4330955696', 'post4330955696')"><pre></pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>    def create(self, **kwargs):</pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>        return self.get_query_set().create(**kwargs)</pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre></pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>    def bulk_create(self, *args, **kwargs):</pre></li><li onclick="toggle('pre4330955696', 'post4330955696')"><pre>        return self.get_query_set().bulk_create(*args, **kwargs)</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330955696')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330955696">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;django.contrib.auth.models.UserManager object at 0x101a9f490&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>kwargs</td>
-                    <td class="code"><pre>{&#39;email&#39;: u&#39;jblum18@gmail.com&#39;, &#39;username&#39;: u&#39;jblum18@gmail.com&#39;}</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py</code> in <code>get_or_create</code>
-
-          
-            <div class="context" id="c4330964104">
-              
-                <ol start="442" class="pre-context" id="pre4330964104"><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>            return self.get(**lookup), False</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>        except self.model.DoesNotExist:</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>            try:</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                params = dict([(k, v) for k, v in kwargs.items() if &#39;__&#39; not in k])</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                params.update(defaults)</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                obj = self.model(**params)</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                sid = transaction.savepoint(using=self.db)</pre></li></ol>
-              
-              <ol start="449" class="context-line"><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                obj.save(force_insert=True, using=self.db)</pre> <span>...</span></li></ol>
-              
-                <ol start='450' class="post-context" id="post4330964104"><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                transaction.savepoint_commit(sid, using=self.db)</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                return obj, True</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>            except IntegrityError, e:</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                transaction.savepoint_rollback(sid, using=self.db)</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                exc_info = sys.exc_info()</pre></li><li onclick="toggle('pre4330964104', 'post4330964104')"><pre>                try:</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330964104')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330964104">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>obj</td>
-                    <td class="code"><pre>&lt;User: jblum18@gmail.com&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>f</td>
-                    <td class="code"><pre>&lt;django.db.models.fields.DateTimeField: date_joined&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>kwargs</td>
-                    <td class="code"><pre>{&#39;email&#39;: u&#39;jblum18@gmail.com&#39;, &#39;username&#39;: u&#39;jblum18@gmail.com&#39;}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>k</td>
-                    <td class="code"><pre>&#39;email&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>sid</td>
-                    <td class="code"><pre>&#39;s4366274560_x1&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>params</td>
-                    <td class="code"><pre>{&#39;email&#39;: u&#39;jblum18@gmail.com&#39;, &#39;username&#39;: u&#39;jblum18@gmail.com&#39;}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>defaults</td>
-                    <td class="code"><pre>{}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>v</td>
-                    <td class="code"><pre>u&#39;jblum18@gmail.com&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>lookup</td>
-                    <td class="code"><pre>{&#39;email&#39;: u&#39;jblum18@gmail.com&#39;, &#39;username&#39;: u&#39;jblum18@gmail.com&#39;}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>[&lt;User: joshblum&gt;, &lt;User: ajlerch&gt;, &lt;User: aliemck&gt;, &lt;User: andiejh&gt;, &lt;User: arup&gt;, &lt;User: avianap&gt;, &lt;User: bhogan&gt;, &lt;User: blanks&gt;, &lt;User: boss&gt;, &lt;User: brigance&gt;, &lt;User: brooksr8&gt;, &lt;User: burrows&gt;, &lt;User: calvinfo&gt;, &lt;User: cameronf&gt;, &lt;User: camilled&gt;, &lt;User: ccpost&gt;, &lt;User: chazlin&gt;, &lt;User: chyleigh&gt;, &lt;User: cklyons&gt;, &lt;User: cmorley&gt;, &#39;...(remaining elements truncated)...&#39;]</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py</code> in <code>save</code>
-
-          
-            <div class="context" id="c4330964032">
-              
-                <ol start="456" class="pre-context" id="pre4330964032"><li onclick="toggle('pre4330964032', 'post4330964032')"><pre></pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>        The &#39;force_insert&#39; and &#39;force_update&#39; parameters can be used to insist</pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>        that the &quot;save&quot; must be an SQL insert or update (or equivalent for</pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>        non-SQL backends), respectively. Normally, they should not be set.</pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>        &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>        if force_insert and force_update:</pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>            raise ValueError(&quot;Cannot force both insert and updating in model saving.&quot;)</pre></li></ol>
-              
-              <ol start="463" class="context-line"><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>        self.save_base(using=using, force_insert=force_insert, force_update=force_update)</pre> <span>...</span></li></ol>
-              
-                <ol start='464' class="post-context" id="post4330964032"><li onclick="toggle('pre4330964032', 'post4330964032')"><pre></pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>    save.alters_data = True</pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre></pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>    def save_base(self, raw=False, cls=None, origin=None, force_insert=False,</pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>            force_update=False, using=None):</pre></li><li onclick="toggle('pre4330964032', 'post4330964032')"><pre>        &quot;&quot;&quot;</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330964032')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330964032">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>using</td>
-                    <td class="code"><pre>&#39;default&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;User: jblum18@gmail.com&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>force_update</td>
-                    <td class="code"><pre>False</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>force_insert</td>
-                    <td class="code"><pre>True</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py</code> in <code>save_base</code>
-
-          
-            <div class="context" id="c4330963960">
-              
-                <ol start="558" class="pre-context" id="pre4330963960"><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>        self._state.db = using</pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>        # Once saved, this is no longer a to-be-added instance.</pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>        self._state.adding = False</pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre></pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>        # Signal that the save is complete</pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>        if origin and not meta.auto_created:</pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>            signals.post_save.send(sender=origin, instance=self,</pre></li></ol>
-              
-              <ol start="565" class="context-line"><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>                created=(not record_exists), raw=raw, using=using)</pre> <span>...</span></li></ol>
-              
-                <ol start='566' class="post-context" id="post4330963960"><li onclick="toggle('pre4330963960', 'post4330963960')"><pre></pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre></pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>    save_base.alters_data = True</pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre></pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>    def delete(self, using=None):</pre></li><li onclick="toggle('pre4330963960', 'post4330963960')"><pre>        using = using or router.db_for_write(self.__class__, instance=self)</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963960')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963960">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>origin</td>
-                    <td class="code"><pre>&lt;class &#39;django.contrib.auth.models.User&#39;&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>non_pks</td>
-                    <td class="code"><pre>[&lt;django.db.models.fields.CharField: username&gt;,
- &lt;django.db.models.fields.CharField: first_name&gt;,
- &lt;django.db.models.fields.CharField: last_name&gt;,
- &lt;django.db.models.fields.EmailField: email&gt;,
- &lt;django.db.models.fields.CharField: password&gt;,
- &lt;django.db.models.fields.BooleanField: is_staff&gt;,
- &lt;django.db.models.fields.BooleanField: is_active&gt;,
- &lt;django.db.models.fields.BooleanField: is_superuser&gt;,
- &lt;django.db.models.fields.DateTimeField: last_login&gt;,
- &lt;django.db.models.fields.DateTimeField: date_joined&gt;]</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>f</td>
-                    <td class="code"><pre>&lt;django.db.models.fields.DateTimeField: date_joined&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>fields</td>
-                    <td class="code"><pre>[&lt;django.db.models.fields.CharField: username&gt;,
- &lt;django.db.models.fields.CharField: first_name&gt;,
- &lt;django.db.models.fields.CharField: last_name&gt;,
- &lt;django.db.models.fields.EmailField: email&gt;,
- &lt;django.db.models.fields.CharField: password&gt;,
- &lt;django.db.models.fields.BooleanField: is_staff&gt;,
- &lt;django.db.models.fields.BooleanField: is_active&gt;,
- &lt;django.db.models.fields.BooleanField: is_superuser&gt;,
- &lt;django.db.models.fields.DateTimeField: last_login&gt;,
- &lt;django.db.models.fields.DateTimeField: date_joined&gt;]</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;User: jblum18@gmail.com&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>force_update</td>
-                    <td class="code"><pre>False</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>force_insert</td>
-                    <td class="code"><pre>True</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>raw</td>
-                    <td class="code"><pre>False</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>manager</td>
-                    <td class="code"><pre>&lt;django.db.models.manager.Manager object at 0x101aa27d0&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>meta</td>
-                    <td class="code"><pre>&lt;Options for User&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>pk_val</td>
-                    <td class="code"><pre>None</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>result</td>
-                    <td class="code"><pre>184L</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>using</td>
-                    <td class="code"><pre>&#39;default&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>pk_set</td>
-                    <td class="code"><pre>False</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>org</td>
-                    <td class="code"><pre>None</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>cls</td>
-                    <td class="code"><pre>&lt;class &#39;django.contrib.auth.models.User&#39;&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>update_pk</td>
-                    <td class="code"><pre>True</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>record_exists</td>
-                    <td class="code"><pre>False</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/dispatch/dispatcher.py</code> in <code>send</code>
-
-          
-            <div class="context" id="c4330963888">
-              
-                <ol start="165" class="pre-context" id="pre4330963888"><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>        Returns a list of tuple pairs [(receiver, response), ... ].</pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>        &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>        responses = []</pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>        if not self.receivers:</pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>            return responses</pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre></pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>        for receiver in self._live_receivers(_make_id(sender)):</pre></li></ol>
-              
-              <ol start="172" class="context-line"><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>            response = receiver(signal=self, sender=sender, **named)</pre> <span>...</span></li></ol>
-              
-                <ol start='173' class="post-context" id="post4330963888"><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>            responses.append((receiver, response))</pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>        return responses</pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre></pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>    def send_robust(self, sender, **named):</pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>        &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4330963888', 'post4330963888')"><pre>        Send signal from sender to all connected receivers catching errors.</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963888')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963888">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;django.dispatch.dispatcher.Signal object at 0x1019b9f10&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>named</td>
-                    <td class="code"><pre>{&#39;created&#39;: True,
- &#39;instance&#39;: &lt;User: jblum18@gmail.com&gt;,
- &#39;raw&#39;: False,
- &#39;using&#39;: &#39;default&#39;}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>sender</td>
-                    <td class="code"><pre>&lt;class &#39;django.contrib.auth.models.User&#39;&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>responses</td>
-                    <td class="code"><pre>[]</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>receiver</td>
-                    <td class="code"><pre>&lt;function create_user_profile at 0x101c3d7d0&gt;</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame user">
-          <code>/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/models.py</code> in <code>create_user_profile</code>
-
-          
-            <div class="context" id="c4330963816">
-              
-                <ol start="50" class="pre-context" id="pre4330963816"><li onclick="toggle('pre4330963816', 'post4330963816')"><pre> name = models.CharField(max_length=40, default=&#39;Human Jizz Rag&#39;)</pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre>  year = models.IntegerField()</pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre></pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre></pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre></pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre>def create_user_profile(sender, instance, created, **kwargs):  </pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre>    if created:  </pre></li></ol>
-              
-              <ol start="57" class="context-line"><li onclick="toggle('pre4330963816', 'post4330963816')"><pre>       profile, created = UserProfile.objects.get_or_create(user=instance)  </pre> <span>...</span></li></ol>
-              
-                <ol start='58' class="post-context" id="post4330963816"><li onclick="toggle('pre4330963816', 'post4330963816')"><pre></pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre>post_save.connect(create_user_profile, sender=User) </pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre></pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre>def update_commprod_avg (sender, instance, **kwargs):</pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre>  instance.commprod.update_avg()</pre></li><li onclick="toggle('pre4330963816', 'post4330963816')"><pre></pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963816')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963816">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>instance</td>
-                    <td class="code"><pre>&lt;User: jblum18@gmail.com&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>created</td>
-                    <td class="code"><pre>True</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>sender</td>
-                    <td class="code"><pre>&lt;class &#39;django.contrib.auth.models.User&#39;&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>kwargs</td>
-                    <td class="code"><pre>{&#39;raw&#39;: False,
- &#39;signal&#39;: &lt;django.dispatch.dispatcher.Signal object at 0x1019b9f10&gt;,
- &#39;using&#39;: &#39;default&#39;}</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/manager.py</code> in <code>get_or_create</code>
-
-          
-            <div class="context" id="c4330963744">
-              
-                <ol start="127" class="pre-context" id="pre4330963744"><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>    def extra(self, *args, **kwargs):</pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>        return self.get_query_set().extra(*args, **kwargs)</pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre></pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>    def get(self, *args, **kwargs):</pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>        return self.get_query_set().get(*args, **kwargs)</pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre></pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>    def get_or_create(self, **kwargs):</pre></li></ol>
-              
-              <ol start="134" class="context-line"><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>        return self.get_query_set().get_or_create(**kwargs)</pre> <span>...</span></li></ol>
-              
-                <ol start='135' class="post-context" id="post4330963744"><li onclick="toggle('pre4330963744', 'post4330963744')"><pre></pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>    def create(self, **kwargs):</pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>        return self.get_query_set().create(**kwargs)</pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre></pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>    def bulk_create(self, *args, **kwargs):</pre></li><li onclick="toggle('pre4330963744', 'post4330963744')"><pre>        return self.get_query_set().bulk_create(*args, **kwargs)</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963744')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963744">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;django.db.models.manager.Manager object at 0x102048090&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>kwargs</td>
-                    <td class="code"><pre>{&#39;user&#39;: &lt;User: jblum18@gmail.com&gt;}</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py</code> in <code>get_or_create</code>
-
-          
-            <div class="context" id="c4330963672">
-              
-                <ol start="435" class="pre-context" id="pre4330963672"><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>        defaults = kwargs.pop(&#39;defaults&#39;, {})</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>        lookup = kwargs.copy()</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>        for f in self.model._meta.fields:</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>            if f.attname in lookup:</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>                lookup[f.name] = lookup.pop(f.attname)</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>        try:</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>            self._for_write = True</pre></li></ol>
-              
-              <ol start="442" class="context-line"><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>            return self.get(**lookup), False</pre> <span>...</span></li></ol>
-              
-                <ol start='443' class="post-context" id="post4330963672"><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>        except self.model.DoesNotExist:</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>            try:</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>                params = dict([(k, v) for k, v in kwargs.items() if &#39;__&#39; not in k])</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>                params.update(defaults)</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>                obj = self.model(**params)</pre></li><li onclick="toggle('pre4330963672', 'post4330963672')"><pre>                sid = transaction.savepoint(using=self.db)</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963672')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963672">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>Error in formatting: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>kwargs</td>
-                    <td class="code"><pre>{&#39;user&#39;: &lt;User: jblum18@gmail.com&gt;}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>lookup</td>
-                    <td class="code"><pre>{&#39;user&#39;: &lt;User: jblum18@gmail.com&gt;}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>defaults</td>
-                    <td class="code"><pre>{}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>f</td>
-                    <td class="code"><pre>&lt;django.db.models.fields.BooleanField: send_mail&gt;</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py</code> in <code>get</code>
-
-          
-            <div class="context" id="c4330963600">
-              
-                <ol start="354" class="pre-context" id="pre4330963600"><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        Performs the query and returns a single object matching the given</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        keyword arguments.</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        &quot;&quot;&quot;</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        clone = self.filter(*args, **kwargs)</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        if self.query.can_filter():</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>            clone = clone.order_by()</pre></li></ol>
-              
-              <ol start="361" class="context-line"><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        num = len(clone)</pre> <span>...</span></li></ol>
-              
-                <ol start='362' class="post-context" id="post4330963600"><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        if num == 1:</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>            return clone._result_cache[0]</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        if not num:</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>            raise self.model.DoesNotExist(&quot;%s matching query does not exist.&quot;</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>                    % self.model._meta.object_name)</pre></li><li onclick="toggle('pre4330963600', 'post4330963600')"><pre>        raise self.model.MultipleObjectsReturned(&quot;get() returned more than one %s -- it returned %s! Lookup parameters were %s&quot;</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963600')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963600">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>clone</td>
-                    <td class="code"><pre>Error in formatting: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>args</td>
-                    <td class="code"><pre>()</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>Error in formatting: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>kwargs</td>
-                    <td class="code"><pre>{&#39;user&#39;: &lt;User: jblum18@gmail.com&gt;}</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py</code> in <code>__len__</code>
-
-          
-            <div class="context" id="c4330963528">
-              
-                <ol start="78" class="pre-context" id="pre4330963528"><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>        # Since __len__ is called quite frequently (for example, as part of</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>        # list(qs), we make some effort here to be as efficient as possible</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>        # whilst not messing up any existing iterators against the QuerySet.</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>        if self._result_cache is None:</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>            if self._iter:</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>                self._result_cache = list(self._iter)</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>            else:</pre></li></ol>
-              
-              <ol start="85" class="context-line"><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>                self._result_cache = list(self.iterator())</pre> <span>...</span></li></ol>
-              
-                <ol start='86' class="post-context" id="post4330963528"><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>        elif self._iter:</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>            self._result_cache.extend(self._iter)</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>        if self._prefetch_related_lookups and not self._prefetch_done:</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>            self._prefetch_related_objects()</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre>        return len(self._result_cache)</pre></li><li onclick="toggle('pre4330963528', 'post4330963528')"><pre></pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963528')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963528">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>Error in formatting: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py</code> in <code>iterator</code>
-
-          
-            <div class="context" id="c4330963456">
-              
-                <ol start="284" class="pre-context" id="pre4330963456"><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>        # Cache db and model outside the loop</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>        db = self.db</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>        model = self.model</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>        compiler = self.query.get_compiler(using=db)</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>        if fill_cache:</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>            klass_info = get_klass_info(model, max_depth=max_depth,</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>                                        requested=requested, only_load=only_load)</pre></li></ol>
-              
-              <ol start="291" class="context-line"><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>        for row in compiler.results_iter():</pre> <span>...</span></li></ol>
-              
-                <ol start='292' class="post-context" id="post4330963456"><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>            if fill_cache:</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>                obj, _ = get_cached_row(row, index_start, db, klass_info,</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>                                        offset=len(aggregate_select))</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>            else:</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>                if skip:</pre></li><li onclick="toggle('pre4330963456', 'post4330963456')"><pre>                    row_data = row[index_start:aggregate_start]</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963456')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963456">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>requested</td>
-                    <td class="code"><pre>None</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>fill_cache</td>
-                    <td class="code"><pre>False</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>aggregate_select</td>
-                    <td class="code"><pre>[]</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>fields</td>
-                    <td class="code"><pre>[&lt;django.db.models.fields.AutoField: id&gt;,
- &lt;django.db.models.fields.related.OneToOneField: user&gt;,
- &lt;django.db.models.fields.CharField: activation_key&gt;,
- &lt;django.db.models.fields.EmailField: alt_email&gt;,
- &lt;django.db.models.fields.BooleanField: send_mail&gt;]</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>skip</td>
-                    <td class="code"><pre>None</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>Error in formatting: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>load_fields</td>
-                    <td class="code"><pre>[]</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>db</td>
-                    <td class="code"><pre>&#39;default&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>index_start</td>
-                    <td class="code"><pre>0</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>extra_select</td>
-                    <td class="code"><pre>[]</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>aggregate_start</td>
-                    <td class="code"><pre>5</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>model</td>
-                    <td class="code"><pre>&lt;class &#39;commProd.models.UserProfile&#39;&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>only_load</td>
-                    <td class="code"><pre>{}</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>max_depth</td>
-                    <td class="code"><pre>5</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>compiler</td>
-                    <td class="code"><pre>&lt;django.db.backends.mysql.compiler.SQLCompiler object at 0x10224a710&gt;</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py</code> in <code>results_iter</code>
-
-          
-            <div class="context" id="c4330963384">
-              
-                <ol start="756" class="pre-context" id="pre4330963384"><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>        fields = None</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>        has_aggregate_select = bool(self.query.aggregate_select)</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>        # Set transaction dirty if we&#39;re using SELECT FOR UPDATE to ensure</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>        # a subsequent commit/rollback is executed, so any database locks</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>        # are released.</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>        if self.query.select_for_update and transaction.is_managed(self.using):</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>            transaction.set_dirty(self.using)</pre></li></ol>
-              
-              <ol start="763" class="context-line"><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>        for rows in self.execute_sql(MULTI):</pre> <span>...</span></li></ol>
-              
-                <ol start='764' class="post-context" id="post4330963384"><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>            for row in rows:</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>                if resolve_columns:</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>                    if fields is None:</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>                        # We only set this up here because</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>                        # related_select_fields isn&#39;t populated until</pre></li><li onclick="toggle('pre4330963384', 'post4330963384')"><pre>                        # execute_sql() has been called.</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963384')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963384">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>fields</td>
-                    <td class="code"><pre>None</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;django.db.backends.mysql.compiler.SQLCompiler object at 0x10224a710&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>has_aggregate_select</td>
-                    <td class="code"><pre>False</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>resolve_columns</td>
-                    <td class="code"><pre>True</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py</code> in <code>execute_sql</code>
-
-          
-            <div class="context" id="c4330963312">
-              
-                <ol start="811" class="pre-context" id="pre4330963312"><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>        except EmptyResultSet:</pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>            if result_type == MULTI:</pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>                return empty_iter()</pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>            else:</pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>                return</pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre></pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>        cursor = self.connection.cursor()</pre></li></ol>
-              
-              <ol start="818" class="context-line"><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>        cursor.execute(sql, params)</pre> <span>...</span></li></ol>
-              
-                <ol start='819' class="post-context" id="post4330963312"><li onclick="toggle('pre4330963312', 'post4330963312')"><pre></pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>        if not result_type:</pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>            return cursor</pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>        if result_type == SINGLE:</pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>            if self.query.ordering_aliases:</pre></li><li onclick="toggle('pre4330963312', 'post4330963312')"><pre>                return cursor.fetchone()[:-len(self.query.ordering_aliases)]</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963312')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963312">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>cursor</td>
-                    <td class="code"><pre>&lt;django.db.backends.util.CursorDebugWrapper object at 0x102253050&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;django.db.backends.mysql.compiler.SQLCompiler object at 0x10224a710&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>params</td>
-                    <td class="code"><pre>(184,)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>result_type</td>
-                    <td class="code"><pre>&#39;multi&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>sql</td>
-                    <td class="code"><pre>&#39;SELECT `commProd_userprofile`.`id`, `commProd_userprofile`.`user_id`, `commProd_userprofile`.`activation_key`, `commProd_userprofile`.`alt_email`, `commProd_userprofile`.`send_mail` FROM `commProd_userprofile` WHERE `commProd_userprofile`.`user_id` = %s &#39;</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/backends/util.py</code> in <code>execute</code>
-
-          
-            <div class="context" id="c4330963024">
-              
-                <ol start="33" class="pre-context" id="pre4330963024"><li onclick="toggle('pre4330963024', 'post4330963024')"><pre></pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>class CursorDebugWrapper(CursorWrapper):</pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre></pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>    def execute(self, sql, params=()):</pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>        self.set_dirty()</pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>        start = time()</pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>        try:</pre></li></ol>
-              
-              <ol start="40" class="context-line"><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>            return self.cursor.execute(sql, params)</pre> <span>...</span></li></ol>
-              
-                <ol start='41' class="post-context" id="post4330963024"><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>        finally:</pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>            stop = time()</pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>            duration = stop - start</pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>            sql = self.db.ops.last_executed_query(self.cursor, sql, params)</pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>            self.db.queries.append({</pre></li><li onclick="toggle('pre4330963024', 'post4330963024')"><pre>                &#39;sql&#39;: sql,</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963024')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963024">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;django.db.backends.util.CursorDebugWrapper object at 0x102253050&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>stop</td>
-                    <td class="code"><pre>1341120692.702046</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>start</td>
-                    <td class="code"><pre>1341120692.600439</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>params</td>
-                    <td class="code"><pre>(184,)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>sql</td>
-                    <td class="code"><pre>&#39;SELECT `commProd_userprofile`.`id`, `commProd_userprofile`.`user_id`, `commProd_userprofile`.`activation_key`, `commProd_userprofile`.`alt_email`, `commProd_userprofile`.`send_mail` FROM `commProd_userprofile` WHERE `commProd_userprofile`.`user_id` = 184 &#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>duration</td>
-                    <td class="code"><pre>0.10160684585571289</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame django">
-          <code>/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/backends/mysql/base.py</code> in <code>execute</code>
-
-          
-            <div class="context" id="c4330958792">
-              
-                <ol start="107" class="pre-context" id="pre4330958792"><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>    codes_for_integrityerror = (1048,)</pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre></pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>    def __init__(self, cursor):</pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>        self.cursor = cursor</pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre></pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>    def execute(self, query, args=None):</pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>        try:</pre></li></ol>
-              
-              <ol start="114" class="context-line"><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>            return self.cursor.execute(query, args)</pre> <span>...</span></li></ol>
-              
-                <ol start='115' class="post-context" id="post4330958792"><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>        except Database.IntegrityError, e:</pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>            raise utils.IntegrityError, utils.IntegrityError(*tuple(e)), sys.exc_info()[2]</pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>        except Database.OperationalError, e:</pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>            # Map some error codes to IntegrityError, since they seem to be</pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>            # misclassified and Django would prefer the more logical place.</pre></li><li onclick="toggle('pre4330958792', 'post4330958792')"><pre>            if e[0] in self.codes_for_integrityerror:</pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330958792')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330958792">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>query</td>
-                    <td class="code"><pre>&#39;SELECT `commProd_userprofile`.`id`, `commProd_userprofile`.`user_id`, `commProd_userprofile`.`activation_key`, `commProd_userprofile`.`alt_email`, `commProd_userprofile`.`send_mail` FROM `commProd_userprofile` WHERE `commProd_userprofile`.`user_id` = %s &#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;django.db.backends.mysql.base.CursorWrapper object at 0x102253090&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>args</td>
-                    <td class="code"><pre>(184,)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>e</td>
-                    <td class="code"><pre>OperationalError(1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame user">
-          <code>/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/cursors.py</code> in <code>execute</code>
-
-          
-            <div class="context" id="c4330963240">
-              
-                <ol start="167" class="pre-context" id="pre4330963240"><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>            else:</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>                self.messages.append((TypeError, m))</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>                self.errorhandler(self, TypeError, m)</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>        except:</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>            exc, value, tb = sys.exc_info()</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>            del tb</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>            self.messages.append((exc, value))</pre></li></ol>
-              
-              <ol start="174" class="context-line"><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>            self.errorhandler(self, exc, value)</pre> <span>...</span></li></ol>
-              
-                <ol start='175' class="post-context" id="post4330963240"><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>        self._executed = query</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>        if not self._defer_warnings: self._warning_check()</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>        return r</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre></pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre>    def executemany(self, query, args):</pre></li><li onclick="toggle('pre4330963240', 'post4330963240')"><pre></pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963240')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963240">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>charset</td>
-                    <td class="code"><pre>&#39;utf8&#39;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>exc</td>
-                    <td class="code"><pre>&lt;class &#39;_mysql_exceptions.OperationalError&#39;&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>self</td>
-                    <td class="code"><pre>&lt;MySQLdb.cursors.Cursor object at 0x10224ab10&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>args</td>
-                    <td class="code"><pre>(184,)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>db</td>
-                    <td class="code"><pre>&lt;weakproxy at 0x10222f8e8 to Connection at 0x102815e20&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>value</td>
-                    <td class="code"><pre>OperationalError(1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>query</td>
-                    <td class="code"><pre>&#39;SELECT `commProd_userprofile`.`id`, `commProd_userprofile`.`user_id`, `commProd_userprofile`.`activation_key`, `commProd_userprofile`.`alt_email`, `commProd_userprofile`.`send_mail` FROM `commProd_userprofile` WHERE `commProd_userprofile`.`user_id` = 184 &#39;</pre></td>
-                  </tr>
-                
-              </tbody>
-            </table>
-          
-        </li>
-      
-        <li class="frame user">
-          <code>/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/connections.py</code> in <code>defaulterrorhandler</code>
-
-          
-            <div class="context" id="c4330963168">
-              
-                <ol start="29" class="pre-context" id="pre4330963168"><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>    error = errorclass, errorvalue</pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>    if cursor:</pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>        cursor.messages.append(error)</pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>    else:</pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>        connection.messages.append(error)</pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>    del cursor</pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>    del connection</pre></li></ol>
-              
-              <ol start="36" class="context-line"><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>    raise errorclass, errorvalue</pre> <span>...</span></li></ol>
-              
-                <ol start='37' class="post-context" id="post4330963168"><li onclick="toggle('pre4330963168', 'post4330963168')"><pre></pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>re_numeric_part = re.compile(r&quot;^(\d+)&quot;)</pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre></pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>def numeric_part(s):</pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>    &quot;&quot;&quot;Returns the leading numeric part of a string.</pre></li><li onclick="toggle('pre4330963168', 'post4330963168')"><pre>    </pre></li></ol>
-              
-            </div>
-          
-
-          
-            <div class="commands">
-                
-                    <a href="#" onclick="return varToggle(this, '4330963168')"><span>&#x25b6;</span> Local vars</a>
-                
-            </div>
-            <table class="vars" id="v4330963168">
-              <thead>
-                <tr>
-                  <th>Variable</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                
-                  <tr>
-                    <td>errorclass</td>
-                    <td class="code"><pre>&lt;class &#39;_mysql_exceptions.OperationalError&#39;&gt;</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>errorvalue</td>
-                    <td class="code"><pre>OperationalError(1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)</pre></td>
-                  </tr>
-                
-                  <tr>
-                    <td>error</td>
-                    <td class="code"><pre>(&lt;class &#39;_mysql_exceptions.OperationalError&#39;&gt;,
- OperationalError(1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;))</pre></td>
+                    <td>dic</td>
+                    <td class="code"><pre>u&#39;alisonleighmckenzie@gmail.com&#39;</pre></td>
                   </tr>
                 
               </tbody>
@@ -1660,7 +466,7 @@ META:{&#39;Apple_PubSub_Socket_Render&#39;: &#39;/tmp/launch-Inss5O/Render&#39;,
 
   <div id="pastebinTraceback" class="pastebin">
     <input type="hidden" name="language" value="PythonConsole">
-    <input type="hidden" name="title" value="DatabaseError at /processprod">
+    <input type="hidden" name="title" value="AttributeError at /processprod">
     <input type="hidden" name="source" value="Django Dpaste Agent">
     <input type="hidden" name="poster" value="Django">
     <textarea name="content" id="traceback_area" cols="140" rows="25">
@@ -1668,10 +474,10 @@ Environment:
 
 
 Request Method: POST
-Request URL: http://localhost:5000/processprod
+Request URL: http://commprod.herokuapp.com/processprod
 
 Django Version: 1.4
-Python Version: 2.7.3
+Python Version: 2.7.2
 Installed Applications:
 (&#39;django.contrib.auth&#39;,
  &#39;django.contrib.contenttypes&#39;,
@@ -1679,62 +485,32 @@ Installed Applications:
  &#39;django.contrib.messages&#39;,
  &#39;django.contrib.staticfiles&#39;,
  &#39;django.contrib.admin&#39;,
- &#39;commProd&#39;)
+ &#39;django_evolution&#39;,
+ &#39;pagination&#39;,
+ &#39;commProd&#39;,
+ &#39;helpers&#39;,
+ &#39;cron&#39;)
 Installed Middleware:
 (&#39;django.middleware.common.CommonMiddleware&#39;,
  &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
  &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,
  &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
  &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
- &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;)
+ &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;,
+ &#39;helpers.profiler.ProfileMiddleware&#39;,
+ &#39;pagination.middleware.PaginationMiddleware&#39;)
 
 
 Traceback:
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py" in get_response
+File "/app/.heroku/venv/lib/python2.7/site-packages/django/core/handlers/base.py" in get_response
   111.                         response = callback(request, *callback_args, **callback_kwargs)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/csrf.py" in wrapped_view
+File "/app/.heroku/venv/lib/python2.7/site-packages/django/views/decorators/csrf.py" in wrapped_view
   77.         return view_func(*args, **kwargs)
-File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/views.py" in processProd
-  192.                 user, created = createUser(sender, sender, False)
-File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/create_users.py" in createUser
-  45.         user, created = User.objects.get_or_create(username=username, email=email)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/manager.py" in get_or_create
-  134.         return self.get_query_set().get_or_create(**kwargs)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py" in get_or_create
-  449.                 obj.save(force_insert=True, using=self.db)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py" in save
-  463.         self.save_base(using=using, force_insert=force_insert, force_update=force_update)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/base.py" in save_base
-  565.                 created=(not record_exists), raw=raw, using=using)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/dispatch/dispatcher.py" in send
-  172.             response = receiver(signal=self, sender=sender, **named)
-File "/Users/joshblum/Desktop/Dropbox/code/comm.prod/commProd/models.py" in create_user_profile
-  57.        profile, created = UserProfile.objects.get_or_create(user=instance)  
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/manager.py" in get_or_create
-  134.         return self.get_query_set().get_or_create(**kwargs)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py" in get_or_create
-  442.             return self.get(**lookup), False
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py" in get
-  361.         num = len(clone)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py" in __len__
-  85.                 self._result_cache = list(self.iterator())
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/query.py" in iterator
-  291.         for row in compiler.results_iter():
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py" in results_iter
-  763.         for rows in self.execute_sql(MULTI):
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/models/sql/compiler.py" in execute_sql
-  818.         cursor.execute(sql, params)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/backends/util.py" in execute
-  40.             return self.cursor.execute(sql, params)
-File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/db/backends/mysql/base.py" in execute
-  114.             return self.cursor.execute(query, args)
-File "/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/cursors.py" in execute
-  174.             self.errorhandler(self, exc, value)
-File "/Users/joshblum/Library/Python/2.7/lib/python/site-packages/MySQLdb/connections.py" in defaulterrorhandler
-  36.     raise errorclass, errorvalue
+File "/app/commProd/views.py" in processProd
+  202.             sender = dic.keys()[0]
 
-Exception Type: DatabaseError at /processprod
-Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail&#39; in &#39;field list&#39;&quot;)
+Exception Type: AttributeError at /processprod
+Exception Value: &#39;unicode&#39; object has no attribute &#39;keys&#39;
 </textarea>
   <br><br>
   <input type="submit" value="Share this traceback on a public Web site">
@@ -1766,7 +542,7 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         
           <tr>
             <td>data</td>
-            <td class="code"><pre>u&#39;[{&quot;jblum18@gmail.com&quot;: [&quot;a btb \\&quot;hey there\\&quot; comm.prod\\r\\n&quot;, [&quot;hey there&quot;]]}]&#39;</pre></td>
+            <td class="code"><pre>u&#39;{&quot;alisonleighmckenzie@gmail.com&quot;: [&quot;Hey guys,\\r\\n\\r\\nI had a down comforter with a dark green cover that was packed into a\\r\\nlaundry basket along with my pillow and put in the trunk room near the\\r\\nbeginning of last semester.  The comforter and pillow are now missing,\\r\\nso if you happen to spot them when you\&#39;re getting your stuff out of\\r\\nthe trunk room, please let me know - I think they may have fallen out\\r\\nof the laundry basket.\\r\\n\\r\\nThanks everyone!\\r\\n\\r\\nAlie\\r\\n\\r\\na btb \\&quot;Trying to convince myself that it\&#39;s not already being used as a\\r\\njacket by a hobo\\&quot; comm.prod\\r\\n\\r\\n-- \\r\\nAlison McKenzie\\r\\nMIT 2011\\r\\nBrain &amp; Cognitive Sciences\\r\\naliemck@mit.edu\\r\\n414.231.0846\\r\\n&quot;, [&quot;Trying to convince myself that it\&#39;s not already being used as a\\r\\njacket by a hobo&quot;], &quot;2010-09-06T00:28:49&quot;]}&#39;</pre></td>
           </tr>
         
           <tr>
@@ -1799,18 +575,13 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
     <tbody>
       
         <tr>
-          <td>RUN_MAIN</td>
-          <td class="code"><pre>&#39;true&#39;</pre></td>
-        </tr>
-      
-        <tr>
           <td>SERVER_SOFTWARE</td>
-          <td class="code"><pre>&#39;WSGIServer/0.1 Python/2.7.3&#39;</pre></td>
+          <td class="code"><pre>&#39;WSGIServer/0.1 Python/2.7.2&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>TERM_PROGRAM_VERSION</td>
-          <td class="code"><pre>&#39;303.2&#39;</pre></td>
+          <td>SCRIPT_NAME</td>
+          <td class="code"><pre>u&#39;&#39;</pre></td>
         </tr>
       
         <tr>
@@ -1825,52 +596,47 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
       
         <tr>
           <td>HOME</td>
-          <td class="code"><pre>&#39;/Users/joshblum&#39;</pre></td>
+          <td class="code"><pre>&#39;/app&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>DISPLAY</td>
-          <td class="code"><pre>&#39;/tmp/launch-ZK6nc2/org.x:0&#39;</pre></td>
+          <td>LD_LIBRARY_PATH</td>
+          <td class="code"><pre>&#39;/app/.heroku/vendor/lib&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>TERM_PROGRAM</td>
-          <td class="code"><pre>&#39;Apple_Terminal&#39;</pre></td>
+          <td>CONTENT_LENGTH</td>
+          <td class="code"><pre>&#39;1045&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>LANG</td>
-          <td class="code"><pre>&#39;en_US.UTF-8&#39;</pre></td>
+          <td>LIBRARY_PATH</td>
+          <td class="code"><pre>&#39;/app/.heroku/vendor/lib&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>SHELL</td>
-          <td class="code"><pre>&#39;/bin/bash&#39;</pre></td>
-        </tr>
-      
-        <tr>
-          <td>SECURITYSESSIONID</td>
-          <td class="code"><pre>&#39;186a4&#39;</pre></td>
-        </tr>
-      
-        <tr>
-          <td>_</td>
-          <td class="code"><pre>&#39;/Library/Frameworks/Python.framework/Versions/2.7/bin/python&#39;</pre></td>
+          <td>PYTHONHASHSEED</td>
+          <td class="code"><pre>&#39;random&#39;</pre></td>
         </tr>
       
         <tr>
           <td>SERVER_PORT</td>
-          <td class="code"><pre>&#39;5000&#39;</pre></td>
+          <td class="code"><pre>&#39;37829&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>wsgi.run_once</td>
+          <td class="code"><pre>False</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PYTHONPATH</td>
+          <td class="code"><pre>&#39;/app/&#39;</pre></td>
         </tr>
       
         <tr>
           <td>HTTP_HOST</td>
-          <td class="code"><pre>&#39;localhost:5000&#39;</pre></td>
-        </tr>
-      
-        <tr>
-          <td>SCRIPT_NAME</td>
-          <td class="code"><pre>u&#39;&#39;</pre></td>
+          <td class="code"><pre>&#39;commprod.herokuapp.com&#39;</pre></td>
         </tr>
       
         <tr>
@@ -1884,13 +650,13 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
-          <td>wsgi.run_once</td>
-          <td class="code"><pre>False</pre></td>
+          <td>HTTP_X_FORWARDED_FOR</td>
+          <td class="code"><pre>&#39;67.169.39.105&#39;</pre></td>
         </tr>
       
         <tr>
           <td>wsgi.errors</td>
-          <td class="code"><pre>&lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x100284270&gt;</pre></td>
+          <td class="code"><pre>&lt;open file &#39;&lt;stderr&gt;&#39;, mode &#39;w&#39; at 0x7fda4ab1c270&gt;</pre></td>
         </tr>
       
         <tr>
@@ -1899,18 +665,23 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
-          <td>__CF_USER_TEXT_ENCODING</td>
-          <td class="code"><pre>&#39;0x1F6:0:0&#39;</pre></td>
+          <td>DATABASE_URL</td>
+          <td class="code"><pre>&#39;mysql://joshblum:sfbombers@sql.mit.edu/joshblum+comm.prod&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>USER</td>
-          <td class="code"><pre>&#39;joshblum&#39;</pre></td>
+          <td>HTTP_X_REQUEST_START</td>
+          <td class="code"><pre>&#39;1341390092255&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>LOGNAME</td>
-          <td class="code"><pre>&#39;joshblum&#39;</pre></td>
+          <td>HTTP_X_FORWARDED_PORT</td>
+          <td class="code"><pre>&#39;80&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_X_HEROKU_QUEUE_WAIT_TIME</td>
+          <td class="code"><pre>&#39;4178&#39;</pre></td>
         </tr>
       
         <tr>
@@ -1925,12 +696,22 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
       
         <tr>
           <td>PATH</td>
-          <td class="code"><pre>&#39;/Library/Frameworks/Python.framework/Versions/2.7/bin:/opt/local/bin:/opt/local/sbin:/Users/joshblum/.rvm/gems/ruby-1.9.2-p290/bin:/Users/joshblum/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/joshblum/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/joshblum/.rvm/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin&#39;</pre></td>
+          <td class="code"><pre>&#39;/app/.heroku/venv/bin:/bin:/usr/local/bin:/usr/bin&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>TERM</td>
-          <td class="code"><pre>&#39;xterm-256color&#39;</pre></td>
+          <td>PYTHONUNBUFFERED</td>
+          <td class="code"><pre>&#39;true&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>PORT</td>
+          <td class="code"><pre>&#39;37829&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>HTTP_X_HEROKU_DYNOS_IN_USE</td>
+          <td class="code"><pre>&#39;1&#39;</pre></td>
         </tr>
       
         <tr>
@@ -1939,13 +720,18 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
+          <td>HTTP_CONNECTION</td>
+          <td class="code"><pre>&#39;keep-alive&#39;</pre></td>
+        </tr>
+      
+        <tr>
           <td>SERVER_NAME</td>
-          <td class="code"><pre>&#39;1.0.0.127.in-addr.arpa&#39;</pre></td>
+          <td class="code"><pre>&#39;5a9dbd3a-bd6e-4459-a69c-05057399a6bb&#39;</pre></td>
         </tr>
       
         <tr>
           <td>REMOTE_ADDR</td>
-          <td class="code"><pre>&#39;127.0.0.1&#39;</pre></td>
+          <td class="code"><pre>&#39;10.92.97.233&#39;</pre></td>
         </tr>
       
         <tr>
@@ -1954,33 +740,33 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
+          <td>HTTP_X_HEROKU_QUEUE_DEPTH</td>
+          <td class="code"><pre>&#39;0&#39;</pre></td>
+        </tr>
+      
+        <tr>
           <td>wsgi.url_scheme</td>
           <td class="code"><pre>&#39;http&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>CONTENT_LENGTH</td>
-          <td class="code"><pre>&#39;197&#39;</pre></td>
+          <td>HTTP_X_FORWARDED_PROTO</td>
+          <td class="code"><pre>&#39;http&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>TERM_SESSION_ID</td>
-          <td class="code"><pre>&#39;DBEB7543-988E-4C0B-8426-33BABC024999&#39;</pre></td>
+          <td>LANG</td>
+          <td class="code"><pre>&#39;en_US.UTF-8&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>SSH_AUTH_SOCK</td>
-          <td class="code"><pre>&#39;/tmp/launch-B8hVMM/Listeners&#39;</pre></td>
+          <td>SHARED_DATABASE_URL</td>
+          <td class="code"><pre>&#39;postgres://scjoehmqmr:2dA8AGRgpRXRapbqn_hB@ec2-184-73-162-187.compute-1.amazonaws.com/scjoehmqmr&#39;</pre></td>
         </tr>
       
         <tr>
           <td>wsgi.input</td>
-          <td class="code"><pre>&lt;socket._fileobject object at 0x10208f950&gt;</pre></td>
-        </tr>
-      
-        <tr>
-          <td>Apple_PubSub_Socket_Render</td>
-          <td class="code"><pre>&#39;/tmp/launch-Inss5O/Render&#39;</pre></td>
+          <td class="code"><pre>&lt;socket._fileobject object at 0x31eb3d0&gt;</pre></td>
         </tr>
       
         <tr>
@@ -1989,8 +775,8 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
-          <td>TMPDIR</td>
-          <td class="code"><pre>&#39;/var/folders/ky/l_8hqtp51k727rb_ql0mb1pr0000gp/T/&#39;</pre></td>
+          <td>_</td>
+          <td class="code"><pre>&#39;/app/.heroku/venv/bin/python&#39;</pre></td>
         </tr>
       
         <tr>
@@ -2000,17 +786,17 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
       
         <tr>
           <td>CSRF_COOKIE</td>
-          <td class="code"><pre>&#39;k2M46T5AXfFcJqrstdOkmQUilj0XOO5y&#39;</pre></td>
+          <td class="code"><pre>&#39;TTV9NFZw6ou8F4PCXCYYNc2RyIavF3e8&#39;</pre></td>
         </tr>
       
         <tr>
-          <td>Apple_Ubiquity_Message</td>
-          <td class="code"><pre>&#39;/tmp/launch-4QvcAt/Apple_Ubiquity_Message&#39;</pre></td>
+          <td>PYTHONHOME</td>
+          <td class="code"><pre>&#39;/app/.heroku/venv/&#39;</pre></td>
         </tr>
       
         <tr>
           <td>PWD</td>
-          <td class="code"><pre>&#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod&#39;</pre></td>
+          <td class="code"><pre>&#39;/app&#39;</pre></td>
         </tr>
       
         <tr>
@@ -2036,11 +822,6 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         <tr>
           <td>HTTP_ACCEPT_ENCODING</td>
           <td class="code"><pre>&#39;identity, deflate, compress, gzip&#39;</pre></td>
-        </tr>
-      
-        <tr>
-          <td>COMMAND_MODE</td>
-          <td class="code"><pre>&#39;unix2003&#39;</pre></td>
         </tr>
       
     </tbody>
@@ -2095,7 +876,7 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
       
         <tr>
           <td>STATIC_ROOT</td>
-          <td class="code"><pre>&#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/static&#39;</pre></td>
+          <td class="code"><pre>&#39;/app/commerical_production/static&#39;</pre></td>
         </tr>
       
         <tr>
@@ -2109,8 +890,8 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
-          <td>SEND_BROKEN_LINK_EMAILS</td>
-          <td class="code"><pre>False</pre></td>
+          <td>FILE_UPLOAD_PERMISSIONS</td>
+          <td class="code"><pre>None</pre></td>
         </tr>
       
         <tr>
@@ -2151,7 +932,7 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
              &#39;NAME&#39;: &#39;joshblum+comm.prod&#39;,
              &#39;OPTIONS&#39;: {},
              &#39;PASSWORD&#39;: u&#39;********************&#39;,
-             &#39;PORT&#39;: &#39;&#39;,
+             &#39;PORT&#39;: None,
              &#39;TEST_CHARSET&#39;: None,
              &#39;TEST_COLLATION&#39;: None,
              &#39;TEST_MIRROR&#39;: None,
@@ -2161,8 +942,8 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
-          <td>FILE_UPLOAD_PERMISSIONS</td>
-          <td class="code"><pre>None</pre></td>
+          <td>SERVER_EMAIL</td>
+          <td class="code"><pre>&#39;root@localhost&#39;</pre></td>
         </tr>
       
         <tr>
@@ -2217,11 +998,6 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
-          <td>SERVER_EMAIL</td>
-          <td class="code"><pre>&#39;root@localhost&#39;</pre></td>
-        </tr>
-      
-        <tr>
           <td>SESSION_COOKIE_PATH</td>
           <td class="code"><pre>&#39;/&#39;</pre></td>
         </tr>
@@ -2232,18 +1008,15 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
-          <td>USER</td>
-          <td class="code"><pre>&#39;joshblum&#39;</pre></td>
-        </tr>
-      
-        <tr>
           <td>MIDDLEWARE_CLASSES</td>
           <td class="code"><pre>(&#39;django.middleware.common.CommonMiddleware&#39;,
  &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
  &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,
  &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
  &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
- &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;)</pre></td>
+ &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;,
+ &#39;helpers.profiler.ProfileMiddleware&#39;,
+ &#39;pagination.middleware.PaginationMiddleware&#39;)</pre></td>
         </tr>
       
         <tr>
@@ -2279,6 +1052,11 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         <tr>
           <td>LOGGING_CONFIG</td>
           <td class="code"><pre>&#39;django.utils.log.dictConfig&#39;</pre></td>
+        </tr>
+      
+        <tr>
+          <td>SEND_BROKEN_LINK_EMAILS</td>
+          <td class="code"><pre>False</pre></td>
         </tr>
       
         <tr>
@@ -2360,7 +1138,11 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
  &#39;django.contrib.messages&#39;,
  &#39;django.contrib.staticfiles&#39;,
  &#39;django.contrib.admin&#39;,
- &#39;commProd&#39;)</pre></td>
+ &#39;django_evolution&#39;,
+ &#39;pagination&#39;,
+ &#39;commProd&#39;,
+ &#39;helpers&#39;,
+ &#39;cron&#39;)</pre></td>
         </tr>
       
         <tr>
@@ -2530,7 +1312,7 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
       
         <tr>
           <td>ROOT_PATH</td>
-          <td class="code"><pre>&#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production&#39;</pre></td>
+          <td class="code"><pre>&#39;/app/commerical_production&#39;</pre></td>
         </tr>
       
         <tr>
@@ -2574,9 +1356,9 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
  &#39;filters&#39;: {&#39;require_debug_false&#39;: {&#39;()&#39;: &#39;django.utils.log.RequireDebugFalse&#39;}},
  &#39;formatters&#39;: {&#39;simple&#39;: {&#39;format&#39;: &#39;%(levelname)s %(asctime)s %(message)s&#39;}},
  &#39;handlers&#39;: {&#39;errorfile&#39;: {&#39;class&#39;: &#39;logging.handlers.WatchedFileHandler&#39;,
-                            &#39;filename&#39;: &#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/logs/error_log.log&#39;},
+                            &#39;filename&#39;: &#39;/app/commerical_production/logs/error_log.log&#39;},
               &#39;logfile&#39;: {&#39;class&#39;: &#39;logging.handlers.WatchedFileHandler&#39;,
-                          &#39;filename&#39;: &#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/logs/log.log&#39;},
+                          &#39;filename&#39;: &#39;/app/commerical_production/logs/log.log&#39;},
               &#39;mail_admins&#39;: {&#39;class&#39;: &#39;django.utils.log.AdminEmailHandler&#39;,
                               &#39;filters&#39;: [&#39;require_debug_false&#39;],
                               &#39;include_html&#39;: True,
@@ -2616,11 +1398,6 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
-          <td>HOST</td>
-          <td class="code"><pre>&#39;sql.mit.edu&#39;</pre></td>
-        </tr>
-      
-        <tr>
           <td>LOGOUT_URL</td>
           <td class="code"><pre>&#39;/accounts/logout/&#39;</pre></td>
         </tr>
@@ -2646,13 +1423,8 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
-          <td>NAME</td>
-          <td class="code"><pre>&#39;joshblum+comm.prod&#39;</pre></td>
-        </tr>
-      
-        <tr>
           <td>MEDIA_ROOT</td>
-          <td class="code"><pre>&#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/public&#39;</pre></td>
+          <td class="code"><pre>&#39;/app/commerical_production/public&#39;</pre></td>
         </tr>
       
         <tr>
@@ -2676,6 +1448,14 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         </tr>
       
         <tr>
+          <td>MYSQL</td>
+          <td class="code"><pre>{&#39;HOST&#39;: &#39;sql.mit.edu&#39;,
+ &#39;NAME&#39;: &#39;joshblum+comm.prod&#39;,
+ &#39;PASSWORD&#39;: u&#39;********************&#39;,
+ &#39;USER&#39;: &#39;joshblum&#39;}</pre></td>
+        </tr>
+      
+        <tr>
           <td>MEDIA_URL</td>
           <td class="code"><pre>&#39;/public/&#39;</pre></td>
         </tr>
@@ -2687,7 +1467,7 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
       
         <tr>
           <td>TEMPLATE_DIRS</td>
-          <td class="code"><pre>(&#39;/Users/joshblum/Desktop/Dropbox/code/comm.prod/commerical_production/templates&#39;,)</pre></td>
+          <td class="code"><pre>(&#39;/app/commerical_production/templates&#39;,)</pre></td>
         </tr>
       
         <tr>
@@ -2749,7 +1529,11 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
           <td>TEMPLATE_CONTEXT_PROCESSORS</td>
           <td class="code"><pre>(&#39;django.contrib.messages.context_processors.messages&#39;,
  &#39;django.contrib.auth.context_processors.auth&#39;,
- &#39;django.core.context_processors.static&#39;)</pre></td>
+ &#39;django.core.context_processors.static&#39;,
+ &#39;django.core.context_processors.debug&#39;,
+ &#39;django.core.context_processors.i18n&#39;,
+ &#39;django.core.context_processors.media&#39;,
+ &#39;django.core.context_processors.request&#39;)</pre></td>
         </tr>
       
         <tr>
@@ -2790,11 +1574,6 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
         <tr>
           <td>EMAIL_PORT</td>
           <td class="code"><pre>587</pre></td>
-        </tr>
-      
-        <tr>
-          <td>PASSWORD</td>
-          <td class="code"><pre>u&#39;********************&#39;</pre></td>
         </tr>
       
         <tr>
@@ -2864,3 +1643,5 @@ Exception Value: (1054, &quot;Unknown column &#39;commProd_userprofile.send_mail
 </body>
 </html>
 
+07/04/2012 01:21:40 AM No content found from sender mattgildner101@gmail.com
+07/04/2012 01:21:43 AM No content found from sender mattgildner101@gmail.com
