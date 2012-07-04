@@ -17,6 +17,7 @@ from commerical_production import config
 from helpers.view_helpers import getRandomUsername, renderErrorMessage
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
+from helpers.aws_put import put_profile_pic
 
 import  time
 """
@@ -53,9 +54,10 @@ def register(request, key):
             user.set_password(request.POST['password'])
 
             alt_email = request.POST['alt_email']
+            pic_url = request.POST['pic_url']
             user.profile.mergeAndDelete(alt_email)
             user.profile.alt_email = alt_email
-            user.profile.pic_url = request.POST['pic_url']
+            user.profile.pic_url = put_profile_pic(pic_url) #download and upload to our S3
             
             ShirtName(user_profile=user.profile, name=request.POST['shirt_name']).save()
             
