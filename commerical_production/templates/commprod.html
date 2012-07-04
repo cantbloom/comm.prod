@@ -1,17 +1,20 @@
 <!--commprod variable should ref commprodd model -->
 <div id="commprod_{{commprod.id}}" class='row commprod-container' data-id="{{commprod.id}}">
 	<div class="author-container">
-		<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
-		<span class="author-name">
-			{% if commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}	
+		<a class="author-name" href='users/{{commprod.user_profile.user.username}}'>
+			<img class="author-pic" src="{{		commprod.user_profile.pic_url}}"/>
+			{% if commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}
 			{{ commprod.user_profile.user.first_name }} {{ commprod.user_profile.user.last_name}}
 			{% else %}
 			{{commprod.user_profile.user.username}}
 			{% endif %}
-		</span>
+		</a>
 		<div class="vote-container" style="float:right">
-			<span class='score'>{{commprod.avg_score}}</span>
-			<span class="raty-container" data-id="{{commprod.id}}" data-rating="{{commprod.avg_score|floatformat:2}}"> </span>
+			<div class="up-down-container" data-id="{{commprod.id}}">
+				<span class="up-vote">▲</span>
+				<span class="down-vote">▼</span>
+			</div>
+			<span class='score'>{{commprod.score}}</span>
 		</div>
 	</div>
 	<div class="commprod-content">

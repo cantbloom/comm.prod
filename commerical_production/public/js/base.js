@@ -1,22 +1,35 @@
+function voteSelection (e, data){
+	var $src = $(e.srcElement);
+	$src.addClass('selected').siblings().removeClass('selected');
+
+
+	var isUpVote = $src.hasClass('up-vate');
+	var score = isUpVote ? 1:-1;
+
+	var id = $src.closest('.up-down-container').attr('data-id');
+
+	sendVote(id, score);
+}
+
 function sendVote(id, score){
 	var payload = {'id':id, 'score':score}
-
-	$(document).trigger('voteSent', payload);
 
 	$.post('/vote', payload, function(res){
 		$('#commprod_'+res.cp_id).trigger('voteResponse', res);
 	});
+
+	$('#commprod_'+id).trigger('voteSent', payload)
 }
 
 function updateAvgScore(e, data){
 	if (data.success){
 		var $commprod = $('#commprod_'+data.cp_id)
 
-		//update 
-		$commprod.find('.score').html(data.avg_score.toFixed(2));
+		//not udpating now because of lag...//update 
+		//$commprod.find('.score').html(data.avg_score.toFixed(2));
 
-		//make sure personal score set correctly
-		$commprod.find('.raty-container').raty('set', { score:data.score});
+		//todo:
+		//make sure psonal score set correctly
 	}
 }
 
@@ -27,24 +40,5 @@ function updateAvgScore(e, data){
 
 $(function(){
 	$(document).on('voteResponse', updateAvgScore);
-
-	$('.raty-container').raty({
-	  half       : true,
-	  halfShow   : true,
-	  number     : 3,
-	  //hints      : ['0', '.5', '1', '1.5', '2', '2.5', '3'],
-	  size       : 32,
-	  path		 : '/public/img',
-	  space      : false,
-	  starHalf   : 'bomb-half.png',
-	  starOff    : 'bomb-off.png',
-	  starOn     : 'bomb-on.png',
-	  score : function() {
-	  	return parseFloat($(this).attr('data-rating')).toFixed(2);
-	  },
-	  click : function(score, evt) {
-	    //send to server
-	    sendVote($(this).attr('data-id'), score)
-	  }
-	});
+	$(document).on('click', '.vote-container span', voteSelection)
 }); 

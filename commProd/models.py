@@ -17,9 +17,8 @@ class UserProfile(models.Model):
     pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
 
     def update_avg(self):
-
         #self.avg_score = self.user.ratings__set.aggregate(Avg('score'))['score__avg']
-        self.avg_score = Rating.objects.filter(commprod__user_profile=self).aggregate(Avg('score'))['score__avg']
+        self.avg_score = self.score / CommProd.objects.filter(user_profile=self).count()
         self.save()
 
     """
@@ -62,7 +61,10 @@ class CommProd(models.Model):
 
     def update_avg(self):
     	self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
-    	self.save()
+    	self.save()    
+
+    def calculate_score(votes, item_hour_age, gravity=1.8):
+        return (votes - 1) / pow((item_hour_age+2), gravity)
 
 	def __unicode__(self):
 		return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user.username, str(self.date))
@@ -71,13 +73,15 @@ class Rating(models.Model):
     commprod = models.ForeignKey(CommProd)
     user_profile = models.ForeignKey(UserProfile)
 
-    score = models.FloatField(default=0.0) 
+    score = models.FloatField(default=0.0)
+    previous_score = models.FloatField(default=0.0)
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
         super(Rating, self).save(force_insert, force_update)
-        self.commprod.update_avg()
-        self.commprod.user_profile.update_avg()
+        diff = self.score - self.previous_score
+        self.commprod.update_score(diff)
+        self.commprod.user_profile.update_score(diff)
 
     def __unicode__(self):
     	return "%s voted a %s on commprod_id %s on %s " % (self.user_profile.user.username, self.score, self.commprod.id, self.date)
