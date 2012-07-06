@@ -16,7 +16,7 @@ from helpers.view_helpers import getRandomUsername, renderErrorMessage
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
-from helpers.query_managers import commprod_queryManager
+from helpers.query_managers import commprod_query_manager
 
 import  time
 
@@ -67,7 +67,7 @@ def vote (request):
 @login_required
 @csrf_exempt
 def api_search (request):
-   return HttpResponse(commprod_queryManager(request.GET))
+   return HttpResponse(commprod_query_manager(request.GET))
 
 @csrf_exempt
 def processProd(request):
