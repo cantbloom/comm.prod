@@ -18,11 +18,9 @@ def fetch_prods():
     url = "http://commprod.herokuapp.com/processprod"
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        mail.login('jblum18@gmail.com', '')
-        #mail.login(CRON['EMAIL'], CRON['PASSWORD'])
-        #mail.select("inbox") # connect to inbox.
-        mail.select("[Gmail]/All Mail") # connect to inbox.
-        result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
+        mail.login(CRON['EMAIL'], CRON['PASSWORD'])
+        mail.select("inbox") # connect to inbox.
+        result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
         unread_mail = data[0].split() #list of unread uids
         for msg_id in unread_mail:
             result, data = mail.uid('fetch', msg_id, '(RFC822)')
