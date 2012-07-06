@@ -1,16 +1,13 @@
 <div class="subnav subnav-fixed">
     <ul class="nav nav-pills">
-      <li class={{ subnav_stats }}>
-        <a href="#">Statistics</a>
-      </li>
-      <li class={{ subnav_trending }}>
-        <a href="?q=trending">Trending</a>
+      <li class={{ subnav_statistics }}>
+        <a href=/users/{{user.username}}>Statistics</a>
       </li>
       <li class={{ subnav_popular }}>
-        <a href="?q=popular">Popular</a>
+        <a href="?type=popular">Popular</a>
       </li>
       <li class={{ subnav_recent }}>
-        <a href="?q=recent">Recent</a>
+        <a href="?type=recent">Recent</a>
       </li>
     </ul>
 </div>

@@ -9,11 +9,9 @@ first + last, username, and a shirt first_name.
 """
 def getRandomUsername(user):
     potentials = list(ShirtName.objects.filter(user_profile=user.profile))
-    potentials.append(str(user.first_name + user.last_name))
-
     potentials.append(user.username)
-    first_last = user.first_name + " " +user.last_name
-    if (first_last.strip() != ""):
+    first_last = user.first_name.strip() + " " + user.last_name.strip()
+    if (first_last != " "):
         potentials.append(first_last)
     return random.choice(potentials)
 
@@ -34,3 +32,14 @@ def renderErrorMessage(request, page_title, hero_title):
     }
     return render_to_response('hero_err_template.html', 
         template_values, context_instance=RequestContext(request)) 
+""" 
+Returns proper ingrish for user profile page
+"""
+def possesive(name, title):
+    if unicode(name)[-1] == 's':
+        result = "%s' " % name
+    else:
+        result = "%s's " % name
+    if title == "":
+        title = " Profile"
+    return result + title.capitalize()

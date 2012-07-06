@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block styles %}
+<link href="/public/css/profile.css" rel="stylesheet">
 {%  endblock %}
 
 {% block subnav %}
@@ -9,9 +10,37 @@
 
 
 {% block content %}
-<div class="row">
-    <h2 id='username'> {{ user_name }} </h2>
-    {{ commprod_timeline }}
+    <div class="row">
+        <h1 id='username' class="span4 offset4"> 
+            {{ header }} 
+        </h1>
+    </div>
+    {% block prods %}
+
+    <div class="container-fluid content_container">
+        <div class="row-fluid">
+            <div class="span4 border">
+                <h3 class="sidebar well" > Best Prod: </h3>
+                {{ best_prod }}
+
+                <h3 class="sidebar well" > Worst Prod: </h3>
+                {{ worst_prod }}
+
+                <h3 class="sidebar well" > Most Loved Bomber: </h3>
+                <img class="icon" src="{{ most_loved.0.pic_url }}" /> {{ most_loved.0.user.username }} With: {{ most_loved.1 }} points
+
+                <h3 class="sidebar well" > Most Hated Bomber: </h3>
+                <img class="icon" src="{{ most_hated.0.pic_url }}" /> {{ most_hated.0.user.username }} With: {{ most_hated.1 }} points
+              <!--Sidebar content-->
+            </div>
+            <div class="span8 border">
+                content
+            <!--Body content-->
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
 
 {%  endblock %}
 
