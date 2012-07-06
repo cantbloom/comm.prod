@@ -43,13 +43,8 @@ def commprod_query_manager(get_dict, username=None, return_type = "html"):
     return commprod_renderer(commprods, return_type, get_dict.get('page',1))
 
 
-<<<<<<< HEAD
 def commprod_renderer(commprods, returnType, page=None):
-    if returnType == "html":
-=======
-def commprod_renderer(commprods, return_type, page):
     if return_type == "html":
->>>>>>> ad3f92360f12a0ee9712948004910ab5df565eee
         t = loader.get_template('commprod_timeline.html')
         c = Context({
             'commprods': paginator(page, commprods)
