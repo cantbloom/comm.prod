@@ -13,7 +13,7 @@ from commProd.forms import RegForm
 
 from helpers.view_helpers import getRandomUsername, renderErrorMessage
 from helpers.aws_put import put_profile_pic
-from helpers.query_managers import commprod_queryManager
+from helpers.query_managers import commprod_query_manager
 
 """
 Registration page. Visitor arrives wih activation key
@@ -108,7 +108,7 @@ def profile(request, username=None):
         'nav_profile' : 'active',
         'subnav_stats' : 'active',
         'user_name' : page_username,
-        'commprod_timeline' : commprod_queryManager(request.GET, username=user.username)
+        'commprod_timeline' : commprod_query_manager(request.GET, username=user.username)
 
     }
     return render_to_response('profile.html', 
