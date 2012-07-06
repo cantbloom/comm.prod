@@ -16,10 +16,18 @@ class UserProfile(models.Model):
     avg_score = models.FloatField(default=0.0)
     pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
 
+    score = models.FloatField(default=0.0)
+
+
     def update_avg(self):
         #self.avg_score = self.user.ratings__set.aggregate(Avg('score'))['score__avg']
         self.avg_score = self.score / CommProd.objects.filter(user_profile=self).count()
         self.save()
+
+    def update_score(self, diff):
+        self.score = self.score + diff
+        self.update_avg()
+        self.save()   
     
     def to_json(self):
         return json.dumps({
@@ -63,11 +71,20 @@ class CommProd(models.Model):
     commprod_content = models.TextField()
     email_content = models.TextField()
     avg_score = models.FloatField(default=0.0)
+    score = models.FloatField(default=0.0)
     date = models.DateTimeField()
 
     def update_avg(self):
     	self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
-    	self.save()    
+    	self.save()  
+
+    def update_score(self, diff):
+        self.score = self.score + diff
+        self.user_profile.update_score(diff)
+
+        self.update_avg()
+
+        self.save()   
 
     def calculate_score(votes, item_hour_age, gravity=1.8):
         return (votes - 1) / pow((item_hour_age+2), gravity)
@@ -85,9 +102,8 @@ class Rating(models.Model):
 
     def save(self, force_insert=False, force_update=False, **kwargs):
         super(Rating, self).save(force_insert, force_update)
-        diff = self.score - self.previous_score
+        diff = float(self.score) - float(self.previous_score)
         self.commprod.update_score(diff)
-        self.commprod.user_profile.update_score(diff)
 
     def __unicode__(self):
     	return "%s voted a %s on commprod_id %s on %s " % (self.user_profile.user.username, self.score, self.commprod.id, self.date)
