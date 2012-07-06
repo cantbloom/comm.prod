@@ -17,16 +17,19 @@ from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager
+from helpers.link_activator import get_active_page
 
 import  time
 
 
 @login_required
 def search(request):
+    subnav_key, subnav_value, title =  get_active_page('home', request.GET.get('type', ""))
 
     template_values = {
         "user": request.user,
-        'commprod_timeline' : commprod_query_manager(request.GET)
+        'commprod_timeline' : commprod_query_manager(request.GET),
+        subnav_key : subnav_value,
 
     }
     return render_to_response('search.html', template_values, context_instance=RequestContext(request))

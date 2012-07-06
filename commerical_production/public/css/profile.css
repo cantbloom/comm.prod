@@ -1,0 +1,16 @@
+#username {
+    padding:15px;
+}
+
+.border {
+    border:1px solid #DDD;
+}
+
+.sidebar {
+    margin:5px;
+    padding:5px;
+}
+
+.content-containter {
+    margin-bottom:50px;
+}

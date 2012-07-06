@@ -11,9 +11,10 @@ from django.contrib.auth import authenticate, login, logout
 from commProd.models import CommProd, Rating, UserProfile, ShirtName
 from commProd.forms import RegForm
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive
 from helpers.aws_put import put_profile_pic
-from helpers.query_managers import commprod_query_manager
+from helpers.query_managers import commprod_query_manager, profile_query_manager
+from helpers.link_activator import get_active_page
 
 """
 Registration page. Visitor arrives wih activation key
@@ -83,10 +84,12 @@ Landing page, top ten rated comm prods + ten newest commprods
 """
 @login_required
 def home(request):
+    subnav_key, subnav_value, title =  get_active_page('home', request.GET.get('type', ""))
+
     template_values = {
         'page_title' : "Home",
         'nav_home' : "active",
-        'subnav_trending' : "active",
+        subnav_key : subnav_value,
     }
     return render_to_response('home.html', template_values, context_instance=RequestContext(request))
 
@@ -103,13 +106,30 @@ def profile(request, username=None):
         raise Http404
 
     page_username = getRandomUsername(user)
-    template_values = {
-        "page_title": user.username +"'s Profile",
-        'nav_profile' : 'active',
-        'subnav_stats' : 'active',
-        'user_name' : page_username,
-        'commprod_timeline' : commprod_query_manager(request.GET, username=user.username)
 
+    subnav_key, subnav_value, title =  get_active_page('profile', request.GET.get('type', ""))
+    
+    title = possesive(user.username, title)
+    
+    template_values = {
+        "page_title": title,
+        'nav_profile' : 'active',
+        subnav_key : subnav_value,
+        'header' : title,
     }
-    return render_to_response('profile.html', 
+    
+    if request.GET != {}:
+        return profile_search(request, template_values, username)
+    else:
+        template_values.update(profile_query_manager(user))
+        return render_to_response('profile.html', 
+        template_values, context_instance=RequestContext(request))
+
+"""Helper function to deal with recent/popular
+search queries
+"""
+def profile_search(request, template_values, username):
+    template_values['commprod_timeline'] = commprod_query_manager(request.GET, username=username)
+
+    return render_to_response('profile_search.html', 
         template_values, context_instance=RequestContext(request))
