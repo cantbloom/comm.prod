@@ -5,7 +5,7 @@ To test:
 python manage.py shell
 from helpers.commprod_search import commprod_search
 """
-def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None):
+def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None):
 	commprods = CommProd.objects.all()
 
 	try:
