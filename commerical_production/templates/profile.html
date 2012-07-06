@@ -11,16 +11,7 @@
 {% block content %}
 <div class="row">
     <h2 id='username'> {{ user_name }} </h2>
-    
-<table class="table offset3">
-    <tbody>
-        {% for commprod in commprods %}
-            
-        {% include "commprod.html" with commprod=commprod%}
-        {% endfor %}
-
-    </tbody>
-</table>
+    {{ commprod_timeline }}
 
 {%  endblock %}
 
