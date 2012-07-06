@@ -19,7 +19,7 @@ def commprod_query_manager(get_dict, username=None, return_type = "html"):
         },
         'trending' : {
                 'orderBy': 'trending_score', 
-                'direction':'h1',
+                'direction':'lh',
         }
     }
     
@@ -35,7 +35,7 @@ def commprod_query_manager(get_dict, username=None, return_type = "html"):
 
     commprods = commprod_search(**search_params)
 
-    return commprod_renderer(commprods, returnType, get_dict.get('page',1))
+    return commprod_renderer(commprods, return_type, get_dict.get('page',1))
 
 
 def commprod_renderer(commprods, return_type, page):
