@@ -17,7 +17,6 @@ from helpers.view_helpers import getRandomUsername, renderErrorMessage
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
-from helpers.pagination import paginator
 
 import  time
 """
@@ -135,15 +134,12 @@ def profile(request, user_id=None, username=None, alt_email=None):
 
 @login_required
 def search(request, title, nav, subnav, **kwargs):
-    commprod_list = commprod_search(**kwargs)
-    commprods = paginator(request, commprod_list)
-
     template_values = {
         "page_title": title,
         nav[0] : nav[1],
         subnav[0] : subnav[1],
         "user": request.user,
-        'commprods' :commprods
+        'commprod_timeline' : commprod_search(html=True, page=request.GET.get('page'), **kwargs)
     }
     return render_to_response('search.html', template_values, context_instance=RequestContext(request))
 
