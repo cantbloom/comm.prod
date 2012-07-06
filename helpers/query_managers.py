@@ -5,8 +5,9 @@ from helpers.pagination import paginator
 """ Takes in a get request's dictionary of
 values and returns an HTMl template based on the search query
 """
-def commprod_query_manager(get_dict, username=None, returnType="html" ):
-    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate']
+def commprod_query_manager(get_dict, username=None, return_type = "html"):
+    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit']
+
     valid_types = {
         'popular' : {
                     'orderBy': 'avg_score', 
@@ -16,6 +17,10 @@ def commprod_query_manager(get_dict, username=None, returnType="html" ):
                     'orderBy': 'date', 
                     'direction':'lh',
         },
+        'trending' : {
+                'orderBy': 'trending_score', 
+                'direction':'h1',
+        }
     }
     
     search_params = {k : v for k, v in get_dict.items() if k in valid_params}
@@ -30,16 +35,17 @@ def commprod_query_manager(get_dict, username=None, returnType="html" ):
 
     commprods = commprod_search(**search_params)
 
-    return commprod_renderer(commprods, returnType)
+    return commprod_renderer(commprods, return_type)
 
-def commprod_renderer(commprods, returnType):
-    if returnType == "html":
+def commprod_renderer(commprods, return_type):
+    if return_type == "html":
         t = loader.get_template('commprod_timeline.html')
         c = Context({
             'commprods': paginator(get_dict.get('page', 1), commprods)
         })
         return t.render(c)
-    elif returnType == "list":
+
+    elif return_type == "list":
         t = loader.get_template('commprod.html')
         
         commprod_list = []

@@ -72,19 +72,32 @@ class CommProd(models.Model):
     email_content = models.TextField()
     avg_score = models.FloatField(default=0.0)
     score = models.FloatField(default=0.0)
+    trending_score = models.IntegerField(default=0)
     date = models.DateTimeField()
 
-    def update_avg(self):
+    def update_avg(self, save=True):
     	self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
-    	self.save()  
+    	if save:
+            self.save()  
 
     def update_score(self, diff):
-        self.score = self.score + diff
+        self.score += diff
         self.user_profile.update_score(diff)
 
-        self.update_avg()
+        self.update_avg(save=False)
+
+        #there was no previous vote, so register activity
+        if abs(diff) > 1:
+            self.commprod.register_activity(save=False)
 
         self.save()   
+
+    def register_activity(self, save=True):
+        #fiddle with 400 to adjust how long a vote has an effect
+        self.trending_score += 400;
+        
+        if save:
+            self.save()  
 
     def calculate_score(votes, item_hour_age, gravity=1.8):
         return (votes - 1) / pow((item_hour_age+2), gravity)

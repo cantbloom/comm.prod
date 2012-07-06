@@ -5,4 +5,5 @@ urlpatterns = patterns('commProd.views',
     url(r'^vote$', 'vote'),
     url(r'^search$', 'search'),
     url(r'^api/search$', 'api_search'),
+    url(r'^$', 'home')
 )
