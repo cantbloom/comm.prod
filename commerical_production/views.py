@@ -84,19 +84,7 @@ Landing page, top ten rated comm prods + ten newest commprods
 """
 @login_required
 def home(request):
-<<<<<<< HEAD
-    subnav_key, subnav_value, title =  get_active_page('home', request.GET.get('type', ""))
-
-    template_values = {
-        'page_title' : "Home",
-        'nav_home' : "active",
-        subnav_key : subnav_value,
-    }
-    return render_to_response('home.html', template_values, context_instance=RequestContext(request))
-=======
     return redirect('commprod/')
-
->>>>>>> ad3f92360f12a0ee9712948004910ab5df565eee
 
 """
 User profile page, 
