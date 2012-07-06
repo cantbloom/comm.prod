@@ -43,7 +43,7 @@ def commprod_query_manager(get_dict, username=None, return_type = "html"):
     return commprod_renderer(commprods, return_type, get_dict.get('page',1))
 
 
-def commprod_renderer(commprods, returnType, page=None):
+def commprod_renderer(commprods, return_type, page=None):
     if return_type == "html":
         t = loader.get_template('commprod_timeline.html')
         c = Context({
