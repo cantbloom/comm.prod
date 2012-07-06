@@ -8,7 +8,6 @@ from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
 from django.contrib.auth import authenticate, login
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from commProd.models import CommProd, Rating, UserProfile, ShirtName
 from commProd.forms import RegForm
@@ -18,6 +17,7 @@ from helpers.view_helpers import getRandomUsername, renderErrorMessage
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
+from helpers.pagination import paginator
 
 import  time
 """
@@ -93,6 +93,8 @@ def home(request):
     
     template_values = {
         'page_title' : "Home",
+        'nav_home' : "active",
+        'subnav_trending' : "active",
     }
     return render_to_response('home.html', 
         template_values, context_instance=RequestContext(request))
@@ -101,24 +103,29 @@ def home(request):
 """
 User profile page, 
 displays avg. overall score + list of commprods
+Profile can be gotten to by user_id, username, or an alt_email
 """
 @login_required
-def profile(request, user_id=None, username=None):
+def profile(request, user_id=None, username=None, alt_email=None):
     if user_id and User.objects.filter(id=user_id).exists():
         user = User.objects.filter(id=user_id)[0]
     elif username and User.objects.filter(username=username).exists():
         user = User.objects.filter(username=username)[0]
+    elif alt_email and User.objects.filter(username=alt_email).exists():
+        user = User.objects.filter(username=alt_email)[0]
     else:
         raise Http404
     
-    commprods = CommProd.objects.filter(user_profile=user.profile)
-
+    commprod_list = commprod_search(username=user.username)
+    commprods = paginator(request, commprod_list)
 
     page_username = getRandomUsername(user)
     template_values = {
         "page_title": user.username +"'s Profile",
         'commprods' : commprods,
-        'user_name' : page_username
+        'nav_profile' : 'active',
+        'subnav_stats' : 'active',
+        'user_name' : page_username,
 
     }
     return render_to_response('profile.html', 
@@ -127,23 +134,14 @@ def profile(request, user_id=None, username=None):
 
 
 @login_required
-def search(request, title, **kwargs):
+def search(request, title, nav, subnav, **kwargs):
     commprod_list = commprod_search(**kwargs)
+    commprods = paginator(request, commprod_list)
 
-    paginator = Paginator(commprod_list, 10) # Show 10 commprods per page
-
-    page = request.GET.get('page')
-    
-    try:
-        commprods = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        commprods = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        commprods = paginator.page(paginator.num_pages)
     template_values = {
         "page_title": title,
+        nav[0] : nav[1],
+        subnav[0] : subnav[1],
         "user": request.user,
         'commprods' :commprods
     }
@@ -218,7 +216,10 @@ def processProd(request):
         resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
         
         for commprod in commprods:
-            CommProd(email_content=content, commprod_content=commprod, user_profile=user.profile, date=date).save() 
+            commprod, created = CommProd.objects.get_or_create(email_content=content, commprod_content=commprod, user_profile=user.profile, date=date) 
+            if created:
+                commprod.save()
+            resp += "Added?" + str(created)
     else:
         resp = "No data"
         if str(key) != config.SECRET_KEY: #patlsotw

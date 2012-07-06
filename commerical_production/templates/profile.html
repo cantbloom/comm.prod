@@ -3,14 +3,20 @@
 {% block styles %}
 {%  endblock %}
 
+{% block subnav %}
+{% include "subnav_profile.html"%}
+{% endblock%}
+
+
 {% block content %}
 <div class="row">
     <h2 id='username'> {{ user_name }} </h2>
     
 <table class="table offset3">
     <tbody>
-        {% for prod in commprods %}
-            <tr><td> {{prod}} </tr></td>
+        {% for commprod in commprods %}
+            
+        {% include "commprod.html" with commprod=commprod%}
         {% endfor %}
 
     </tbody>
