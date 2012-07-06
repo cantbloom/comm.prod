@@ -5,7 +5,7 @@ from helpers.pagination import paginator
 """ Takes in a get request's dictionary of
 values and returns an HTMl template based on the search query
 """
-def commprod_queryManager(get_dict, username=None):
+def commprod_query_manager(get_dict, username=None, returnType="html" ):
     valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate']
     valid_types = {
         'popular' : {
@@ -30,9 +30,21 @@ def commprod_queryManager(get_dict, username=None):
 
     commprods = commprod_search(**search_params)
 
-    #return rendered html
-    t = loader.get_template('commprod_timeline.html')
-    c = Context({
-        'commprods': paginator(get_dict.get('page', 1), commprods)
-    })
-    return t.render(c)
+    return commprod_renderer(commprods, returnType)
+
+def commprod_renderer(commprods, returnType):
+    if returnType == "html":
+        t = loader.get_template('commprod_timeline.html')
+        c = Context({
+            'commprods': paginator(get_dict.get('page', 1), commprods)
+        })
+        return t.render(c)
+    elif returnType == "list":
+        t = loader.get_template('commprod.html')
+        
+        commprod_list = []
+        for commprod in commprods:
+            c = Context({'commprod': commprod})
+            commprod_list.append(t.render(c))
+
+        return commprod_list
