@@ -15,10 +15,10 @@ Sends a post request to the endpoint of a dictionary of new messages in the form
 or None if no new messages exist or no comm_prod was found.
 """
 def fetch_prods():
-    url = "http://localhost:5000/processprod"
+    url = "http://commprod.herokuapp.com/processprod"
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        mail.login('jblum18@gmail.com', 'PASSWORD')
+        mail.login('jblum18@gmail.com', '')
         #mail.login(CRON['EMAIL'], CRON['PASSWORD'])
         #mail.select("inbox") # connect to inbox.
         mail.select("[Gmail]/All Mail") # connect to inbox.

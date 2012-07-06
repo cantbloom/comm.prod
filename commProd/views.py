@@ -106,13 +106,9 @@ displays avg. overall score + list of commprods
 Profile can be gotten to by user_id, username, or an alt_email
 """
 @login_required
-def profile(request, user_id=None, username=None, alt_email=None):
-    if user_id and User.objects.filter(id=user_id).exists():
-        user = User.objects.filter(id=user_id)[0]
-    elif username and User.objects.filter(username=username).exists():
+def profile(request, username=None):
+    if username and User.objects.filter(username=username).exists():
         user = User.objects.filter(username=username)[0]
-    elif alt_email and User.objects.filter(username=alt_email).exists():
-        user = User.objects.filter(username=alt_email)[0]
     else:
         raise Http404
     
@@ -134,14 +130,13 @@ def profile(request, user_id=None, username=None, alt_email=None):
 
 
 @login_required
-def search(request, title, nav, subnav, **kwargs):
-    commprod_list = commprod_search(**kwargs)
+def search(request):
+
+    commprod_list = commprod_queryManager(request.GET)
     commprods = paginator(request, commprod_list)
 
     template_values = {
         "page_title": title,
-        nav[0] : nav[1],
-        subnav[0] : subnav[1],
         "user": request.user,
         'commprods' :commprods
     }
