@@ -39,16 +39,11 @@
                     </a>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <li class={{ home }}>
+                            <li class={{ nav_home }}>
                                 <a href="/">Home</a>
                             </li>
-                            <li class={{ popular }}>
-                                <a href="/popular">Popular</a>
-                            </li>
-                            <li class={{ recent }}>
-                                <a href="/recent">Recent</a>
-                            </li>
-                            <li class={{ profile }}>
+                            
+                            <li class={{ nav_profile }}>
                                  <a id="user_prof" href=/users/{{user.username}}>Profile </a>
                             </li>
                         </ul>
@@ -91,7 +86,8 @@
                 </div>
             </div>
         </div>
-
+        {% block subnav %}
+        {% endblock %}
         <div class="container wrapper">
             {% block content %} {% endblock%}
 

@@ -15,12 +15,13 @@ Sends a post request to the endpoint of a dictionary of new messages in the form
 or None if no new messages exist or no comm_prod was found.
 """
 def fetch_prods():
-    url = "http://commprod.herokuapp.com/processprod"
+    url = "http://localhost:5000/processprod"
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
         mail.login(CRON['EMAIL'], CRON['PASSWORD'])
-        mail.select("inbox") # connect to inbox.
-        result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-facists@mit.edu"))')
+        #mail.select("inbox") # connect to inbox.
+        mail.select("[Gmail]/All Mail") # connect to inbox.
+        result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
         unread_mail = data[0].split() #list of unread uids
         for msg_id in unread_mail:
             result, data = mail.uid('fetch', msg_id, '(RFC822)')
@@ -57,8 +58,8 @@ returns None. Run query through stripOld()
 before passing in. 
 """
 def parseProd(query):
-    btb_regex = '((a btb)|(btb)|(abtb))'
-    prod_regex = '((comm.prod)|(comm prod)|(commprod))'
+    btb_regex = '((btb)|(abtb))'
+    prod_regex = '((comm.prod)|(comm prod)|(commprod)|(comm.prod.)|(commprod.))'
     regex = btb_regex + '(?P<comm_prod>.+?)' + prod_regex + "+"
     pattern = re.compile(regex, re.I|re.M|re.DOTALL)
     match = pattern.search(query)
