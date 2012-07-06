@@ -29,7 +29,7 @@ def home(request):
         'page_title' : "Home",
         'nav_commprod' : "active",
         'subnav_home' : "active",
-        'trending_timeline': commprod_query_manager({'type':'trending', 'limit':10})
+        'trending_timeline': commprod_query_manager({'type':'trending', 'limit':10, 'page':1})
     }
     return render_to_response('home.html', template_values, context_instance=RequestContext(request))
 

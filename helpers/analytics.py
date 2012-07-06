@@ -1,3 +1,8 @@
+#! /usr/bin/env python
+
+## crontab prefs
+## * * * * * /path/to/update_trending_score.py >/dev/null 2>&1  
+
 from django.db.models import F
 from commProd.models import CommProd
 

@@ -87,15 +87,15 @@ class CommProd(models.Model):
         self.update_avg(save=False)
 
         #there was no previous vote, so register activity
-        if abs(diff) > 1:
-            self.commprod.register_activity(save=False)
+        if abs(diff) == 1:
+            self.register_activity(save=False)
 
         self.save()   
 
     def register_activity(self, save=True):
         #fiddle with 400 to adjust how long a vote has an effect
         self.trending_score += 400;
-        
+
         if save:
             self.save()  
 
