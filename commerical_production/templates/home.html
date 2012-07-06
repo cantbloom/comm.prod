@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 
 {% block subnav %}
-{% include "subnav_home.html"%}
+{% include "subnav_commprod.html"%}
 {% endblock%}
 
 {% block content %} 
+<div class="span8">
+	<div class="span4">
+		{{ trending_timeline }}
+	</div>
+	<div class="span4">
+		{{ unvoted_timeline }}
+	</div>
+</div>
+
 
 {% endblock%}

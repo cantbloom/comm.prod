@@ -21,6 +21,19 @@ from helpers.link_activator import get_active_page
 
 import  time
 
+"""
+Landing page, top ten rated comm prods + ten newest commprods 
+"""
+@login_required
+def home(request):
+    template_values = {
+        'page_title' : "Home",
+        'nav_commprod' : "active",
+        'subnav_home' : "active",
+        'trending_timeline': commprod_query_manager({'type':'trending', 'limit':10, 'page':1})
+    }
+    return render_to_response('home.html', template_values, context_instance=RequestContext(request))
+
 
 @login_required
 def search(request):

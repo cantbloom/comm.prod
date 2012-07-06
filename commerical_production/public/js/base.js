@@ -19,7 +19,7 @@ function voteSelection (e, data){
 function sendVote(id, score){
 	var payload = {'id':id, 'score':score}
 
-	$.post('/vote', payload, function(res){
+	$.post('/commprod/vote', payload, function(res){
 		$('#commprod_'+res.cp_id).trigger('voteResponse', res);
 	});
 
