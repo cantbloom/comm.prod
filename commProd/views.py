@@ -26,7 +26,7 @@ def search(request):
 
     template_values = {
         "user": request.user,
-        'commprod_timeline' : commprod_queryManager(request.GET)
+        'commprod_timeline' : commprod_query_manager(request.GET)
 
     }
     return render_to_response('search.html', template_values, context_instance=RequestContext(request))

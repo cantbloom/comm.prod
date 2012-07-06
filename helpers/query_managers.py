@@ -30,13 +30,13 @@ def commprod_query_manager(get_dict, username=None, returnType="html" ):
 
     commprods = commprod_search(**search_params)
 
-    return commprod_renderer(commprods, returnType)
+    return commprod_renderer(commprods, returnType, get_dict.get('page',1))
 
-def commprod_renderer(commprods, returnType):
+def commprod_renderer(commprods, returnType, page):
     if returnType == "html":
         t = loader.get_template('commprod_timeline.html')
         c = Context({
-            'commprods': paginator(get_dict.get('page', 1), commprods)
+            'commprods': paginator(page, commprods)
         })
         return t.render(c)
     elif returnType == "list":
