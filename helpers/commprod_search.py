@@ -5,7 +5,7 @@ To test:
 python manage.py shell
 from helpers.commprod_search import commprod_search
 """
-def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None):
+def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None):
 	commprods = CommProd.objects.all()
 
 	try:
@@ -19,16 +19,23 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
 			commprods = commprods.filter(commprod_content__contains=query)
 
 		if orderBy:
+			print direction
 			if direction == 'lh':
 				orderBy = '-' + orderBy
-			elif direction == 'hl': 
-				commprods = commprods.order_by(orderBy)
+				
+			commprods = commprods.order_by(orderBy)
+
 
 		if startDate:
 			commprods = commprods.objects.filter(date__gte=startDate)
 
 		if endDate:
 			commprods = commprods.objects.filter(date__lte=endDate)
+
+		if limit:
+			commprods = commprods[:limit]
+
+
 	
 	except:
 		commprods = CommProd.objects.all()

@@ -10,8 +10,9 @@ from helpers.pagination import paginator
 """ Takes in a get request's dictionary of
 values and returns an HTMl template based on the search query
 """
-def commprod_query_manager(get_dict, username=None, returnType="html" ):
-    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate']
+def commprod_query_manager(get_dict, username=None, return_type = "html"):
+    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit']
+
     valid_types = {
         'popular' : {
                     'orderBy': 'avg_score', 
@@ -21,6 +22,10 @@ def commprod_query_manager(get_dict, username=None, returnType="html" ):
                     'orderBy': 'date', 
                     'direction':'lh',
         },
+        'trending' : {
+                'orderBy': 'trending_score', 
+                'direction':'lh',
+        }
     }
     
     search_params = {k : v for k, v in get_dict.items() if k in valid_params}
@@ -35,16 +40,23 @@ def commprod_query_manager(get_dict, username=None, returnType="html" ):
 
     commprods = commprod_search(**search_params)
 
-    return commprod_renderer(commprods, returnType, get_dict.get('page',1))
+    return commprod_renderer(commprods, return_type, get_dict.get('page',1))
 
+
+<<<<<<< HEAD
 def commprod_renderer(commprods, returnType, page=None):
     if returnType == "html":
+=======
+def commprod_renderer(commprods, return_type, page):
+    if return_type == "html":
+>>>>>>> ad3f92360f12a0ee9712948004910ab5df565eee
         t = loader.get_template('commprod_timeline.html')
         c = Context({
             'commprods': paginator(page, commprods)
         })
         return t.render(c)
-    elif returnType == "list":
+
+    elif return_type == "list":
         t = loader.get_template('commprod.html')
         
         commprod_list = []
