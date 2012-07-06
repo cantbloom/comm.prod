@@ -1,5 +1,10 @@
 function voteSelection (e, data){
 	var $src = $(e.srcElement);
+
+	if ($src.hasClass('selected')){
+		return;
+	}
+
 	$src.addClass('selected').siblings().removeClass('selected');
 
 
