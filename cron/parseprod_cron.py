@@ -18,7 +18,8 @@ def fetch_prods():
     url = "http://localhost:5000/processprod"
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        mail.login(CRON['EMAIL'], CRON['PASSWORD'])
+        mail.login('jblum18@gmail.com', 'PASSWORD')
+        #mail.login(CRON['EMAIL'], CRON['PASSWORD'])
         #mail.select("inbox") # connect to inbox.
         mail.select("[Gmail]/All Mail") # connect to inbox.
         result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
