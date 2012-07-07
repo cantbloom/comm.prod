@@ -6,5 +6,6 @@ urlpatterns = patterns('commProd.views',
     url(r'^search$', 'search'),
     url(r'^api/search$', 'api_search'),
     url(r'^api/vs_data$', 'vs_data'),
+    url(r'^api/profile_data$', 'profile_data'),
     url(r'^$', 'home')
 )

@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models import Max, Min
 
-from commProd.models import CommProd, Rating, UserProfile
+from commProd.models import CommProd, Rating, UserProfile, TrendData
 from commprod_search import commprod_search
 
 from helpers.renderers import commprod_renderer, profile_renderer
@@ -76,6 +76,52 @@ def profile_query_manager(user):
     return response
 
 """ 
+Returns a dictionary of data needed for graphing
+data with the given filter. Returns data_points for
+graphing, std, mean, and a grade for the given user.
+"""
+def vs_data_manager(user, filter_year=None):
+    profiles = UserProfile.objects.all()
+    if filter_year:
+        profiles = profiles.filter(class_year=filter_year)
+    score_dict = {}
+    for profile in profiles:
+        score = profile.score
+        if score in score_dict:
+            score_dict[score] += 1
+        else:
+            score_dict[score] = 1
+    
+    std = np.std(np.array(score_dict.keys()))
+    mean = np.mean(np.array(score_dict.keys()))
+    grade = get_grade(user.profile.score, std, mean)
+    vs_data = {
+        'data_points' : score_dict.items(),
+        'std' : std,
+        'mean' : mean,
+        'grade' : grade,
+    }
+
+    return vs_data
+
+"""
+Calculates trend data and returns response
+dictionary for given User object
+"""
+def trend_data_manager(user):
+    trend_query_all = TrendData.objects.filter(date__gt=user.date_joined)
+    trend_query_class = trend_query_all.filter(user_profile__class_year=user.profile.class_year)
+    trend_query_user = trend_query_class.filter(user_profile=user.profile)
+    trend_data = {
+        'floor_trend' : get_trend_data(trend_query_all),
+        'class_trend' : get_trend_data(trend_query_class),
+        'user_trend' : get_trend_data(trend_query_user),
+    }
+    return trend_data
+
+
+########### Helpers #############
+""" 
 Finds the highest and least rated bomber from the 
 given user. Returns a rendered list of highest and 
 lowest profiles found. 
@@ -109,40 +155,6 @@ def find_faves(user):
     
     return  profile_renderer(dict(zip([most_loved, most_hated], [max_val,min_val])))
 
-""" 
-Returns a dictionary of data needed for graphing
-data with the given filter. Returns data_points for
-graphing, std, mean, and a grade for the given user.
-"""
-def vs_data_manager(user, filter_year=None):
-    profiles = UserProfile.objects.all()
-    if filter_year:
-        profiles = profiles.filter(class_year=filter_year)
-    score_dict = {}
-    for profile in profiles:
-        score = profile.score
-        if score in score_dict:
-            score_dict[score] += 1
-        else:
-            score_dict[score] = 1
-    
-    data_points = []
-    for score in score_dict:
-        data_points.append({
-            'x' : score,
-            'y' : score_dict[score]
-            })
-    std = np.std(np.array(score_dict.keys()))
-    mean = np.mean(np.array(score_dict.keys()))
-    grade = get_grade(user.profile.score, std, mean)
-    vs_data = {
-        'data_points' : score_dict.items(),
-        'std' : std,
-        'mean' : mean,
-        'grade' : grade,
-    }
-
-    return vs_data
 
 """ 
 Returns a letter grade for a given score,
@@ -166,4 +178,9 @@ def get_grade(user_score, std, mean):
     else:
         return "F"
 
-
+"""
+Helper for trend data manager.
+Returns a list of data point tuples
+"""
+def get_trend_data(query_set):
+    return [(trend.date, trend.score) for trend in query_set]
