@@ -141,7 +141,7 @@ body {
 }
 
 .nav {
-	padding-top:2px;
+	padding-top:3px;
 }
 
 .form {
@@ -198,6 +198,10 @@ body {
 
 .commprod-container .author-name:hover{
 	color:	rgb(254,114,39);
+}
+
+a:hover {
+  color:  rgb(254,114,39);
 }
 
 .commprod-container .date {

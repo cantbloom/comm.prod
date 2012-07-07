@@ -7,7 +7,7 @@
     padding:15px;
 }
 
-#target {
+.score_holder {
     background-color: #000;
     color: rgb(254,114,39);
     padding: 5px 5px;
@@ -31,4 +31,18 @@
 img {
     width: 32px;
     height: 32px;
+}
+
+#chart_container{
+    min-width: 400px; 
+    height: 400px; 
+    margin: 0 auto
+}
+
+.stat {
+    padding-right:10px;
+}
+#stats {
+    padding: 5px 5px;
+    font-size: 20px;
 }

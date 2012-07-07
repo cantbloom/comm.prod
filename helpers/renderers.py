@@ -30,7 +30,7 @@ Renders a user information block as a list of
 html items.
 """
 def profile_renderer(profiles):
-    t = loader.get_template('user.html')
+    t = loader.get_template('profile_template.html')
     
     html_list = []
     for profile in profiles:

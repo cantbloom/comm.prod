@@ -11,13 +11,13 @@
 
 {% block content %}
     <div class="row">
-        <h1 id='username' class="span4 offset4"> 
+        <h1 id='username' data-username='{{ user.username }}'class="span4 offset4"> 
             {{ header }} 
         </h1>
 
         <div id="raty-container" class="pull-left">
             <div id="raty" class="pull-left" data-rating="{{ user.profile.score }}"> </div>
-            <span id="target" class="score pull-left"> </span>
+            <span id="target" class="pull-left score_holder"> {{ user.profile.score }} </span>
         </div>
 
     </div>
@@ -42,14 +42,34 @@
             </div>
             <div class="span8 border well">
                 <ul class="nav nav-tabs">
-                  <li id="vs_class" class='{{ vs_class_tab }}'>
-                    <a href="?filter=vs_class">{{ user.username }} vs The {{ user.profile.class_year }}'s </a>
-                  </li>
-                  <li id="vs_floor" class='{{ vs_floor_tab }}'><a href="?filter=vs_floor">{{ user.username }} vs The Floor</a></li>
-                  <li id="trends" class='{{ trends_tab }}'><a href="?filter=trends">Trends</a></li>
+                    <li id="vs_class_tab" class="tab" data-class-year='{{ user.profile.class_year }}'>
+                        <a id="vs_class" >{{ user.username }} vs. The {{ user.profile.class_year }}'s </a>
+                    </li>
+                    <li id="vs_floor_tab" class="tab">
+                        <a id="vs_floor">{{ user.username }} vs. The Floor</a>
+                    </li>
+                    <li id="trends_tab" class="tab">
+                        <a id="trends">Trends</a>
+                    </li>
                 </ul>
 
-                <div id="chart"> </div>
+                <div id="chart_container">
+                </div> 
+                <div id ="stats"> 
+                    <p class="pull-left stat"> 
+                        <strong>  Standard Deviation: </strong> 
+                        <span id="std"> </span> 
+                    </p>
+                    <p class="pull-left stat">
+                        <strong>  Mean:  </strong>
+                        <span id="mean" > </span> 
+                    </p>
+                    <p class="pull-left stat">
+                        <strong>  {{ user.username }}'s Grade:  </strong>
+                        <span id="grade" > </span> 
+                    </p>
+                </div>
+                
             <!--Body content-->
             </div>
         </div>

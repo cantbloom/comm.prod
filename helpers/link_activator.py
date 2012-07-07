@@ -15,12 +15,6 @@ def get_active_page(pageName, requestType):
             "popular" : 'subnav_popular',
             "recent" : 'subnav_recent',
         },
-    'profile_trends' : {
-        "" : 'vs_class_tab',
-        "vs_class" : 'vs_class_tab',
-        "vs_floor" : 'vs_floor_tab',
-        "trends" : 'trends_tab',
-        },
     }
     try: 
         result = (template_values[pageName][requestType], "active", requestType)
