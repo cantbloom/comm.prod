@@ -67,7 +67,7 @@ class UserProfile(models.Model):
             
             to_delete.delete()
 
-    def __str__(self):  
+    def __unicode__(self):  
           return "%s's profile" % self.user  
 
 User.profile = property(lambda u: u.get_profile())
@@ -78,6 +78,9 @@ class ShirtName(models.Model):
     number = models.CharField(max_length=40, default='')
     name = models.CharField(max_length=40, default='Human Jizz Rag')
     year = models.IntegerField()
+
+    def __unicode__(self):
+        return "%s, %s, owned by %s" % name, number, user_profile.user.username
 
 class CommProd(models.Model):
     user_profile = models.ForeignKey(UserProfile)
@@ -116,8 +119,8 @@ class CommProd(models.Model):
     def calculate_score(votes, item_hour_age, gravity=1.8):
         return (votes - 1) / pow((item_hour_age+2), gravity)
 
-	def __unicode__(self):
-		return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user_profile.user.username, str(self.date))
+    def __unicode__(self):
+        return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user_profile.user.username, str(self.date))
 
 class Rating(models.Model):
     commprod = models.ForeignKey(CommProd)
@@ -141,6 +144,9 @@ class TrendData(models.Model):
     date = models.DateTimeField(auto_now=True)
     score = models.IntegerField(default=0)
     avg_score = models.FloatField(default=0.0)
+
+    def __unicode__(self):
+        return "%s had a score of %s and avg score of %s on %s" % self.user_profile.user.username, self.score, self.avg_score, str(self.datetime)
 
 
 #fuck.
