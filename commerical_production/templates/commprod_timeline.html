@@ -1,6 +1,13 @@
 <div class="commprod-timeline well">
     {% for commprod in commprods %}
+        {% if commprod.id in upvoted%}
+        {% include "commprod.html" with commprod=commprod upvote_selected="selected"%}
+        {% elif commprod.id in downvoted %}
+        {% include "commprod.html" with commprod=commprod downvote_selected="selected"%}
+        {% else %}
         {% include "commprod.html" with commprod=commprod%}
+        {% endif %}
+
     {% endfor %}
 </div>
 
