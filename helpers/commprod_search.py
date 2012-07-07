@@ -4,8 +4,10 @@ from commProd.models import CommProd, Rating, UserProfile
 To test:
 python manage.py shell
 from helpers.commprod_search import commprod_search
+
+unvoted: passing in username and receive commprods unvoted by user
 """
-def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None):
+def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None, unvoted=False):
 	commprods = CommProd.objects.all()
 
 	try:
@@ -34,8 +36,9 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
 		if limit:
 			commprods = commprods[:limit]
 
-
-	
+		if unvoted:
+			commprods = commprods.exclude(rating__user_profile__user__username = unvoted)
+			
 	except:
 		commprods = CommProd.objects.all()
 
