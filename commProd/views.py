@@ -16,10 +16,9 @@ from helpers.view_helpers import getRandomUsername, renderErrorMessage
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
-from helpers.query_managers import commprod_query_manager
+from helpers.query_managers import commprod_query_manager, vs_data_manager
 from helpers.link_activator import get_active_page
 
-import  time
 
 """
 Landing page, top ten rated comm prods + ten newest commprods 
@@ -82,8 +81,16 @@ def vote (request):
 
 @login_required
 @csrf_exempt
-def api_search (request):
+def search (request):
    return HttpResponse(commprod_query_manager(request.GET))
+
+@login_required
+@csrf_exempt
+def vs_data(request):
+    filter = request.GET.get('filter', None)
+    response_data = vs_data_manager(filter)
+    return HttpResponse(json.dumps(response_data), mimetype="application/json")
+
 
 @csrf_exempt
 def processProd(request):

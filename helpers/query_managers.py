@@ -3,8 +3,8 @@ from django.db.models import Max, Min
 
 from commProd.models import CommProd, Rating, UserProfile
 from commprod_search import commprod_search
-from django.template import loader, Context
-from helpers.pagination import paginator
+
+from helpers.renderers import commprod_renderer, profile_renderer
 
 
 """ Takes in a get request's dictionary of
@@ -43,23 +43,7 @@ def commprod_query_manager(get_dict, username=None, return_type = "html"):
     return commprod_renderer(commprods, return_type, get_dict.get('page',1))
 
 
-def commprod_renderer(commprods, return_type, page=None):
-    if return_type == "html":
-        t = loader.get_template('commprod_timeline.html')
-        c = Context({
-            'commprods': paginator(page, commprods)
-        })
-        return t.render(c)
 
-    elif return_type == "list":
-        t = loader.get_template('commprod.html')
-        
-        commprod_list = []
-        for commprod in commprods:
-            c = Context({'commprod': commprod})
-            commprod_list.append(t.render(c))
-
-        return commprod_list
 
 """
 Handles queries for user data to be displayed on profile page.
@@ -67,28 +51,30 @@ Handles queries for user data to be displayed on profile page.
 def profile_query_manager(user):
     best_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Max('score'))['score__max']
     worst_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Min('score'))['score__min']
+    
     best_prod = CommProd.objects.filter(user_profile=user.profile, score=best_score)[0]
     worst_prod = CommProd.objects.filter(user_profile=user.profile, score=worst_score)[0]
-
+    #render html
     best_prod, worst_prod = commprod_renderer([best_prod, worst_prod], 'list')
 
-    most_loved, max, most_hated, min = find_faves(user)
+    most_loved, most_hated, = find_faves(user)
     response = {
         'best_prod' : best_prod,
         'worst_prod' : worst_prod,
-        'most_loved' : (most_loved, max),
-        'most_hated' : (most_hated, min),
+        'most_loved' : most_loved,
+        'most_hated' : most_hated,
     }
     return response
 
+""" 
+Finds the highest and least rated bomber from the 
+given user. Returns a rendered list of highest and 
+lowest profiles found. 
+"""
 def find_faves(user):
-    ratings = Rating.objects.filter(user_profile=user.profile)
+    ratings = Rating.objects.filter(user_profile=user.profile).select_related()
 
     user_dict = {}
-    max = 0
-    min = 0
-    most_loved = None
-    most_hated = None
     for rating in ratings:
         username = rating.commprod.user_profile.user.username
         score = rating.score
@@ -96,21 +82,38 @@ def find_faves(user):
             user_dict[username] += score
         else:
             user_dict[username] = score
-        if user_dict[username] > max:
-            max = score
-            most_loved = username
-        if user_dict[username] < min:
-            min = score
-            most_hated = username
 
-    if most_loved:
-        most_loved = UserProfile.objects.filter(user__username=most_loved)[0]
-    else:
-        most_loved = UserProfile.objects.order_by('?')[0]
-   
-    if most_hated:
-        most_hated = UserProfile.objects.filter(user__username=most_hated)[0]
-    else:
-        most_hated = UserProfile.objects.order_by('?')[0]
+    most_loved = UserProfile.objects.order_by('?')[0]
+    most_hated = UserProfile.objects.order_by('?')[0]
+    min_val = 0
+    max_val = 0
+    if user_dict != {}:
+        most_loved = max(user_dict)
+        max_val = user_dict[most_loved]
+        most_hated = min(user_dict)
+        min_val = user_dict[most_hated]
+
+        # not all equal
+        if most_loved != most_hated:
+            most_loved = UserProfile.objects.filter(user__username=most_loved)[0]
+            most_hated = UserProfile.objects.filter(user__username=most_hated)[0]
     
-    return  (most_loved, max, most_hated, min)
+    return  profile_renderer(dict(zip([most_loved, most_hated], [max_val,min_val])))
+
+""" Returns a list of tuples of x,y values for a given
+query. Filter is a tuple of strings (filter_value)
+Used to graph a user's score vs a filter.
+(x,y) = (number_of_users, value)
+"""
+def vs_data_manager(filter_year=None):
+    profiles = UserProfile.objects.all()
+    if filter_year:
+        profiles = profiles.filter(class_year=filter_year)
+    score_dict = {}
+    for profile in profiles:
+        score = profile.score
+        if score in score_dict:
+            score_dict[score] += 1
+        else:
+            score_dict[score] = 1
+    return score_dict.items()

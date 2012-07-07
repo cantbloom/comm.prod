@@ -14,27 +14,42 @@
         <h1 id='username' class="span4 offset4"> 
             {{ header }} 
         </h1>
+
+        <div id="raty-container" class="pull-left">
+            <div id="raty" class="pull-left" data-rating="{{ user.profile.score }}"> </div>
+            <span id="target" class="score pull-left"> </span>
+        </div>
+
     </div>
     {% block prods %}
 
     <div class="container-fluid content_container">
         <div class="row-fluid">
-            <div class="span4 border">
-                <h3 class="sidebar well" > Best Prod: </h3>
+            <div class="span4 border well">
+                <h3 class="sidebar" > Best Prod: </h3>
                 {{ best_prod }}
 
-                <h3 class="sidebar well" > Worst Prod: </h3>
+                <h3 class="sidebar" > Worst Prod: </h3>
                 {{ worst_prod }}
 
-                <h3 class="sidebar well" > Most Loved Bomber: </h3>
-                <img class="icon" src="{{ most_loved.0.pic_url }}" /> {{ most_loved.0.user.username }} With: {{ most_loved.1 }} points
+                <h3 class="sidebar" > Most Loved Bomber: </h3>
+                
+                {{ most_loved }}
 
-                <h3 class="sidebar well" > Most Hated Bomber: </h3>
-                <img class="icon" src="{{ most_hated.0.pic_url }}" /> {{ most_hated.0.user.username }} With: {{ most_hated.1 }} points
+                <h3 class="sidebar" > Most Hated Bomber: </h3>
+                {{ most_hated }}
               <!--Sidebar content-->
             </div>
-            <div class="span8 border">
-                content
+            <div class="span8 border well">
+                <ul class="nav nav-tabs">
+                  <li id="vs_class" class='{{ vs_class_tab }}'>
+                    <a href="?filter=vs_class">{{ user.username }} vs The {{ user.profile.class_year }}'s </a>
+                  </li>
+                  <li id="vs_floor" class='{{ vs_floor_tab }}'><a href="?filter=vs_floor">{{ user.username }} vs The Floor</a></li>
+                  <li id="trends" class='{{ trends_tab }}'><a href="?filter=trends">Trends</a></li>
+                </ul>
+
+                <div id="chart"> </div>
             <!--Body content-->
             </div>
         </div>
@@ -45,4 +60,5 @@
 {%  endblock %}
 
 {% block scripts %} 
+<script src="/public/js/profile.js"></script>
 {% endblock %}

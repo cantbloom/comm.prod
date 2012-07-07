@@ -12,6 +12,7 @@ class UserProfile(models.Model):
 
     activation_key = models.CharField(max_length=40, default='')
     alt_email = models.EmailField(default='')
+    class_year = models.IntegerField(default=1933)
     send_mail = models.BooleanField(default=False)
     avg_score = models.FloatField(default=0.0)
     pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
