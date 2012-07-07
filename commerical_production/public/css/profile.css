@@ -46,3 +46,12 @@ img {
     padding: 5px 5px;
     font-size: 20px;
 }
+
+#loading_div {
+    background-color: #FFF;
+}
+
+#loading_icon {
+    width:auto;
+    height: auto;
+}

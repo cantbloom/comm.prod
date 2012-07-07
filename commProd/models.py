@@ -146,7 +146,7 @@ class TrendData(models.Model):
     avg_score = models.FloatField(default=0.0)
 
     def __unicode__(self):
-        return "%s had a score of %s and avg score of %s on %s" % self.user_profile.user.username, self.score, self.avg_score, str(self.datetime)
+        return "%s had a score of %s and avg score of %s on %s" % (self.user_profile.user.username, self.score, self.avg_score, str(self.date))
 
 
 #fuck.

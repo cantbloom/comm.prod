@@ -20,7 +20,7 @@ $(function(){
     });
 
     $('.tab').click(tabListener);
-    $('#vs_class_tab').trigger('click'); // vs class by default
+    //$('#trend_tab').trigger('click'); // vs class by default
 
 }); 
 
@@ -36,7 +36,7 @@ function tabListener(){
     
     $('#chart_container').empty(); //clear old graph
     
-    if (id == 'trends_tab') {
+    if (id == 'trend_tab') {
         $('#stats').hide();
         getTrendData();
     } else {
@@ -49,7 +49,7 @@ function tabListener(){
 
 //clear classes on tabs
 function clearActiveTabs() {
-    var tabs = ['#vs_class_tab', '#vs_floor_tab', '#trends_tab'];
+    var tabs = ['#vs_class_tab', '#vs_floor_tab', '#trend_tab'];
     $.each(tabs, function(index, tab){
         $(tab).attr('class', '');
     });
@@ -110,7 +110,7 @@ function renderVsData(vsData) {
 }
 
 function renderTrendData(trendData) {
-    renderTrendGraph(trendData.floor_trend, trendData.trendData, trendData.user_trend);
+    renderTrendGraph(trendData.floor_trend, trendData.class_trend, trendData.user_trend);
 }
 
 //create new graph for vs_data
@@ -166,7 +166,7 @@ function renderTrendGraph(floor_trend, class_trend, user_trend){
             zoomType: 'x',
             spacingRight: 20
         },
-        colors : ['#fe7227', "#000", "#3d96ae"],
+        colors : ["#000", "#fe7227", "#3d96ae"],
         title: {
             text: 'User Rating Trends'
         },
@@ -177,10 +177,10 @@ function renderTrendGraph(floor_trend, class_trend, user_trend){
         },
         xAxis: {
             type: 'datetime',
-            maxZoom: 24 * 3600000, // one day
+            maxZoom: 3600000, // one day
             title: {
                 text: null
-            }
+            },
         },
         yAxis: {
             title: {
@@ -198,47 +198,20 @@ function renderTrendGraph(floor_trend, class_trend, user_trend){
         credits : {
             enabled: false,
         },
-        plotOptions: {
-            area: {
-                fillColor: {
-                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
-                    stops: [
-                        [0, Highcharts.getOptions().colors[0]],
-                        [1, 'rgba(2,0,0,0)']
-                    ]
-                },
-                lineWidth: 1,
-                marker: {
-                    enabled: false,
-                    states: {
-                        hover: {
-                            enabled: true,
-                            radius: 5
-                        }
-                    }
-                },
-                shadow: false,
-                states: {
-                    hover: {
-                        lineWidth: 1
-                    }
-                }
-            }
-        },
 
         series: [
         {
-            type: 'area',
+            type: 'line',
             name: 'The Floor\'s Trend',
             data: floor_trend
         },
         {
-            type: 'area',
+            type: 'line',
             name: class_year + '\'s Trend',
             data: class_trend
         },
         {
-            type: 'area',
+            type: 'line',
             name: username + '\'s Trend',
             data: user_trend
         },
