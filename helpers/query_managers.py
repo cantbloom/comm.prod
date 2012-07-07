@@ -13,7 +13,7 @@ import random, numpy as np
 values and returns an HTMl template based on the search query
 """
 def commprod_query_manager(get_dict, username=None, return_type = "html"):
-    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit']
+    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted']
 
     valid_types = {
         'popular' : {

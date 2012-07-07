@@ -1,8 +1,8 @@
-<div class="commprod-timeline span6 offset2 well">
+<div class="commprod-timeline well">
     {% for commprod in commprods %}
         {% include "commprod.html" with commprod=commprod%}
     {% endfor %}
-<div>
+</div>
 
 <ul class="pager">
     {% if commprods.has_previous %}
