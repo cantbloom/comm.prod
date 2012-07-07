@@ -12,8 +12,8 @@ import random, numpy as np
 """ Takes in a get request's dictionary of
 values and returns an HTMl template based on the search query
 """
-def commprod_query_manager(get_dict, username=None, return_type = "html"):
-    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit']
+def commprod_query_manager(get_dict, user, return_type = "html"):
+    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted']
 
     valid_types = {
         'popular' : {
@@ -37,12 +37,12 @@ def commprod_query_manager(get_dict, username=None, return_type = "html"):
     if type in valid_types:
         search_params = dict(search_params, **valid_types[type])
 
-    if username:
-        search_params['username'] = username
+    # if user:
+    #     search_params['username'] = user.username
 
     commprods = commprod_search(**search_params)
 
-    return commprod_renderer(commprods, return_type, get_dict.get('page',1))
+    return commprod_renderer(user, commprods, return_type, get_dict.get('page',1))
 
 
 
