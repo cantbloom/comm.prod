@@ -100,18 +100,24 @@ def profile(request, username=None):
 
     page_username = getRandomUsername(user)
 
-    subnav_key, subnav_value, title =  get_active_page('profile', request.GET.get('type', ""))
-    
-    title = possesive(user.username, title)
+    request_type = request.GET.get('type', "")
+
+    subnav_key, subnav_value, page_title =  get_active_page('profile', request_type)
+
+    trend_tab_key, trend_tab_value, trend_title = get_active_page('profile_trends', request.GET.get('filter', ""))
+
+    page_title = possesive(user.username, page_title)
     
     template_values = {
-        "page_title": title,
+        "page_title": page_title,
         'nav_profile' : 'active',
         subnav_key : subnav_value,
-        'header' : title,
+        trend_tab_key : trend_tab_value,
+        'header' : page_title,
+        'user'  : user,
     }
     
-    if request.GET != {}:
+    if request_type != "":
         return profile_search(request, template_values, username)
     else:
         template_values.update(profile_query_manager(user))
