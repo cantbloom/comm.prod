@@ -57,7 +57,7 @@ def profile_query_manager(user):
     #render html
     best_prod, worst_prod = commprod_renderer([best_prod, worst_prod], 'list')
 
-    most_loved, most_hated, = find_faves(user)
+    most_loved, most_hated = find_faves(user)
     response = {
         'best_prod' : best_prod,
         'worst_prod' : worst_prod,
