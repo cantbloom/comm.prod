@@ -94,38 +94,39 @@ Profile can be gotten to by user_id, username, or an alt_email
 @login_required
 def profile(request, username=None):
     if username and User.objects.filter(username=username).exists():
-        user = User.objects.filter(username=username)[0]
+        profile_user = User.objects.filter(username=username)[0]
     else:
         raise Http404
 
-    page_username = getRandomUsername(user)
+    page_username = getRandomUsername(profile_user)
 
     request_type = request.GET.get('type', "")
 
     subnav_key, subnav_value, page_title =  get_active_page('profile', request_type)
 
-    page_title = possesive(user.username, page_title)
+    page_title = possesive(profile_user.username, page_title)
     
     template_values = {
         "page_title": page_title,
         'nav_profile' : 'active',
         subnav_key : subnav_value,
         'header' : page_title,
-        'user'  : user,
+        'user'  : request.user,
+        'profile_user' : profile_user,
     }
     
     if request_type != "":
-        return profile_search(request, template_values, username)
+        return profile_search(request, template_values, profile_user)
     else:
-        template_values.update(profile_query_manager(user))
+        template_values.update(profile_query_manager(profile_user))
         return render_to_response('profile.html', 
         template_values, context_instance=RequestContext(request))
 
 """Helper function to deal with recent/popular
 search queries
 """
-def profile_search(request, template_values, username):
-    template_values['commprod_timeline'] = commprod_query_manager(request.GET, username=username)
+def profile_search(request, template_values, profile_user):
+    template_values['commprod_timeline'] = commprod_query_manager(request.GET, user=profile_user)
 
     return render_to_response('profile_search.html', 
         template_values, context_instance=RequestContext(request))

@@ -11,13 +11,13 @@
 
 {% block content %}
     <div class="row">
-        <h1 id='username' data-username='{{ user.username }}' data-class-year="{{ user.profile.class_year }}" class="span4 offset4"> 
+        <h1 id='username' data-username='{{ profile_user.username }}' data-class-year="{{ profile_user.profile.class_year }}" class="span4 offset4"> 
             {{ header }} 
         </h1>
 
         <div id="raty-container" class="pull-left">
-            <div id="raty" class="pull-left" data-rating="{{ user.profile.score }}" > </div>
-            <span id="target" class="pull-left score_holder"> {{ user.profile.score }} </span>
+            <div id="raty" class="pull-left" data-rating="{{ profile_user.profile.score }}" > </div>
+            <span id="target" class="pull-left score_holder"> {{ profile_user.profile.score }} </span>
         </div>
 
     </div>
@@ -26,12 +26,15 @@
     <div class="container-fluid content_container">
         <div class="row-fluid">
             <div class="span4 border well">
+                {% if best_prod %}
                 <h3 class="sidebar" > Best Prod: </h3>
                 {{ best_prod }}
+                {% endif %}
 
+                {% if worst_prod %}
                 <h3 class="sidebar" > Worst Prod: </h3>
                 {{ worst_prod }}
-
+                {% endif %}
                 <h3 class="sidebar" > Most Loved Bomber: </h3>
                 
                 {{ most_loved }}
@@ -42,17 +45,19 @@
             </div>
             <div class="span8 border well">
                 <ul class="nav nav-tabs">
-                    <li id="vs_class_tab" class="tab" data-class-year='{{ user.profile.class_year }}'>
-                        <a id="vs_class" >{{ user.username }} vs. The {{ user.profile.class_year }}'s </a>
-                    </li>
-                    <li id="vs_floor_tab" class="tab">
-                        <a id="vs_floor">{{ user.username }} vs. The Floor</a>
-                    </li>
-                    <li id="trends_tab" class="tab">
+                    <li id="trend_tab" class="tab">
                         <a id="trends">Trends</a>
                     </li>
+                    <li id="vs_class_tab" class="tab" data-class-year='{{ profile_user.profile.class_year }}'>
+                        <a id="vs_class" >{{ profile_user.username }} vs. The {{ profile_user.profile.class_year }}'s </a>
+                    </li>
+                    <li id="vs_floor_tab" class="tab">
+                        <a id="vs_floor">{{ profile_user.username }} vs. The Floor</a>
+                    </li>
                 </ul>
-
+                <div id="loading_div" class='span4 offset4'>
+                    <img id='loading_icon' src="/public/img/loading.gif">
+                </div>
                 <div id="chart_container">
                 </div> 
                 <div id ="stats"> 
@@ -65,7 +70,7 @@
                         <span id="mean" > </span> 
                     </p>
                     <p class="pull-left stat">
-                        <strong>  {{ user.username }}'s Grade:  </strong>
+                        <strong>  {{ profile_user.username }}'s Grade:  </strong>
                         <span id="grade" > </span> 
                     </p>
                 </div>

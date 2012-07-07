@@ -6,13 +6,14 @@ from commprod_search import commprod_search
 
 from helpers.renderers import commprod_renderer, profile_renderer
 
-import random, numpy as np
+from datetime import datetime
+import random, time, numpy as np
 
 
 """ Takes in a get request's dictionary of
 values and returns an HTMl template based on the search query
 """
-def commprod_query_manager(get_dict, user, return_type = "html"):
+def commprod_query_manager(get_dict, user, return_type="html"):
     valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted']
 
     valid_types = {
@@ -37,8 +38,8 @@ def commprod_query_manager(get_dict, user, return_type = "html"):
     if type in valid_types:
         search_params = dict(search_params, **valid_types[type])
 
-    # if user:
-    #     search_params['username'] = user.username
+    if user:
+        search_params['username'] = user.username
 
     commprods = commprod_search(**search_params)
 
@@ -51,22 +52,11 @@ def commprod_query_manager(get_dict, user, return_type = "html"):
 Handles queries for user data to be displayed on profile page.
 """
 def profile_query_manager(user):
-    best_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Max('score'))['score__max']
-    worst_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Min('score'))['score__min']  
 
-    if best_score == worst_score: 
-        query_set = CommProd.objects.filter(user_profile=user.profile, score=best_score)
-        best_prod = random.choice(query_set)
-        worst_prod = random.choice(query_set)
-    
-    else: 
-        best_prod = CommProd.objects.filter(user_profile=user.profile, score=best_score)[0]
-    
-        worst_prod = CommProd.objects.filter(user_profile=user.profile, score=worst_score)[0]
-    #render html
-    best_prod, worst_prod = commprod_renderer([best_prod, worst_prod], 'list')
+    best_prod, worst_prod = find_profile_prods(user)
 
-    most_loved, most_hated = find_faves(user)
+    most_loved, most_hated = find_profile_faves(user)
+    
     response = {
         'best_prod' : best_prod,
         'worst_prod' : worst_prod,
@@ -121,12 +111,43 @@ def trend_data_manager(user):
 
 
 ########### Helpers #############
-""" 
+"""
+Finds the best and worst commprods for a given profile if they
+exist. If none exists boolean is sent back and nothing is
+rentered.
+"""
+
+def find_profile_prods(user):
+    if CommProd.objects.filter(user_profile=user.profile).exists():
+        best_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Max('score'))['score__max']
+        worst_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Min('score'))['score__min']  
+
+        #all prods are the same, just return random
+        if best_score == worst_score: 
+            query_set = CommProd.objects.filter(user_profile=user.profile, score=best_score)
+            best_prod = random.choice(query_set)
+            worst_prod = random.choice(query_set)
+        
+        #otherwise return best/worst prods
+        else: 
+            best_prod = CommProd.objects.filter(user_profile=user.profile, score=best_score)[0]
+        
+            worst_prod = CommProd.objects.filter(user_profile=user.profile, score=worst_score)[0]
+        
+        #render html
+        best_prod, worst_prod = commprod_renderer(user, [best_prod, worst_prod], 'list')
+    else:
+        best_prod = False
+        worst_prod = False
+
+    return best_prod, worst_prod
+
+"""
 Finds the highest and least rated bomber from the 
 given user. Returns a rendered list of highest and 
 lowest profiles found. 
 """
-def find_faves(user):
+def find_profile_faves(user):
     ratings = Rating.objects.filter(user_profile=user.profile).select_related()
 
     user_dict = {}
@@ -183,4 +204,4 @@ Helper for trend data manager.
 Returns a list of data point tuples
 """
 def get_trend_data(query_set):
-    return [(trend.date, trend.score) for trend in query_set]
+    return [(time.mktime(trend.date.timetuple())*1000, trend.score) for trend in query_set]

@@ -35,10 +35,13 @@ def commprod_renderer(user, commprods, return_type, page=None):
             elif commprod.id in downvoted:
                 upvote_selected = ''
                 downvote_selected = 'selected'
+            else:
+                upvote_selected = ''
+                downvote_selected = ''
 
             c = Context({
                 'commprod': commprod,
-                'upvoted': upvote_selected ,
+                'upvoted': upvote_selected,
                 'downnvoted': downvote_selected
             })
 
