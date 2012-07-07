@@ -19,7 +19,6 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
 			commprods = commprods.filter(commprod_content__contains=query)
 
 		if orderBy:
-			print direction
 			if direction == 'lh':
 				orderBy = '-' + orderBy
 				

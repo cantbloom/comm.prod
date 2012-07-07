@@ -104,15 +104,12 @@ def profile(request, username=None):
 
     subnav_key, subnav_value, page_title =  get_active_page('profile', request_type)
 
-    trend_tab_key, trend_tab_value, trend_title = get_active_page('profile_trends', request.GET.get('filter', ""))
-
     page_title = possesive(user.username, page_title)
     
     template_values = {
         "page_title": page_title,
         'nav_profile' : 'active',
         subnav_key : subnav_value,
-        trend_tab_key : trend_tab_value,
         'header' : page_title,
         'user'  : user,
     }

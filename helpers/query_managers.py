@@ -6,6 +6,8 @@ from commprod_search import commprod_search
 
 from helpers.renderers import commprod_renderer, profile_renderer
 
+import random, numpy as np
+
 
 """ Takes in a get request's dictionary of
 values and returns an HTMl template based on the search query
@@ -50,10 +52,17 @@ Handles queries for user data to be displayed on profile page.
 """
 def profile_query_manager(user):
     best_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Max('score'))['score__max']
-    worst_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Min('score'))['score__min']
+    worst_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Min('score'))['score__min']  
+
+    if best_score == worst_score: 
+        query_set = CommProd.objects.filter(user_profile=user.profile, score=best_score)
+        best_prod = random.choice(query_set)
+        worst_prod = random.choice(query_set)
     
-    best_prod = CommProd.objects.filter(user_profile=user.profile, score=best_score)[0]
-    worst_prod = CommProd.objects.filter(user_profile=user.profile, score=worst_score)[0]
+    else: 
+        best_prod = CommProd.objects.filter(user_profile=user.profile, score=best_score)[0]
+    
+        worst_prod = CommProd.objects.filter(user_profile=user.profile, score=worst_score)[0]
     #render html
     best_prod, worst_prod = commprod_renderer([best_prod, worst_prod], 'list')
 
@@ -100,12 +109,12 @@ def find_faves(user):
     
     return  profile_renderer(dict(zip([most_loved, most_hated], [max_val,min_val])))
 
-""" Returns a list of tuples of x,y values for a given
-query. Filter is a tuple of strings (filter_value)
-Used to graph a user's score vs a filter.
-(x,y) = (number_of_users, value)
+""" 
+Returns a dictionary of data needed for graphing
+data with the given filter. Returns data_points for
+graphing, std, mean, and a grade for the given user.
 """
-def vs_data_manager(filter_year=None):
+def vs_data_manager(user, filter_year=None):
     profiles = UserProfile.objects.all()
     if filter_year:
         profiles = profiles.filter(class_year=filter_year)
@@ -116,4 +125,45 @@ def vs_data_manager(filter_year=None):
             score_dict[score] += 1
         else:
             score_dict[score] = 1
-    return score_dict.items()
+    
+    data_points = []
+    for score in score_dict:
+        data_points.append({
+            'x' : score,
+            'y' : score_dict[score]
+            })
+    std = np.std(np.array(score_dict.keys()))
+    mean = np.mean(np.array(score_dict.keys()))
+    grade = get_grade(user.profile.score, std, mean)
+    vs_data = {
+        'data_points' : score_dict.items(),
+        'std' : std,
+        'mean' : mean,
+        'grade' : grade,
+    }
+
+    return vs_data
+
+""" 
+Returns a letter grade for a given score,
+std, and mean. 
+This is the worst code ever. 
+"""
+def get_grade(user_score, std, mean):
+    a = mean + std
+    b = mean
+    c = mean - std
+    d = c - std
+    f = d - std
+    if user_score >= a:
+        return "A"
+    elif user_score < a and user_score >= b:
+        return "B"
+    elif user_score < b and user_score >= c:
+        return "C"
+    elif user_score < c and user_score >= d:
+        return "D"
+    else:
+        return "F"
+
+

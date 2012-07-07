@@ -18,17 +18,30 @@ class UserProfile(models.Model):
     pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
 
     score = models.FloatField(default=0.0)
+    data_point_count = models.IntegerField(default=0)
 
+    def update_data_point(self, save=True):
+        if self.data_point_count % 3:
+            data_point = TrendData(user_profile=self, score=self.score, avg_score=self.avg_score)
+            data_point.save()
 
-    def update_avg(self):
+        self.data_point_count += 1
+
+        if save:
+            self.save()
+
+    def update_avg(self, save=True):
         #self.avg_score = self.user.ratings__set.aggregate(Avg('score'))['score__avg']
         self.avg_score = self.score / CommProd.objects.filter(user_profile=self).count()
-        self.save()
+        if save:
+            self.save()
 
-    def update_score(self, diff):
+    def update_score(self, diff, save=True):
         self.score = self.score + diff
-        self.update_avg()
-        self.save()   
+        self.update_avg(save=False)
+        self.update_data_point(save=False)
+        if save:
+            self.save()   
     
     def to_json(self):
         return json.dumps({
@@ -121,6 +134,14 @@ class Rating(models.Model):
 
     def __unicode__(self):
     	return "%s voted a %s on commprod_id %s on %s " % (self.user_profile.user.username, self.score, self.commprod.id, self.date)
+
+
+class TrendData(models.Model):
+    user_profile = models.ForeignKey(UserProfile)
+    date = models.DateTimeField(auto_now=True)
+    score = models.IntegerField(default=0)
+    avg_score = models.FloatField(default=0.0)
+
 
 #fuck.
 import signals

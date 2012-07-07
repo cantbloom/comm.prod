@@ -87,8 +87,14 @@ def search (request):
 @login_required
 @csrf_exempt
 def vs_data(request):
+    response_data = None #patlsotw
+    
     filter = request.GET.get('filter', None)
-    response_data = vs_data_manager(filter)
+    username = request.GET.get('username', None)
+
+    if username and User.objects.filter(username=username).exists():
+        user = User.objects.filter(username=username)[0]
+        response_data = vs_data_manager(user, filter)
     return HttpResponse(json.dumps(response_data), mimetype="application/json")
 
 
