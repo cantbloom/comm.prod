@@ -8,7 +8,7 @@ function voteSelection (e, data){
 	$src.addClass('selected').siblings().removeClass('selected');
 
 
-	var isUpVote = $src.hasClass('up-vate');
+	var isUpVote = $src.hasClass('up-vote');
 	var score = isUpVote ? 1:-1;
 
 	var id = $src.closest('.up-down-container').attr('data-id');
