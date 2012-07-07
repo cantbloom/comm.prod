@@ -29,7 +29,9 @@ def home(request):
         'page_title' : "Home",
         'nav_commprod' : "active",
         'subnav_home' : "active",
-        'trending_timeline': commprod_query_manager({'type':'trending', 'limit':10, 'page':1})
+        'trending_timeline': commprod_query_manager({'type':'trending', 'limit':10, 'page':1}),
+        'unvoted_timeline': commprod_query_manager({'unvoted':request.user.username, 'limit':10, 'page':1}),
+        'user_profile':request.user.profile
     }
     return render_to_response('home.html', template_values, context_instance=RequestContext(request))
 
@@ -42,7 +44,6 @@ def search(request):
         "user": request.user,
         'commprod_timeline' : commprod_query_manager(request.GET),
         subnav_key : subnav_value,
-
     }
     return render_to_response('search.html', template_values, context_instance=RequestContext(request))
 
@@ -81,7 +82,7 @@ def vote (request):
 
 @login_required
 @csrf_exempt
-def search (request):
+def api_search (request):
    return HttpResponse(commprod_query_manager(request.GET))
 
 @login_required
