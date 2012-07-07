@@ -1,5 +1,5 @@
 $(function(){
-
+    graph_data = {};
     //initialize rating on top div.
     $('#raty').raty({
         half : true,
@@ -18,9 +18,9 @@ $(function(){
             return parseFloat($(this).attr('data-rating')/10).toFixed(2); // normalize rating to scale
         },
     });
-    $('.tab').click(tabListener);
-    $('#vs_class_tab').trigger('click');
 
+    $('.tab').click(tabListener);
+    $('#vs_class_tab').trigger('click'); // vs class by default
 
 }); 
 
@@ -30,14 +30,19 @@ $(function(){
 //Calls respective graphing function.
 function tabListener(){
     clearActiveTabs();
+    
     $(this).attr('class', 'active');//set tab to active
-    var id = $(this).attr('id'),
-    tab = id.slice(0, id.length -4);
+    var id = $(this).attr('id');
+    
+    $('#chart_container').empty(); //clear old graph
+    
     if (id == 'trends_tab') {
-
-    }
-    else {
-        var filter = $(this).data('classYear');
+        $('#stats').hide();
+        getTrendData();
+    } else {
+        $('#stats').show();
+        var tab = id.slice(0, id.length -4),
+        filter = $(this).data('classYear');
         getVsData(filter, tab);
     }
 }
@@ -50,22 +55,62 @@ function clearActiveTabs() {
     });
 }
 
+
+function vsDataObject(vs_data, tab){
+    this.data_points = vs_data['data_points'];
+    this.std = vs_data['std'];
+    this.mean = vs_data['mean'];
+    this.grade = vs_data['grade'];
+    this.tab = tab;
+}   
+
+function trendDataObject(trend_data) {
+    this.floor_trend = trend_data['floor_trend'];
+    this.class_trend = trend_data['class_trend'];
+    this.user_trend = trend_data['user_trend'];
+}   
+
 //calls api for vs_data
 //renders new graph and puts
 //mean and std of data on page
 function getVsData(filter, tab) {
-    var username = $('#username').data('username'),
-    url = '/commprod/api/vs_data?username=' + username;
+    username = $('#username').data('username'),
+    url = '/commprod/api/profile_data?type=vs_data&username=' + username;
     if (filter) {
-        url += '&?filter=' + filter; 
+        url += '&filter=' + filter;
     }
-    $('#chart_container').empty(); //clear old graph
+
+    if (graph_data[url]) {
+        return renderVsData(graph_data[url])
+    }
     $.get(url, function(vs_data){
-        renderVsGraph(vs_data['data_points'], tab);
-        $('#std').text(vs_data['std'].toFixed(2));
-        $('#mean').text(vs_data['mean'].toFixed(2));
-        $('#grade').text(vs_data['grade']);
+         graph_data[url] = new vsDataObject(vs_data, tab);
+         renderVsData(graph_data[url])
     })
+}
+
+function getTrendData() {
+    var username = $('#username').data('username'),
+    url = '/commprod/api/profile_data?type=trend&username=' + username;
+    if (graph_data[url]) {
+        return renderTrendData(graph_data[url])
+    }
+    $.get(url, function(trend_data){
+        graph_data[url] = new trendDataObject(trend_data)
+        renderTrendData(graph_data[url]);
+    })
+}
+
+//render data from cache
+function renderVsData(vsData) {
+    renderVsGraph(vsData.data_points, vsData.tab);
+    $('#std').text(vsData.std.toFixed(2));
+    $('#mean').text(vsData.mean.toFixed(2));
+    $('#grade').text(vsData.grade);
+}
+
+function renderTrendData(trendData) {
+    renderTrendGraph(trendData.floor_trend, trendData.trendData, trendData.user_trend);
 }
 
 //create new graph for vs_data
@@ -111,3 +156,93 @@ function renderVsGraph(data_points, tab) {
         }
     });
 }
+
+function renderTrendGraph(floor_trend, class_trend, user_trend){
+    var username = $('#username').data('username'),
+    class_year = $('#username').data('classYear'),
+    chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'chart_container',
+            zoomType: 'x',
+            spacingRight: 20
+        },
+        colors : ['#fe7227', "#000", "#3d96ae"],
+        title: {
+            text: 'User Rating Trends'
+        },
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+                'Click and drag in the plot area to zoom in' :
+                'Drag your finger over the plot to zoom in'
+        },
+        xAxis: {
+            type: 'datetime',
+            maxZoom: 24 * 3600000, // one day
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'User Score'
+            },
+            startOnTick: false,
+            showFirstLabel: false,
+        },
+        tooltip: {
+            shared: true,
+        },
+        exporting : {
+            enabled : false,
+        },
+        credits : {
+            enabled: false,
+        },
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, 'rgba(2,0,0,0)']
+                    ]
+                },
+                lineWidth: 1,
+                marker: {
+                    enabled: false,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            radius: 5
+                        }
+                    }
+                },
+                shadow: false,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                }
+            }
+        },
+
+        series: [
+        {
+            type: 'area',
+            name: 'The Floor\'s Trend',
+            data: floor_trend
+        },
+        {
+            type: 'area',
+            name: class_year + '\'s Trend',
+            data: class_trend
+        },
+        {
+            type: 'area',
+            name: username + '\'s Trend',
+            data: user_trend
+        },
+        ]
+    });
+}
+  

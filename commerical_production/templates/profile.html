@@ -11,12 +11,12 @@
 
 {% block content %}
     <div class="row">
-        <h1 id='username' data-username='{{ user.username }}'class="span4 offset4"> 
+        <h1 id='username' data-username='{{ user.username }}' data-class-year="{{ user.profile.class_year }}" class="span4 offset4"> 
             {{ header }} 
         </h1>
 
         <div id="raty-container" class="pull-left">
-            <div id="raty" class="pull-left" data-rating="{{ user.profile.score }}"> </div>
+            <div id="raty" class="pull-left" data-rating="{{ user.profile.score }}" > </div>
             <span id="target" class="pull-left score_holder"> {{ user.profile.score }} </span>
         </div>
 

@@ -16,7 +16,7 @@ from helpers.view_helpers import getRandomUsername, renderErrorMessage
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
-from helpers.query_managers import commprod_query_manager, vs_data_manager
+from helpers.query_managers import commprod_query_manager, vs_data_manager, trend_data_manager
 from helpers.link_activator import get_active_page
 
 
@@ -80,23 +80,25 @@ def vote (request):
     return HttpResponse(return_data, mimetype='application/json') 
 
 @login_required
-@csrf_exempt
 def search (request):
    return HttpResponse(commprod_query_manager(request.GET))
 
 @login_required
-@csrf_exempt
-def vs_data(request):
+def profile_data(request):
     response_data = None #patlsotw
     
+    type = request.GET.get('type', None)
     filter = request.GET.get('filter', None)
     username = request.GET.get('username', None)
-
     if username and User.objects.filter(username=username).exists():
         user = User.objects.filter(username=username)[0]
-        response_data = vs_data_manager(user, filter)
+        
+        if type == "trend":
+            response_data = trend_data_manager(user)
+        elif type == "vs_data":
+            response_data = vs_data_manager(user, filter)
+    
     return HttpResponse(json.dumps(response_data), mimetype="application/json")
-
 
 @csrf_exempt
 def processProd(request):
