@@ -177,7 +177,7 @@ function renderTrendGraph(floor_trend, class_trend, user_trend){
         },
         xAxis: {
             type: 'datetime',
-            maxZoom: 60*1000, // one day
+            maxZoom: 60*1000, // one minute
             title: {
                 text: null
             },

@@ -10,7 +10,8 @@ from datetime import datetime
 import random, time, numpy as np
 
 
-""" Takes in a get request's dictionary of
+""" 
+Takes in a get request's dictionary of
 values and returns an HTMl template based on the search query
 """
 def commprod_query_manager(get_dict, user, return_type="html"):
@@ -34,12 +35,10 @@ def commprod_query_manager(get_dict, user, return_type="html"):
     search_params = {k : v for k, v in get_dict.items() if k in valid_params}
 
     ## overwrite given parameters with default for type.
-    type = get_dict.get('type', None)
-    if type in valid_types:
-        search_params = dict(search_params, **valid_types[type])
-
-    if user:
-        search_params['username'] = user.username
+    types = get_dict.get('type', None)
+    for type in types:
+        if type in valid_types:
+            search_params = dict(search_params, **valid_types[type])
 
     commprods = commprod_search(**search_params)
 
