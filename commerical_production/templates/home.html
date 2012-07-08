@@ -6,19 +6,22 @@
 
 {% block content %} 
 <div class="row">
-	<div class="span5">
-		{{ trending_timeline }}
-	</div>
-	<div class="span5">
-		{{ unvoted_timeline }}
+	<div class="span6 offset3">
+		<div class="commprod-timeline well">
+
+
+		</div>
 	</div>
 </div>
 {% endblock %}
 
 {% block scripts %} 
+
 <script type="text/javascript">
-        CONFIG = {  
-        			username: {{user_profile.user.username}}
+        data = {  
+        			username: "{{user_profile.user.username}}",
+        			commprods: {{unvoted_commprods}}
       		}
 </script>
+<script src="/public/js/home.js"></script>         
 {% endblock %}
