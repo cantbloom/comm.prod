@@ -200,10 +200,6 @@ body {
 	color:	rgb(254,114,39);
 }
 
-a:hover {
-  color:  rgb(254,114,39);
-}
-
 .commprod-container .date {
 	font-size: .8em;
 }
@@ -258,6 +254,10 @@ a:hover {
 	-webkit-border-radius: 3px!important;
 	-moz-border-radius: 3px!important;
 	border-radius: 3px!important;
+}
+
+a:hover {
+  color:  rgb(254,114,39);
 }
 
 /* Input Text */

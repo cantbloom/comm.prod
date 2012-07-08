@@ -43,7 +43,7 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 
     commprods = commprod_search(**search_params)
 
-    return commprod_renderer(user, commprods, return_type, get_dict.get('page',1))
+    return commprod_renderer(user, commprods, return_type, type, get_dict.get('page',1))
 
 
 

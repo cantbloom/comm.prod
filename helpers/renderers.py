@@ -9,19 +9,21 @@ from commProd.models import CommProd, Rating, UserProfile, ShirtName
 Can render a commprod as html block or list of
 html items.
 """
-def commprod_renderer(user, commprods, return_type, page=None):
+def commprod_renderer(user, commprods, return_type, type=None, page=None):
     votes = CommProd.objects.filter(rating__user_profile__user = user)
     upvoted = votes.filter(score__gt = 0).values_list('id', flat=True)
     downvoted = votes.filter(score__lt = 0).values_list('id', flat=True)
 
     if return_type == "html":
-        print upvoted
         t = loader.get_template('commprod_timeline.html')
-        c = Context({
+        c = {
             'commprods': paginator(page, commprods),
             'upvoted': upvoted,
             'downvoted': downvoted
-        })
+        }
+        if type:
+            c['link_mod'] = "&type=" + type
+        c = Context(c)
         return t.render(c)
 
     elif return_type == "list":
