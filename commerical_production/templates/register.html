@@ -2,7 +2,7 @@
 
 
 {% block styles %}
-    <link href="/public/css/registration.css" rel="stylesheet">
+    <link href="/public/css/register.css" rel="stylesheet">
 {%  endblock %}
 {% block content %} 
     <h2 id="reg-header-text" class=" span6 offset3 center-text">We just need a little more information...</h2>
@@ -34,7 +34,7 @@
                 <form id="reg-form" method='post' action='/register/{{ user.profile.activation_key }}/' >
                     {{ form.as_p }}
 
-                    <img id="profile_pic" class="icon" src="/public/img/btb-placeholder.png">
+                    <img id="profile_pic" class="icon" src="/public/img/placeholder.jpg">
                     <input class="btn" name="upload" id="upload"type="button" value="Edit profile picture"/>
                     <input class="btn btn-warning" type="submit" value="Login" id="submit"/>
                 </form>
