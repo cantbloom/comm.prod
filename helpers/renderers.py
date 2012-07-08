@@ -57,10 +57,10 @@ def profile_renderer(profiles):
     
     html_list = []
     for profile in profiles:
-        c = Context({
-            'user_profile': profile,
-            'score' : profiles[profile],
-            })
+        c = {
+        'user_profile': profile, 
+        'score' : profiles[profile],
+        }
         html_list.append(render_to_string('profile_template.html', c))
 
     return html_list
