@@ -54,18 +54,18 @@ def search(request):
 def permalink(request, username, cp_id):
     get_dict = {'username' : username, 'cp_id' : cp_id}
     
-    commprod = commprod_query_manager(get_dict, request.user)
-
+    commprod = commprod_query_manager(get_dict, request.user, 'list')
     if len(commprod) == 1:
-        commprod = commprod[0]
+        rendered_commprod = commprod[0]
         cp_user = User.objects.filter(username=username)[0]
+        commprod = CommProd.objects.filter(id=cp_id)[0]
     
     else:
         raise Http404
 
     template_values = {
         'user': request.user,
-        'rendered_commprod' : commprod_renderer(request.user, [commprod], 'list')[0],
+        'rendered_commprod' : rendered_commprod,
         'commprod' : commprod,
     }
     return render_to_response('commprod_permalink.html', template_values, context_instance=RequestContext(request))

@@ -13,7 +13,6 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None):
     votes = CommProd.objects.filter(rating__user_profile__user = user)
     upvoted = votes.filter(score__gt = 0).values_list('id', flat=True)
     downvoted = votes.filter(score__lt = 0).values_list('id', flat=True)
-    print return_type
     if return_type == "html":
         template_values =  {
             'commprods': paginator(page, commprods),
