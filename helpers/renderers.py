@@ -7,7 +7,7 @@ from commProd.models import CommProd, Rating, UserProfile, ShirtName
 
 """ 
 Can render a commprod as html block or list of
-html items.
+html items. User is the user requesting the view.
 """
 def commprod_renderer(user, commprods, return_type, type=None, page=None):
     votes = CommProd.objects.filter(rating__user_profile__user = user)

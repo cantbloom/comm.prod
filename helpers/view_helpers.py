@@ -43,3 +43,12 @@ def possesive(name, title):
     if title == "":
         title = " Profile"
     return result + title.capitalize()
+
+"""
+Adds the specified username to the given dictionary
+"""
+
+def addUserToQuery(request_dict, username):
+    d = dict(**request_dict) #request.GET is immutable
+    d['username'] = profile_user.username
+    return d

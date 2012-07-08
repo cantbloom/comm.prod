@@ -92,8 +92,8 @@ displays avg. overall score + list of commprods
 Profile can be gotten to by user_id, username, or an alt_email
 """
 @login_required
-def profile(request, username=None):
-    if username and User.objects.filter(username=username).exists():
+def profile(request, username):
+    if User.objects.filter(username=username).exists():
         profile_user = User.objects.filter(username=username)[0]
     else:
         raise Http404
@@ -126,8 +126,7 @@ Helper function to deal with recent/popular
 search queries
 """
 def profile_search(request, template_values, profile_user):
-    get_dict = dict(**request.GET) #request.GET is immutable
-    get_dict['username'] = profile_user.username
+    get_dict = addUserToQuery(request.GET, profile_user.username)
     template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=profile_user)
 
     return render_to_response('profile_search.html', 
