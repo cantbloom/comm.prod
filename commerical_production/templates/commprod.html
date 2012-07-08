@@ -1,4 +1,3 @@
-<!--commprod variable ref commprod model -->
 <div id="commprod_{{ commprod.id }}" class='row commprod-container' data-id="{{ commprod.id }}">
 	<div class="author-container">
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
@@ -11,8 +10,8 @@
 		</a>
 		<div class="vote-container" style="float:right">
 			<div class="up-down-container" data-id="{{ commprod.id }}">
-				<span class="up-vote {{upvote_selected}}">▲</span>
-				<span class="down-vote {{downvote_selected}}">▼</span>
+				<span class="up-vote {{upvote_selected}}">up</span>
+				<span class="down-vote {{downvote_selected}}">down</span>
 			</div>
 			<span class='score'> {{ commprod.score }}
 			</span>
