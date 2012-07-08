@@ -22,7 +22,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None):
         if type:
             template_values['link_mod'] = "&type=" + type
 
-        return render_to_string('commprod_timeline.html',template_values)
+        return render_to_string('commprod/timeline.html',template_values)
 
     elif return_type == "list":       
         commprod_list = []
@@ -38,7 +38,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None):
                 downvote_selected = ''
             
             commprod_list.append(
-                str(render_to_string('commprod.html', {
+                str(render_to_string('commprod/template.html', {
                     'commprod': commprod,
                     'upvoted_selected': upvote_selected ,
                     'downnvoted_selected': downvote_selected

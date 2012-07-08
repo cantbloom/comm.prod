@@ -5,17 +5,15 @@
 {%  endblock %}
 
 {% block subnav %}
-{% include "subnav_commprod.html"%}
+{% include "commprod/subnav.html"%}
 {% endblock%}
 
 {% block content %} 
-    <h1 class="offset2">{{page_title}}</h1>
+
+    <div class="span4 offset4 row header"> 
+        <h1>{{page_title}}</h1>
+    </div> 
 
     {{commprod_timeline}}
 
 {% endblock%}
-{% block scripts %} 
-<script type="text/javascript">
-    
-</script>
-{% endblock %}
