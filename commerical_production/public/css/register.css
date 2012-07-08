@@ -1,0 +1,42 @@
+#known-info{
+	font-size: 1.5em;
+	margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#reg-form {
+    margin-bottom:0px;
+}
+#reg-form input {
+	width:80%;
+	margin: 5px 7%;
+	font-size: 1.1em;
+}
+
+ul.errorlist {
+    display:none;
+}
+
+.form-errors {
+	margin-right:-30px;
+}
+
+#filepicker_dialog_container {
+    top:90px !important;
+}
+
+#id_pic_url {
+    display:none;
+}
+
+#upload {
+    width:auto !important;
+    margin:0px !important;
+}
+
+#profile_pic {
+    margin:0px 10px 5px 85px;
+    padding:3px;
+    border:1px solid #666;
+    background-color:#FFFFFF;
+}

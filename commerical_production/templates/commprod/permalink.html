@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<link href="/public/css/commprod/permalink.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<div class="row offset10"> 
+    <a class="btn btn-info" data-toggle="modal" href="#correction_modal" >
+        Make Correction
+    </a>
+
+</div>
+<div class="well prod_well">
+
+    {{ rendered_commprod|safe}}
+
+    <div class="commprod-container">
+        <div class="author-container">
+        <b class="author-name"> Original Email:
+        </b>
+        <div class="commprod-content">
+            {{ commprod.email_content }}
+        </div>
+    </div>
+</div>
+
+{% include "commprod/correction.html" with commprod=commprod %}
+
+{% endblock %}
+

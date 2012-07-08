@@ -30,7 +30,7 @@ Landing page, top ten rated comm prods + ten newest commprods
 @login_required
 def home(request):
     template_values = {
-        'page_title' : "Home",
+        'page_title' : "CommProd Home",
         'nav_commprod' : "active",
         'subnav_home' : "active",
         #'trending_time#line': commprod_query_manager({'type':'trending', 'limit':10, 'page':1}, request.user),
@@ -38,17 +38,18 @@ def home(request):
         'user_profile':request.user.profile
     }
 
-    return render_to_response('home.html', template_values, context_instance=RequestContext(request))
+    return render_to_response('commprod/home.html', template_values, context_instance=RequestContext(request))
 
 @login_required
 def search(request):
     subnav_key, subnav_value, title =  get_active_page('home', request.GET.get('type', ""))
     template_values = {
+        'page_title' : subnav_key.split("_")[1].capitalize() + " CommProds",
         'user': request.user,
         'commprod_timeline' : commprod_query_manager(request.GET, request.user),
         subnav_key : subnav_value,
     }
-    return render_to_response('search.html', template_values, context_instance=RequestContext(request))
+    return render_to_response('commprod/search.html', template_values, context_instance=RequestContext(request))
 
 @login_required
 def permalink(request, username, cp_id):
@@ -65,10 +66,11 @@ def permalink(request, username, cp_id):
 
     template_values = {
         'user': request.user,
+        'page_title' : "CommProd Permalink",
         'rendered_commprod' : rendered_commprod,
         'commprod' : commprod,
     }
-    return render_to_response('commprod_permalink.html', template_values, context_instance=RequestContext(request))
+    return render_to_response('commprod/permalink.html', template_values, context_instance=RequestContext(request))
 
 ###### request endpoints #######
 @login_required
