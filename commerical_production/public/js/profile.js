@@ -20,7 +20,7 @@ $(function(){
     });
 
     $('.tab').click(tabListener);
-    //$('#trend_tab').trigger('click'); // vs class by default
+    $('#trend_tab').trigger('click'); // vs class by default
 
 }); 
 
@@ -177,7 +177,7 @@ function renderTrendGraph(floor_trend, class_trend, user_trend){
         },
         xAxis: {
             type: 'datetime',
-            maxZoom: 3600000, // one day
+            maxZoom: 60*1000, // one day
             title: {
                 text: null
             },
