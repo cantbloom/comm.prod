@@ -33,11 +33,12 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
 		if endDate:
 			commprods = commprods.objects.filter(date__lte=endDate)
 
-		if limit:
-			commprods = commprods[:limit]
-
 		if unvoted:
 			commprods = commprods.exclude(rating__user_profile__user__username = unvoted)
+
+		if limit:
+			print limit
+			commprods = commprods[:limit]
 			
 	except:
 		commprods = CommProd.objects.all()
