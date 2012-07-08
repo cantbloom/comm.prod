@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     data_point_count = models.IntegerField(default=0)
 
     def update_data_point(self, save=True):
-        if self.data_point_count % 3:
+        if self.data_point_count % 1:
             data_point = TrendData(user_profile=self, score=self.score, avg_score=self.avg_score)
             data_point.save()
 

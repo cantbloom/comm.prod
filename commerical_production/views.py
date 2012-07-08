@@ -121,12 +121,14 @@ def profile(request, username=None):
         template_values.update(profile_query_manager(profile_user))
         return render_to_response('profile.html', 
         template_values, context_instance=RequestContext(request))
-
-"""Helper function to deal with recent/popular
+"""
+Helper function to deal with recent/popular
 search queries
 """
 def profile_search(request, template_values, profile_user):
-    template_values['commprod_timeline'] = commprod_query_manager(request.GET, user=profile_user)
+    get_dict = dict(**request.GET) #request.GET is immutable
+    get_dict['username'] = profile_user.username
+    template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=profile_user)
 
     return render_to_response('profile_search.html', 
         template_values, context_instance=RequestContext(request))

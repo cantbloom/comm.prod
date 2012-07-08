@@ -43,8 +43,8 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None):
 
             c = Context({
                 'commprod': commprod,
-                'upvoted': upvote_selected,
-                'downnvoted': downvote_selected
+                'upvote_selected': upvote_selected,
+                'downvote_selected': downvote_selected
             })
 
             commprod_list.append(t.render(c))

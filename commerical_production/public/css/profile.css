@@ -1,6 +1,5 @@
 #username {
     padding:15px;
-    text-align: center;
 }
 
 #raty-container {
@@ -35,8 +34,7 @@ img {
 
 #chart_container{
     min-width: 400px; 
-    height: 400px; 
-    margin: 0 auto
+    height: 400px;
 }
 
 .stat {
