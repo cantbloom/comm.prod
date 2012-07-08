@@ -11,7 +11,7 @@
 
 {% block content %}
     <div class="row">
-        <h1 id='username' data-username='{{ profile_user.username }}' data-class-year="{{ profile_user.profile.class_year }}" class="span9"> 
+        <h1 id='username' data-username='{{ profile_user.username }}' data-class-year="{{ profile_user.profile.class_year }}" data-score="{{ profile_user.profile.score }}" class="span9"> 
             {{ header }} 
         </h1>
 
@@ -28,12 +28,12 @@
             <div class="span4 border well">
                 {% if best_prod %}
                 <h3 class="sidebar" > Best Prod: </h3>
-                {{ best_prod }}
+                {{ best_prod|safe}}
                 {% endif %}
 
                 {% if worst_prod %}
                 <h3 class="sidebar" > Worst Prod: </h3>
-                {{ worst_prod }}
+                {{ worst_prod|safe}}
                 {% endif %}
                 <h3 class="sidebar" > Most Loved Bomber: </h3>
                 
@@ -55,22 +55,22 @@
                         <a id="vs_floor">{{ profile_user.username }} vs. The Floor</a>
                     </li>
                 </ul>
-                <div id="chart_container">
-                </div> 
                 <div id ="stats"> 
-                    <p class="pull-left stat"> 
+                    <p class="stat"> 
                         <strong>  Standard Deviation: </strong> 
                         <span id="std"> </span> 
                     </p>
-                    <p class="pull-left stat">
+                    <p class="stat">
                         <strong>  Mean:  </strong>
                         <span id="mean" > </span> 
                     </p>
-                    <p class="pull-left stat">
+                    <p class="stat">
                         <strong>  {{ profile_user.username }}'s Grade:  </strong>
                         <span id="grade" > </span> 
                     </p>
                 </div>
+                <div id="chart_container">
+                </div> 
                 
             <!--Body content-->
             </div>

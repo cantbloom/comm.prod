@@ -6,6 +6,8 @@ from commprod_search import commprod_search
 
 from helpers.renderers import commprod_renderer, profile_renderer
 
+#from django.utils.safestring import mark_safe
+
 from datetime import datetime
 import random, time, numpy as np
 
