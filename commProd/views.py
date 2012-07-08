@@ -20,6 +20,9 @@ from helpers.query_managers import commprod_query_manager, vs_data_manager, tren
 from helpers.link_activator import get_active_page
 from helpers.renderers import commprod_renderer
 
+from django.utils.safestring import mark_safe
+
+
 
 """
 Landing page, top ten rated comm prods + ten newest commprods 
@@ -30,12 +33,12 @@ def home(request):
         'page_title' : "Home",
         'nav_commprod' : "active",
         'subnav_home' : "active",
-        'trending_timeline': commprod_query_manager({'type':'trending', 'limit':10, 'page':1}, request.user),
-        'unvoted_timeline': commprod_query_manager({'unvoted':request.user.username, 'limit':10, 'page':1}, request.user),
+        #'trending_time#line': commprod_query_manager({'type':'trending', 'limit':10, 'page':1}, request.user),
+        'unvoted_commprods': mark_safe(str(commprod_query_manager({'unvoted':True, 'limit':30}, request.user, 'list'))),
         'user_profile':request.user.profile
     }
-    return render_to_response('home.html', template_values, context_instance=RequestContext(request))
 
+    return render_to_response('home.html', template_values, context_instance=RequestContext(request))
 
 @login_required
 def search(request):
@@ -103,7 +106,9 @@ def vote (request):
 @login_required
 @csrf_exempt
 def api_search (request):
-   return HttpResponse(commprod_query_manager(request.GET, request.user))
+    return_type =  request.GET.get("return_type", 'html')
+    res = { 'res':commprod_query_manager(request.GET, request.user, return_type)}
+    return HttpResponse(json.dumps(res), mimetype='application/json')
 
 @login_required
 def profile_data(request):

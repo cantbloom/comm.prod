@@ -1,4 +1,4 @@
-from django.template import loader, Context
+from django.template.loader import render_to_string
 
 from helpers.pagination import paginator
 
@@ -13,22 +13,19 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None):
     votes = CommProd.objects.filter(rating__user_profile__user = user)
     upvoted = votes.filter(score__gt = 0).values_list('id', flat=True)
     downvoted = votes.filter(score__lt = 0).values_list('id', flat=True)
-
+    print return_type
     if return_type == "html":
-        t = loader.get_template('commprod_timeline.html')
-        c = {
+        template_values =  {
             'commprods': paginator(page, commprods),
             'upvoted': upvoted,
             'downvoted': downvoted
         }
         if type:
-            c['link_mod'] = "&type=" + type
-        c = Context(c)
-        return t.render(c)
+            template_values['link_mod'] = "&type=" + type
 
-    elif return_type == "list":
-        t = loader.get_template('commprod.html')
-        
+        return render_to_string('commprod_timeline.html',template_values)
+
+    elif return_type == "list":       
         commprod_list = []
         for commprod in commprods:
             if commprod.id in upvoted:
@@ -40,14 +37,14 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None):
             else:
                 upvote_selected = ''
                 downvote_selected = ''
-
-            c = Context({
-                'commprod': commprod,
-                'upvote_selected': upvote_selected,
-                'downvote_selected': downvote_selected
-            })
-
-            commprod_list.append(t.render(c))
+            
+            commprod_list.append(
+                str(render_to_string('commprod.html', {
+                    'commprod': commprod,
+                    'upvoted_selected': upvote_selected ,
+                    'downnvoted_selected': downvote_selected
+                }))
+            )
 
         return commprod_list
 
@@ -57,7 +54,6 @@ Renders a user information block as a list of
 html items.
 """
 def profile_renderer(profiles):
-    t = loader.get_template('profile_template.html')
     
     html_list = []
     for profile in profiles:
@@ -65,6 +61,6 @@ def profile_renderer(profiles):
             'user_profile': profile,
             'score' : profiles[profile],
             })
-        html_list.append(t.render(c))
+        html_list.append(render_to_string('profile_template.html', c))
 
     return html_list

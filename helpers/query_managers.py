@@ -37,6 +37,10 @@ def commprod_query_manager(get_dict, user, return_type="html"):
     type = get_dict.get('type', None)
     if type in valid_types:
         search_params = dict(search_params, **valid_types[type])
+
+    if 'unvoted' in search_params:
+        search_params['unvoted'] = user.username
+
     commprods = commprod_search(**search_params)
 
     return commprod_renderer(user, commprods, return_type, type, get_dict.get('page',1))
