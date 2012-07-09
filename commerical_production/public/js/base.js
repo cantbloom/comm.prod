@@ -23,6 +23,7 @@ function sendVote(id, score, type){
 		url += type;
 	} else {
 		url += 'commprod'
+		type = "";
 	}
 	$.post(url, payload, function(res){
 		var div_id = '#'+ type + 'object_'  + res.id;
@@ -37,8 +38,7 @@ function sendVote(id, score, type){
 			$(div_id).remove();
 		}
 	});
-
-	$('#'+ type + 'object_'+id).trigger('voteSent', payload)
+	$('#'+ type + 'object_' + id).trigger('voteSent', payload)
 }
 
 function updateAvgScore(e, data){
