@@ -18,6 +18,7 @@ from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, vs_data_manager, trend_data_manager
 from helpers.link_activator import get_active_page
+from helpers.renderers import commprod_renderer
 
 from django.utils.safestring import mark_safe
 
@@ -37,18 +38,39 @@ def home(request):
         'user_profile':request.user.profile
     }
 
-    return render_to_response('home.html', template_values, context_instance=RequestContext(request))
+    return render_to_response('commprod/home.html', template_values, context_instance=RequestContext(request))
 
 @login_required
 def search(request):
     subnav_key, subnav_value, title =  get_active_page('home', request.GET.get('type', ""))
-
     template_values = {
-        "user": request.user,
+        'page_title' : subnav_key.split("_")[1].capitalize() + " CommProds",
+        'user': request.user,
         'commprod_timeline' : commprod_query_manager(request.GET, request.user),
         subnav_key : subnav_value,
     }
-    return render_to_response('search.html', template_values, context_instance=RequestContext(request))
+    return render_to_response('commprod/search.html', template_values, context_instance=RequestContext(request))
+
+@login_required
+def permalink(request, username, cp_id):
+    get_dict = {'username' : username, 'cp_id' : cp_id}
+    
+    commprod = commprod_query_manager(get_dict, request.user, 'list')
+    if len(commprod) == 1:
+        rendered_commprod = commprod[0]
+        cp_user = User.objects.filter(username=username)[0]
+        commprod = CommProd.objects.filter(id=cp_id)[0]
+    
+    else:
+        raise Http404
+
+    template_values = {
+        'user': request.user,
+        'page_title' : "CommProd Permalink",
+        'rendered_commprod' : rendered_commprod,
+        'commprod' : commprod,
+    }
+    return render_to_response('commprod/permalink.html', template_values, context_instance=RequestContext(request))
 
 ###### request endpoints #######
 @login_required

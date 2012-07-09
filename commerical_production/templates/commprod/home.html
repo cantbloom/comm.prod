@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block subnav %}
-{% include "subnav_commprod.html"%}
+{% include "commprod/subnav.html"%}
 {% endblock%}
 
 {% block content %} 
@@ -24,5 +24,5 @@
         			commprods: {{unvoted_commprods}}
       		}
 </script>
-<script src="/public/js/home.js"></script>         
+<script src="/public/js/commprod/home.js"></script>         
 {% endblock %}

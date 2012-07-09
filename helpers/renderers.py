@@ -7,13 +7,12 @@ from commProd.models import CommProd, Rating, UserProfile, ShirtName
 
 """ 
 Can render a commprod as html block or list of
-html items.
+html items. User is the user requesting the view.
 """
 def commprod_renderer(user, commprods, return_type, type=None, page=None):
     votes = CommProd.objects.filter(rating__user_profile__user = user)
     upvoted = votes.filter(score__gt = 0).values_list('id', flat=True)
     downvoted = votes.filter(score__lt = 0).values_list('id', flat=True)
-    print return_type
     if return_type == "html":
         template_values =  {
             'commprods': paginator(page, commprods),
@@ -23,7 +22,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None):
         if type:
             template_values['link_mod'] = "&type=" + type
 
-        return render_to_string('commprod_timeline.html',template_values)
+        return render_to_string('commprod/timeline.html',template_values)
 
     elif return_type == "list":       
         commprod_list = []
@@ -39,7 +38,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None):
                 downvote_selected = ''
             
             commprod_list.append(
-                str(render_to_string('commprod.html', {
+                str(render_to_string('commprod/template.html', {
                     'commprod': commprod,
                     'upvoted_selected': upvote_selected ,
                     'downnvoted_selected': downvote_selected
@@ -54,14 +53,13 @@ Renders a user information block as a list of
 html items.
 """
 def profile_renderer(profiles):
-    t = loader.get_template('profile_template.html')
     
     html_list = []
     for profile in profiles:
-        c = Context({
-            'user_profile': profile,
-            'score' : profiles[profile],
-            })
-        html_list.append(t.render(c))
+        c = {
+        'user_profile': profile, 
+        'score' : profiles[profile],
+        }
+        html_list.append(render_to_string('profile_template.html', c))
 
     return html_list
