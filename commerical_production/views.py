@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email
 from commProd.forms import RegForm
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, profile_query_manager
 from helpers.link_activator import get_active_page

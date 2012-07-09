@@ -1,6 +1,9 @@
-from commProd.models import CommProd, Rating, UserProfile, ShirtName
+from commProd.models import CommProd, Rating, UserProfile, ShirtName, Correction, CorrectionRating
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+
+from helpers.commprod_search import commprod_search
+
 import random
 
 """
@@ -49,6 +52,32 @@ Adds the specified username to the given dictionary
 """
 
 def addUserToQuery(request_dict, username):
-    d = dict(**request_dict) #request.GET is immutable
-    d['username'] = profile_user.username
+    d = {}
+    for key, value in request_dict.items():
+        d[key] = value
+    d['username'] = username
     return d
+
+"""
+Submit vote for a commprod
+"""
+def vote_commprod(id, score, user):
+    commprod = commprod_search(cp_id=id)[0]
+    if not commprod:
+        return False
+
+    rating, created = Rating.objects.get_or_create(commprod=commprod, user_profile=user.profile)
+
+    return rating, commprod
+
+"""
+Submit vote for a correction 
+"""
+def vote_correction(id, score, user):
+    correction = Correction.objects.filter(id=id)
+    if not correction.exists():
+        return None
+
+    rating, created = CorrectionRating.objects.get_or_create(correction=correction[0], user_profile=user.profile)
+    return rating, correction[0]
+

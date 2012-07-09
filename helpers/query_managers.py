@@ -123,7 +123,7 @@ def correction_query_manager(correction_id=None, commprod=None):
         query = Correction.objects.filter(commprod=commprod, active=True)
     
     if query and query.exists():
-        return correction_renderer(query) 
+        return correction_renderer(query[0].commprod.user_profile.user, query) 
     else:
         return []
 

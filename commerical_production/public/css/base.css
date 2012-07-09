@@ -259,6 +259,10 @@ body {
   font-size:1.5em;
 }
 
+.correction {
+  background-color: #f2dede !important;
+}
+
 a:hover {
   color:  rgb(254,114,39);
 }

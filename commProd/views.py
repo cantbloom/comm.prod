@@ -9,10 +9,10 @@ from django.template import RequestContext
 from django.http import Http404
 from django.contrib.auth import authenticate, login
 
-from commProd.models import CommProd, Rating, UserProfile, Correction
+from commProd.models import CommProd, Rating, UserProfile, Correction, CorrectionRating
 from commerical_production import config
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
@@ -55,12 +55,12 @@ def search(request):
 def permalink(request, username, cp_id):
     get_dict = {'username' : username, 'cp_id' : cp_id}
     
-    commprod = commprod_query_manager(get_dict, request.user, 'list')
+    commprod = commprod_query_manager(get_dict, request.user, return_type='list')
     if len(commprod) == 1:
         rendered_commprod = commprod[0]
         cp_user = User.objects.filter(username=username)[0]
         commprod = CommProd.objects.filter(id=cp_id)[0]
-        corrections = Correction.objects.filter(commprod=commprod)
+        corrections = correction_query_manager(commprod=commprod)
     
     else:
         raise Http404
@@ -77,32 +77,39 @@ def permalink(request, username, cp_id):
 ###### request endpoints #######
 @login_required
 @csrf_exempt
-def vote (request):
+def vote (request, type):
+    types = ['commprod' , 'correction']
     valid_votes = ['-1','1'] #patlsotw 
+    payload = {'success' : False}
 
-    score = request.POST["score"]
-    cp_id = request.POST["id"]
+    score = request.POST.get("score", None)
+    id = request.POST.get("id", None)
     user = request.user
 
-    commprod = commprod_search(cp_id=cp_id)[0]
-
-    if not commprod:
-        return HttpResponse(json.dumps({'success':False}), mimetype='application/json')
-
-    rating, created = Rating.objects.get_or_create(commprod=commprod, user_profile=user.profile)
-
-    if score in valid_votes:
-        rating.previous_score = rating.score
-        rating.score = score
-        rating.save() #updates commprod avg automatically with postsave signal
+    if type in types and score and id:
+        if type == "commprod":
+            rating, obj = vote_commprod(id, score, user)
+        elif type == "correction":
+            rating, obj = vote_correction(id, score, user)
     
-    payload = {
-        "success": True,
-        "cp_id": cp_id,
-        "rating": float(score),
-        "cp_score": commprod.score
-    }
+        if rating and score in valid_votes:
+            rating.previous_score = rating.score
+            rating.score = score
+            rating.save() #updates object avg automatically with postsave signal
+            
+            payload = {
+                "success": True,
+                "id": id,
+                "rating": float(score),
+                "score": obj.score
+            }
+            if type == 'correction':
+                if rating.correction.active == False:
+                    payload['rm'] = True
+                if rating.correction.used == True:
+                    payload['rm_all'] = True
 
+        
     return_data = json.dumps(payload)
 
     return HttpResponse(return_data, mimetype='application/json') 
@@ -113,6 +120,18 @@ def api_search (request):
     return_type =  request.GET.get("return_type", 'html')
     res = { 'res':commprod_query_manager(request.GET, request.user, return_type)}
     return HttpResponse(json.dumps(res), mimetype='application/json')
+    if score in valid_votes:
+        rating.previous_score = rating.score
+        rating.score = score
+        rating.save() #updates commprod avg automatically with postsave signal
+
+        payload = {
+            "success": True,
+            "cp_id": cp_id,
+            "rating": float(score),
+            "cp_score": commprod.score
+        }
+
 
 @login_required
 def profile_data(request):
