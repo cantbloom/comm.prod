@@ -1,4 +1,4 @@
-registration ={
+registration = {
 	'subject': 'Register for comm.prod',
 	'content': """
 		Hi %s, 
@@ -9,3 +9,15 @@ registration ={
 		Me
 	"""
 } 
+
+alt_email = {
+	'subject': 'Confirm your alternative email',
+	'content': """
+		Hi %s, 
+		<br>
+		Please confirm that you are the owner of this email <a href='%s'>here</a>.
+		<br>
+		Love,
+		Me
+	"""
+}

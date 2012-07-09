@@ -24,6 +24,6 @@ class RegForm(forms.Form):
 
     def clean_alt_email(self):
         data = self.cleaned_data['alt_email']
-        if UserProfile.objects.filter(alt_email=data).exists() or User.objects.filter(email=data).exists():
+        if UserProfile.objects.filter(email_email=data).exists() or User.objects.filter(email=data).exists():
             raise forms.ValidationError('Email already in use.')
         return data
