@@ -11,7 +11,7 @@
 
 {% block content %}
     <div class="row">
-        <h1 id='username' data-username='{{ profile_user.username }}' data-class-year="{{ profile_user.profile.class_year }}" data-score="{{ profile_user.profile.score }}" class="span9"> 
+        <h1 id='username' class="span9"> 
             {{ header }} 
         </h1>
 
@@ -48,7 +48,7 @@
                     <li id="trend_tab" class="tab">
                         <a id="trends">Trends</a>
                     </li>
-                    <li id="vs_class_tab" class="tab" data-class-year='{{ profile_user.profile.class_year }}'>
+                    <li id="vs_class_tab" class="tab">
                         <a id="vs_class" >{{ profile_user.username }} vs. The {{ profile_user.profile.class_year }}'s </a>
                     </li>
                     <li id="vs_floor_tab" class="tab">
@@ -82,5 +82,12 @@
 {%  endblock %}
 
 {% block scripts %} 
+<script type="text/javascript">
+    user_data = {
+        'username' : '{{ profile_user.username }}',
+        'class_year' : {{ profile_user.profile.class_year }},
+        'score' : {{ profile_user.profile.score }},
+    }
+</script>
 <script src="/public/js/profile.js"></script>
 {% endblock %}

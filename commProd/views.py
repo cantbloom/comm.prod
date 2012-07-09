@@ -9,14 +9,14 @@ from django.template import RequestContext
 from django.http import Http404
 from django.contrib.auth import authenticate, login
 
-from commProd.models import CommProd, Rating, UserProfile
+from commProd.models import CommProd, Rating, UserProfile, Correction
 from commerical_production import config
 
 from helpers.view_helpers import getRandomUsername, renderErrorMessage
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
-from helpers.query_managers import commprod_query_manager, vs_data_manager, trend_data_manager
+from helpers.query_managers import commprod_query_manager, vs_data_manager, trend_data_manager, correction_query_manager
 from helpers.link_activator import get_active_page
 from helpers.renderers import commprod_renderer
 
@@ -60,6 +60,7 @@ def permalink(request, username, cp_id):
         rendered_commprod = commprod[0]
         cp_user = User.objects.filter(username=username)[0]
         commprod = CommProd.objects.filter(id=cp_id)[0]
+        corrections = Correction.objects.filter(commprod=commprod)
     
     else:
         raise Http404
@@ -69,6 +70,7 @@ def permalink(request, username, cp_id):
         'page_title' : "CommProd Permalink",
         'rendered_commprod' : rendered_commprod,
         'commprod' : commprod,
+        'corrections' : corrections
     }
     return render_to_response('commprod/permalink.html', template_values, context_instance=RequestContext(request))
 
@@ -128,6 +130,26 @@ def profile_data(request):
             response_data = vs_data_manager(user, filter)
     
     return HttpResponse(json.dumps(response_data), mimetype="application/json")
+
+@login_required
+@csrf_exempt
+def correction(request):
+    user = request.user
+    cp_id = request.POST.get('cp_id', None)
+    content = request.POST.get('content', None)
+    if (cp_id and content) and CommProd.objects.filter(id=cp_id).exists():
+        commprod = CommProd.objects.filter(id=cp_id)[0]
+        correction = Correction(user_profile=user.profile, commprod_content=content, commprod=commprod)
+        correction.save()
+        response_data = {
+            'correction' : correction_query_manager(correction.id)
+        }
+    else:
+        response_data = {
+        'nodata' : ''
+        }
+
+    return HttpResponse(json.dumps(response_data), mimetype="application/json") 
 
 @csrf_exempt
 def processProd(request):
