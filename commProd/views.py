@@ -30,11 +30,11 @@ Landing page, top ten rated comm prods + ten newest commprods
 @login_required
 def home(request):
     template_values = {
-        'page_title' : "CommProd Home",
+        'page_title' : "Vote on these comm.prods we think you'll like",
         'nav_commprod' : "active",
         'subnav_home' : "active",
         #'trending_time#line': commprod_query_manager({'type':'trending', 'limit':10, 'page':1}, request.user),
-        'unvoted_commprods': mark_safe(str(commprod_query_manager({'unvoted':True, 'limit':30}, request.user, 'list'))),
+        'unvoted_commprods': mark_safe(str(commprod_query_manager({'unvoted':True, 'orderBy': '?', 'limit':30}, request.user, 'list'))),
         'user_profile':request.user.profile
     }
 

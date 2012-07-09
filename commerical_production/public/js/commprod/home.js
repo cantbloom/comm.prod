@@ -1,9 +1,11 @@
 function insertCommprod(e, d){
 	var toAdd = $(data.commprods.shift());
 	
+	toAdd.addClass('first');
 	toAdd.hide();
 	toAdd.css('opacity', 0);
 	
+	$(e.currentTarget).find('.first').removeClass('first');
 	$(e.currentTarget).prepend(toAdd);
 	
 	toAdd.slideDown(function(){
@@ -21,7 +23,16 @@ function insertCommprod(e, d){
 $(function(){
 	var $commprod_timeline = $('.commprod-timeline');
 
-	$commprod_timeline.on('needsCommprod voteSent', insertCommprod)
+	$commprod_timeline.on('needsCommprod', insertCommprod)
+
+	$commprod_timeline.on('voteSent', function(e, d){
+		//ignore if clicked on a commprod that isn't first
+		if (!$(e.target).is('.commprod-container.first')){
+			return;
+		} 
+
+		$commprod_timeline.trigger('needsCommprod');		
+	});
 
 	$commprod_timeline.trigger('needsCommprod');
 })
