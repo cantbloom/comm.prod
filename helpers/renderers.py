@@ -38,7 +38,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None):
                 downvote_selected = ''
             
             commprod_list.append(
-                str(render_to_string('commprod/template.html', {
+                str(render_to_string('commprod/commprod_template.html', {
                     'commprod': commprod,
                     'upvoted_selected': upvote_selected ,
                     'downnvoted_selected': downvote_selected
@@ -61,5 +61,22 @@ def profile_renderer(profiles):
         'score' : profiles[profile],
         }
         html_list.append(render_to_string('profile_template.html', c))
+
+    return html_list
+
+""" 
+Input is a list of Corrections to render
+Renders a correction  block as a list of
+html items.
+"""
+def correction_renderer(corrections):
+    
+    html_list = []
+    for correction in corrections:
+        c = {
+        'commprod': correction,
+        'correction' :'alert' #correction css class
+        }
+        html_list.append(render_to_string('commprod/commprod_template.html', c))
 
     return html_list

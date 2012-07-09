@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
 from django.db.models import Max, Min
 
-from commProd.models import CommProd, Rating, UserProfile, TrendData
+from commProd.models import CommProd, Rating, UserProfile, TrendData, Correction
 from commprod_search import commprod_search
 
-from helpers.renderers import commprod_renderer, profile_renderer
+from helpers.renderers import commprod_renderer, profile_renderer, correction_renderer
 
 #from django.utils.safestring import mark_safe
 
@@ -110,6 +110,22 @@ def trend_data_manager(user):
         'user_trend' : get_trend_data(trend_query_user),
     }
     return trend_data
+
+"""
+Finds and renders active corrections for the given commprod
+"""
+def correction_query_manager(correction_id=None, commprod=None):
+    query = None
+    if correction_id:
+        query =  Correction.objects.filter(id=correction_id, active=True)
+    
+    elif commprod:
+        query = Correction.objects.filter(commprod=commprod, active=True)
+    
+    if query and query.exists():
+        return correction_renderer(query) 
+    else:
+        return []
 
 
 ########### Helpers #############
