@@ -63,17 +63,14 @@ class UserProfile(models.Model):
     Also updates Rating objects to self
     """
     def mergeAndDelete(self, email):
-        to_delete = User.objects.filter(user__email=email)
+        to_delete = User.objects.filter(email=email)
         if to_delete.exists():
             to_delete = to_delete[0].profile
-            #to_delete.commprod__set.update(user=self)
-            #to_delete.rating__set.update(user=self)
 
-            #delete when above is confirmed to work
             CommProd.objects.filter(user_profile=to_delete).update(user_profile=self)
-            Rating.objects.filter(user_profile=to_delete).update(user_profile=self)
+            TrendData.objects.filter(user_profile=to_delete).update(user_profile=self)
             
-            to_delete.delete()
+            to_delete.user.delete()
 
     def __unicode__(self):  
           return "%s's profile" % self.user  
@@ -87,10 +84,10 @@ class Email(models.Model):
     confirmed = models.BooleanField(default=False)
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
-    def sendConfirmEmail():
-        content = email_templates.alt_email['content'] % (user.username, 'http://localhost:8000/confirm_email/'+self.activation_key + '/')
+    def sendConfirmEmail(self):
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, 'http://localhost:8000/confirm_email/'+self.activation_key + '/')
         subject = email_templates.alt_email['subject']
-        emails = [self.user_profile.user.email]
+        emails = [self.email]
         print content, subject, emails
         utils.emailUsers(subject, content, emails)
 
@@ -105,7 +102,7 @@ class ShirtName(models.Model):
 
     number = models.CharField(max_length=40, default='')
     name = models.CharField(max_length=40, default='Human Jizz Rag')
-    year = models.IntegerField()
+    year = models.IntegerField(default=1933)
 
     def __unicode__(self):
         return "%s, %s, owned by %s" % name, number, user_profile.user.username
