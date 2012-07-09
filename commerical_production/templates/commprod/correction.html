@@ -1,0 +1,27 @@
+<div class="modal hide" id="correction_modal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Enter your correction below...</h3>
+  </div>
+    <div class="modal-body">
+        <b class="correction_wrapper"> a btb </b>
+        <textarea id="corrected_prod" rows="3"> {{ commprod.commprod_content }}</textarea>
+        <b class="correction_wrapper"> comm.prod </b>
+        <div class="commprod-container">
+        <div class="author-container">
+            <b class="author-name"> Original Email:</b>
+            <div class="commprod-content">
+                {{ commprod.email_content }}
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <a href="#" class="btn btn-primary">Submit changes</a>
+  </div>
+</div>
+
+
+
+<script src="/public/js/commprod/correction.js"></script>

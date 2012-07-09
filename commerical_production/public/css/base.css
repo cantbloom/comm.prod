@@ -155,6 +155,7 @@ body {
 }
 
 .commprod-timeline{
+  margin-top:25px;
 }
 
 .commprod-container{
@@ -230,11 +231,9 @@ body {
 }
 
 .up-down-container .up-vote{
-
 }
 
 .up-down-container .down-vote{
-
 }
 
 
@@ -256,8 +255,16 @@ body {
 	border-radius: 3px!important;
 }
 
+.correction_wrapper{
+  font-size:1.5em;
+}
+
 a:hover {
   color:  rgb(254,114,39);
+}
+
+textarea {
+  width:350px;
 }
 
 /* Input Text */

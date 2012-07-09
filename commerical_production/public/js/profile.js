@@ -115,13 +115,16 @@ function renderTrendData(trendData) {
 
 //create new graph for vs_data
 function renderVsGraph(data_points, tab) {
-    var title = $('#' + tab).text();
+    var title = $('#' + tab).text(),
+    class_year = $('#username').data('classYear'),
+    username = $('#username').data('username'),
+    user_score = $('#username').data('score');
     var chart = new Highcharts.Chart({
         chart : {
             renderTo: 'chart_container',
             type: 'column'
         },
-        colors : ['#fe7227'],
+        colors : ['#fe7227', "#3d96ae"],
         title : {
             text: title
         },
@@ -139,7 +142,7 @@ function renderVsGraph(data_points, tab) {
         tooltip: {
             formatter: function() {
                 return ''+
-                    this.series.name +': '+ this.y +'';
+                    this.series.name + ': ' + this.y;
             }
         },
 
@@ -148,9 +151,13 @@ function renderVsGraph(data_points, tab) {
         },
 
         series : [{
-            name : "Number of users",
+            name : class_year,
             data: data_points,
-        }],
+        },
+        {
+            name : username,
+            data : [[user_score, 1]]
+        },],
         exporting : {
             enabled : false,
         }

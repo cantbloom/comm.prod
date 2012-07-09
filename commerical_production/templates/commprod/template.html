@@ -3,9 +3,9 @@
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
 			<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
 			{% if commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}
-			{{ commprod.user_profile.user.first_name }} {{ commprod.user_profile.user.last_name}}
+			{{ commprod.user_profile.user.first_name }} {{ commprod.user_profile.user.last_name }}
 			{% else %}
-			{{commprod.user_profile.user.username}}
+			{{ commprod.user_profile.user.username }}
 			{% endif %}
 		</a>
 		<div class="vote-container" style="float:right">
@@ -21,6 +21,6 @@
 		a btb <b>"{{ commprod.commprod_content }}"</b> comm.prod
 	</div>
 	<div class="commprod-footer">
-		<span class="date">{{commprod.date}}</span>
+		<span class="date"> <a class="permalink" href="/commprod/{{ commprod.user_profile.user.username }}/{{ commprod.id }}" title="Permalink"> {{ commprod.date }} </a> </span>
 	</div>
 </div>
