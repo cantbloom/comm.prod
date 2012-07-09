@@ -5,18 +5,20 @@ from django.db.models.signals import post_save
 from django.db.models import Avg
 from datetime import date
 
+from helpers.admin import email_templates, utils
+
+import sha, random
+
  
 class UserProfile(models.Model):  
     user = models.OneToOneField(User)
     #other fields here
 
     activation_key = models.CharField(max_length=40, default='')
-    alt_email = models.EmailField(default='')
     class_year = models.IntegerField(default=1933)
     send_mail = models.BooleanField(default=False)
     avg_score = models.FloatField(default=0.0)
     pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
-
     score = models.FloatField(default=0.0)
     data_point_count = models.IntegerField(default=0)
 
@@ -49,6 +51,12 @@ class UserProfile(models.Model):
             'name' : self.user.first_name + " " + self.user.last_name,
             })
 
+    def addEmail(self, email):
+        email = Email(user_profile=self, email=email)
+        email.sendConfirmEmail();
+        email.save()
+
+
     """
     Takes an email, updates commprod objects 
     associatd with the alt_email user to self. 
@@ -71,6 +79,26 @@ class UserProfile(models.Model):
           return "%s's profile" % self.user  
 
 User.profile = property(lambda u: u.get_profile())
+
+class Email(models.Model):
+    user_profile = models.ForeignKey(UserProfile)
+
+    email = models.EmailField(default='')
+    confirmed = models.BooleanField(default=False)
+    activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
+
+    def sendConfirmEmail():
+        content = email_templates.alt_email['content'] % (user.username, 'http://localhost:8000/confirm_email/'+self.activation_key + '/')
+        subject = email_templates.alt_email['subject']
+        emails = [self.user_profile.user.email]
+        print content, subject, emails
+        utils.emailUsers(subject, content, emails)
+
+    def confirm(self):
+        self.confirmed = True
+        self.user_profile.mergeAndDelete(self.email)
+        self.save()
+
 
 class ShirtName(models.Model):
     user_profile = models.ForeignKey(UserProfile)
