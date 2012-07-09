@@ -1,15 +1,19 @@
-<div id="commprod_{{ commprod.id }}" class='row commprod-container {{ correction }}' data-id="{{ commprod.id }}">
+<div id="{{ correction }}object_{{ commprod.id }}" class='row commprod-container {{ correction }}' data-id="{{ commprod.id }}">
 	<div class="author-container">
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
 			<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
-			{% if commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}
-			{{ commprod.user_profile.user.first_name }} {{ commprod.user_profile.user.last_name }}
+			{% if correction == "correction" %}
+			<b> Correction by: {{ commprod.user_profile.user.username }} </b> 
 			{% else %}
-			{{ commprod.user_profile.user.username }}
+				{% if commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}
+				{{ commprod.user_profile.user.first_name }} {{ commprod.user_profile.user.last_name }}
+				{% else %}
+				{{ commprod.user_profile.user.username }}
+				{% endif %}
 			{% endif %}
 		</a>
 		<div class="vote-container" style="float:right">
-			<div class="up-down-container" data-id="{{ commprod.id }}">
+			<div class="up-down-container" data-id="{{ commprod.id }}" data-type="{{ correction }}">
 				<span class="up-vote {{upvote_selected}}">up</span>
 				<span class="down-vote {{downvote_selected}}">down</span>
 			</div>
@@ -17,13 +21,17 @@
 			</span>
 		</div>
 	</div>
-	<div class="commprod-content">
+	<div id="{{ correction }}object_{{ commprod.id }}_content" class="commprod-content">
 		a btb <b>"{{ commprod.commprod_content }}"</b> comm.prod
 	</div>
 	<div class="commprod-footer">
+		{% if correction == 'correction' %}
+
+		{% else %}
 		<span class="date"> <a class="permalink" href="/commprod/{{ commprod.user_profile.user.username }}/{{ commprod.id }}" title="Permalink"> {{ commprod.date }} </a> </span> 
-		{% if commprod.user_profile.send_mail == False %}
-		<button class="btn btn-mini" value="Claim Profile"></button>
+		{% endif %}
+		{% if commprod.user_profile.send_mail == 0 %}
+		<button class="btn btn-mini btn-primary"> Claim Profile</button>
 		{% endif %}
 	</div>
 </div>

@@ -42,7 +42,7 @@ function tabListener(){
     } else {
         $('#stats').show();
         var tab = id.slice(0, id.length -4),
-        filter = user_data['class_year'];
+        filter = user_data.class_year;
         getVsData(filter, tab);
     }
 }
@@ -57,24 +57,24 @@ function clearActiveTabs() {
 
 
 function vsDataObject(vs_data, tab){
-    this.data_points = vs_data['data_points'];
-    this.std = vs_data['std'];
-    this.mean = vs_data['mean'];
-    this.grade = vs_data['grade'];
+    this.data_points = vs_data.data_points;
+    this.std = vs_data.std;
+    this.mean = vs_data.mean;
+    this.grade = vs_data.grade;
     this.tab = tab;
 }   
 
 function trendDataObject(trend_data) {
-    this.floor_trend = trend_data['floor_trend'];
-    this.class_trend = trend_data['class_trend'];
-    this.user_trend = trend_data['user_trend'];
+    this.floor_trend = trend_data.floor_trend;
+    this.class_trend = trend_data.class_trend;
+    this.user_trend = trend_data.user_trend;
 }   
 
 //calls api for vs_data
 //renders new graph and puts
 //mean and std of data on page
 function getVsData(filter, tab) {
-    username = user_data['username'],
+    username = user_data.username,
     url = '/commprod/api/profile_data?type=vs_data&username=' + username;
     if (filter) {
         url += '&filter=' + filter;
@@ -90,7 +90,7 @@ function getVsData(filter, tab) {
 }
 
 function getTrendData() {
-    var username = user_data['username'],
+    var username = user_data.username,
     url = '/commprod/api/profile_data?type=trend&username=' + username;
     if (graph_data[url]) {
         return renderTrendData(graph_data[url])
@@ -116,9 +116,9 @@ function renderTrendData(trendData) {
 //create new graph for vs_data
 function renderVsGraph(data_points, tab) {
     var title = $('#' + tab).text(),
-    class_year = user_data['class_year'],
-    username = user_data['username'],
-    score = user_data['score'];
+    class_year = user_data.class_year,
+    username = user_data.username,
+    score = user_data.score;
     var chart = new Highcharts.Chart({
         chart : {
             renderTo: 'chart_container',
@@ -165,8 +165,8 @@ function renderVsGraph(data_points, tab) {
 }
 
 function renderTrendGraph(floor_trend, class_trend, user_trend){
-    var username = user_data['username'],
-    class_year = user_data['class_year'],
+    var username = user_data.username,
+    class_year = user_data.class_year,
     chart = new Highcharts.Chart({
         chart: {
             renderTo: 'chart_container',

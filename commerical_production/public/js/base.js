@@ -11,24 +11,39 @@ function voteSelection (e, data){
 	var isUpVote = $src.hasClass('up-vote');
 	var score = isUpVote ? 1:-1;
 
-	var id = $src.closest('.up-down-container').attr('data-id');
-
-	sendVote(id, score);
+	var id = $src.closest('.up-down-container').data('id'),
+	type = $src.closest('.up-down-container').data('type')
+	sendVote(id, score, type);
 }
 
-function sendVote(id, score){
-	var payload = {'id':id, 'score':score}
-
-	$.post('/commprod/vote', payload, function(res){
-		$('#commprod_'+res.cp_id).trigger('voteResponse', res);
+function sendVote(id, score, type){
+	var payload = {'id':id, 'score':score},
+	url = '/commprod/vote/'
+	if (type == 'correction') {
+		url += type;
+	} else {
+		url += 'commprod'
+	}
+	$.post(url, payload, function(res){
+		var div_id = '#'+ type + 'object_'  + res.id;
+		res['type'] = type
+		$(div_id).trigger('voteResponse', res);
+		if (res.rm_all == true) {
+			var new_prod = $(div_id +'_content').html();
+			$('.commprod-content:first').html(new_prod);
+			$('.correction').remove();
+		}
+		else if (res.rm == true) {
+			$(div_id).remove();
+		}
 	});
 
-	$('#commprod_'+id).trigger('voteSent', payload)
+	$('#'+ type + 'object_'+id).trigger('voteSent', payload)
 }
 
 function updateAvgScore(e, data){
 	if (data.success){
-		var $commprod = $('#commprod_'+data.cp_id);
+		var $commprod = $('#'+ data.type + 'object_'+ data.cp_id);
 
 		//not udpating now because of lag...//update 
 		//$commprod.find('.score').html(data.avg_score.toFixed(2));

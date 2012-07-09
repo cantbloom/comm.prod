@@ -187,24 +187,41 @@ class Correction(models.Model):
     active = models.BooleanField(default=True)
     used = models.BooleanField(default=False)
 
-    def update_score(self, score):
-        self.score += score
-        self.user_profile.score += score #update user for points
+    def update_score(self, diff):
+        self.score = self.score + diff
+        self.user_profile.score = self.user_profile.score +diff #update user for points
 
         if self.score == -5:
             self.active = False
 
         elif self.score == 5:
+            Correction.objects.filter(commprod=self.commprod).update(active=False)
             self.active = False
             self.used = True
             self.commprod.commprod_content = self.commprod_content
+            self.commprod.save()
 
         self.save()
 
 
     def __unicode__(self):
-        return 'Correction by %s with content %s on %s' % (self.user_profile.user.username, self.content, str(self.date))
+        return 'Correction by %s with content %s on %s' % (self.user_profile.user.username, self.commprod_content, str(self.date))
 
+class CorrectionRating(models.Model):
+    correction = models.ForeignKey(Correction)
+    user_profile = models.ForeignKey(UserProfile)
+
+    previous_score = models.FloatField(default=0.0)
+    score = models.FloatField(default=0.0)
+    date = models.DateTimeField(auto_now=True)
+
+    def save(self, force_insert=False, force_update=False, **kwargs):
+        super(CorrectionRating, self).save(force_insert, force_update)
+        diff = float(self.score) - float(self.previous_score)
+        self.correction.update_score(diff)
+
+    def __unicode__(self):
+        return "%s voted a %s on correction_id %s on %s " % (self.user_profile.user.username, self.score, self.correction.id, self.date)
 
 
 #fuck.
