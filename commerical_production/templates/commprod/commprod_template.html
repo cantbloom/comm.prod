@@ -1,4 +1,4 @@
-<div id="commprod_{{ commprod.id }}" class='row commprod-container' data-id="{{ commprod.id }}">
+<div id="commprod_{{ commprod.id }}" class='row commprod-container {{ correction }}' data-id="{{ commprod.id }}">
 	<div class="author-container">
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
 			<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
@@ -21,6 +21,9 @@
 		a btb <b>"{{ commprod.commprod_content }}"</b> comm.prod
 	</div>
 	<div class="commprod-footer">
-		<span class="date"> <a class="permalink" href="/commprod/{{ commprod.user_profile.user.username }}/{{ commprod.id }}" title="Permalink"> {{ commprod.date }} </a> </span>
+		<span class="date"> <a class="permalink" href="/commprod/{{ commprod.user_profile.user.username }}/{{ commprod.id }}" title="Permalink"> {{ commprod.date }} </a> </span> 
+		{% if commprod.user_profile.send_mail == False %}
+		<button class="btn btn-mini" value="Claim Profile"></button>
+		{% endif %}
 	</div>
 </div>

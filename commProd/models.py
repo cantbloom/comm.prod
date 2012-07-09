@@ -169,12 +169,42 @@ class Rating(models.Model):
 
 class TrendData(models.Model):
     user_profile = models.ForeignKey(UserProfile)
+
     date = models.DateTimeField(auto_now=True)
     score = models.IntegerField(default=0)
     avg_score = models.FloatField(default=0.0)
 
     def __unicode__(self):
         return "%s had a score of %s and avg score of %s on %s" % (self.user_profile.user.username, self.score, self.avg_score, str(self.date))
+
+class Correction(models.Model):
+    user_profile = models.ForeignKey(UserProfile)
+    commprod = models.ForeignKey(CommProd)
+
+    date = models.DateTimeField(auto_now=True)
+    score = models.IntegerField(default=0)
+    commprod_content = models.TextField()
+    active = models.BooleanField(default=True)
+    used = models.BooleanField(default=False)
+
+    def update_score(self, score):
+        self.score += score
+        self.user_profile.score += score #update user for points
+
+        if self.score == -5:
+            self.active = False
+
+        elif self.score == 5:
+            self.active = False
+            self.used = True
+            self.commprod.commprod_content = self.commprod_content
+
+        self.save()
+
+
+    def __unicode__(self):
+        return 'Correction by %s with content %s on %s' % (self.user_profile.user.username, self.content, str(self.date))
+
 
 
 #fuck.

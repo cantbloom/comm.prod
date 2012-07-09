@@ -7,5 +7,6 @@ urlpatterns = patterns('commProd.views',
     url(r'^api/search$', 'api_search'),
     url(r'^api/profile_data$', 'profile_data'),
     url(r'^(?P<username>.+)/(?P<cp_id>\d+)$', 'permalink'),
+    url(r'^correction?', 'correction'),
     url(r'^$', 'home')
 )

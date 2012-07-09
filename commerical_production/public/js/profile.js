@@ -42,7 +42,7 @@ function tabListener(){
     } else {
         $('#stats').show();
         var tab = id.slice(0, id.length -4),
-        filter = $(this).data('classYear');
+        filter = user_data['class_year'];
         getVsData(filter, tab);
     }
 }
@@ -74,7 +74,7 @@ function trendDataObject(trend_data) {
 //renders new graph and puts
 //mean and std of data on page
 function getVsData(filter, tab) {
-    username = $('#username').data('username'),
+    username = user_data['username'],
     url = '/commprod/api/profile_data?type=vs_data&username=' + username;
     if (filter) {
         url += '&filter=' + filter;
@@ -90,7 +90,7 @@ function getVsData(filter, tab) {
 }
 
 function getTrendData() {
-    var username = $('#username').data('username'),
+    var username = user_data['username'],
     url = '/commprod/api/profile_data?type=trend&username=' + username;
     if (graph_data[url]) {
         return renderTrendData(graph_data[url])
@@ -116,9 +116,9 @@ function renderTrendData(trendData) {
 //create new graph for vs_data
 function renderVsGraph(data_points, tab) {
     var title = $('#' + tab).text(),
-    class_year = $('#username').data('classYear'),
-    username = $('#username').data('username'),
-    user_score = $('#username').data('score');
+    class_year = user_data['class_year'],
+    username = user_data['username'],
+    score = user_data['score'];
     var chart = new Highcharts.Chart({
         chart : {
             renderTo: 'chart_container',
@@ -156,7 +156,7 @@ function renderVsGraph(data_points, tab) {
         },
         {
             name : username,
-            data : [[user_score, 1]]
+            data : [[score, 1]]
         },],
         exporting : {
             enabled : false,
@@ -165,8 +165,8 @@ function renderVsGraph(data_points, tab) {
 }
 
 function renderTrendGraph(floor_trend, class_trend, user_trend){
-    var username = $('#username').data('username'),
-    class_year = $('#username').data('classYear'),
+    var username = user_data['username'],
+    class_year = user_data['class_year'],
     chart = new Highcharts.Chart({
         chart: {
             renderTo: 'chart_container',
