@@ -15,7 +15,7 @@ alt_email = {
 	'content': """
 		Hi %s, 
 		<br>
-		Please confirm that you are the owner of this email <a href='%s'>here</a>.
+		Please confirm that you are the owner of  %s by clicking <a href='%s'>here</a>.
 		<br>
 		Love,
 		Me

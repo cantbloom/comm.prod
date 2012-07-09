@@ -49,17 +49,19 @@ def register(request, key):
             user.last_name = request.POST['last_name']
             user.set_password(request.POST['password'])
             pic_url = request.POST['pic_url']
-            user.profile.pic_url = put_profile_pic(pic_url) #download and upload to our S3
+            user.profile.pic_url = put_profile_pic(pic_url, user.profile) #download and upload to our S3
             
             ShirtName(user_profile=user.profile, name=request.POST['shirt_name']).save()
 
             alt_emails = request.POST.getlist('alt_email')
             for alt_email in alt_emails:
-                user.profile.addAltEmail(alt_email)
+                if alt_email != "":
+                    user.profile.addEmail(alt_email)
             
             user.save()
             user.profile.save()
             
+            user = authenticate(username=user.username, password=request.POST['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -80,13 +82,24 @@ def register(request, key):
     return render_to_response('register.html', template_values, context_instance=RequestContext(request))
 
 def confirm_email(request, key):
-    alt_email = AltEmail.objects.filter(activation_key=key)
+    alt_email = Email.objects.filter(activation_key=key)
     if alt_email.exists():
-        alt_email.confirm()
+        alt_email[0].confirm()
         return redirect('/')
 
     return redirect('/invalid_reg')
     
+
+"""
+First page after successfully signing update
+"""
+@login_required
+def welcome(request):
+    template_values = {
+        'user': request.user
+    }
+
+    return render_to_response('welcome.html', template_values, context_instance=RequestContext(request))
 
 
 """
