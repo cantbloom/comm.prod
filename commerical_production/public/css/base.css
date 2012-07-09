@@ -226,20 +226,36 @@ body {
 	color: #666;
 }
 
-.up-down-container > span:active {
-	color: #222;
+.up-vote:active {
+  border-bottom-color: #222;
+}
+.down-vote:active {
+  border-top-color: #222;
+}
+.up-vote.selected{
+  border-bottom-color: #468847;
+}
+.down-vote.selected{
+	 border-top-color: #B94A48;
 }
 
-.up-down-container .up-vote{
+.up-vote {
+  width: 0; 
+  height: 0; 
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 26px solid #888;
+  margin-bottom: 5px;
 }
 
-.up-down-container .down-vote{
+.down-vote {
+  width: 0; 
+  height: 0; 
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 26px solid #888;
 }
 
-
-.up-down-container .selected{
-	color: #444;
-}
 
 .vote-container>.score{
 	float:right;

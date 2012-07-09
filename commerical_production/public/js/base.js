@@ -4,7 +4,7 @@ function voteSelection (e, data){
 	if ($src.hasClass('selected')){
 		return;
 	}
-
+	console.log($src)
 	$src.addClass('selected').siblings().removeClass('selected');
 
 
@@ -56,7 +56,7 @@ function updateAvgScore(e, data){
 $(function(){
 	$(document).on('voteResponse', updateAvgScore);
 
-	$(document).on('click', '.vote-container span', voteSelection)
+	$(document).on('click', '.vote-container div', voteSelection)
 
 	$('#search_bar').typeahead({
 		'source' : user_list

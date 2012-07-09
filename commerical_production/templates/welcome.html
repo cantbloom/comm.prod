@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="hero-unit span6 offset2" style="background-color:#DDD;">
+  <h1 id="hero"> Welcome! </h1>
+  <h2> Now that you're registered, there's lots of things you can do on the site</h2>
+  <br>
+  <h3> Edit your profile: <a class="btn btn-inverse" href="/users/{{user.username}}">Edit</a></h3>
+  <h3> Vote on commprods: <a class="btn btn-inverse" href="/commprod/">Vote</a></h3>
+</div>
+
+
+
+{% endblock %}
+{% block helper %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    var error_val = $("#hero").text(); 
+    $('#page_title').html(error_val + " Error");
+    $('#user_prof').attr("href", "/");
+  });
+
+</script>
+{% endblock %}
