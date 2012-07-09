@@ -13,6 +13,17 @@
 	font-size: 1.1em;
 }
 
+.alt-email>input{
+    width:70%!important;
+    margin: 5px 0% 5px 7%!important;
+}
+
+.remove-email{
+    width: 3%;
+    height: 20px;
+    margin: 2%;;
+}
+
 ul.errorlist {
     display:none;
 }
@@ -27,6 +38,10 @@ ul.errorlist {
 
 #id_pic_url {
     display:none;
+}
+
+#add-email{
+    margin: 0px 10%;
 }
 
 #upload {

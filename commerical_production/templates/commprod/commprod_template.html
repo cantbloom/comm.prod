@@ -13,12 +13,11 @@
 			{% endif %}
 		</a>
 		<div class="vote-container" style="float:right">
-			<div class="up-down-container" data-id="{{ commprod.id }}" data-type="{{ correction }}">
-				<span class="up-vote {{upvote_selected}}">up</span>
-				<span class="down-vote {{downvote_selected}}">down</span>
-			</div>
-			<span class='score'> {{ commprod.score }}
-			</span>
+		<div class="up-down-container" data-id="{{ commprod.id }}">
+			<div class="up-vote {{upvote_selected}}"></div>
+			<div class="down-vote {{downvote_selected}}"></div>
+		</div>
+		<span class='score'> {{ commprod.score }} </span>
 		</div>
 	</div>
 	<div id="{{ correction }}object_{{ commprod.id }}_content" class="commprod-content">
