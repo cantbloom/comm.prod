@@ -1,8 +1,8 @@
-<div id="{{ correction }}object_{{ commprod.id }}" class='row commprod-container {{ correction }}' data-id="{{ commprod.id }}">
+<div id="{{ obj_type }}_object_{{ commprod.id }}" class='row commprod-container {{ obj_type }}' data-id="{{ commprod.id }}">
 	<div class="author-container">
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
 			<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
-			{% if correction == "correction" %}
+			{% if obj_type == "correction" %}
 			<b> Correction by: {{ commprod.user_profile.user.username }} </b> 
 			{% else %}
 				{% if commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}
@@ -13,18 +13,18 @@
 			{% endif %}
 		</a>
 		<div class="vote-container" style="float:right">
-		<div class="up-down-container" data-id="{{ commprod.id }}">
+		<div class="up-down-container" data-id="{{ commprod.id }}" data-type='{{ obj_type }}'>
 			<div class="up-vote {{upvote_selected}}"></div>
 			<div class="down-vote {{downvote_selected}}"></div>
 		</div>
 		<span class='score'> {{ commprod.score }} </span>
 		</div>
 	</div>
-	<div id="{{ correction }}object_{{ commprod.id }}_content" class="commprod-content">
-		a btb <b>"{{ commprod.commprod_content|urlize }}"</b> comm.prod
+	<div id="{{ obj_type }}_object_{{ commprod.id }}_content" class="commprod-content">
+		a btb <b>"{{ commprod.commprod_content }}"</b> comm.prod
 	</div>
 	<div class="commprod-footer">
-		{% if correction == 'correction' %}
+		{% if obj_type == 'correction' %}
 
 		{% else %}
 		<span class="date"> <a class="permalink" href="/commprod/{{ commprod.user_profile.user.username }}/{{ commprod.id }}" title="Permalink"> {{ commprod.date }} </a> </span> 

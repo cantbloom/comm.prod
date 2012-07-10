@@ -62,10 +62,10 @@ def addUserToQuery(request_dict, username):
 Submit vote for a commprod
 """
 def vote_commprod(id, score, user):
-    commprod = commprod_search(cp_id=id)[0]
-    if not commprod:
-        return False
-
+    commprod = commprod_search(cp_id=id)
+    if len(commprod) == 0:
+        return False, False
+    commprod = commprod[0]
     rating, created = Rating.objects.get_or_create(commprod=commprod, user_profile=user.profile)
 
     return rating, commprod

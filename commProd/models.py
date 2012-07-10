@@ -19,7 +19,7 @@ class UserProfile(models.Model):
     send_mail = models.BooleanField(default=False)
     avg_score = models.FloatField(default=0.0)
     pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
-    score = models.FloatField(default=0.0)
+    score = models.IntegerField(default=0)
     data_point_count = models.IntegerField(default=0)
 
     def update_data_point(self, save=True):
@@ -85,10 +85,9 @@ class Email(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, 'http://localhost:8000/confirm_email/'+self.activation_key + '/')
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, 'http://commprod.herokuapp.com/confirm_email/'+self.activation_key + '/')
         subject = email_templates.alt_email['subject']
         emails = [self.email]
-        print content, subject, emails
         utils.emailUsers(subject, content, emails)
 
     def confirm(self):
@@ -113,7 +112,7 @@ class CommProd(models.Model):
     commprod_content = models.TextField()
     email_content = models.TextField()
     avg_score = models.FloatField(default=0.0)
-    score = models.FloatField(default=0.0)
+    score = models.IntegerField(default=0)
     trending_score = models.IntegerField(default=0)
     date = models.DateTimeField()
 
@@ -151,13 +150,13 @@ class Rating(models.Model):
     commprod = models.ForeignKey(CommProd)
     user_profile = models.ForeignKey(UserProfile)
 
-    score = models.FloatField(default=0.0)
-    previous_score = models.FloatField(default=0.0)
+    score = models.IntegerField(default=0)
+    previous_score = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
         super(Rating, self).save(force_insert, force_update)
-        diff = float(self.score) - float(self.previous_score)
+        diff = self.score - self.previous_score
         self.commprod.update_score(diff)
 
     def __unicode__(self):
@@ -188,10 +187,10 @@ class Correction(models.Model):
         self.score = self.score + diff
         self.user_profile.score = self.user_profile.score +diff #update user for points
 
-        if self.score == -5:
+        if self.score == -1:
             self.active = False
 
-        elif self.score == 5:
+        elif self.score == 1:
             Correction.objects.filter(commprod=self.commprod).update(active=False)
             self.active = False
             self.used = True
@@ -208,13 +207,13 @@ class CorrectionRating(models.Model):
     correction = models.ForeignKey(Correction)
     user_profile = models.ForeignKey(UserProfile)
 
-    previous_score = models.FloatField(default=0.0)
-    score = models.FloatField(default=0.0)
+    previous_score = models.IntegerField(default=0)
+    score = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
         super(CorrectionRating, self).save(force_insert, force_update)
-        diff = float(self.score) - float(self.previous_score)
+        diff = self.score - self.previous_score
         self.correction.update_score(diff)
 
     def __unicode__(self):

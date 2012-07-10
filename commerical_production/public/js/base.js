@@ -4,7 +4,6 @@ function voteSelection (e, data){
 	if ($src.hasClass('selected')){
 		return;
 	}
-	console.log($src)
 	$src.addClass('selected').siblings().removeClass('selected');
 
 
@@ -23,10 +22,10 @@ function sendVote(id, score, type){
 		url += type;
 	} else {
 		url += 'commprod'
-		type = "";
+		type = 'commprod';
 	}
 	$.post(url, payload, function(res){
-		var div_id = '#'+ type + 'object_'  + res.id;
+		var div_id = '#'+ type + '_object_'  + res.id;
 		res['type'] = type
 		$(div_id).trigger('voteResponse', res);
 		if (res.rm_all == true) {
@@ -38,12 +37,12 @@ function sendVote(id, score, type){
 			$(div_id).remove();
 		}
 	});
-	$('#'+ type + 'object_' + id).trigger('voteSent', payload)
+	$('#'+ type + '_object_' + id).trigger('voteSent', payload)
 }
 
 function updateAvgScore(e, data){
 	if (data.success){
-		var $commprod = $('#'+ data.type + 'object_'+ data.cp_id);
+		var $commprod = $('#'+ data.type + '_object_'+ data.cp_id);
 
 		//not udpating now because of lag...//update 
 		//$commprod.find('.score').html(data.avg_score.toFixed(2));

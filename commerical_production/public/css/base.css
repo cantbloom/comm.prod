@@ -238,10 +238,10 @@ body {
 .down-vote.selected{
 	 border-top-color: #CD5C5C;
 }
-.up-vote.selected:hover{
+.up-vote:hover{
   border-bottom-color: #dff0d8;
 }
-.down-vote.selected:hover{
+.down-vote:hover{
    border-top-color: #f2dede;
 }
 
