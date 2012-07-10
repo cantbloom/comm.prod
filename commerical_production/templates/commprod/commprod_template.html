@@ -21,7 +21,7 @@
 		</div>
 	</div>
 	<div id="{{ correction }}object_{{ commprod.id }}_content" class="commprod-content">
-		a btb <b>"{{ commprod.commprod_content }}"</b> comm.prod
+		a btb <b>"{{ commprod.commprod_content|urlize }}"</b> comm.prod
 	</div>
 	<div class="commprod-footer">
 		{% if correction == 'correction' %}
