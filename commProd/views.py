@@ -47,7 +47,7 @@ def search(request):
         'page_title' : subnav_key.split("_")[1].capitalize() + " CommProds",
         'user': request.user,
         'commprod_timeline' : commprod_query_manager(request.GET, request.user),
-        subnav_key : subnav_value,
+        subnav_key : subnav_value
     }
     return render_to_response('commprod/search.html', template_values, context_instance=RequestContext(request))
 

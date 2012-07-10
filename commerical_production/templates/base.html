@@ -89,7 +89,7 @@
         {% block subnav %}
         {% endblock %}
         <div class="container wrapper">
-            {% block content %} {% endblock%}
+        {% block content %} {% endblock%}
 
         <!-- <div class="push"></div> -->
         </div> <!-- /container -->
@@ -127,6 +127,7 @@
         </div> -->
         <!--  javascript leave everything imported for dev,
         cleanup for production --> 
+        {% include "commprod/claim_email.html" %}
         <script src="/public/js/user_list.js"></script>
         <script src="/public/js/lib/jquery.min.js"></script>
         

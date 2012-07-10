@@ -52,10 +52,37 @@ function updateAvgScore(e, data){
 	}
 }
 
+function openClaimProfile(e, d){
+	var $src = $(e.srcElement);
+	var user = $src.data('user');
+
+
+	var $modal = $('#claim-email-modal');
+	$modal.find('.replace-email').text(user);
+	$modal.data('email',user);
+
+	$modal.modal('show');
+}
+
+function submitClaimProfile (e,d) {
+	console.log(arguments)
+	var $modal = $('#claim-email-modal');
+	var email = $modal.data('email');
+	console.log(arguments)
+	$.post('/claim_email', {email: email})
+	console.log(arguments)
+	$modal.modal('hide');
+}
+
 $(function(){
 	$(document).on('voteResponse', updateAvgScore);
 
 	$(document).on('click', '.vote-container div', voteSelection)
+
+	$(document).on('click', '.claim-profile', openClaimProfile)
+	$(document).on('click', '#email-claim-confirm', submitClaimProfile)
+
+
 
 	$('#search_bar').typeahead({
 		'source' : user_list
