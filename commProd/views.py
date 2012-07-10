@@ -9,7 +9,7 @@ from django.template import RequestContext
 from django.http import Http404
 from django.contrib.auth import authenticate, login
 
-from commProd.models import CommProd, Rating, UserProfile, Correction, CorrectionRating
+from commProd.models import CommProd, Rating, UserProfile, Correction, CorrectionRating, CommProdEmail
 from commerical_production import config
 
 from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction
@@ -195,7 +195,11 @@ def processProd(request):
         resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
         
         for commprod in commprods:
-            commprod, created = CommProd.objects.get_or_create(email_content=content, commprod_content=commprod, user_profile=user.profile, date=date) 
+            email_content, created = CommProdEmail.objects.get_or_create(user_profile=user.profile,email_content=content, date=date)
+            if created:
+                email_content.save()
+            
+            commprod, created = CommProd.objects.get_or_create(email_content=email_content, commprod_content=commprod, user_profile=user.profile, date=date) 
             if created:
                 commprod.save()
             resp += "\nAdded?" + str(created)

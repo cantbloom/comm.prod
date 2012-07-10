@@ -21,6 +21,7 @@ def fetch_prods():
         mail.login(CRON['EMAIL'], CRON['PASSWORD'])
         mail.select("inbox") # connect to inbox.
         result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
+
         unread_mail = data[0].split() #list of unread uids
         for msg_id in unread_mail:
             result, data = mail.uid('fetch', msg_id, '(RFC822)')
