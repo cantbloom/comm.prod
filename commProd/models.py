@@ -95,7 +95,6 @@ class Email(models.Model):
         self.user_profile.mergeAndDelete(self.email)
         self.save()
 
-
 class ShirtName(models.Model):
     user_profile = models.ForeignKey(UserProfile)
 
@@ -106,11 +105,20 @@ class ShirtName(models.Model):
     def __unicode__(self):
         return "%s, %s, owned by %s" % name, number, user_profile.user.username
 
-class CommProd(models.Model):
+class CommProdEmail(models.Model):
     user_profile = models.ForeignKey(UserProfile)
 
+    content = models.TextField()
+    date = models.DateTimeField()
+
+    def __unicode__(self):
+        return 'Email with content %s by %s on %s' % (self.content, self.user_profile.user.username, str(self.date))
+
+class CommProd(models.Model):
+    user_profile = models.ForeignKey(UserProfile)
+    email_content = models.ForeignKey(CommProdEmail)
+
     commprod_content = models.TextField()
-    email_content = models.TextField()
     avg_score = models.FloatField(default=0.0)
     score = models.IntegerField(default=0)
     trending_score = models.IntegerField(default=0)
