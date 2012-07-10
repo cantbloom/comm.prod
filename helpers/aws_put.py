@@ -19,6 +19,7 @@ def put_profile_pic(url, profile):
     k = Key(b)
     k.key = md5.new(profile.user.username).hexdigest()
     k.set_contents_from_filename(filename) 
+    k.set_acl('public-read')
     
     #update user profile
     return "http://s3.amazonaws.com/%s/%s"% (AWS['bucket'], k.key)

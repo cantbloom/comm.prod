@@ -3,7 +3,7 @@ $(function(){
     $('#submit_correction').click(function() {
         var check_text = $('#corrected_text').val().toLowerCase();
         if (check_text.indexOf("btb") != -1 || check_text.indexOf("comm") != -1 || check_text.indexOf("prod") != -1) {
-            $('#submit_warning').show()
+            $('#submit_warning').fadeIn()
         } else{
             submit_correction();
         }
@@ -17,7 +17,7 @@ $(function(){
     });
     //hide warning
     $('#corrected_text').bind('keyup', function(){
-         $('#submit_warning').hide();
+         $('#submit_warning').fadeOut();
     });
 });
 
@@ -31,7 +31,8 @@ function submit_correction() {
 
     $.post('/commprod/correction', payload, function(res){
         $('#correction_container').append(res['correction'][0]);
+        $('#submit_success').fadeOut();
     });
     $('#correction_modal').modal('hide');
-    $('#submit_success').show();
+    $('#submit_success').fadeIn();
 }

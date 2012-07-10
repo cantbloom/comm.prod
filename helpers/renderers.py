@@ -9,7 +9,7 @@ from commProd.models import CommProd, Rating, UserProfile, ShirtName, Correction
 Can render a commprod as html block or list of
 html items. User is the user requesting the view.
 """
-def commprod_renderer(user, commprods, return_type, type=None, page=None, correction=""):
+def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_type="commprod"):
     votes = CommProd.objects.filter(rating__user_profile__user=user)
     upvoted = votes.filter(score__gt = 0).values_list('id', flat=True)
     downvoted = votes.filter(score__lt = 0).values_list('id', flat=True)
@@ -18,7 +18,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, correc
             'commprods': paginator(page, commprods),
             'upvoted': upvoted,
             'downvoted': downvoted,
-            'correction' : correction,
+            'obj_type' : obj_type,
         }
         if type:
             template_values['link_mod'] = "&type=" + type
@@ -42,7 +42,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, correc
                     'commprod': commprod,
                     'upvote_selected': upvote_selected ,
                     'downnvote_selected': downvote_selected,
-                    'correction' : correction,
+                    'obj_type' : obj_type,
                 }))
             )
 
@@ -89,11 +89,8 @@ def correction_renderer(user, corrections):
         'commprod': correction,
         'upvote_selected': upvote_selected ,
         'downnvote_selected': downvote_selected,
-        'correction' :'correction' #correction css class
+        'obj_type' :'correction' #correction css class
         }
-        print c, correction.id
-        print upvoted
-        print downvoted
         html_list.append(render_to_string('commprod/commprod_template.html', c))
 
     return html_list
