@@ -81,6 +81,11 @@ def register(request, key):
 
     return render_to_response('register.html', template_values, context_instance=RequestContext(request))
 
+"""
+Endpoint to confirm you are owner of email
+"""
+@login_required
+@csrf_exempt
 def confirm_email(request, key):
     alt_email = Email.objects.filter(activation_key=key)
     if alt_email.exists():
@@ -88,7 +93,19 @@ def confirm_email(request, key):
         return redirect('/')
 
     return redirect('/invalid_reg')
-    
+
+"""
+Endpoint to request an email be added to you profile
+"""
+@login_required
+@csrf_exempt
+def claim_email(request):
+    email = request.POST.get('email', "")
+    email_user = User.objects.filter(email = email)
+    if email_user.exists() and email_user[0].profile.send_email == False:
+        request.user.profile.addEmail(email)
+        return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json') 
+    return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json') 
 
 """
 First page after successfully signing update
