@@ -195,7 +195,7 @@ def processProd(request):
         resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
         
         for commprod in commprods:
-            email_content, created = CommProdEmail.objects.get_or_create(user_profile=user.profile,email_content=content, date=date)
+            email_content, created = CommProdEmail.objects.get_or_create(user_profile=user.profile, content=content, date=date)
             if created:
                 email_content.save()
             
