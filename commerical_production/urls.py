@@ -15,6 +15,7 @@ urlpatterns = patterns('',
 urlpatterns += patterns('commerical_production.views',
     url(r'^register/(?P<key>\w+)', 'register'),
     url(r'^confirm_email/(?P<key>\w+)', 'confirm_email'),
+    url(r'^claim_email$', 'claim_email'),
     url(r'^users/(?P<username>.+)$', 'profile'),
     url(r'^welcome$', 'welcome'),
     url(r'^$', 'home')
