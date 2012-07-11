@@ -26,7 +26,6 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
 				
 			commprods = commprods.order_by(orderBy)
 
-
 		if startDate:
 			commprods = commprods.objects.filter(date__gte=startDate)
 
