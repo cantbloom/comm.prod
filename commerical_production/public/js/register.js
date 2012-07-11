@@ -17,7 +17,6 @@ function getImg() {
                     filepicker.SERVICES.DROPBOX,]
         },
         function(url, metadata){
-            url += "/resize?w=40&h=40"; //image resize:
             $('#profile_pic').attr("src", url);
             $('#id_pic_url').attr("value", url);
         }
@@ -28,7 +27,7 @@ function addEmail (e, d) {
     $('#add-email').before('<p class="alt-email"><input type="text" placeholder="Alternative Email" name="alt_email" data-original-title=""><a class="btn remove-email"><i class="icon-minus"></i></a></p>')
 }
 
-function removeEmail(e,d){
+function removeEmail(e, d){
     $(e.srcElement).closest('.alt-email').remove();
 }
 

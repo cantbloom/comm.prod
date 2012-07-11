@@ -18,5 +18,7 @@ urlpatterns += patterns('commerical_production.views',
     url(r'^claim_email$', 'claim_email'),
     url(r'^users/(?P<username>.+)$', 'profile'),
     url(r'^welcome$', 'welcome'),
-    url(r'^$', 'home')
+    url(r'^home$', 'home'),
+    url(r'^feedback$', 'feedback'),
+    url(r'^$', 'home'),
 )

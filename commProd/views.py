@@ -202,7 +202,7 @@ def processProd(request):
             commprod, created = CommProd.objects.get_or_create(email_content=email_content, commprod_content=commprod, user_profile=user.profile, date=date) 
             if created:
                 commprod.save()
-            resp += "\nAdded?" + str(created)
+            resp += "\nAdded? " + str(created)
     else:
         resp = "No data"
         if str(key) != config.SECRET_KEY: #patlsotw
