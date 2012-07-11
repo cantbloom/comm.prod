@@ -67,7 +67,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                         <a href="mailto:cantbloom@mit.edu">
+                                        <a data-toggle="modal" href="#send-feedback-modal" >
                                             <i class="icon-envelope"></i> 
                                             Send Feedback
                                         </a>
@@ -127,6 +127,8 @@
         </div> -->
         <!--  javascript leave everything imported for dev,
         cleanup for production --> 
+
+        {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
         <script src="/public/js/user_list.js"></script>
         <script src="/public/js/lib/jquery.min.js"></script>

@@ -14,11 +14,17 @@ it to our aws s3 account.
 """
 def put_profile_pic(url, profile):
     filename, headers = urlretrieve(url)
+    resize_filename, headers = urlretrieve(url + "/resize?w=40&h=40") # store profile sized picture (40x40px)
     conn = S3Connection(AWS['aws_access_key_id'], AWS['aws_secret_access_key'])
     b = conn.get_bucket(AWS['bucket'])
     k = Key(b)
     k.key = md5.new(profile.user.username).hexdigest()
     k.set_contents_from_filename(filename) 
+    k.set_acl('public-read')
+
+    k = Key(b)
+    k.key = md5.new(profile.user.username + "resize").hexdigest()
+    k.set_contents_from_filename(resize_filename) 
     k.set_acl('public-read')
     
     #update user profile

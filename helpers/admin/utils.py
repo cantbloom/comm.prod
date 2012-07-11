@@ -67,7 +67,8 @@ def createUser(username, email, send_mail=False):
 
 
 """
-Email current users
+Email current users 
+user_emails is a list of emails to send to.
 """
 def emailUsers(subject, html_content, user_emails):
     text_content = strip_tags(html_content)

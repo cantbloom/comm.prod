@@ -18,10 +18,9 @@ def fetch_prods():
     url = "http://commprod.herokuapp.com/commprod/processprod"
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        # mail.login(CRON['EMAIL'], CRON['PASSWORD'])
-        # mail.select("inbox") # connect to inbox.
-        # result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
-
+        mail.login(CRON['EMAIL'], CRON['PASSWORD'])
+        mail.select("inbox") # connect to inbox.
+        result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
         unread_mail = data[0].split() #list of unread uids
         for msg_id in unread_mail:
             result, data = mail.uid('fetch', msg_id, '(RFC822)')
@@ -58,7 +57,7 @@ returns None. Run query through stripOld()
 before passing in. 
 """
 def parseProd(query):
-    btb_regex = '((btb)|(abtb))'
+    btb_regex = '((a btb)|(abtb))'
     prod_regex = '((comm.prod)|(comm prod)|(commprod)|(comm.prod.)|(commprod.))'
     regex = btb_regex + '(?P<comm_prod>.+?)' + prod_regex + "+"
     pattern = re.compile(regex, re.I|re.M|re.DOTALL)
@@ -87,10 +86,12 @@ shitty hack
 """
 def stripOld(query):
     forward = "---------- Forwarded message ----------"
+    original = "-----Original message-----"
     reply = "wrote:"
     if query != None:
         query = query.split(forward)[0]
         query = query.split(reply)[0]
+        query = query.split(original)[0]
     return query
                              
 """
