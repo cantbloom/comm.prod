@@ -47,7 +47,7 @@ def fetch_prods():
     except imaplib.IMAP4.error as e:
         logging.warning(str(e))
 
-    return "Done"
+    print "Done"
 
 
 """
@@ -92,6 +92,7 @@ def stripOld(query):
         query = query.split(forward)[0]
         query = query.split(reply)[0]
         query = query.split(original)[0]
+        query = query.replace('=\r\n', '\n')
     return query
                              
 """

@@ -15,8 +15,7 @@ function insertCommprod(e, d){
 	if (data.commprods.length < 20){
 		$.getJSON('/commprod/api/search', {unread:true, limit:10, return_type:'list'}, function(res){
 			data.commprods = data.commprods.concat(res.res);
-			console.log(data.commprods.length)
-		})
+		});
 	}
 }
 

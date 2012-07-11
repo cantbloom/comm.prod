@@ -5,7 +5,7 @@ Provides pagination for a given list of objects.
 Call function for any page needing pagination.
 """
 
-def paginator(page, object_list, per_page=10):
+def paginator(page, object_list, per_page=33):
 
     paginator = Paginator(object_list, per_page) # Show default 10 objects per page
     
