@@ -7,9 +7,12 @@ from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
 from django.contrib.auth import authenticate, login, logout
+from django import forms
 
 from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email
 from commProd.forms import RegForm
+
+
 
 from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery
 from helpers.aws_put import put_profile_pic
@@ -184,6 +187,58 @@ def profile(request, username):
         template_values.update(profile_query_manager(profile_user))
         return render_to_response('profile.html', 
         template_values, context_instance=RequestContext(request))
+"""
+Edit profile page
+"""
+@login_required
+def edit_profile(request):
+    profile = request.user.profile
+    ##update for post request
+
+
+    #not post request
+    passwordForm = [
+        {
+            'name': 'current_password',
+            'placeholder': 'Current password'
+        },
+        {
+            'name': 'new_password',
+            'placeholder': 'New password'
+        },
+        {
+            'name': 'new_password2',
+            'placeholder': 'Confirm new password'
+        }
+    ]
+
+    shirtNameForm = []
+    for name in ShirtName.objects.filter(user_profile = profile).values_list('name', flat=True):
+        field = {
+            'name': 'shirt_name',
+            'placeholder': 'Shirt name',
+            'value': name
+        }
+        shirtNameForm.append(field)
+
+    emailForm = []
+    for email in Email.objects.filter(user_profile = profile).values_list('email', flat=True):
+        field = {
+            'value': email
+        }
+        emailForm.append(field)
+
+
+    template_values = {
+        "page_title": "Edit Profile",
+        'user'  : request.user,
+        'password': passwordForm,
+        'shirtname': shirtNameForm,
+        'email': emailForm
+
+    }
+    
+    return render_to_response('edit_profile.html', template_values, context_instance=RequestContext(request))
 """
 Helper function to deal with recent/popular
 search queries

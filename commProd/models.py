@@ -103,7 +103,7 @@ class ShirtName(models.Model):
     year = models.IntegerField(default=1933)
 
     def __unicode__(self):
-        return "%s, %s, owned by %s" % name, number, user_profile.user.username
+        return "%s, %s, owned by %s" % (self.name, self.number, self.user_profile.user.username)
 
 class CommProdEmail(models.Model):
     user_profile = models.ForeignKey(UserProfile)
