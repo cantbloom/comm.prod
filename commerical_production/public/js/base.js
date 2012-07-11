@@ -65,7 +65,6 @@ function openClaimProfile(e, d){
 }
 
 function submitClaimProfile (e,d) {
-	console.log(arguments)
 	var $modal = $('#claim-email-modal');
 	var email = $modal.data('email');
 	$.post('/claim_email', {email: email})
@@ -74,10 +73,13 @@ function submitClaimProfile (e,d) {
 }
 
 function submitFeedBack(e, d) {
-	var $modal = $('#send-feedback-modal');
-	var feedback = $('#feedback').text();
-	$.post('/feedback', {feedback: feedback})
-	$modal.modal('hide');
+	$('#submit_success').fadeIn();
+	$.post('/feedback', { 
+		'feedback' : $('#feedback').val()
+	});
+	$('#submit_success').fadeOut();
+	$('#send-feedback-modal').modal('hide');
+	$('#feedback').val("");
 }
 
 $(function(){

@@ -20,8 +20,8 @@
 
 <script type="text/javascript">
         data = {  
-        			username: "{{user_profile.user.username}}",
-        			commprods: {{unvoted_commprods}}
+        			username: "{{ user_profile.user.username }}",
+        			commprods: {{ unvoted_commprods|safe }}
       		}
 </script>
 <script src="/public/js/commprod/home.js"></script>         

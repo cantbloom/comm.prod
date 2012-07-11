@@ -38,7 +38,7 @@ def fetch_prods():
                     logging.warning("Commprod found from email %s with commprod\n '%s'" % (sender, parsed_content))
                     data = json.dumps({sender : (content, parsed_content, date)})
                     r = requests.post(url, data={'data' : data, 'key' : CRON['SECRET_KEY']})
-                    time.sleep(2) # don't overload poor heroku
+                    time.sleep(1) # don't overload poor heroku
                     logging.info(r.text)
                     
                 print "Parsed email from %s with comprods:\n %s" % (str(sender), str(parsed_content))
