@@ -118,7 +118,8 @@ class CommProd(models.Model):
     user_profile = models.ForeignKey(UserProfile)
     email_content = models.ForeignKey(CommProdEmail)
 
-    commprod_content = models.TextField()
+    content = models.TextField()
+    original_content = models.TextField() #fuck corrections
     avg_score = models.FloatField(default=0.0)
     score = models.IntegerField(default=0)
     trending_score = models.IntegerField(default=0)
@@ -152,7 +153,7 @@ class CommProd(models.Model):
         return (votes - 1) / pow((item_hour_age+2), gravity)
 
     def __unicode__(self):
-        return 'a btb "%s" comm.prod by %s on %s' % (self.commprod_content, self.user_profile.user.username, str(self.date))
+        return 'a btb "%s" comm.prod by %s on %s' % (self.content, self.user_profile.user.username, str(self.date))
 
 class Rating(models.Model):
     commprod = models.ForeignKey(CommProd)
@@ -164,7 +165,7 @@ class Rating(models.Model):
 
     def save(self, force_insert=False, force_update=False, **kwargs):
         super(Rating, self).save(force_insert, force_update)
-        diff = self.score - self.previous_score
+        diff = int(self.score) - int(self.previous_score)
         self.commprod.update_score(diff)
 
     def __unicode__(self):
@@ -187,7 +188,7 @@ class Correction(models.Model):
 
     date = models.DateTimeField(auto_now=True)
     score = models.IntegerField(default=0)
-    commprod_content = models.TextField()
+    content = models.TextField()
     active = models.BooleanField(default=True)
     used = models.BooleanField(default=False)
 
@@ -202,14 +203,15 @@ class Correction(models.Model):
             Correction.objects.filter(commprod=self.commprod).update(active=False)
             self.active = False
             self.used = True
-            self.commprod.commprod_content = self.commprod_content
+            
+            self.commprod.content = self.content
             self.commprod.save()
 
         self.save()
 
 
     def __unicode__(self):
-        return 'Correction by %s with content %s on %s' % (self.user_profile.user.username, self.commprod_content, str(self.date))
+        return 'Correction by %s with content %s on %s' % (self.user_profile.user.username, self.content, str(self.date))
 
 class CorrectionRating(models.Model):
     correction = models.ForeignKey(Correction)
@@ -221,7 +223,7 @@ class CorrectionRating(models.Model):
 
     def save(self, force_insert=False, force_update=False, **kwargs):
         super(CorrectionRating, self).save(force_insert, force_update)
-        diff = self.score - self.previous_score
+        diff = int(self.score) - int(self.previous_score)
         self.correction.update_score(diff)
 
     def __unicode__(self):

@@ -16,6 +16,7 @@ from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, profile_query_manager
 from helpers.link_activator import get_active_page
 from helpers.admin.utils import emailUsers
+from helpers.admin import email_templates
 
 from config import ADMIN_INFO
 
@@ -121,10 +122,10 @@ def feedback(request):
     feedback = request.POST.get('feedback', None)
     if not feedback:
         return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json') 
-    
+    feedback.replace('\n', '<br>')
     user = request.user
-    subject = 'Feedback for commerical production'
-    content = 'Feedback received from:%s \n \n %s' % (user.username, feedback)
+    subject = email_templates.alt_email['subject']
+    content = email_templates.alt_email['content'] % (user.username, feedback)
     admin_emails = [admin[1] for admin in ADMIN_INFO]
     emailUsers(subject, content, admin_emails)
     return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json') 

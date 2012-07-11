@@ -19,8 +19,8 @@ from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, vs_data_manager, trend_data_manager, correction_query_manager
 from helpers.link_activator import get_active_page
 from helpers.renderers import commprod_renderer
+from helpers.urlize import urlize_commprod
 
-from django.utils.safestring import mark_safe
 
 
 
@@ -34,7 +34,7 @@ def home(request):
         'nav_commprod' : "active",
         'subnav_home' : "active",
         #'trending_time#line': commprod_query_manager({'type':'trending', 'limit':10, 'page':1}, request.user),
-        'unvoted_commprods': mark_safe(str(commprod_query_manager({'unvoted':True, 'orderBy': '?', 'limit':30}, request.user, 'list'))),
+        'unvoted_commprods': str(commprod_query_manager({'unvoted':True, 'orderBy': '?', 'limit':30}, request.user, 'list')),
         'user_profile':request.user.profile
     }
 
@@ -61,7 +61,9 @@ def permalink(request, username, cp_id):
         cp_user = User.objects.filter(username=username)[0]
         commprod = CommProd.objects.filter(id=cp_id)[0]
         corrections = correction_query_manager(commprod=commprod)
-    
+        
+        commprods = CommProd.objects.filter(email_content=commprod.email_content)
+        email_content = urlize_commprod(commprod.email_content.content, commprods)
     else:
         raise Http404
 
@@ -70,7 +72,8 @@ def permalink(request, username, cp_id):
         'page_title' : "CommProd Permalink",
         'rendered_commprod' : rendered_commprod,
         'commprod' : commprod,
-        'corrections' : corrections
+        'corrections' : corrections,
+        'email_content' : email_content
     }
     return render_to_response('commprod/permalink.html', template_values, context_instance=RequestContext(request))
 
@@ -158,7 +161,7 @@ def correction(request):
     content = request.POST.get('content', None)
     if (cp_id and content) and CommProd.objects.filter(id=cp_id).exists():
         commprod = CommProd.objects.filter(id=cp_id)[0]
-        correction = Correction(user_profile=user.profile, commprod_content=content, commprod=commprod)
+        correction = Correction(user_profile=user.profile, content=content, commprod=commprod)
         correction.save()
         response_data = {
             'correction' : correction_query_manager(correction.id)
@@ -199,7 +202,7 @@ def processProd(request):
             if created:
                 email_content.save()
             
-            commprod, created = CommProd.objects.get_or_create(email_content=email_content, commprod_content=commprod, user_profile=user.profile, date=date) 
+            commprod, created = CommProd.objects.get_or_create(email_content=email_content, content=commprod, original_content=commprod, user_profile=user.profile, date=date) 
             if created:
                 commprod.save()
             resp += "\nAdded? " + str(created)

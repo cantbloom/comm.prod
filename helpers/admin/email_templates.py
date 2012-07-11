@@ -21,3 +21,10 @@ alt_email = {
 		Me
 	"""
 }
+
+alt_email = {
+	'subject': 'Feedback for commerical production',
+	'content': """
+		'Feedback received from: %s <br><br> %s'
+	"""
+}
