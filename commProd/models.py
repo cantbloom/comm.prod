@@ -51,7 +51,7 @@ class UserProfile(models.Model):
             'name' : self.user.first_name + " " + self.user.last_name,
             })
 
-    def addEmail(self, email):
+    def add_email(self, email):
         email = Email(user_profile=self, email=email)
         email.sendConfirmEmail();
         email.save()

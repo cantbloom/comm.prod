@@ -19,6 +19,8 @@ from helpers.admin.utils import emailUsers
 
 from config import ADMIN_INFO
 
+import json
+
 """
 Registration page. Visitor arrives wih activation key
 """
@@ -59,7 +61,7 @@ def register(request, key):
             alt_emails = request.POST.getlist('alt_email')
             for alt_email in alt_emails:
                 if alt_email != "":
-                    user.profile.addEmail(alt_email)
+                    user.profile.add_email(alt_email)
             
             user.save()
             user.profile.save()
@@ -105,8 +107,8 @@ Endpoint to request an email be added to you profile
 def claim_email(request):
     email = request.POST.get('email', "")
     email_user = User.objects.filter(email = email)
-    if email_user.exists() and email_user[0].profile.send_email == False:
-        request.user.profile.addEmail(email)
+    if email_user.exists() and email_user[0].profile.send_mail == False:
+        request.user.profile.add_email(email)
         return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json') 
     return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json') 
 
