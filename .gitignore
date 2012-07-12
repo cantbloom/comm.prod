@@ -3,3 +3,5 @@
 *.pyc
 *.log
 bombers.txt
+.env
+config.py

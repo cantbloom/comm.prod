@@ -1,6 +1,6 @@
 # Django settings for commerical_production project.
-from config import ADMIN_INFO, MYSQL, SENDGRID, SECRET_KEY
 import os
+from os import environ as env
 #custom auth by max
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
@@ -8,16 +8,19 @@ AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = ADMIN_INFO
+ADMINS = (
+    ('Joshua Blum', 'joshblum@mit.edu'),
+    ('Max Kanter', 'kanter@mit.edu'),
+)
 
 MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': MYSQL['NAME'],    # Or path to database file if using sqlite3.
-        'USER': MYSQL['USER'],                      # Not used with sqlite3.
-        'PASSWORD': MYSQL['PASSWORD'],                  # Not used with sqlite3.
-        'HOST': MYSQL['HOST'],                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': env['MYSQL_NAME'],# Or path to database file if using sqlite3.
+        'USER': env['MYSQL_USER'], # Not used with sqlite3.
+        'PASSWORD': env['PASSWORD'],# Not used with sqlite3.
+        'HOST':env['MYSQL_HOST'], # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -83,7 +86,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = SECRET_KEY
+SECRET_KEY = env['SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -146,11 +149,11 @@ INSTALLED_APPS = (
 
 
 #email settings from sendgrid.com
-EMAIL_HOST = SENDGRID['EMAIL_HOST']
-EMAIL_HOST_USER = SENDGRID['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = SENDGRID['EMAIL_HOST_PASSWORD']
-EMAIL_PORT = SENDGRID['EMAIL_PORT']
-EMAIL_USE_TLS = SENDGRID['EMAIL_USE_TLS']
+EMAIL_HOST = env['EMAIL_HOST']
+EMAIL_HOST_USER = env['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = env['PASSWORD']
+EMAIL_PORT = env['EMAIL_PORT']
+EMAIL_USE_TLS = env['EMAIL_USE_TLS']
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
