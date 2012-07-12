@@ -168,13 +168,13 @@ def profile(request, username):
 
     subnav_key, subnav_value, page_title =  get_active_page('profile', request_type)
 
-    page_title = possesive(profile_user.username, page_title)
-    
+    header = possesive(page_username, page_title)
+    title = possesive(profile_user.username, page_title)
     template_values = {
-        "page_title": page_title,
+        "page_title": title ,
         'nav_profile' : 'active',
         subnav_key : subnav_value,
-        'header' : page_title,
+        'header' : header,
         'user'  : request.user,
         'profile_user' : profile_user,
     }

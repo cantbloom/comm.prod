@@ -17,7 +17,7 @@ Takes in a get request's dictionary of
 values and returns an HTMl template based on the search query
 """
 def commprod_query_manager(get_dict, user, return_type="html"):
-    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted']
+    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted', 'orderBy']
 
     valid_types = {
         'popular' : {
@@ -42,7 +42,7 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 
     if 'unvoted' in search_params:
         search_params['unvoted'] = user.username
-
+        
     commprods = commprod_search(**search_params)
 
     return commprod_renderer(user, commprods, return_type, type, get_dict.get('page',1))

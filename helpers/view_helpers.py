@@ -11,11 +11,13 @@ Returns a username to be rendered choosing randomly between
 first + last, username, and a shirt first_name.
 """
 def getRandomUsername(user):
-    potentials = list(ShirtName.objects.filter(user_profile=user.profile))
+    potentials = [shirtname.name for shirtname in ShirtName.objects.filter(user_profile=user.profile)]
+
     potentials.append(user.username)
     first_last = user.first_name.strip() + " " + user.last_name.strip()
     if (first_last != " "):
         potentials.append(first_last)
+    print potentials
     return random.choice(potentials)
 
 """ 
