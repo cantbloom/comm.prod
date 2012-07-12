@@ -4,7 +4,6 @@ from os import environ as env
 #custom auth by max
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
