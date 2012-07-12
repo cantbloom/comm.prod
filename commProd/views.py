@@ -177,7 +177,7 @@ def processProd(request):
     key = request.POST.get("key", None)
     
     resp = ""
-    if data and str(key) == config.SECRET_KEY:
+    if data and str(key) == env['SECRET_KEY']:
         data = json.loads(data) #{sender : (content, [comm_prods], date)}
         sender = data.keys()[0]
         content, commprods, date = data[sender]
