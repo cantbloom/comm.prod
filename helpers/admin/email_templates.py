@@ -22,11 +22,7 @@ alt_email = {
 	"""
 }
 
-<<<<<<< HEAD
 feedback = {
-=======
-alt_email = {
->>>>>>> 3d25dfbd021facf95b03a291f2a1bdb18ce0c508
 	'subject': 'Feedback for commerical production',
 	'content': """
 		'Feedback received from: %s <br><br> %s'
