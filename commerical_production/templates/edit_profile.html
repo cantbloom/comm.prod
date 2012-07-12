@@ -57,7 +57,7 @@
                 <div class="alert"></div>
                 <input type="hidden" name="form_type" value="email">
                 {% for input in email %}
-                    <p><input type="text" value="{{input.value}}" disabled></p>
+                    <p><input type="text" value="{{input.value}}" class="disabled" disabled></p>
                 {% endfor %}
 
                 <p id=""><a id='add-email' class="btn" ><i class="icon-plus"></i> Add another email</a></p>
