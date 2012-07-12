@@ -10,7 +10,6 @@ from django.http import Http404
 from django.contrib.auth import authenticate, login
 
 from commProd.models import CommProd, Rating, UserProfile, Correction, CorrectionRating, CommProdEmail
-from commerical_production import config
 
 from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction
 from helpers.commprod_search import commprod_search
