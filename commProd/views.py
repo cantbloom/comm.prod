@@ -20,7 +20,7 @@ from helpers.link_activator import get_active_page
 from helpers.renderers import commprod_renderer
 from helpers.urlize import urlize_commprod
 
-
+from os import environ as env
 
 
 """
@@ -206,7 +206,7 @@ def processProd(request):
             resp += "\nAdded? " + str(created)
     else:
         resp = "No data"
-        if str(key) != config.SECRET_KEY: #patlsotw
+        if str(key) != env['SECRET_KEY']: #patlsotw
             resp = "Success!"
     return HttpResponse(resp, mimetype="text/plain")
 
