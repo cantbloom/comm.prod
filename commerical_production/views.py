@@ -14,7 +14,7 @@ from commProd.forms import RegForm
 
 
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, profile_query_manager
 from helpers.link_activator import get_active_page
@@ -191,9 +191,72 @@ def profile(request, username):
 Edit profile page
 """
 @login_required
+@csrf_exempt
 def edit_profile(request):
-    profile = request.user.profile
+    user = request.user
+    profile = user.profile
     ##update for post request
+
+    if request.POST and request.is_ajax():
+        success = False
+        errors = {}
+        type = request.POST.get('form_type', None)
+        if type == "password":
+            password = request.POST.get('current_password', None)
+            new_password = request.POST.get('new_password', None)
+            new_password_confirm = request.POST.get('new_password_confirm', None)
+
+            if user.check_password(password):
+                if new_password!=None and new_password == new_password_confirm:
+                    user.set_password(new_password)
+                    success = 'Password changed'
+                else:
+                    errors['password'] = ["Passwords don't match"]
+            else:
+                errors['password'] = ['Incorrect password']
+        
+        elif type == "shirt_name":
+            try:
+                #delete all current shirt names
+                ShirtName.objects.filter(user_profile=profile, editable = True).delete()
+
+                #add in all new shirt names
+                shirt_names = request.POST.getlist('shirt_name')
+                for name in shirt_names:
+                    name = name.strip()
+                    if name != "":
+                        ShirtName(user_profile=profile, name=name).save()
+
+                success = 'Shirt names added'
+
+            except:
+                errors['shirt_name'] = ['Oops -- something went wrong']
+
+        elif type == "email":
+            emails = request.POST.getlist('email')
+            errors['email'] = []
+
+            for email in emails:
+                #makes sure email
+                if not validateEmail(email): 
+                    errors['email'].append(email + ' is not a valid email')
+
+                #make sure email doesn't exists
+                elif UserProfile.objects.filter(email__email=email, email__confirmed=True).exists() or UserProfile.objects.filter(user__email=email, send_mail=True).exists():
+                    errors['email'].append(email + ' is already registered with an account')
+
+            if errors['email'] == []:
+                for email in emails:
+                    profile.add_email(email)
+                success = "Confirmation emails sent out"
+
+        return_obj = {
+            'success' : success,
+            'errors': errors
+        }
+
+        return HttpResponse(json.dumps(return_obj), mimetype='application/json') 
+
 
 
     #not post request
@@ -207,7 +270,7 @@ def edit_profile(request):
             'placeholder': 'New password'
         },
         {
-            'name': 'new_password2',
+            'name': 'new_password_confirm',
             'placeholder': 'Confirm new password'
         }
     ]
@@ -221,8 +284,8 @@ def edit_profile(request):
         }
         shirtNameForm.append(field)
 
-    emailForm = []
-    for email in Email.objects.filter(user_profile = profile).values_list('email', flat=True):
+    emailForm = [{'value':user.email}]
+    for email in Email.objects.filter(user_profile = profile, confirmed=True).values_list('email', flat=True):
         field = {
             'value': email
         }
