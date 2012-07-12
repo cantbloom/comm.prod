@@ -12,8 +12,6 @@ from django import forms
 from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email
 from commProd.forms import RegForm
 
-
-
 from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, profile_query_manager
@@ -256,8 +254,6 @@ def edit_profile(request):
         }
 
         return HttpResponse(json.dumps(return_obj), mimetype='application/json') 
-
-
 
     #not post request
     passwordForm = [
