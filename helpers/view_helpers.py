@@ -80,3 +80,13 @@ def vote_correction(id, score, user):
 
     rating, created = CorrectionRating.objects.get_or_create(correction=correction[0], user_profile=user.profile)
     return rating, correction[0]
+
+def validateEmail( email ):
+    from django.core.validators import validate_email
+    from django.core.exceptions import ValidationError
+    try:
+        validate_email( email )
+        return True
+    except ValidationError:
+        return False
+

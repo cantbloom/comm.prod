@@ -12,11 +12,13 @@
           Change password
         </a>
       </div>
-      <div id="collapseOne" class="accordion-body in collapse" style="height: auto; ">
+      <div id="collapseOne" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-        <form id="password-form">
+        <form id="password">
+            <div class="alert"></div>
+            <input type="hidden" name="form_type" value="password">
             {% for input in password %}
-                <p><input type="text" placeholder="{{input.placeholder}}" name="{{input.name}}" id="id_{{input.name}} "></p>
+                <p><input type="password" placeholder="{{input.placeholder}}" name="{{input.name}}" id="id_{{input.name}} "></p>
             {% endfor %}
                 <input class="btn btn-warning" type="submit" value="Save" id="password_save"/>
         </form>
@@ -29,13 +31,15 @@
           Add/remove shirt name
         </a>
       </div>
-      <div id="collapseTwo" class="accordion-body in collapse">
+      <div id="collapseTwo" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-            <form id="shirt-name-form">
+            <form id="shirt_name">
+                <div class="alert"></div>
+                <input type="hidden" name="form_type" value="shirt_name">
                 {% for input in shirtname %}
                     <p><input type="text" class="removable_input" placeholder="{{input.placeholder}}" name="{{input.name}}" value="{{input.value}}"><a class="btn remove-input remove-shirt-name"><i class="icon-minus"></i></a></p>
                 {% endfor %}
-                    <p id=""><a id='add-shirt-name' class="btn" href="#"><i class="icon-plus"></i> Add another shirtname</a></p>
+                    <p id=""><a id='add-shirt-name' class="btn"><i class="icon-plus"></i> Add another shirtname</a></p>
                     <input class="btn btn-warning" type="submit" value="Save" id="shirt-name-save"/>
             </form>
         </div>
@@ -47,15 +51,17 @@
           Add alternative emails
         </a>
       </div>
-      <div id="collapseThree" class="accordion-body in collapse">
+      <div id="collapseThree" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-            <form id="password-form">
+            <form id="email">
+                <div class="alert"></div>
+                <input type="hidden" name="form_type" value="email">
                 {% for input in email %}
                     <p><input type="text" value="{{input.value}}" disabled></p>
                 {% endfor %}
 
-                <p id=""><a id='add-email' class="btn" href="#"><i class="icon-plus"></i> Add another email</a></p>
-                <input class="btn btn-warning" type="submit" value="Save" id="shirt-name-save"/>
+                <p id=""><a id='add-email' class="btn" ><i class="icon-plus"></i> Add another email</a></p>
+                <input class="btn btn-warning" type="submit" value="Save" id="email-save"/>
             </form>
         </div>
       </div>
@@ -66,7 +72,7 @@
           Change profile image
         </a>
       </div>
-      <div id="collapseFour" class="accordion-body in collapse">
+      <div id="collapseFour" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
           Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
         </div>

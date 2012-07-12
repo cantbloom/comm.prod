@@ -22,7 +22,7 @@ alt_email = {
 	"""
 }
 
-alt_email = {
+feedback = {
 	'subject': 'Feedback for commerical production',
 	'content': """
 		'Feedback received from: %s <br><br> %s'

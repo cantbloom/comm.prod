@@ -101,6 +101,7 @@ class ShirtName(models.Model):
     number = models.CharField(max_length=40, default='')
     name = models.CharField(max_length=40, default='Human Jizz Rag')
     year = models.IntegerField(default=1933)
+    editable = models.BooleanField(default=True)
 
     def __unicode__(self):
         return "%s, %s, owned by %s" % (self.name, self.number, self.user_profile.user.username)
