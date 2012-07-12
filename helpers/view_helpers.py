@@ -80,4 +80,3 @@ def vote_correction(id, score, user):
 
     rating, created = CorrectionRating.objects.get_or_create(correction=correction[0], user_profile=user.profile)
     return rating, correction[0]
-

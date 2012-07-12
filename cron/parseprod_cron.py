@@ -1,8 +1,8 @@
-#! /usr/bin/env python
+#! /home/cantbloom/venv/bin/python
 
 ## crontab prefs
 ## * * * * * /path/to/commprod_cron.py >/dev/null 2>&1  
-from config import CRON
+from os import environ as env
 import email, imaplib, re, logging, requests, datetime, time, os, simplejson as json
 
 
@@ -18,7 +18,7 @@ def fetch_prods():
     url = "http://commprod.herokuapp.com/commprod/processprod"
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-        mail.login(CRON['EMAIL'], CRON['PASSWORD'])
+        mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
         mail.select("inbox") # connect to inbox.
         result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
         unread_mail = data[0].split() #list of unread uids

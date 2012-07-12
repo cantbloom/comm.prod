@@ -21,7 +21,7 @@ from helpers.link_activator import get_active_page
 from helpers.admin.utils import emailUsers
 from helpers.admin import email_templates
 
-from config import ADMIN_INFO
+from commerical_production.settings import ADMINS
 
 import json
 
@@ -127,9 +127,9 @@ def feedback(request):
         return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json') 
     feedback.replace('\n', '<br>')
     user = request.user
-    subject = email_templates.alt_email['subject']
-    content = email_templates.alt_email['content'] % (user.username, feedback)
-    admin_emails = [admin[1] for admin in ADMIN_INFO]
+    subject = email_templates.feedback['subject']
+    content = email_templates.feedback['content'] % (user.username, feedback)
+    admin_emails = [admin[1] for admin in ADMINS]
     emailUsers(subject, content, admin_emails)
     return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json') 
 

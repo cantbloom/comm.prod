@@ -39,7 +39,7 @@ CRON = {
 SENDGRID = {
     'EMAIL_HOST': 'smtp.sendgrid.net',
     'EMAIL_HOST_USER': 'commprod',
-    'EMAIL_HOST_PASSWORD': 'sfbombers',
+    'EMAIL_HOST_PASSWORD': PASSWORD,
     'EMAIL_PORT': 587,
     'EMAIL_USE_TLS': True,
 }
