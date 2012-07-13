@@ -94,6 +94,7 @@ function getImg() {
                     filepicker.SERVICES.DROPBOX,]
         },
         function(url, metadata){
+        	$('#pic').find('.btn[type=submit]').removeAttr('disabled').removeClass('disabled');
             $('#profile_pic').attr("src", url);
             $('#id_pic_url').attr("value", url);
         }

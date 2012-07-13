@@ -18,12 +18,12 @@
       <div id="collapseOne" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
         <form id="password">
-            <div class="alert"></div>
+          {% include 'alert_box.html' %}
             <input type="hidden" name="form_type" value="password">
             {% for input in password %}
                 <p><input type="password" placeholder="{{input.placeholder}}" name="{{input.name}}" id="id_{{input.name}} "></p>
             {% endfor %}
-                <input class="btn btn-warning" type="submit" value="Save" id="password_save"/>
+                <input class="btn btn-warning" type="submit" value="Save" data-loading-text="Saving..." id="password_save"/>
         </form>
         </div>
       </div>
@@ -40,13 +40,13 @@
       <div id="collapseTwo" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
             <form id="shirt_name">
-                <div class="alert"></div>
+                {% include 'alert_box.html' %}
                 <input type="hidden" name="form_type" value="shirt_name">
                 {% for input in shirtname %}
                     <p><input type="text" class="removable_input" placeholder="{{input.placeholder}}" name="{{input.name}}" value="{{input.value}}"><a class="btn remove-input remove-shirt-name"><i class="icon-minus"></i></a></p>
                 {% endfor %}
                     <p id=""><a id='add-shirt-name' class="btn"><i class="icon-plus"></i> Add another shirtname</a></p>
-                    <input class="btn btn-warning" type="submit" value="Save" id="shirt-name-save"/>
+                    <input class="btn btn-warning" type="submit" value="Save" data-loading-text="Saving..." id="shirt-name-save"/>
             </form>
         </div>
       </div>
@@ -63,14 +63,14 @@
       <div id="collapseThree" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
             <form id="email">
-                <div class="alert"></div>
+                {% include 'alert_box.html' %}
                 <input type="hidden" name="form_type" value="email">
                 {% for input in email %}
                     <p><input type="text" value="{{input.value}}" class="disabled" disabled></p>
                 {% endfor %}
 
                 <p id=""><a id='add-email' class="btn" ><i class="icon-plus"></i> Add another email</a></p>
-                <input class="btn btn-warning" type="submit" value="Save" id="email-save"/>
+                <input class="btn btn-warning" data-loading-text="Saving..." type="submit" value="Save" id="email-save"/>
             </form>
         </div>
       </div>
@@ -87,14 +87,14 @@
       <div id="collapseFour" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
           <form id="pic">
-              <div class="alert"></div>
-              <input type="hidden" name="form_type" value="profile_pic">
+              {% include 'alert_box.html' %}
+              <input type="hidden" name="form_type" value="pic">
 
-              <input type='hidden' name='profile_url' id='id_pic_url'>
+              <input type='hidden' name='pic_url' value="{{ user.profile.pic_url }}" id='id_pic_url'>
               <img id="profile_pic" class="icon" src="{{ user.profile.pic_url }}">
-              
+
               <input class="btn" name="upload" id="upload" type="button" value="Edit profile picture"/>
-              <input class="btn btn-warning" type="submit" value="Save" id="profile-pic-save"/>
+              <input class="btn btn-warning disabled" disabled type="submit" value="Save" data-loading-text="Saving..." id="profile-pic-save"/>
             </form>
         </div>
       </div>

@@ -14,25 +14,25 @@ function addEmailInput(){
 
 function submitForm(e, d){
 	e.preventDefault();
-	
 	var $form = $(e.target);
 	var id = $(e.target).attr('id');
+	$form.find('.btn[type=submit]').button('loading')
 	$.post("/edit", $form.serialize(), function(res){
 		if (res.success){
 			var addClass = "alert-success";
 			var removeClass = "alert-error";
-			var text = res.success;
+			var text = '<p>' + res.success + '</p>';
 		} else {
 			var addClass = "alert-error";
 			var removeClass = "alert-success";
-			var text = "<ul>";
+			var text = "";
 			for (var i =0, max=res.errors[id].length; i<max; i++){
-				text += "<li>" + res.errors[id][i] + "</li>";
+				text += "<p>" + res.errors[id][i] + "</p>";
 			}
-			text+= "</ul>";
 		}
-
-		$form.find('.alert').removeClass(removeClass).addClass(addClass).html(text).slideDown();
+		$form.find('.response_text').html(text)
+		$form.find('.alert').removeClass(removeClass).addClass(addClass).slideDown();
+		$form.find('.btn[type=submit]').button('reset')
 	});
 }
 

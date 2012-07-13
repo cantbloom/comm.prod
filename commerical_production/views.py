@@ -255,15 +255,14 @@ def edit_profile(request):
                     profile.add_email(email)
                 success = "Confirmation emails sent out!"
 
-        elif type == 'profile_pic':
-            errors['profile_pic'] = []
+        elif type == 'pic':
             pic_url = request.POST.get('pic_url')
             pic_url = put_profile_pic(pic_url, user.profile) #download and upload to our S3
             if pic_url: #no errors/less than 1mb #patlsotw
                 user.profile.pic_url = pic_url
                 success = "Profile picture changed!"
             else:
-                errors['profile_pic'].append('Oops -- something went wrong.')
+                errors['pic'] = ['Oops -- something went wrong.']
 
         return_obj = {
             'success' : success,

@@ -125,6 +125,7 @@ class CommProd(models.Model):
     score = models.IntegerField(default=0)
     trending_score = models.IntegerField(default=0)
     date = models.DateTimeField()
+    date_added = models.DateTimeField(auto_now=True)
 
     def update_avg(self, save=True):
     	self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
