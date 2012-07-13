@@ -55,9 +55,10 @@ def register(request, key):
             user.first_name = request.POST['first_name']
             user.last_name = request.POST['last_name']
             user.set_password(request.POST['password'])
+
             pic_url = request.POST['pic_url']
-            user.profile.pic_url = put_profile_pic(pic_url, user.profile) #download and upload to our S3
-            
+            user.profile.pic_url = pic_url
+
             ShirtName(user_profile=user.profile, name=request.POST['shirt_name']).save()
 
             alt_emails = request.POST.getlist('alt_email')
@@ -209,9 +210,9 @@ def edit_profile(request):
                     user.set_password(new_password)
                     success = 'Password changed'
                 else:
-                    errors['password'] = ["Passwords don't match"]
+                    errors['password'] = ["Passwords don't match."]
             else:
-                errors['password'] = ['Incorrect password']
+                errors['password'] = ['Incorrect password.']
         
         elif type == "shirt_name":
             try:
@@ -225,10 +226,10 @@ def edit_profile(request):
                     if name != "":
                         ShirtName(user_profile=profile, name=name).save()
 
-                success = 'Shirt names added'
+                success = 'Shirt names added!'
 
             except:
-                errors['shirt_name'] = ['Oops -- something went wrong']
+                errors['shirt_name'] = ['Oops -- something went wrong.']
 
         elif type == "email":
             emails = request.POST.getlist('email')
@@ -237,16 +238,26 @@ def edit_profile(request):
             for email in emails:
                 #makes sure email
                 if not validateEmail(email): 
-                    errors['email'].append(email + ' is not a valid email')
+                    errors['email'].append(email + ' is not a valid email.')
 
                 #make sure email doesn't exists
                 elif UserProfile.objects.filter(email__email=email, email__confirmed=True).exists() or UserProfile.objects.filter(user__email=email, send_mail=True).exists():
-                    errors['email'].append(email + ' is already registered with an account')
+                    errors['email'].append(email + ' is already registered with an account.')
 
             if errors['email'] == []:
                 for email in emails:
                     profile.add_email(email)
-                success = "Confirmation emails sent out"
+                success = "Confirmation emails sent out!"
+
+        elif type == 'profile_pic':
+            errors['profile_pic'] = []
+            pic_url = request.POST.get('pic_url')
+            pic_url = put_profile_pic(pic_url, user.profile) #download and upload to our S3
+            if pic_url: #no errors/less than 1mb #patlsotw
+                user.profile.pic_url = pic_url
+                success = "Profile picture changed!"
+            else:
+                errors['profile_pic'].append('Oops -- something went wrong.')
 
         return_obj = {
             'success' : success,

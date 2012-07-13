@@ -4,24 +4,7 @@ $(document).ready(function() {
     $(document).on('click','.remove-email', removeEmail)
     addTips();
 });
- 
 
-function getImg() {
-    filepicker.setKey('A1Os2AsKsRgK8t0gbEHcAz')
-    filepicker.getFile("image/*",{
-        'modal': true, 
-        'multiple' : false,
-        'services' : [filepicker.SERVICES.WEBCAM,
-                    filepicker.SERVICES.COMPUTER,
-                    filepicker.SERVICES.FACEBOOK,
-                    filepicker.SERVICES.DROPBOX,]
-        },
-        function(url, metadata){
-            $('#profile_pic').attr("src", url);
-            $('#id_pic_url').attr("value", url);
-        }
-     );
-}
 function addEmail (e, d) {
     e.preventDefault();
     $('#add-email').before('<p class="alt-email"><input type="text" placeholder="Alternative Email" name="alt_email" data-original-title=""><a class="btn remove-email"><i class="icon-minus"></i></a></p>')

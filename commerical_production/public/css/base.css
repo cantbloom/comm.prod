@@ -252,10 +252,10 @@ body {
 	 border-top-color: #CD5C5C;
 }
 .up-vote:hover{
-  border-bottom-color: #dff0d8;
+  border-bottom-color: #8dad80;
 }
 .down-vote:hover{
-   border-top-color: #f2dede;
+   border-top-color: #e58585;
 }
 
 .up-vote {
@@ -300,6 +300,15 @@ body {
 
 a:hover {
   color:  rgb(254,114,39);
+}
+
+a.links:link, a.links:visited, a.links:hover, a.links:active {
+    color:#000000;
+    text-decoration:none;
+}
+
+.arrow{
+  margin-top: 2px;
 }
 
 textarea {
