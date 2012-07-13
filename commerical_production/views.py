@@ -89,6 +89,12 @@ def register(request, key):
 
     return render_to_response('register.html', template_values, context_instance=RequestContext(request))
 
+def login(request, *args, **kwargs):
+    if request.method == 'POST':
+        if not request.POST.get('remember_me', None):
+            request.session.set_expiry(0)
+    return auth_views.login(request, *args, **kwargs)
+
 """
 Endpoint to confirm you are owner of email
 """
