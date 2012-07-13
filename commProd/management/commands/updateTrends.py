@@ -3,9 +3,6 @@
 ## crontab prefs
 ## * * * * * source /home/cantbloom/commprod/venv/bin/activate; >/dev/null 2>&1  python /home/cantbloom/commprod/manage.py updateTrends >/dev/null 2>&1  
 
-
-
-
 from django.core.management.base import NoArgsCommand
 from django.db.models import F
 from commProd.models import CommProd

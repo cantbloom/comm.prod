@@ -41,7 +41,7 @@ function tabListener(){
         getTrendData();
     } else {
         $('#stats').show();
-        var tab = id.slice(0, id.length -4),
+        var tab = id.slice(0, id.length - 4),
         filter = user_data.class_year;
         getVsData(filter, tab);
     }
@@ -118,8 +118,9 @@ function renderVsGraph(data_points, tab) {
     var title = $('#' + tab).text(),
     class_year = user_data.class_year,
     username = user_data.username,
-    score = user_data.score;
-    var chart = new Highcharts.Chart({
+    score = user_data.score,
+
+    vs_chart = new Highcharts.Chart({
         chart : {
             renderTo: 'chart_container',
             type: 'column'
@@ -162,12 +163,13 @@ function renderVsGraph(data_points, tab) {
             enabled : false,
         }
     });
+    return vs_chart
 }
 
 function renderTrendGraph(floor_trend, class_trend, user_trend){
     var username = user_data.username,
     class_year = user_data.class_year,
-    chart = new Highcharts.Chart({
+    trend_chart = new Highcharts.Chart({
         chart: {
             renderTo: 'chart_container',
             zoomType: 'x',
@@ -225,4 +227,5 @@ function renderTrendGraph(floor_trend, class_trend, user_trend){
         ]
     });
 }
+
   
