@@ -72,7 +72,7 @@ user_emails is a list of emails to send to.
 """
 def emailUsers(subject, html_content, user_emails):
     text_content = strip_tags(html_content)
-    from_email = 'kanter@mit.edu'
+    from_email = 'bombers@mit.edu'
     msg = EmailMultiAlternatives(subject, text_content, from_email, user_emails)
     msg.attach_alternative(html_content, "text/html")
     msg.send()

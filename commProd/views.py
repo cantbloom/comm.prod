@@ -10,7 +10,6 @@ from django.http import Http404
 from django.contrib.auth import authenticate, login
 
 from commProd.models import CommProd, Rating, UserProfile, Correction, CorrectionRating, CommProdEmail
-from commerical_production import config
 
 from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction
 from helpers.commprod_search import commprod_search
@@ -21,7 +20,7 @@ from helpers.link_activator import get_active_page
 from helpers.renderers import commprod_renderer
 from helpers.urlize import urlize_commprod
 
-
+from os import environ as env
 
 
 """
@@ -178,7 +177,7 @@ def processProd(request):
     key = request.POST.get("key", None)
     
     resp = ""
-    if data and str(key) == config.SECRET_KEY:
+    if data and str(key) == env['SECRET_KEY']:
         data = json.loads(data) #{sender : (content, [comm_prods], date)}
         sender = data.keys()[0]
         content, commprods, date = data[sender]
@@ -207,7 +206,7 @@ def processProd(request):
             resp += "\nAdded? " + str(created)
     else:
         resp = "No data"
-        if str(key) != config.SECRET_KEY: #patlsotw
+        if str(key) != env['SECRET_KEY']: #patlsotw
             resp = "Success!"
     return HttpResponse(resp, mimetype="text/plain")
 
