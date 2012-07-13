@@ -10,14 +10,38 @@
       <div class="accordion-heading">
         <b>
           <a class="accordion-toggle links" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-            Change your password
+            Change profile image
           <i class="icon-chevron-down pull-right arrow"></i>
           </a>
         </b>
       </div>
       <div id="collapseOne" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-        <form id="password">
+          <form id="pic">
+              {% include 'alert_box.html' %}
+              <input type="hidden" name="form_type" value="pic">
+
+              <input type='hidden' name='pic_url' value="{{ user.profile.pic_url }}" id='id_pic_url'>
+              <img id="profile_pic" class="icon" src="{{ user.profile.pic_url }}">
+
+              <input class="btn" name="upload" id="upload" type="button" value="Edit profile picture"/>
+              <input class="btn btn-warning disabled" disabled type="submit" value="Save" data-loading-text="Saving..." id="profile-pic-save"/>
+            </form>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <b>
+          <a class="accordion-toggle links" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+            Change your password
+            <i class="icon-chevron-down pull-right arrow"></i>
+          </a>
+        </b>
+      </div>
+      <div id="collapseTwo" class="accordion-body in collapse" style="height: 0px;">
+        <div class="accordion-inner">
+         <form id="password">
           {% include 'alert_box.html' %}
             <input type="hidden" name="form_type" value="password">
             {% for input in password %}
@@ -31,47 +55,31 @@
     <div class="accordion-group">
       <div class="accordion-heading">
         <b>
-          <a class="accordion-toggle links" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-            Add/remove shirt name
-            <i class="icon-chevron-down pull-right arrow"></i>
-          </a>
-        </b>
-      </div>
-      <div id="collapseTwo" class="accordion-body in collapse" style="height: 0px;">
-        <div class="accordion-inner">
-            <form id="shirt_name">
-                {% include 'alert_box.html' %}
-                <input type="hidden" name="form_type" value="shirt_name">
-                {% for input in shirtname %}
-                    <p><input type="text" class="removable_input" placeholder="{{input.placeholder}}" name="{{input.name}}" value="{{input.value}}"><a class="btn remove-input remove-shirt-name"><i class="icon-minus"></i></a></p>
-                {% endfor %}
-                    <p id=""><a id='add-shirt-name' class="btn"><i class="icon-plus"></i> Add another shirtname</a></p>
-                    <input class="btn btn-warning" type="submit" value="Save" data-loading-text="Saving..." id="shirt-name-save"/>
-            </form>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <b>
           <a class="accordion-toggle links" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-            Add alternative emails
+            Add/remove shirt names
             <i class="icon-chevron-down pull-right arrow"></i>
           </a>
       </b>
       </div>
       <div id="collapseThree" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-            <form id="email">
-                {% include 'alert_box.html' %}
-                <input type="hidden" name="form_type" value="email">
-                {% for input in email %}
-                    <p><input type="text" value="{{input.value}}" class="disabled" disabled></p>
-                {% endfor %}
-
-                <p id=""><a id='add-email' class="btn" ><i class="icon-plus"></i> Add another email</a></p>
-                <input class="btn btn-warning" data-loading-text="Saving..." type="submit" value="Save" id="email-save"/>
-            </form>
+            <form id="shirt_name">
+            {% include 'alert_box.html' %}
+            <input type="hidden" name="form_type" value="shirt_name">
+            {% for input in shirtname %}
+              <p>
+                <input type="text" class="removable_input" placeholder="{{input.placeholder}}" name="{{input.name}}" value="{{input.value}}">
+                <a class="btn remove-input remove-shirt-name">
+                  <i class="icon-minus"></i>
+                </a>
+              </p>
+            {% endfor %}
+              <p id="">
+                <a id='add-shirt-name' class="btn"><i class="icon-plus">
+                </i> Add another shirtname</a>
+              </p> <br>
+              <input class="btn btn-warning" type="submit" value="Save" data-loading-text="Saving..." id="shirt-name-save"/>
+            </form> 
         </div>
       </div>
     </div>
@@ -79,22 +87,22 @@
       <div class="accordion-heading">
         <b>
           <a class="accordion-toggle links" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
-            Change profile image
+            Add alternative emails
             <i class="icon-chevron-down pull-right arrow"></i>
           </a>
-      </b>
+        </b>
       </div>
       <div id="collapseFour" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-          <form id="pic">
+          <form id="email">
               {% include 'alert_box.html' %}
-              <input type="hidden" name="form_type" value="pic">
+              <input type="hidden" name="form_type" value="email">
+              {% for input in email %}
+                  <p><input type="text" value="{{input.value}}" class="disabled" disabled></p>
+              {% endfor %}
 
-              <input type='hidden' name='pic_url' value="{{ user.profile.pic_url }}" id='id_pic_url'>
-              <img id="profile_pic" class="icon" src="{{ user.profile.pic_url }}">
-
-              <input class="btn" name="upload" id="upload" type="button" value="Edit profile picture"/>
-              <input class="btn btn-warning disabled" disabled type="submit" value="Save" data-loading-text="Saving..." id="profile-pic-save"/>
+              <p id=""><a id='add-email' class="btn" ><i class="icon-plus"></i> Add another email</a></p> <br>
+              <input class="btn btn-warning" data-loading-text="Saving..." type="submit" value="Save" id="email-save"/>
             </form>
         </div>
       </div>
