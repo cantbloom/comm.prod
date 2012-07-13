@@ -6,3 +6,4 @@ django-pagination==1.0.7
 boto==2.5.2
 numpy==1.6.2
 django_chartit==0.1
+requests==0.13.1
