@@ -36,14 +36,26 @@ function submitForm(e, d){
 	});
 }
 
+function toggleAccordion (e, d){
+	var $accordion = $(e.target).closest('.accordion-group');
+
+	var $arrow = $accordion.find('.arrow');
+
+	$arrow.toggleClass('icon-chevron-down');
+	$arrow.toggleClass('icon-chevron-up');
+}
+
+
 $(function(){
 	$(".collapse").collapse()
 	$('form').find('.alert').slideUp(0);
 
+    $('#upload').click(getImg);
 	$('form').submit(submitForm);
 
 	$(document).on('click', '.remove-input', removeInput);
 	$(document).on('click', '#add-shirt-name', addShirtNameInput);
 	$(document).on('click', '#add-email', addEmailInput);
-});
 
+	$(document).on('show hide', '.accordion-body', toggleAccordion)
+});

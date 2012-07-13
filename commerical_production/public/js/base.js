@@ -64,7 +64,7 @@ function openClaimProfile(e, d){
 	$modal.modal('show');
 }
 
-function submitClaimProfile (e,d) {
+function submitClaimProfile (e, d) {
 	var $modal = $('#claim-email-modal');
 	var email = $modal.data('email');
 	$.post('/claim_email', {email: email})
@@ -80,6 +80,24 @@ function submitFeedBack(e, d) {
 	$('#submit_success').fadeOut();
 	$('#send-feedback-modal').modal('hide');
 	$('#feedback').val("");
+}
+
+//filepicker image upload for registration/edit_profile page
+function getImg() {
+    filepicker.setKey('A1Os2AsKsRgK8t0gbEHcAz')
+    filepicker.getFile("image/*",{
+        'modal': true, 
+        'multiple' : false,
+        'services' : [filepicker.SERVICES.WEBCAM,
+                    filepicker.SERVICES.COMPUTER,
+                    filepicker.SERVICES.FACEBOOK,
+                    filepicker.SERVICES.DROPBOX,]
+        },
+        function(url, metadata){
+            $('#profile_pic').attr("src", url);
+            $('#id_pic_url').attr("value", url);
+        }
+     );
 }
 
 $(function(){

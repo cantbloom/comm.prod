@@ -4,13 +4,16 @@
 {%  endblock %}
 
 {% block content %}
-<h1 class="page-title">{{page_title}}</h1>
-<div class="accordion span6 offset3" id="accordion2">
-    <div class="accordion-group">
+<h1 class="span4 offset5">{{page_title}}</h1>
+<div class="accordion span6 offset3 well" id="accordion2">
+    <div class="accordion-group" >
       <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-          Change password
-        </a>
+        <b>
+          <a class="accordion-toggle links" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+            Change your password
+          <i class="icon-chevron-down pull-right arrow"></i>
+          </a>
+        </b>
       </div>
       <div id="collapseOne" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
@@ -27,9 +30,12 @@
     </div>
     <div class="accordion-group">
       <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-          Add/remove shirt name
-        </a>
+        <b>
+          <a class="accordion-toggle links" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+            Add/remove shirt name
+            <i class="icon-chevron-down pull-right arrow"></i>
+          </a>
+        </b>
       </div>
       <div id="collapseTwo" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
@@ -47,9 +53,12 @@
     </div>
     <div class="accordion-group">
       <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-          Add alternative emails
-        </a>
+        <b>
+          <a class="accordion-toggle links" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+            Add alternative emails
+            <i class="icon-chevron-down pull-right arrow"></i>
+          </a>
+      </b>
       </div>
       <div id="collapseThree" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
@@ -68,13 +77,25 @@
     </div>
     <div class="accordion-group">
       <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
-          Change profile image
-        </a>
+        <b>
+          <a class="accordion-toggle links" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+            Change profile image
+            <i class="icon-chevron-down pull-right arrow"></i>
+          </a>
+      </b>
       </div>
       <div id="collapseFour" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+          <form id="pic">
+              <div class="alert"></div>
+              <input type="hidden" name="form_type" value="profile_pic">
+
+              <input type='hidden' name='profile_url' id='id_pic_url'>
+              <img id="profile_pic" class="icon" src="{{ user.profile.pic_url }}">
+              
+              <input class="btn" name="upload" id="upload" type="button" value="Edit profile picture"/>
+              <input class="btn btn-warning" type="submit" value="Save" id="profile-pic-save"/>
+            </form>
         </div>
       </div>
     </div>
