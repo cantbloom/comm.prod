@@ -184,7 +184,7 @@ def processProd(request):
 
         user = None
         email_search = User.objects.filter(email=sender)
-        alt_email_search = UserProfile.objects.filter(email__email=sender)
+        alt_email_search = UserProfile.objects.filter(email__email=sender, confirmed=True)
 
         if email_search.exists():
             user = email_search[0]
