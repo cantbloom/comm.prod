@@ -1,4 +1,4 @@
-#! /home/cantbloom/venv/bin/python
+#! /usr/bin/env python
 
 ## crontab prefs
 ## * * * * * source /home/cantbloom/commprod/venv/bin/activate; python /home/cantbloom/commprod/cron/parseprod_cron.py
@@ -22,10 +22,10 @@ def fetch_prods():
         ## fill in with your credentails
         mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
         
-        ## or "[Gmail]/All Mail" 
-        mail.select("inbox")
+        mail.select('inbox')
+       ## mail.select("[Gmail]/All Mail")
         
-        ## probably change to (OR (TO "bombers@mit.edu") ( TO "bombers-minus-fascists@mit.edu"))
+      ##result,data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") ( TO "bombers-minus-fascists@mit.edu"))')
         result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
         unread_mail = data[0].split() #list of unread uids
         for msg_id in unread_mail:
