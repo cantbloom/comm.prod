@@ -13,25 +13,27 @@ Takes a url from filepicker and uploads
 it to our aws s3 account.
 """
 def put_profile_pic(url, profile):
-    r = requests.get(url)
-    size = r.headers.get('content-length')
-    if int(size) > 10000000: #greater than a 1mb #patlsotw
-        return False 
+    try:
+        r = requests.get(url)
+        size = r.headers.get('content-length')
+        if int(size) > 10000000: #greater than a 1mb #patlsotw
+            return False 
 
-    filename, headers = urlretrieve(url +"/resize?w=600&h=600")
-    resize_filename, headers = urlretrieve(url + "/resize?w=40&h=40") # store profile sized picture (40x40px)
-    conn = S3Connection(env['AWS_ACCESS_KEY_ID'], env['AWS_SECRET_ACCESS_KEY'])
-    b = conn.get_bucket(env['AWS_BUCK'])
-    k = Key(b)
-    k.key = md5.new(profile.user.username).hexdigest()
-    k.set_contents_from_filename(filename) 
-    k.set_acl('public-read')
+        filename, headers = urlretrieve(url + "/resize?w=600&h=600")
+        resize_filename, headers = urlretrieve(url + "/resize?w=40&h=40") # store profile sized picture (40x40px)
+        conn = S3Connection(env['AWS_ACCESS_KEY_ID'], env['AWS_SECRET_ACCESS_KEY'])
+        b = conn.get_bucket(env['AWS_BUCK'])
+        k = Key(b)
+        k.key = md5.new(profile.user.username).hexdigest()
+        k.set_contents_from_filename(filename) 
+        k.set_acl('public-read')
 
-    k = Key(b)
-    k.key = md5.new(profile.user.username + "resize").hexdigest()
-    k.set_contents_from_filename(resize_filename) 
-    k.set_acl('public-read')
-        
+        k = Key(b)
+        k.key = md5.new(profile.user.username + "resize").hexdigest()
+        k.set_contents_from_filename(resize_filename) 
+        k.set_acl('public-read')
+    except:
+        return False
     #update user profile
     return "http://s3.amazonaws.com/%s/%s"% (env['AWS_BUCK'], k.key)
 
