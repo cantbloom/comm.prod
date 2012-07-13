@@ -231,9 +231,7 @@ def edit_profile(request):
                     name = name.strip()
                     if name != "":
                         ShirtName(user_profile=profile, name=name).save()
-
-                success = 'Shirt names added!'
-
+                success = "Shirt names added!"
             except:
                 errors['shirt_name'] = ['Oops -- something went wrong.']
 
@@ -244,7 +242,10 @@ def edit_profile(request):
             for email in emails:
                 #makes sure email
                 if not validateEmail(email): 
-                    errors['email'].append(email + ' is not a valid email.')
+                    if email.strip() == "":
+                        errors['email'].append("Empty email entered.")
+                    else:
+                        errors['email'].append(email + ' is not a valid email.')
 
                 #make sure email doesn't exists
                 elif UserProfile.objects.filter(email__email=email, email__confirmed=True).exists() or UserProfile.objects.filter(user__email=email, send_mail=True).exists():
@@ -305,7 +306,7 @@ def edit_profile(request):
 
 
     template_values = {
-        "page_title": "Edit Profile",
+        "page_title": "Edit Your Profile",
         'user'  : request.user,
         'password': passwordForm,
         'shirtname': shirtNameForm,

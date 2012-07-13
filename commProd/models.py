@@ -3,10 +3,10 @@ from django.utils import simplejson as json
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db.models import Avg
-from datetime import date
 
 from helpers.admin import email_templates, utils
 
+from datetime import date, datetime
 import sha, random
 
  
@@ -82,18 +82,28 @@ class Email(models.Model):
 
     email = models.EmailField(default='')
     confirmed = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now=True, default=datetime.now())
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, 'http://commprod.herokuapp.com/confirm_email/'+self.activation_key + '/')
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, 'http://commprod.herokuapp.com/confirm_email/' + self.activation_key + '/')
         subject = email_templates.alt_email['subject']
         emails = [self.email]
         utils.emailUsers(subject, content, emails)
+
+        removeExpiredEmails() #perform cleanup of unconfirmed emails
 
     def confirm(self):
         self.confirmed = True
         self.user_profile.mergeAndDelete(self.email)
         self.save()
+
+    def removeExpiredEmails(self):
+        time_threshold = datetime.now() - timedelta(hours=24)
+        Email.objects.filter(date_created__lt=time_threshold, confirmed=False).delete()
+
+    def __unicode__(self):
+        return "%s, confirmed: %s, owned by %s" % (self.email, self.confirmed, self.user_profile.user.username)
 
 class ShirtName(models.Model):
     user_profile = models.ForeignKey(UserProfile)
