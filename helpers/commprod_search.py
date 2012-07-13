@@ -9,7 +9,6 @@ unvoted: passing in username and receive commprods unvoted by user
 """
 def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None, unvoted=False):
 	commprods = CommProd.objects.all()
-
 	try:
 		if cp_id:
 			commprods = commprods.filter(id=cp_id)
@@ -33,11 +32,11 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
 			commprods = commprods.objects.filter(date__lte=endDate)
 
 		if unvoted:
-			commprods = commprods.exclude(rating__user_profile__user__username = unvoted)
+			commprods = commprods.exclude(rating__user_profile__user__username=unvoted)
 
 		if limit:
 			commprods = commprods[:limit]
-			
+
 	except:
 		commprods = CommProd.objects.all()
 
