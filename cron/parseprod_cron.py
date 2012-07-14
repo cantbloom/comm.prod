@@ -40,10 +40,10 @@ def fetch_prods():
             if content == None:
                 logging.warn("No content found from sender %s" % str(sender))
             else:
-                parsed_content = parseProd(content)
+                parsed_content = parseProd(clean_content(content, 'commprod'))
                 if parsed_content:
                     logging.warning("Commprod found from email %s with commprod\n '%s'" % (sender, parsed_content))
-                    data = json.dumps({sender : (content, parsed_content, date)})
+                    data = json.dumps({sender : (clean_content(content, 'email'), parsed_content, date)})
                     r = requests.post(url, data={'data' : data, 'key' : env['SECRET_KEY']})
                     time.sleep(1) # don't overload poor heroku
                     logging.info(r.text)
@@ -64,8 +64,8 @@ returns None. Run query through stripOld()
 before passing in. 
 """
 def parseProd(query):
-    btb_regex = '((a btb)|(abtb))'
-    prod_regex = '((comm.prod\s)|(comm prod\s)|(commprod\s))'
+    btb_regex = '((^a btb)|(^abtb)|(\sa btb)|(\sabtb))'
+    prod_regex = '((comm\.prod\s)|(comm prod\s)|(commprod\s)|(comm\.prod\s)|(commprod\.\s))'
     regex = btb_regex + '(?P<comm_prod>.+?)' + prod_regex + "+"
     pattern = re.compile(regex, re.I|re.M|re.DOTALL)
     match = pattern.search(query)
@@ -91,16 +91,23 @@ def strip_quotes(string):
 """
 shitty hack
 """
-def stripOld(query):
-    forward = "---------- Forwarded message ----------"
-    original = "-----Original message-----"
-    reply = "wrote:"
+def stripOld(query, type):
+    strip_params = {
+        forward : "---------- Forwarded message ----------",
+        original : "-----Original message-----",
+        reply : "wrote:",
+        reply_alt : "________________________________________",
+        }
     if query != None:
-        query = query.split(forward)[0]
-        query = query.split(reply)[0]
-        query = query.split(original)[0]
-        query = query.replace('=\r\n', '\n')
-    return query
+        for param in strip_params.values():
+            query = query.split(param)[0]
+        return query
+
+def clean_content(query, type):
+    if type == "email":
+        query = re.sub('[=\r\n]', '\n', query)
+    elif type == "commprod":
+        query = re.sub('[\r\n]', '', query)
                              
 """
 Helper to read message content
