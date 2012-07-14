@@ -45,10 +45,10 @@ function updateAvgScore(e, data){
 		var $commprod = $('#'+ data.type + '_object_'+ data.cp_id);
 
 		//not udpating now because of lag...//update 
-		//$commprod.find('.score').html(data.avg_score.toFixed(2));
+		$commprod.find('.score').html(data.score);
 
 		//todo:
-		//make sure psonal score set correctly
+		//make sure personal score set correctly
 	}
 }
 

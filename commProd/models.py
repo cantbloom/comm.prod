@@ -23,17 +23,15 @@ class UserProfile(models.Model):
     data_point_count = models.IntegerField(default=0)
 
     def update_data_point(self, save=True):
-        if self.data_point_count % 1:
+        if not self.data_point_count % 1: ##change mod value for less granularity
             data_point = TrendData(user_profile=self, score=self.score, avg_score=self.avg_score)
             data_point.save()
-
         self.data_point_count += 1
 
         if save:
             self.save()
 
     def update_avg(self, save=True):
-        #self.avg_score = self.user.ratings__set.aggregate(Avg('score'))['score__avg']
         self.avg_score = self.score / CommProd.objects.filter(user_profile=self).count()
         if save:
             self.save()

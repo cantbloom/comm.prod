@@ -10,9 +10,9 @@ Can render a commprod as html block or list of
 html items. User is the user requesting the view.
 """
 def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_type="commprod"):
-    votes = CommProd.objects.filter(rating__user_profile__user=user)
-    upvoted = votes.filter(score__gt = 0).values_list('id', flat=True)
-    downvoted = votes.filter(score__lt = 0).values_list('id', flat=True)
+    votes = Rating.objects.filter(user_profile__user=user)
+    upvoted = votes.filter(score__gt=0).values_list('commprod__id', flat=True)
+    downvoted = votes.filter(score__lt=0).values_list('commprod__id', flat=True)
     if return_type == "html":
         template_values =  {
             'commprods': paginator(page, commprods),

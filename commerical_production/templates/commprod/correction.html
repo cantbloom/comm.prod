@@ -19,7 +19,7 @@
         <div class="author-container">
             <b class="author-name"> Original Email:</b>
             <div class="commprod-content">
-                {{ commprod.email_content }}
+                {{ commprod.email_content.content|safe|linebreaks }}
             </div>
         </div>
       </div>
