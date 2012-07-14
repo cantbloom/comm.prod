@@ -65,7 +65,7 @@ before passing in.
 """
 def parseProd(query):
     btb_regex = '((a btb)|(abtb))'
-    prod_regex = '((comm.prod)|(comm prod)|(commprod)|(comm.prod.)|(commprod.))'
+    prod_regex = '((comm.prod\s)|(comm prod\s)|(commprod\s))'
     regex = btb_regex + '(?P<comm_prod>.+?)' + prod_regex + "+"
     pattern = re.compile(regex, re.I|re.M|re.DOTALL)
     match = pattern.search(query)

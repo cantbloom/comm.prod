@@ -114,15 +114,6 @@ class ShirtName(models.Model):
     def __unicode__(self):
         return "%s, %s, owned by %s" % (self.name, self.number, self.user_profile.user.username)
 
-class CommProdEmail(models.Model):
-    user_profile = models.ForeignKey(UserProfile)
-
-    content = models.TextField()
-    date = models.DateTimeField()
-
-    def __unicode__(self):
-        return 'Email with content %s by %s on %s' % (self.content, self.user_profile.user.username, str(self.date))
-
 class CommProd(models.Model):
     user_profile = models.ForeignKey(UserProfile)
     email_content = models.ForeignKey(CommProdEmail)
@@ -164,6 +155,15 @@ class CommProd(models.Model):
 
     def __unicode__(self):
         return 'a btb "%s" comm.prod by %s on %s' % (self.content, self.user_profile.user.username, str(self.date))
+        
+class CommProdEmail(models.Model):
+    user_profile = models.ForeignKey(UserProfile)
+
+    content = models.TextField()
+    date = models.DateTimeField()
+
+    def __unicode__(self):
+        return 'Email with content %s by %s on %s' % (self.content, self.user_profile.user.username, str(self.date))
 
 class Rating(models.Model):
     commprod = models.ForeignKey(CommProd)
