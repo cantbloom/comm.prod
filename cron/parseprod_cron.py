@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 ## crontab prefs
-## * * * * * source /home/cantbloom/commprod/venv/bin/activate; python /home/cantbloom/commprod/cron/parseprod_cron.py
+## * * * * * source /home/cantbloom/commprod/venv/bin/activate >/dev/null 2>&1; python /home/cantbloom/commprod/cron/parseprod_cron.py >/dev/null 2>&1
 from os import environ as env
 import email, imaplib, re, logging, requests, datetime, time, os, simplejson as json
 
@@ -20,13 +20,14 @@ def fetch_prods():
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
 
         ## fill in with your credentails
-        mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
+        #mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
         
-        mail.select('inbox')
-        #mail.select("[Gmail]/All Mail")
+        mail.login('jblum18@gmail.com', 'LPK9755xml?')
+        #mail.select('inbox')
+        mail.select("[Gmail]/All Mail")
 
-        #result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
-        result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
+        result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
+        #result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
         unread_mail = data[0].split() #list of unread uids
         for msg_id in unread_mail:
             result, data = mail.uid('fetch', msg_id, '(RFC822)')
@@ -99,14 +100,16 @@ def strip_quotes(string):
 shitty hack
 """
 def stripOld(query):
-    strip_params = {
-        'forward' : "---------- Forwarded message ----------",
-        'original' : "-----Original message-----",
-        'reply' : "wrote:",
-        'reply_alt' : "________________________________________",
-        }
+    strip_params = [ "---------- Forwarded message ----------",
+        "-----Original message-----",
+        "wrote:",
+        "________________________________________",
+        'Quoting',
+        '\r\n>',
+        '\n>',
+        ]
     if query != None:
-        for param in strip_params.values():
+        for param in strip_params:
             query = query.split(param)[0]
         return query
 
@@ -115,6 +118,9 @@ def clean_content(query, type):
         query = query.replace('=\r\n', '\n')
     elif type == "commprod":
         query = query.replace('=\r\n', '')
+    query = query.replace('=92', '\'')
+    query = query.replace('=93', '"')
+    query = query.replace('=94', '"')
     return query
                              
 """
