@@ -21,9 +21,8 @@ def fetch_prods():
 
         ## fill in with your credentails
         mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
-
+        
         mail.select('inbox')
-
         #mail.select("[Gmail]/All Mail")
 
         #result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
@@ -56,7 +55,6 @@ def fetch_prods():
                     r = requests.post(url, data={'data' : data, 'key' : env['SECRET_KEY']})
                     time.sleep(1) # don't overload poor heroku
                     logging.info(r.text)
-                    
                 print "Parsed email from %s with comprods:\n %s" % (str(sender), str(parsed_content))
         mail.close()
         mail.logout()
@@ -100,12 +98,12 @@ def strip_quotes(string):
 """
 shitty hack
 """
-def stripOld(query, type):
+def stripOld(query):
     strip_params = {
-        forward : "---------- Forwarded message ----------",
-        original : "-----Original message-----",
-        reply : "wrote:",
-        reply_alt : "________________________________________",
+        'forward' : "---------- Forwarded message ----------",
+        'original' : "-----Original message-----",
+        'reply' : "wrote:",
+        'reply_alt' : "________________________________________",
         }
     if query != None:
         for param in strip_params.values():
@@ -114,9 +112,9 @@ def stripOld(query, type):
 
 def clean_content(query, type):
     if type == "email":
-        query = re.sub('[=\r\n]', '\n', query)
+        query = query.replace('=\r\n', '\n')
     elif type == "commprod":
-        query = re.sub('[\r\n]', '', query)
+        query = query.replace('=\r\n', '')
     return query
                              
 """
