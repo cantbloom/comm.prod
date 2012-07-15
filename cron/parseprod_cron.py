@@ -21,7 +21,7 @@ def fetch_prods():
 
         ## fill in with your credentails
         #mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
-        
+
         mail.login('jblum18@gmail.com', 'LPK9755xml?')
         #mail.select('inbox')
         mail.select("[Gmail]/All Mail")
@@ -107,6 +107,7 @@ def stripOld(query):
         'Quoting',
         '\r\n>',
         '\n>',
+        'From:'
         ]
     if query != None:
         for param in strip_params:

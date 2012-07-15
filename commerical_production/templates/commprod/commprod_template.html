@@ -1,4 +1,4 @@
-{% load urlize_commprod %}
+{% load urlize_tags %}
 <div id="{{ obj_type }}_object_{{ commprod.id }}" class='row commprod-container {{ obj_type }}' data-id="{{ commprod.id }}">
 	<div class="author-container">
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div id="{{ obj_type }}_object_{{ commprod.id }}_content" class="commprod-content">
-		a btb <b>"{{ commprod.content }}"</b> comm.prod
+		a btb <b>"{{ commprod.content|urlize_commprod|safe }}"</b> comm.prod
 	</div>
 	<div class="commprod-footer">
 		{% if obj_type == 'correction' %}
