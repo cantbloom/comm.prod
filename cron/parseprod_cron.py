@@ -20,14 +20,13 @@ def fetch_prods():
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
 
         ## fill in with your credentails
-        #mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
+        mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
 
-        mail.login('jblum18@gmail.com', 'LPK9755xml?')
-        #mail.select('inbox')
-        mail.select("[Gmail]/All Mail")
+        mail.select('inbox')
+        #mail.select("[Gmail]/All Mail")
 
-        result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
-        #result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
+        #result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
+        result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
         unread_mail = data[0].split() #list of unread uids
         for msg_id in unread_mail:
             result, data = mail.uid('fetch', msg_id, '(RFC822)')
