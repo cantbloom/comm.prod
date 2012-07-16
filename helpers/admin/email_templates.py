@@ -7,7 +7,7 @@ registration = {
 		Please register to start rating commprods <a href='%s'>here</a>
 		<br>
 		<br>
-		Love,
+		Love, <br>
 		Josh and Max
 	"""
 } 
@@ -21,7 +21,7 @@ alt_email = {
 		Please confirm that you are the owner of  %s by clicking <a href='%s'>here</a>.
 		<br>
 		<br>
-		Love,
+		Love,<br>
 		Max and Josh
 	"""
 }

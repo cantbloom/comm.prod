@@ -177,21 +177,21 @@ def find_profile_faves(user):
         else:
             user_dict[username] = score
 
-    most_loved = UserProfile.objects.order_by('?')[0]
-    most_hated = UserProfile.objects.order_by('?')[0]
-    min_val = 0
-    max_val = 0
     if user_dict != {}:
         most_loved = max(user_dict)
         max_val = user_dict[most_loved]
         most_hated = min(user_dict)
         min_val = user_dict[most_hated]
 
-        # not all equal
-        if most_loved != most_hated:
-            most_loved = UserProfile.objects.filter(user__username=most_loved)[0]
-            most_hated = UserProfile.objects.filter(user__username=most_hated)[0]
-    
+        
+        most_loved = UserProfile.objects.filter(user__username=most_loved)[0]
+        most_hated = UserProfile.objects.filter(user__username=most_hated)[0]
+    else:
+        most_loved = UserProfile.objects.order_by('?')[0]
+        most_hated = UserProfile.objects.order_by('?')[0]
+        min_val = 0
+        max_val = 0
+
     return  profile_renderer(dict(zip([most_loved, most_hated], [max_val,min_val])))
 
 

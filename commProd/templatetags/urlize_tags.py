@@ -37,7 +37,6 @@ def youtube_tag(url_match):
     try:
         v = url_match[url_match.index('v=')+2:]
         v = v.split('/')[0]
-        print v
     except ValueError:
         return a_tag(url_match) # couldn't extract the value return just a link.
     

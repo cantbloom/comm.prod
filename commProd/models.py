@@ -65,8 +65,15 @@ class UserProfile(models.Model):
         if to_delete.exists():
             to_delete = to_delete[0].profile
 
+            self.score += to_delete.score
+            self.data_point_count += to_delete.data_point_count
+            
             CommProd.objects.filter(user_profile=to_delete).update(user_profile=self)
+
+            CommProdEmail.objects.filter(user_profile=to_delete).update(user_profile=self) #very important!!
             TrendData.objects.filter(user_profile=to_delete).update(user_profile=self)
+
+            self.update_avg()
             
             to_delete.user.delete()
 
@@ -89,7 +96,7 @@ class Email(models.Model):
         emails = [self.email]
         utils.emailUsers(subject, content, emails)
 
-        removeExpiredEmails() #perform cleanup of unconfirmed emails
+        self.removeExpiredEmails() #perform cleanup of unconfirmed emails
 
     def confirm(self):
         self.confirmed = True

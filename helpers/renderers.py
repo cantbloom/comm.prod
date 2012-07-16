@@ -54,7 +54,6 @@ Renders a user information block as a list of
 html items.
 """
 def profile_renderer(profiles):
-    
     html_list = []
     for profile in profiles:
         c = {
@@ -62,6 +61,9 @@ def profile_renderer(profiles):
         'score' : profiles[profile],
         }
         html_list.append(render_to_string('profile_template.html', c))
+    # happens when only one user profile is found
+    if len(html_list) == 1:
+        html_list += html_list
 
     return html_list
 
