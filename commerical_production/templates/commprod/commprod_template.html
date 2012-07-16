@@ -14,7 +14,7 @@
 			{% endif %}
 		</a>
 		{% if commprod.user_profile.send_mail == 0 %}
-		<button class="claim-profile btn btn-mini btn-primary" data-user="{{commprod.user_profile.user.username}}"> Claim Profile</button>
+		<button class="claim-profile btn btn-mini btn-primary" data-user="{{ commprod.user_profile.user.username }}"> Claim Profile</button>
 		{% endif %}
 		
 		<div class="vote-container" style="float:right">

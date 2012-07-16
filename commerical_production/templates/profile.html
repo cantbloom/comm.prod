@@ -14,9 +14,11 @@
         <h1 id='username' class="span9">
             <img id="profile_pic" class="icon" src="{{ profile_user.profile.pic_url }}">
             {{ header }} 
+
             {% if profile_user.profile.send_mail == 0 %}
-            <button class="claim-profile btn btn-primary" data-user="{{commprod.user_profile.user.username}}"> Claim Profile</button>
+            <button class="claim-profile btn btn-primary" data-user="{{ profile_user.username }}"> Claim Profile</button>
             {% endif %}
+
         </h1>
 
         <div id="raty-container" class="pull-right">

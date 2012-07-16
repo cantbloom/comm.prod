@@ -115,7 +115,7 @@ Endpoint to request an email be added to you profile
 @csrf_exempt
 def claim_email(request):
     email = request.POST.get('email', "")
-    email_user = User.objects.filter(email = email)
+    email_user = User.objects.filter(email=email)
     if email_user.exists() and email_user[0].profile.send_mail == False:
         request.user.profile.add_email(email)
         return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json') 

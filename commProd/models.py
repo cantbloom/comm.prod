@@ -6,7 +6,7 @@ from django.db.models import Avg
 
 from helpers.admin import email_templates, utils
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import sha, random
 
  
