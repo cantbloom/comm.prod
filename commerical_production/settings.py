@@ -1,7 +1,7 @@
 # Django settings for commerical_production project.
 import os
 from os import environ as env
-#custom auth by max
+#custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
 DEBUG = True
