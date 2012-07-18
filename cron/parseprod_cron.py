@@ -22,8 +22,8 @@ def fetch_prods():
         ## fill in with your credentails
         mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
 
-        mail.select('inbox')
         #mail.select("[Gmail]/All Mail")
+        mail.select('inbox')
 
         #result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
         result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
@@ -40,7 +40,7 @@ def fetch_prods():
                 logging.warn("No content found from sender %s" % str(sender))
             else:
                 parsed_content = parseProd(clean_content(content, 'commprod'))
-                
+
                 if parsed_content:
                     logging.warning("Commprod found from email %s with commprod\n '%s'" % (sender, parsed_content))
                     
@@ -72,7 +72,8 @@ before passing in.
 """
 def parseProd(query):
     btb_regex = '((^a btb)|(^abtb)|(\sa btb)|(\sabtb))'
-    prod_regex = '((comm\.prod\s)|(comm prod\s)|(commprod\s)|(comm\.prod\s)|(commprod\.\s))'
+    prod_regex = '((comm\.prod\s)|(comm prod\s)|(commprod\s)|(comm\.prod\s)|(commprod\.\s)|(comm\.prod\.\s)|(comm\. prod\.\s))'
+  
     regex = btb_regex + '(?P<comm_prod>.+?)' + prod_regex + "+"
     pattern = re.compile(regex, re.I|re.DOTALL)
     match = pattern.search(query)
