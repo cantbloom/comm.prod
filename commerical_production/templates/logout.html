@@ -1,0 +1,32 @@
+{% extends "hero_err_template.html" %}
+
+    {% block hero_content %} 
+        <p> Come back soon. </p>
+          <p>
+            <a class="btn btn-primary btn-large" href="/login">
+              Login Again
+            </a>
+          </p>
+     {% endblock %}
+
+{% block helper %}
+{% endblock %}
+
+{% block scripts %} 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#page_title').html("Logged Out");
+		$('#hero').html(setHero());
+	});
+
+	function setHero() {
+		var byes = ['Godspeed ', 'Buhbyes', 'Toodles', 'Ta ta for now', 'Ciao', 'Sayanora', 'Laters', 'Live long and prosper', 'Cheerio', "Y'all come back soon now", 'So long', 'Farewell good ser', 'Bon voyage', 'May the Force be with you', 'Shalom', 'Peace out', 'Be well, fellow bomber', 'Adios', 'Kkkkk...out', 'Stay cool, home-brotha', 'That is all', 'No more of you', 'Smell ya later', 'Drink bitch', "Sometimes I think that boy's cheese done slid right off his cracker", "It's been real", "That's all folks", "It's fine I didn't like you either."];
+			
+			return byes[Math.floor(Math.random()*byes.length)];
+	}
+
+</script>
+
+{% endblock %}
+
+

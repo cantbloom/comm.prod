@@ -1,0 +1,18 @@
+<!--user_profile variable ref UserProfile model -->
+<div id="user_{{ user.id }}" class='row commprod-container' data-id="{{ user_profile.user.id }}">
+    <div class="author-container">
+        <a class="author-name" href='/users/{{ user_profile.user.username }}'>
+            <img class="author-pic" src="{{ user_profile.pic_url }}"/>
+            {% if user_profile.user.is_active and not user_profile.user.first_name == ''%}
+            {{ user_profile.user.first_name }} {{ user_profile.user.last_name }}
+            {% else %}
+            {{ user_profile.user.username }}
+            {% endif %}
+        </a>
+        <div class="vote-container" style="float:right">
+            <span class='score'> {{ score }}
+            </span>
+        </div>
+    </div>
+</div>
+

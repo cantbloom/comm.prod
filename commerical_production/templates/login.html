@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+ 
+
+{% block styles %}
+    <link href="/public/css/login.css" rel="stylesheet">
+{%  endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+     <meta http-equiv="REFRESH" content="0; url=/">
+{% endif %}
+<div id="login_container" class="span4 offset4">
+    <div class="row">
+        <div id="top_secret"> </div>
+    </div>
+    <div class="row">
+        <form class="form" method="post" action="{% url django.contrib.auth.views.login %}">
+            {% csrf_token %}
+            {% if form.errors %}
+                    <div class="alert alert-error">
+                        Your username or password was incorrect. Please try again.
+                    </div>
+
+            {% endif %}
+            <p>
+                {{ form.username }}
+            </p>
+            <p>
+                {{ form.password }}
+            </p>
+            <br>
+
+            <input class="btn btn-warning" id="login" type="submit" value="Login" />
+
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
+{% block scripts %} 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#id_username').attr('placeholder', 'Username');
+        $('#id_password').attr('placeholder', 'Password');
+        $('#page_title').html("comm.prod Login");
+    });
+    
+</script>
+
+{% endblock %}

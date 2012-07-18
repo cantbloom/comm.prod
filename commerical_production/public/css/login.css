@@ -1,0 +1,25 @@
+#login{
+    margin-left: 17px;
+}
+
+
+#top_secret{
+    height:200px;
+    width: 200px;
+    background: url(/public/img/btb-confidential.jpg);
+    background-size: 200px 200px;
+    margin: 10px auto;
+}
+
+.login_text {
+    padding-right:5px;
+}
+
+.form>p {
+	padding: 0px;
+	margin: 0px;
+}
+
+.form input{
+	width:90%;
+}

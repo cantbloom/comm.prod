@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link href="/public/css/profile.css" rel="stylesheet">
+{%  endblock %}
+
+{% block subnav %}
+{% include "profile_subnav.html"%}
+{% endblock%}
+
+
+{% block content %}
+    <div class="row">
+        <h1 id='username' class="span9">
+            <img id="profile_pic" class="icon" src="{{ profile_user.profile.pic_url }}">
+            {{ header }} 
+
+            {% if profile_user.profile.send_mail == 0 %}
+            <button class="claim-profile btn btn-primary" data-user="{{ profile_user.username }}"> Claim Profile</button>
+            {% endif %}
+
+        </h1>
+
+        <div id="raty-container" class="pull-right">
+            <div id="raty" class="pull-left" data-rating="{{ profile_user.profile.score }}" > </div>
+            <span id="target" class="pull-left score_holder"> {{ profile_user.profile.score }} </span>
+        </div>
+
+    </div>
+    {% block prods %}
+
+    <div class="container-fluid content_container">
+        <div class="row-fluid">
+            <div class="span4 border well">
+                {% if best_prod %}
+                <h3 class="sidebar" > Best Prod: </h3>
+                {{ best_prod|safe}}
+                {% endif %}
+
+                {% if worst_prod %}
+                <h3 class="sidebar" > Worst Prod: </h3>
+                {{ worst_prod|safe}}
+                {% endif %}
+                <h3 class="sidebar" > Most Loved Bomber: </h3>
+                
+                {{ most_loved }}
+
+                <h3 class="sidebar" > Most Hated Bomber: </h3>
+                {{ most_hated }}
+              <!--Sidebar content-->
+            </div>
+            <div class="span8 border well">
+                <ul class="nav nav-tabs profile_tabs">
+                    <li id="trend_tab" class="tab">
+                        <a id="trends">Trends</a>
+                    </li>
+                    <li id="vs_class_tab" class="tab">
+                        <a id="vs_class" >{{ profile_user.username }} vs. The {{ profile_user.profile.class_year }}'s </a>
+                    </li>
+                    <li id="vs_floor_tab" class="tab">
+                        <a id="vs_floor">{{ profile_user.username }} vs. The Floor</a>
+                    </li>
+                </ul>
+                <div id ="stats" class="row"> 
+                    <p class="stat pull-left"> 
+                        <strong>  Standard Deviation: </strong> 
+                        <span id="std"> </span> 
+                    </p>
+                    <p class="stat pull-left">
+                        <strong>  Mean:  </strong>
+                        <span id="mean" > </span> 
+                    </p>
+                    <p class="stat pull-left">
+                        <strong>  {{ profile_user.username }}'s Grade:  </strong>
+                        <span id="grade" > </span> 
+                    </p>
+                </div>
+                <div id="chart_container">
+                </div> 
+                
+            <!--Body content-->
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+
+{%  endblock %}
+
+{% block scripts %} 
+<script type="text/javascript">
+    user_data = {
+        'username' : '{{ profile_user.username }}',
+        'class_year' : {{ profile_user.profile.class_year }},
+        'score' : {{ profile_user.profile.score }},
+    }
+</script>
+<script src="/public/js/profile.js"></script>
+{% endblock %}

@@ -1,0 +1,10 @@
+.DS_Store
+.dropbox
+*.pyc
+*.log
+bombers.txt
+.env
+config.py
+commprod_env
+test.html
+venv
