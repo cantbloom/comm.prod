@@ -12,7 +12,7 @@
 {% block content %}
     <div class="row">
         <h1 id='username' class="span9">
-            <img id="profile_pic" class="icon" src="{{ profile_user.profile.pic_url }}">
+            <img id="profile_pic" class="author-pic" src="{{ profile_user.profile.pic_url }}">
             {{ header }} 
 
             {% if profile_user.profile.send_mail == 0 %}

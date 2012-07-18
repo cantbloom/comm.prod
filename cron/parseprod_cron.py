@@ -15,7 +15,7 @@ Sends a post request to the endpoint of a dictionary of new messages in the form
 or None if no new messages exist or no comm_prod was found.
 """
 def fetch_prods():
-    url = "http://commprod.herokuapp.com/commprod/processprod"
+    url = env['POST_URL']
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
 
