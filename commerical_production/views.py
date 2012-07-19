@@ -41,7 +41,7 @@ def register(request, key):
     profile = UserProfile.objects.filter(activation_key=key)
     
     # ##switch BACK DONT FORGET
-    if not profile.exists() or not profile[0].user.is_active:
+    if not profile.exists() or profile[0].user.is_active:
          page_title = "Oops"
          hero_title ="Hmm... that registration key is invalid."
          return renderErrorMessage(request, page_title, hero_title)

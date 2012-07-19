@@ -101,15 +101,31 @@ function getImg() {
      );
 }
 
+function dropitemClicked (e,v) {
+	navToUser(v)
+}
+
+function searchSubmit (e, v) {
+	e.preventDefault();
+}
+
+function navToUser(val){
+	var username = user_dict[val];
+	window.location = '/users/' + username
+}
+
 $(function(){
 	$(document).on('voteResponse', updateAvgScore);
 
-	$(document).on('click', '.vote-container div', voteSelection)
+	$(document).on('click', '.vote-container .vote', voteSelection)
 
 	$(document).on('click', '.claim-profile', openClaimProfile)
 	$(document).on('click', '#email-claim-confirm', submitClaimProfile)
 
 	$(document).on('click', '#submit_feedback', submitFeedBack)
+
+	$(document).on('typeaheadItemSelected', dropitemClicked)
+	$('#navbar-search').on('submit', searchSubmit)
 
 	$('#search_bar').typeahead({
 		'source' : user_list
