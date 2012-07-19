@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-
+{% load filters %}
 {% block styles %}
-<link href="/public/css/profile.css" rel="stylesheet">
+{% include_style 'profile' %}
 {%  endblock %}
 
 {% block subnav %}
@@ -95,5 +95,6 @@
         'score' : {{ profile_user.profile.score }},
     }
 </script>
-<script src="/public/js/profile.js"></script>
+
+{% include_script 'profile' %}
 {% endblock %}

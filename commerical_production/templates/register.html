@@ -2,7 +2,7 @@
 
 
 {% block styles %}
-    <link href="/public/css/register.css" rel="stylesheet">
+{% include_style 'register' %}
 {%  endblock %}
 {% block content %} 
     <h2 id="reg-header-text" class=" span6 offset3 center-text">We just need a little more information...</h2>
@@ -46,5 +46,5 @@
 {% endblock%}
 
 {% block scripts %}
-<script src="/public/js/register.js"></script>
+{% include_script 'register' %}
 {% endblock %}

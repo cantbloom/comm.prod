@@ -41,7 +41,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
                 str(render_to_string('commprod/commprod_template.html', {
                     'commprod': commprod,
                     'upvote_selected': upvote_selected ,
-                    'downnvote_selected': downvote_selected,
+                    'downvote_selected': downvote_selected,
                     'obj_type' : obj_type,
                 }))
             )

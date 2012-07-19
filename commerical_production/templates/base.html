@@ -1,3 +1,4 @@
+{% load filters %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,10 +9,11 @@
         <meta name="author" content="">
 
         <!--  styles -->
-        {% load staticfiles %}
-        <link href="/public/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/public/css/bootstrap-responsive.css" rel="stylesheet">
-        <link href="/public/css/base.css" rel="stylesheet">
+        {#% load staticfiles %#}{# because max said so #}
+
+        {% include_style "bootstrap.min" %}
+        {% include_style "bootstrap-responsive" %}
+        {% include_style "base" %}
         {% block styles %} {% endblock%}
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -47,7 +49,7 @@
                                  <a id="user_prof" href=/users/{{user.username}}>Profile </a>
                             </li>
                         </ul>
-                        <ul class="nav pull-right">
+                        <ul class="nav pull-right topbar">
                             <li>
                                 <form class="navbar-search">
                                     <input type="search" id="search_bar" class="search-query" placeholder="Find people..." autocomplete="off">
@@ -130,33 +132,34 @@
 
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
-        <script src="/public/js/user_list.js"></script>
-        <script src="/public/js/lib/jquery.min.js"></script>
-        
+
+        {% include_script 'user_list' %}
+        {% include_script 'lib/jquery.min' %}
+
         <!--  helpers -->
-        <script src="/public/js/lib/filepicker.js"></script>
+        {% include_script 'lib/filepicker' %}
+        {% include_script 'lib/jquery.raty.min' %}
         
-        <script src="/public/js/lib/jquery.raty.min.js"></script>
-
         <!--  graphing -->
-        <script src="/public/js/lib/highcharts.js"></script>
-        <script src="/public/js/lib/exporting.js"></script>
-        
-        <!--  bootstrap -->
-        <script src="/public/js/lib/bootstrap-transition.js"></script>
-        <script src="/public/js/lib/bootstrap-alert.js"></script>
-        <script src="/public/js/lib/bootstrap-modal.js"></script>
-        <script src="/public/js/lib/bootstrap-dropdown.js"></script>
-        <script src="/public/js/lib/bootstrap-scrollspy.js"></script>
-        <script src="/public/js/lib/bootstrap-tab.js"></script>
-        <script src="/public/js/lib/bootstrap-tooltip.js"></script>
-        <script src="/public/js/lib/bootstrap-popover.js"></script>
-        <script src="/public/js/lib/bootstrap-button.js"></script>
-        <script src="/public/js/lib/bootstrap-collapse.js"></script>
-        <script src="/public/js/lib/bootstrap-carousel.js"></script>
-        <script src="/public/js/lib/bootstrap-typeahead.js"></script>
+        {% include_script 'lib/highcharts' %}
+        {% include_script 'lib/exporting' %}
 
-        <script src="/public/js/base.js"></script>         
+        <!--  bootstrap -->
+        {% include_script 'lib/bootstrap-transition' %}
+        {% include_script 'lib/bootstrap-alert' %}
+        {% include_script 'lib/bootstrap-modal' %}
+        {% include_script 'lib/bootstrap-dropdown' %}
+        {% include_script 'lib/bootstrap-scrollspy' %}
+        {% include_script 'lib/bootstrap-tab' %}
+        {% include_script 'lib/bootstrap-tooltip' %}
+        {% include_script 'lib/bootstrap-popover' %}
+        {% include_script 'lib/bootstrap-button' %}
+        {% include_script 'lib/bootstrap-collapse' %}
+        {% include_script 'lib/bootstrap-carousel' %}
+        {% include_script 'lib/bootstrap-typeahead' %}
+
+        {% include_script 'base' %}
+
         {% block scripts %} 
         {% endblock %}
     </body>
