@@ -56,8 +56,10 @@ def register(request, key):
             user.last_name = request.POST['last_name']
             user.set_password(request.POST['password'])
 
-            pic_url = request.POST['pic_url']
-            user.profile.pic_url = pic_url
+            pic_url = put_profile_pic(request.POST['pic_url'], user.profile) 
+            if pic_url:
+                user.profile.pic_url = pic_url
+                user.profile.save()
 
             ShirtName(user_profile=user.profile, name=request.POST['shirt_name']).save()
 
@@ -67,7 +69,6 @@ def register(request, key):
                     user.profile.add_email(alt_email)
             
             user.save()
-            user.profile.save()
             
             user = authenticate(username=user.username, password=request.POST['password'])
             if user is not None:

@@ -28,10 +28,3 @@ class RegForm(forms.Form):
             raise forms.ValidationError('Email already in use.')
         return data
 
-    def clean_pic_url(self):
-        pic_url = self.cleaned_data['pic_url']
-        pic_url = put_profile_pic(pic_url, user.profile) 
-        if pic_url:
-            return pic_url
-        raise forms.ValidationError('Error processing upload.')
-

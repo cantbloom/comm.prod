@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load filters %}
+
 {% block styles %}
-    <link href="/public/css/edit_profile.css" rel="stylesheet">
+    {% include_style "edit_profile" %}
 {%  endblock %}
 
 {% block content %}
@@ -111,5 +113,5 @@
 {%  endblock %}
 
 {% block scripts %} 
-<script src="/public/js/edit_profile.js"></script>
+{% include_script 'edit_profile' %}
 {% endblock %}

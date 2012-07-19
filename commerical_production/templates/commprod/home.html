@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load filters %}
 
 {% block subnav %}
 {% include "commprod/subnav.html"%}
@@ -21,9 +22,10 @@
 
 <script type="text/javascript">
         data = {  
-        			username: "{{ user_profile.user.username }}",
-        			commprods: {{ unvoted_commprods|safe }}
+			username: "{{ user_profile.user.username }}",
+			commprods: {{ unvoted_commprods|safe }}
       		}
 </script>
-<script src="/public/js/commprod/home.js"></script>         
+
+{% include_script 'commprod/home' %}        
 {% endblock %}
