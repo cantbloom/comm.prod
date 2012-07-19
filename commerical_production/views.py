@@ -311,7 +311,6 @@ def edit_profile(request):
         'password': passwordForm,
         'shirtname': shirtNameForm,
         'email': emailForm
-
     }
     
     return render_to_response('edit_profile.html', template_values, context_instance=RequestContext(request))
