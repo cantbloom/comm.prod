@@ -2,7 +2,7 @@
  
 
 {% block styles %}
-    <link href="/public/css/login.css" rel="stylesheet">
+{% include_style 'login' %}
 {%  endblock %}
 {% block content %}
 {% if user.is_authenticated %}

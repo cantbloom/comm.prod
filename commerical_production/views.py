@@ -41,7 +41,7 @@ def register(request, key):
     profile = UserProfile.objects.filter(activation_key=key)
     
     # ##switch BACK DONT FORGET
-    if not profile.exists() or not profile[0].user.is_active:
+    if not profile.exists() or profile[0].user.is_active:
          page_title = "Oops"
          hero_title ="Hmm... that registration key is invalid."
          return renderErrorMessage(request, page_title, hero_title)
@@ -56,8 +56,10 @@ def register(request, key):
             user.last_name = request.POST['last_name']
             user.set_password(request.POST['password'])
 
-            pic_url = request.POST['pic_url']
-            user.profile.pic_url = pic_url
+            pic_url = put_profile_pic(request.POST['pic_url'], user.profile) 
+            if pic_url:
+                user.profile.pic_url = pic_url
+                user.profile.save()
 
             ShirtName(user_profile=user.profile, name=request.POST['shirt_name']).save()
 
@@ -67,7 +69,6 @@ def register(request, key):
                     user.profile.add_email(alt_email)
             
             user.save()
-            user.profile.save()
             
             user = authenticate(username=user.username, password=request.POST['password'])
             if user is not None:
