@@ -4,8 +4,13 @@ from os import environ as env
 #custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+
+if not DEBUG:
+    env['MYSQL_NAME'] = env['MYSQL_NAME_DEV']
+    env['DATABASE_URL'] = env['DATABASE_URL_DEV']
+    env['AWS_BUCK'] = env['AWS_BUCK_DEV']
 
 ADMINS = (
     ('Joshua Blum', 'joshblum@mit.edu'),

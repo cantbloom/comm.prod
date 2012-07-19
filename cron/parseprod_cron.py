@@ -15,16 +15,15 @@ Sends a post request to the endpoint of a dictionary of new messages in the form
 or None if no new messages exist or no comm_prod was found.
 """
 def fetch_prods():
-    url = "http://commprod.herokuapp.com/commprod/processprod"
+    url = env['POST_URL']
     try:
         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-
         ## fill in with your credentails
         mail.login(env['PARSE_EMAIL'], env['PASSWORD'])
-
+        
         #mail.select("[Gmail]/All Mail")
-        mail.select('inbox')
-
+        #mail.select('inbox')
+        
         #result, data = mail.uid('search', None, '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))')
         result, data = mail.uid('search', None, '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))')
         unread_mail = data[0].split() #list of unread uids
