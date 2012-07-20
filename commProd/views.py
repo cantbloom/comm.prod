@@ -78,14 +78,16 @@ def permalink(request, username, cp_id):
 ###### request endpoints #######
 @login_required
 @csrf_exempt
-def vote (request, type):
+def vote (request):
     types = ['commprod' , 'correction']
     valid_votes = ['-1','1'] #patlsotw 
     payload = {'success' : False}
 
     score = request.POST.get("score", None)
     id = request.POST.get("id", None)
+    type = request.POST.get("type", None)
     user = request.user
+
 
     if type in types and score and id:
         if type == "commprod":
@@ -96,20 +98,15 @@ def vote (request, type):
         if rating and score in valid_votes:
             rating.previous_score = rating.score
             rating.score = score
-            rating.save() #updates object avg automatically with postsave signal
+            rating.save() #updates object avg automatically during save
             
             payload = {
                 "success": True,
                 "id": id,
                 "rating": float(score),
-                "score": obj.score
+                "score": obj.score,
+                "type": type
             }
-            if type == 'correction':
-                if rating.correction.active == False:
-                    payload['rm'] = True
-                if rating.correction.used == True:
-                    payload['rm_all'] = True
-
         
     return_data = json.dumps(payload)
 
