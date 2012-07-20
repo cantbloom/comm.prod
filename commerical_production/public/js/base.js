@@ -63,7 +63,7 @@ function submitClaimProfile (e, d) {
 }
 
 function submitFeedBack(e, d) {
-	$('#submit_success').modal('show');
+	$('#submit_success').fadeIn();
 	$.post('/feedback', { 
 		'feedback' : $('#feedback').val()
 	});
@@ -78,10 +78,7 @@ function getImg() {
     filepicker.getFile("image/*",{
         'modal': true, 
         'multiple' : false,
-        'services' : [filepicker.SERVICES.WEBCAM,
-                    filepicker.SERVICES.COMPUTER,
-                    filepicker.SERVICES.FACEBOOK,
-                    filepicker.SERVICES.DROPBOX,]
+        'services' : filepicker_services(),
         },
         function(url, metadata){
         	$('#pic').find('.btn[type=submit]').removeAttr('disabled').removeClass('disabled');
@@ -99,6 +96,19 @@ function dropitemSelected (e, v) {
 function navToUser(val){
 	var username = user_dict[val];
 	window.location = '/users/' + username
+}
+
+//Detects if the user is on a mobile browser. Uses helper file lib/mobile_detection.js. Changes filepicker.SERVICES to only facebook and dropbox for mobile
+function filepicker_services(){
+	if (jQuery.browser.mobile) {
+		return [filepicker.SERVICES.FACEBOOK,
+    		filepicker.SERVICES.DROPBOX,]
+	}
+	return [filepicker.SERVICES.WEBCAM,
+	    filepicker.SERVICES.COMPUTER,
+	    filepicker.SERVICES.FACEBOOK,
+	    filepicker.SERVICES.DROPBOX,]
+	
 }
 
 $(function(){

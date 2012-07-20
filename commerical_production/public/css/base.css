@@ -319,6 +319,15 @@ textarea {
   width:350px;
 }
 
+@media (max-width: 480px) {
+  .modal.fade.in {
+    top: 18% !important;
+    width:95% !important;
+  }
+  textarea {
+    width:93%;
+  }
+
 /* Input Text */
 
 input[type="text"], input[type="password"] {
@@ -335,7 +344,7 @@ input[type="text"], input[type="password"] {
                 0 2px 10px 2px hsla(0,0%,0%,.25)!important;
     cursor: pointer;
     border: 0;
-    width: 200px;
+    width:auto !important;
     padding: 10px 15px;
     font: 13px/20px sans-serif;
     color: #888;

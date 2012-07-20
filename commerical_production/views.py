@@ -262,6 +262,7 @@ def edit_profile(request):
             pic_url = put_profile_pic(pic_url, user.profile) #download and upload to our S3
             if pic_url: #no errors/less than 1mb #patlsotw
                 user.profile.pic_url = pic_url
+                user.profile.save()
                 success = "Profile picture changed!"
             else:
                 errors['pic'] = ['Oops -- something went wrong.']
