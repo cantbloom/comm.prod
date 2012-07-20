@@ -63,7 +63,7 @@ function submitClaimProfile (e, d) {
 }
 
 function submitFeedBack(e, d) {
-	$('#submit_success').fadeIn();
+	$('#submit_success').modal('show');
 	$.post('/feedback', { 
 		'feedback' : $('#feedback').val()
 	});
