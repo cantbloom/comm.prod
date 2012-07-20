@@ -35,7 +35,7 @@ function postVote (e, d) {
 
 	var $commprod = $(e.target);
 
-	//quickly change the ui
+	//change the ui -- to the correct score! remember your diff max!
 	var new_score = parseInt($commprod.find('.score').text()) + d.score;
 	$commprod.find('.score').html(new_score);
 

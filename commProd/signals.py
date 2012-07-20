@@ -5,11 +5,14 @@ from django.contrib.auth.models import User
 from helpers.update_user_list import update
 
 
-def create_user_profile(sender, instance, created, **kwargs):  
+def create_user_profile(sender, instance, created, **kwargs):
+    ## updates global javascript variable for user list on base page
+    update()
+    
     if created:  
        profile, created = UserProfile.objects.get_or_create(user=instance) 
-       ## updates global javascript variable for user list on base page
-       update() 
+       
+       
 
 def post_save_ratings (sender, instance, **kwargs):
     instance.commprod.update_avg()
