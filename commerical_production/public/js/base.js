@@ -35,7 +35,7 @@ function postVote (e, d) {
 
 	var $commprod = $(e.target);
 
-	//quickly change the ui
+	//change the ui -- to the correct score! remember your diff max!
 	var new_score = parseInt($commprod.find('.score').text()) + d.score;
 	$commprod.find('.score').html(new_score);
 
@@ -78,10 +78,7 @@ function getImg() {
     filepicker.getFile("image/*",{
         'modal': true, 
         'multiple' : false,
-        'services' : [filepicker.SERVICES.WEBCAM,
-                    filepicker.SERVICES.COMPUTER,
-                    filepicker.SERVICES.FACEBOOK,
-                    filepicker.SERVICES.DROPBOX,]
+        'services' : filepicker_services(),
         },
         function(url, metadata){
         	$('#pic').find('.btn[type=submit]').removeAttr('disabled').removeClass('disabled');
@@ -91,7 +88,7 @@ function getImg() {
      );
 }
 
-function dropitemSelected (e,v) {
+function dropitemSelected (e, v) {
 	$('#search-bar').blur();
 	navToUser(v);
 }
@@ -99,6 +96,19 @@ function dropitemSelected (e,v) {
 function navToUser(val){
 	var username = user_dict[val];
 	window.location = '/users/' + username
+}
+
+//Detects if the user is on a mobile browser. Uses helper file lib/mobile_detection.js. Changes filepicker.SERVICES to only facebook and dropbox for mobile
+function filepicker_services(){
+	if (jQuery.browser.mobile) {
+		return [filepicker.SERVICES.FACEBOOK,
+    		filepicker.SERVICES.DROPBOX,]
+	}
+	return [filepicker.SERVICES.WEBCAM,
+	    filepicker.SERVICES.COMPUTER,
+	    filepicker.SERVICES.FACEBOOK,
+	    filepicker.SERVICES.DROPBOX,]
+	
 }
 
 $(function(){

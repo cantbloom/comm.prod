@@ -1,4 +1,4 @@
-<div class="commprod-timeline well">
+<div class="commprod-timeline-container well span8 offset2">
     {% for commprod in commprods %}
         {% if commprod.id in upvoted%}
         {% include "commprod/commprod_template.html" with commprod=commprod upvote_selected="selected"%}
@@ -11,20 +11,22 @@
     {% endfor %}
 </div>
 
-<ul class="pager">
-    {% if commprods.has_previous %}
-   <li class="previous"> 
-        <a href="?page={{ commprods.previous_page_number }}{{ link_mod }}">
-            &larr; previous
-        </a>
-    </li>
-    {% endif %}
+<div class="span8 offset2">
+    <ul class="pager">
+        {% if commprods.has_previous %}
+       <li class="previous"> 
+            <a href="?page={{ commprods.previous_page_number }}{{ link_mod }}">
+                &larr; previous
+            </a>
+        </li>
+        {% endif %}
 
-    {% if commprods.has_next %}
-    <li class="next">
-        <a href="?page={{ commprods.next_page_number }}{{ link_mod }}">
-            next &rarr; 
-        </a>
-    </li>
-    {% endif %}
-</ul>
+        {% if commprods.has_next %}
+        <li class="next">
+            <a href="?page={{ commprods.next_page_number }}{{ link_mod }}">
+                next &rarr; 
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
