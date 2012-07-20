@@ -37,7 +37,7 @@ def fetch_prods():
             sender = (email.utils.parseaddr(email_message['From'])[1]).lower()
             content = stripOld(get_first_text_block(email_message))
             if content == None:
-                logging.warn("No content found from sender %s" % str(sender))
+                logging.warn("No content found from sender %s with content \n\n %s" % (str(sender),clean_content(content, 'commprod') )) #this is sent to commprod to help debug what the commprod parser saw.
             else:
                 parsed_content = parseProd(clean_content(content, 'commprod'))
 
@@ -55,8 +55,6 @@ def fetch_prods():
                     r = requests.post(url, data={'data' : data, 'key' : env['SECRET_KEY']})
                     time.sleep(1) # don't overload poor heroku
                     logging.info(r.text)
-                else:
-                    logging.warning("No commprods found for email:\n\n%s"%clean_content(content,'commprod'))
                 print "Parsed email from %s with comprods:\n %s" % (str(sender), str(parsed_content))
         mail.close()
         mail.logout()
