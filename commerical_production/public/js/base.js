@@ -1,9 +1,12 @@
 function voteSelection (e, data){
 	var $src = $(e.srcElement);
 
+	//don't submit again if already selected
 	if ($src.hasClass('selected')){
-		return;
+		return; 
 	}
+
+	//only select one arrow at a time
 	$src.addClass('selected').siblings().removeClass('selected');
 
 
@@ -12,44 +15,31 @@ function voteSelection (e, data){
 
 	var id = $src.closest('.up-down-container').data('id'),
 	type = $src.closest('.up-down-container').data('type')
+
 	sendVote(id, score, type);
 }
 
 function sendVote(id, score, type){
-	var payload = {'id':id, 'score':score},
-	url = '/commprod/vote/'
-	if (type == 'correction') {
-		url += type;
-	} else {
-		url += 'commprod'
-		type = 'commprod';
-	}
-	$.post(url, payload, function(res){
-		var div_id = '#'+ type + '_object_'  + res.id;
-		res['type'] = type
-		$(div_id).trigger('voteResponse', res);
-		if (res.rm_all == true) {
-			var new_prod = $(div_id +'_content').html();
-			$('.commprod-content:first').html(new_prod);
-			$('.correction').remove();
-		}
-		else if (res.rm == true) {
-			$(div_id).remove();
-		}
+	var $commprod = $('#'+ type + '_object_'  + id);
+
+	var payload = {'id':id, 'score':score, 'type': type};
+
+	$.post('/commprod/vote/', payload, function(res){
+		$commprod.trigger('voteResponse', res);
 	});
-	$('#'+ type + '_object_' + id).trigger('voteSent', payload)
+	
+	$commprod.trigger('voteSent', payload)
 }
 
-function updateAvgScore(e, data){
-	if (data.success){
-		var $commprod = $('#'+ data.type + '_object_'+ data.cp_id);
+function postVote (e, d) {
 
-		//not udpating now because of lag...//update 
-		$commprod.find('.score').html(data.score);
+	var $commprod = $(e.target);
 
-		//todo:
-		//make sure personal score set correctly
-	}
+	//quickly change the ui
+	var new_score = parseInt($commprod.find('.score').text()) + d.score;
+	$commprod.find('.score').html(new_score);
+
+	
 }
 
 function openClaimProfile(e, d){
@@ -101,12 +91,9 @@ function getImg() {
      );
 }
 
-function dropitemClicked (e, v) {
-	navToUser(v)
-}
-
-function searchSubmit (e, v) {
-	e.preventDefault();
+function dropitemSelected (e, v) {
+	$('#search-bar').blur();
+	navToUser(v);
 }
 
 function navToUser(val){
@@ -115,8 +102,6 @@ function navToUser(val){
 }
 
 $(function(){
-	$(document).on('voteResponse', updateAvgScore);
-
 	$(document).on('click', '.vote-container .vote', voteSelection)
 
 	$(document).on('click', '.claim-profile', openClaimProfile)
@@ -124,8 +109,9 @@ $(function(){
 
 	$(document).on('click', '#submit_feedback', submitFeedBack)
 
-	$(document).on('typeaheadItemSelected', dropitemClicked)
-	$('#navbar-search').on('submit', searchSubmit)
+	$(document).on('typeaheadItemSelected', dropitemSelected)
+
+	$(document).on('voteSent', postVote)
 
 	$('#search_bar').typeahead({
 		'source' : user_list

@@ -86,12 +86,8 @@ have permission to receive mail to register
 def emailInactive():
     users = User.objects.filter(is_staff = True)
     for user in users:
-        content = registration['content'] % (user.username, 'http://localhost:8000/register/'+user.profile.activation_key + '/')
-        subject = registration['subject']
-        emails = [user.email]
-        print content, subject, emails
-        emailUsers(subject, content, emails)
-
+        sendRegEmail(user.username)
+        
     return 'done'
 
 """
@@ -112,3 +108,13 @@ def testRegex():
             for m in pattern.finditer(query):
                 print "\nI found the text '%s' starting at index '%d' and ending at index '%d'." % (m.group(), m.start(), m.end())
 
+def sendRegEmail(username):
+    user = User.objects.get(username = username)
+    if user:
+        content = registration['content'] % (user.username, 'http://commprod-staging.herokuapp.com/register/'+user.profile.activation_key + '/')
+        subject = registration['subject']
+        emails = [user.email]
+        emailUsers(subject, content, emails)
+        return True
+    else:
+        return False
