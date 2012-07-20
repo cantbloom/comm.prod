@@ -28,8 +28,8 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
     elif return_type == "list":       
         commprod_list = []
         for commprod in commprods:
-	    upvote_selected = ''
-	    downvote_selected = ''
+            upvote_selected = ''
+            downvote_selected = ''
             if commprod.id in upvoted:
                 upvote_selected = 'selected'
             elif commprod.id in downvoted:

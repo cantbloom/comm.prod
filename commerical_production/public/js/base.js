@@ -101,7 +101,7 @@ function getImg() {
      );
 }
 
-function dropitemClicked (e,v) {
+function dropitemClicked (e, v) {
 	navToUser(v)
 }
 

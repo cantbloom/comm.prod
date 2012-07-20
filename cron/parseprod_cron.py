@@ -55,6 +55,8 @@ def fetch_prods():
                     r = requests.post(url, data={'data' : data, 'key' : env['SECRET_KEY']})
                     time.sleep(1) # don't overload poor heroku
                     logging.info(r.text)
+                else:
+                    logging.warning("No commprods found for email:\n\n%s"%clean_content(content,'commprod'))
                 print "Parsed email from %s with comprods:\n %s" % (str(sender), str(parsed_content))
         mail.close()
         mail.logout()
