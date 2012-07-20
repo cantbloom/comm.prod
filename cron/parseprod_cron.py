@@ -37,7 +37,7 @@ def fetch_prods():
             sender = (email.utils.parseaddr(email_message['From'])[1]).lower()
             content = stripOld(get_first_text_block(email_message))
             if content == None:
-                logging.warn("No content found from sender %s" % str(sender))
+                logging.warn("No content found from sender %s with content \n\n %s" % (str(sender),clean_content(content, 'commprod') )) #this is sent to commprod to help debug what the commprod parser saw.
             else:
                 parsed_content = parseProd(clean_content(content, 'commprod'))
 

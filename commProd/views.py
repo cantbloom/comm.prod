@@ -18,7 +18,7 @@ from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, vs_data_manager, trend_data_manager, correction_query_manager
 from helpers.link_activator import get_active_page
 from helpers.renderers import commprod_renderer
-from helpers.urlize import urlize_email_content
+from helpers.urlize_email_content import urlize_email_content
 
 from os import environ as env
 

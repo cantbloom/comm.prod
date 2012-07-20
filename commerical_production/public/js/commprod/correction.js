@@ -1,4 +1,5 @@
 $(function(){
+    $('#submit_success').slideUp();
     //check for illegal text
     $('#submit_correction').click(function() {
         var check_text = $('#corrected_text').val().toLowerCase();

@@ -28,15 +28,12 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
     elif return_type == "list":       
         commprod_list = []
         for commprod in commprods:
+            upvote_selected = ''
+            downvote_selected = ''
             if commprod.id in upvoted:
                 upvote_selected = 'selected'
-                downvote_selected = ''
             elif commprod.id in downvoted:
-                upvote_selected = ''
                 downvote_selected = 'selected'
-            else:
-                upvote_selected = ''
-                downvote_selected = ''
             commprod_list.append(
                 str(render_to_string('commprod/commprod_template.html', {
                     'commprod': commprod,
