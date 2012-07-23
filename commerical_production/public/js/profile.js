@@ -15,7 +15,29 @@ $(function(){
         starOff : 'bomb-off.png',
         starOn : 'bomb-on.png',
         score : function() {
-            return parseFloat($(this).attr('data-rating')/10).toFixed(2); // normalize rating to scale
+            var score_map = {
+                "0": 0,
+                "33": .5,
+                "75": 1,
+                "140": 1.5,
+                "200": 2,
+                "333": 2.5,
+                "400": 3,
+            }
+
+            var scores = [0, 33, 75, 140 , 200 , 333 , 400];
+
+            var raty_score = 3;
+            var user_score = parseFloat($(this).attr('data-rating'));
+            for (var i =0; i<scores.length; i++){
+                if (scores[i] > user_score){
+                    debugger
+                    raty_score = score_map[scores[i-1]]
+                    break;
+                }
+            }
+
+            return raty_score; // normalize rating to scale
         },
     });
 
