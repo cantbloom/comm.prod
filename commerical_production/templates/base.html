@@ -11,7 +11,7 @@
         <!-- analytics -->
         <script type="text/javascript">
             var seg=seg||[];seg.load=function(a){var b,c,d,e,f,g=document;b=g.createElement("script"),b.type="text/javascript",b.async=!0,b.src=a,c=g.getElementsByTagName("script")[0],c.parentNode.insertBefore(b,c),d=function(a){return function(){seg.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["init","identify","track","callback","verbose"];for(f=0;f<e.length;f+=1)seg[e[f]]=d(e[f])};seg.load(document.location.protocol+'//d47xnnr8b1rki.cloudfront.net/api/js/v2/segmentio.js');
-            seg.verbose(true); // remove this in production to turn off logging
+
             seg.init('l37wedvl0ut'); // commprod's very own API key
             seg.identify("{{ user.email }}" == "" ? "anonymous_user":"{{ user.email }}", 
                 {

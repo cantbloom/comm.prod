@@ -23,7 +23,7 @@ class UserProfile(models.Model):
     data_point_count = models.IntegerField(default=0)
 
     def update_data_point(self, save=True):
-        if not self.data_point_count % 1: ##change mod value for less granularity
+        if self.data_point_count % 3: ##change mod value for less granularity
             data_point = TrendData(user_profile=self, score=self.score, avg_score=self.avg_score)
             data_point.save()
         self.data_point_count += 1

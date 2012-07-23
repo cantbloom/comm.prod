@@ -6,7 +6,7 @@ from helpers.aws_put import put_profile_pic
 class RegForm(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label="")
     last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Last Name'}), label="")
-    shirt_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Shirt names!'}), label="")
+    class_year = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder':'1933'}), label="")
     pic_url = forms.CharField(label="", required=False)
     password = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Password'}), label="" )
     password_confirm = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Confirm Password'}), label="")
@@ -27,4 +27,14 @@ class RegForm(forms.Form):
         if UserProfile.objects.filter(email__email=data, email__confirmed=True).exists() or UserProfile.objects.filter(user__email=data, send_mail=True).exists():
             raise forms.ValidationError('Email already in use.')
         return data
+
+    def clean_class_year(self):
+        try:
+            class_year = int(self.cleaned_data['class_year'])
+            max_year = datetime.datetime.today().year + 4
+            if not class_year in range(1933, max_year):
+                raise forms.ValidationError('Enter a class year between 1933 and %s'%max_year)
+        except ValueError:
+            raise forms.ValidationError('Enter a class year between 1933 and %s'%max_year)
+        return class_year
 

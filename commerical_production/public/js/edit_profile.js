@@ -8,7 +8,7 @@ function addShirtNameInput(){
 }
 
 function addEmailInput(){
-	var template = '<p><input type="text" class="removable_input" placeholder="Alternate email" name="email"><a class="btn remove-input remove-shirt-name"><i class="icon-minus"></i></a></p>'
+	var template = '<p><input type="email" class="removable_input" placeholder="Alternate email" name="email"><a class="btn remove-input remove-shirt-name"><i class="icon-minus"></i></a></p>'
 	$('#add-email').closest('p').before(template);
 }
 
