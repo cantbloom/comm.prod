@@ -60,8 +60,6 @@ def register(request, key):
             if pic_url:
                 user.profile.pic_url = pic_url
 
-            ShirtName(user_profile=user.profile, name=request.POST['shirt_name']).save()
-
             alt_emails = request.POST.getlist('alt_email')
             for alt_email in alt_emails:
                 if alt_email != "":
