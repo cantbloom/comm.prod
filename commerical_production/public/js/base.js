@@ -1,20 +1,25 @@
 function voteSelection (e, data){
 	var $src = $(e.srcElement);
+	var $commprod = $src.closest('.commprod-container');
 
 	//don't submit again if already selected
 	if ($src.hasClass('selected')){
 		return; 
 	}
 
-	//only select one arrow at a time
-	$src.addClass('selected').siblings().removeClass('selected');
-
-
+	//gather info about this vote
 	var isUpVote = $src.hasClass('up-vote');
 	var score = isUpVote ? 1:-1;
-
 	var id = $src.closest('.up-down-container').data('id'),
 	type = $src.closest('.up-down-container').data('type')
+
+	//quickly change the ui -- must calc diff to see if user already voted
+	var diff = $commprod.find('.vote').hasClass('selected') ? score*2 : score;
+	var new_score = parseInt($commprod.find('.score').text()) + diff;
+	$commprod.find('.score').html(new_score);
+
+	//only select one arrow at a time
+	$src.addClass('selected').siblings().removeClass('selected');
 
 	sendVote(id, score, type);
 }
@@ -29,17 +34,6 @@ function sendVote(id, score, type){
 	});
 	
 	$commprod.trigger('voteSent', payload)
-}
-
-function postVote (e, d) {
-
-	var $commprod = $(e.target);
-
-	//change the ui -- to the correct score! remember your diff max!
-	var new_score = parseInt($commprod.find('.score').text()) + d.score;
-	$commprod.find('.score').html(new_score);
-
-	
 }
 
 function openClaimProfile(e, d){
@@ -88,6 +82,7 @@ function getImg() {
      );
 }
 
+
 function dropitemSelected (e, v) {
 	$('#search-bar').blur();
 	navToUser(v);
@@ -121,7 +116,7 @@ $(function(){
 
 	$(document).on('typeaheadItemSelected', dropitemSelected)
 
-	$(document).on('voteSent', postVote)
+	//$(document).on('voteSent', postVote) //not being used currenty
 
 	$('#search_bar').typeahead({
 		'source' : user_list
