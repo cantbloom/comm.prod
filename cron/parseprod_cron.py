@@ -78,7 +78,7 @@ def fetch_prods(url, login, password, mailbox, search_query):
                 date = datetime.datetime.fromtimestamp(date).isoformat()
                 sender = (email.utils.parseaddr(email_message['From'])[1]).lower()
                 content = stripOld(get_first_text_block(email_message))
-                subject = email_message['Subject']
+                subject = str(email_message['Subject'])
 
                 ##weird edge case
                 if content == None:
@@ -105,7 +105,7 @@ def fetch_prods(url, login, password, mailbox, search_query):
                     logging.info(r.text)
                 
                 else:
-                     logging.warn("No commprods found.\n\n Date: %s \n From: %s \n Subject: %s \n Content:%s" % (str(sender), date, subject, clean_content(content, 'commprod'))) #this is sent to commprod to help debug what the commprod parser saw.
+                     logging.warn("No commprods found:\n\n Date: %s \n From: %s \n Subject: %s \n Content:\n\n%s" % (date, str(sender), subject, clean_content(content, 'commprod'))) #this is sent to commprod to help debug what the commprod parser saw.
                 
                 print "Parsed email from %s with comprods:\n %s" % (str(sender), str(parsed_content))
             
@@ -181,6 +181,7 @@ def clean_content(query, type):
     query = query.replace('=92', '\'')
     query = query.replace('=93', '"')
     query = query.replace('=94', '"')
+    query = query.replace('=20', '')
     return query
                              
 """

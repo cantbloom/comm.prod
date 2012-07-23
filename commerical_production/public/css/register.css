@@ -55,3 +55,7 @@ ul.errorlist {
     border:1px solid #666;
     background-color:#FFFFFF;
 }
+
+#id_class_year{
+    width:40px !important;
+}

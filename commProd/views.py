@@ -110,7 +110,7 @@ def vote (request):
         
     return_data = json.dumps(payload)
 
-    return HttpResponse(return_data, mimetype='application/json') 
+    return HttpResponse(return_data, mimetype='application/json')
 
 @login_required
 @csrf_exempt
