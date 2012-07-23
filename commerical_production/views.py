@@ -185,6 +185,7 @@ def profile(request, username):
         'header' : header,
         'user'  : request.user,
         'profile_user' : profile_user,
+        'header-classes': ''
     }
     
     if request_type != "":
@@ -323,6 +324,7 @@ search queries
 def profile_search(request, template_values, profile_user):
     get_dict = addUserToQuery(request.GET, profile_user.username)
     template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=profile_user)
+    template_values['header_classes'] = 'offset2 span8 narrow-header'
 
     return render_to_response('profile_search.html', 
         template_values, context_instance=RequestContext(request))

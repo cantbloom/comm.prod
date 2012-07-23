@@ -11,8 +11,8 @@
 
 
 {% block content %}
-    <div class="row">
-        <h1 id='username' class="span8">
+    <div class="row {{header_classes}}">
+        <h1 id='username' class="pull-left">
             <img id="profile_pic" class="author-pic" src="{{ profile_user.profile.pic_url }}">
             {{ header }} 
 
