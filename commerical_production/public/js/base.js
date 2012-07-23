@@ -35,8 +35,9 @@ function postVote (e, d) {
 
 	var $commprod = $(e.target);
 
+	var diff = $commprod.find('.vote').hasClass('selected') ? d.score*2 : d.score;
 	//quickly change the ui
-	var new_score = parseInt($commprod.find('.score').text()) + d.score;
+	var new_score = parseInt($commprod.find('.score').text()) + diff;
 	$commprod.find('.score').html(new_score);
 
 	
