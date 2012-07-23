@@ -3,6 +3,8 @@ from django.core import validators
 from commProd.models import UserProfile, User
 from helpers.aws_put import put_profile_pic
 
+import datetime
+
 class RegForm(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label="")
     last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Last Name'}), label="")

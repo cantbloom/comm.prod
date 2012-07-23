@@ -1,9 +1,9 @@
 registration = {
-	'subject': 'Welcome  to comm.prod! Register to login',
+	'subject': 'Welcome  to comm.prod!',
 	'content': """
-		Hi %s, 
+		Hey %s!, 
 		<p style="margin-top:5px">
-		We are happy to invite you to sign up for Burton Third's home online. Currently, you are able to view and vote on our Database of comm.prods. We are looking to make this a desitination for Bombers, so feel free to let us know what you'd like to see on the site.
+		You are invited to sign up for Burton Third's home online! Currently, you are able to view and vote on past comm.prods. We are looking to make this a desitination for Bombers, so feel free to let us know what you'd like to see on the site.
 		</p>
 		<p style="margin-top:5px">
 		The site is only accessible by current and former members of the floor, so you must register for the site using the link below. 
