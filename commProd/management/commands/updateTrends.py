@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 ## crontab prefs
-## * * * * * source /home/cantbloom/commprod/venv/bin/activate >/dev/null 2>&1; python /home/cantbloom/commprod/manage.py updateTrends >/dev/null 2>&1
+## * * * * * source /home/cantbloom/commprod/venv/bin/activate >/dev/null; python /home/cantbloom/commprod/manage.py updateTrends >/dev/null
 
 from django.core.management.base import NoArgsCommand
 from django.db.models import F

@@ -126,6 +126,7 @@ class CommProdEmail(models.Model):
 
     content = models.TextField()
     date = models.DateTimeField()
+    subject = models.TextField()
 
     def __unicode__(self):
         return 'Email with content %s by %s on %s' % (self.content, self.user_profile.user.username, str(self.date))

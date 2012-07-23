@@ -177,7 +177,7 @@ def processProd(request):
     if data and str(key) == env['SECRET_KEY']:
         data = json.loads(data) #{sender : (content, [comm_prods], date)}
         sender = data.keys()[0]
-        content, commprods, date = data[sender]
+        content, commprods, date, subject = data[sender]
 
         user = None
         email_search = User.objects.filter(email=sender)
@@ -193,7 +193,7 @@ def processProd(request):
         resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
         
         for commprod in commprods:
-            email_content, created = CommProdEmail.objects.get_or_create(user_profile=user.profile, content=content, date=date)
+            email_content, created = CommProdEmail.objects.get_or_create(user_profile=user.profile, content=content, subject=subject, date=date)
             if created:
                 email_content.save()
             
@@ -206,7 +206,3 @@ def processProd(request):
         if str(key) != env['SECRET_KEY']: #patlsotw
             resp = "Success!"
     return HttpResponse(resp, mimetype="text/plain")
-
-
-
-

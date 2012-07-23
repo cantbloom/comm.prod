@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 ## crontab prefs
-## * * * * * source /home/cantbloom/commprod/venv/bin/activate >/dev/null 2>&1; python /home/cantbloom/commprod/cron/parseprod_cron.py >/dev/null 2>&1
+## * * * * * source /home/cantbloom/commprod/venv/bin/activate >/dev/null; python /home/cantbloom/commprod/cron/parseprod_cron.py >/dev/null
 from os import environ as env
 from optparse import OptionParser
 import email, sys, getpass, imaplib, re, logging, requests, datetime, time, os, simplejson as json
@@ -37,7 +37,7 @@ def init_parser():
         print "\nWelcome to commprod parser, please type in your gmail credentials.\n"
         
         login = raw_input("Email: ")
-        password = getpass.getpass("Password:")
+        password = getpass.getpass() #password hidden
         mailbox = '[Gmail]/All Mail'
         search_query = '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))'
         
@@ -78,28 +78,36 @@ def fetch_prods(url, login, password, mailbox, search_query):
                 date = datetime.datetime.fromtimestamp(date).isoformat()
                 sender = (email.utils.parseaddr(email_message['From'])[1]).lower()
                 content = stripOld(get_first_text_block(email_message))
+                subject = email_message['Subject']
+
+                ##weird edge case
                 if content == None:
                     logging.warn("No email content found from sender %s" % str(sender))
-                else:
-                    parsed_content = parseProd(clean_content(content, 'commprod'))
+                    continue
 
-                    if parsed_content:
-                        logging.warning("Commprod found from email %s with commprod\n '%s'" % (sender, parsed_content))
-                        
-                        data = json.dumps({
-                            sender : (
-                                clean_content(content, 'email'),
-                                parsed_content, 
-                                date
-                                )
-                            })
-                        
-                        r = requests.post(url, data={'data' : data, 'key' : env['SECRET_KEY']})
-                        time.sleep(1) # don't overload poor heroku
-                        logging.info(r.text)
-                    else:
-                         logging.warn("No commprods found from sender %s with email content \n\n %s" % (str(sender),clean_content(content, 'commprod') )) #this is sent to commprod to help debug what the commprod parser saw.
-                    print "Parsed email from %s with comprods:\n %s" % (str(sender), str(parsed_content))
+                ##otherwise keep going 
+                parsed_content = parseProd(clean_content(content, 'commprod'))
+
+                if parsed_content:
+                    logging.warning("Commprod found from email %s with commprod\n '%s'" % (sender, parsed_content))
+                    
+                    data = json.dumps({
+                        sender : (
+                            clean_content(content, 'email'),
+                            parsed_content, 
+                            date,
+                            subject
+                            )
+                        })
+                    
+                    r = requests.post(url, data={'data' : data, 'key' : env['SECRET_KEY']})
+                    time.sleep(1) # don't overload poor heroku
+                    logging.info(r.text)
+                
+                else:
+                     logging.warn("No commprods found.\n\n Date: %s \n From: %s \n Subject: %s \n Content:%s" % (str(sender), date, subject, clean_content(content, 'commprod'))) #this is sent to commprod to help debug what the commprod parser saw.
+                
+                print "Parsed email from %s with comprods:\n %s" % (str(sender), str(parsed_content))
             
             except UnicodeDecodeError as e:
                 logging.warning("UnicodeDecodeError for email %s from %s on %s" % (content, sender, date))
@@ -120,19 +128,20 @@ returns None. Run query through stripOld()
 before passing in. 
 """
 def parseProd(query):
-    btb_regex = '((^a btb)|(^abtb)|(\sa btb)|(\sabtb))'
-    prod_regex = '((comm\.prod\s)|(comm prod\s)|(commprod\s)|(comm\.prod\s)|(commprod\.\s)|(comm\.prod\.\s)|(comm\. prod\.\s))'
-  
-    regex = btb_regex + '(?P<comm_prod>.+?)' + prod_regex + "+"
+    btb_regex = '((^)|(\s))((a btb)|(abtb)|(btb))'
+    comm_regex = '(comm)(()|( )|(\.)|(\. )|( \.))'
+    prod_regex = '((prod)|(prodd))((\s)|(\.\s)|(\.\.\s))'
+    
+    commprod_regex = '((%s%s)|(%s\s%s))'%(comm_regex, prod_regex, comm_regex, prod_regex)
+    regex = btb_regex + '(?P<comm_prod>.+?)' + commprod_regex + "+"
     pattern = re.compile(regex, re.I|re.DOTALL)
-    match = pattern.search(query)
-    prods = []
-    if match:
+    if pattern.search(query):
+        prods = []
         for m in pattern.finditer(query):
             m = strip_quotes(m.group('comm_prod'))
             prods.append(m)
         return prods
-
+    
     return None
 
 ####HELPERS#####
@@ -161,6 +170,7 @@ def stripOld(query):
     if query != None:
         for param in strip_params:
             query = query.split(param)[0]
+        query+="\n" ## if there is not newline at the end, add it to pick up the commprod
         return query
 
 def clean_content(query, type):
@@ -180,5 +190,6 @@ def get_first_text_block(msg):
     for part in msg.walk():
         if part.get_content_type() == 'text/plain':
             return part.get_payload()
+
 #run script
 init_parser()
