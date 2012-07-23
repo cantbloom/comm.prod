@@ -56,6 +56,9 @@ $(function(){
 	$(document).on('click', '.remove-input', removeInput);
 	$(document).on('click', '#add-shirt-name', addShirtNameInput);
 	$(document).on('click', '#add-email', addEmailInput);
-
+	
+	$('#add-email').click()
+	$('#add-shirt-name').click()
+	
 	$(document).on('show hide', '.accordion-body', toggleAccordion)
 });

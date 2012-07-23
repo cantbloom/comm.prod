@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load filters %}
+
 {% block styles %}
 {% include_style 'profile' %}
 {%  endblock %}
@@ -11,7 +12,7 @@
 
 {% block content %}
     <div class="row">
-        <h1 id='username' class="span9">
+        <h1 id='username' class="span8">
             <img id="profile_pic" class="author-pic" src="{{ profile_user.profile.pic_url }}">
             {{ header }} 
 

@@ -1,20 +1,25 @@
 function voteSelection (e, data){
 	var $src = $(e.srcElement);
+	var $commprod = $src.closest('.commprod-container');
 
 	//don't submit again if already selected
 	if ($src.hasClass('selected')){
 		return; 
 	}
 
-	//only select one arrow at a time
-	$src.addClass('selected').siblings().removeClass('selected');
-
-
+	//gather info about this vote
 	var isUpVote = $src.hasClass('up-vote');
 	var score = isUpVote ? 1:-1;
-
 	var id = $src.closest('.up-down-container').data('id'),
 	type = $src.closest('.up-down-container').data('type')
+
+	//quickly change the ui -- must calc diff to see if user already voted
+	var diff = $commprod.find('.vote').hasClass('selected') ? score*2 : score;
+	var new_score = parseInt($commprod.find('.score').text()) + diff;
+	$commprod.find('.score').html(new_score);
+
+	//only select one arrow at a time
+	$src.addClass('selected').siblings().removeClass('selected');
 
 	sendVote(id, score, type);
 }
@@ -29,18 +34,6 @@ function sendVote(id, score, type){
 	});
 	
 	$commprod.trigger('voteSent', payload)
-}
-
-function postVote (e, d) {
-
-	var $commprod = $(e.target);
-
-	var diff = $commprod.find('.vote').hasClass('selected') ? d.score*2 : d.score;
-	//quickly change the ui
-	var new_score = parseInt($commprod.find('.score').text()) + diff;
-	$commprod.find('.score').html(new_score);
-
-	
 }
 
 function openClaimProfile(e, d){
@@ -64,7 +57,7 @@ function submitClaimProfile (e, d) {
 }
 
 function submitFeedBack(e, d) {
-	$('#submit_success').modal('show');
+	$('#submit_success').fadeIn();
 	$.post('/feedback', { 
 		'feedback' : $('#feedback').val()
 	});
@@ -79,10 +72,7 @@ function getImg() {
     filepicker.getFile("image/*",{
         'modal': true, 
         'multiple' : false,
-        'services' : [filepicker.SERVICES.WEBCAM,
-                    filepicker.SERVICES.COMPUTER,
-                    filepicker.SERVICES.FACEBOOK,
-                    filepicker.SERVICES.DROPBOX,]
+        'services' : filepicker_services(),
         },
         function(url, metadata){
         	$('#pic').find('.btn[type=submit]').removeAttr('disabled').removeClass('disabled');
@@ -92,7 +82,8 @@ function getImg() {
      );
 }
 
-function dropitemSelected (e,v) {
+
+function dropitemSelected (e, v) {
 	$('#search-bar').blur();
 	navToUser(v);
 }
@@ -100,6 +91,19 @@ function dropitemSelected (e,v) {
 function navToUser(val){
 	var username = user_dict[val];
 	window.location = '/users/' + username
+}
+
+//Detects if the user is on a mobile browser. Uses helper file lib/mobile_detection.js. Changes filepicker.SERVICES to only facebook and dropbox for mobile
+function filepicker_services(){
+	if (jQuery.browser.mobile) {
+		return [filepicker.SERVICES.FACEBOOK,
+    		filepicker.SERVICES.DROPBOX,]
+	}
+	return [filepicker.SERVICES.WEBCAM,
+	    filepicker.SERVICES.COMPUTER,
+	    filepicker.SERVICES.FACEBOOK,
+	    filepicker.SERVICES.DROPBOX,]
+	
 }
 
 $(function(){
@@ -112,7 +116,7 @@ $(function(){
 
 	$(document).on('typeaheadItemSelected', dropitemSelected)
 
-	$(document).on('voteSent', postVote)
+	//$(document).on('voteSent', postVote) //not being used currenty
 
 	$('#search_bar').typeahead({
 		'source' : user_list
