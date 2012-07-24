@@ -6,7 +6,10 @@ from django.core.context_processors import csrf
 from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib import auth
+from django.contrib.auth import views
+
+
 from django import forms
 
 from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email
@@ -60,6 +63,8 @@ def register(request, key):
             if pic_url:
                 user.profile.pic_url = pic_url
 
+            user.profile.class_year = request.POST['class_year']
+
             alt_emails = request.POST.getlist('alt_email')
             for alt_email in alt_emails:
                 if alt_email != "":
@@ -68,10 +73,10 @@ def register(request, key):
             user.save()
             user.profile.save()
             
-            user = authenticate(username=user.username, password=request.POST['password'])
+            user = auth.authenticate(username=user.username, password=request.POST['password'])
             if user is not None:
                 if user.is_active:
-                    login(request, user)
+                    auth.login(request, user)
                     # Redirect to a success page.
                     return redirect('/')
 
@@ -81,7 +86,7 @@ def register(request, key):
         reg_form = RegForm()
 
     template_values = {
-        'page_title': "Registration",
+        'page_title': "register",
         'form' : reg_form,
         'user' : user,
     }
@@ -92,7 +97,8 @@ def login(request, *args, **kwargs):
     if request.method == 'POST':
         if not request.POST.get('remember_me', None):
             request.session.set_expiry(0)
-    return auth_views.login(request, *args, **kwargs)
+
+    return views.login(request, *args, **kwargs)
 
 """
 Endpoint to confirm you are owner of email
@@ -307,7 +313,7 @@ def edit_profile(request):
 
 
     template_values = {
-        "page_title": "Edit Your Profile",
+        "page_title": "Edit Profile",
         'user'  : request.user,
         'password': passwordForm,
         'shirtname': shirtNameForm,
@@ -316,13 +322,13 @@ def edit_profile(request):
     
     return render_to_response('edit_profile.html', template_values, context_instance=RequestContext(request))
 """
-Helper function to deal with recent/popular
+Helper function to deal with recent/best
 search queries
 """
 def profile_search(request, template_values, profile_user):
     get_dict = addUserToQuery(request.GET, profile_user.username)
     template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=profile_user)
-    template_values['header_classes'] = 'offset2 span8 narrow-header'
+    template_values['header_classes'] = 'offset2 span8'
 
     return render_to_response('profile_search.html', 
         template_values, context_instance=RequestContext(request))
