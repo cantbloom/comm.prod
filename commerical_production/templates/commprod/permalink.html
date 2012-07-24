@@ -21,14 +21,15 @@
     {{ rendered_commprod|safe}}
     <div id="correction_container">
         {% for correction in corrections %}
-            {{correction}}
+            {{ correction }}
         {% endfor %}
     </div>
     <div class="commprod-container">
         <div class="author-container">
-        <b class="author-name"> Original Email:
-        </b>
+        <strong class='author-name'> Original Email: </strong>
         <div class="commprod-content">
+            <p> <strong> Subject: </strong> {{ commprod.email_content.subject }}</p>
+            <p> <strong> Date: </strong> {{ commprod.email_content.date }} </p>
             {{ email_content|safe|linebreaks }}
         </div>
     </div>
