@@ -31,7 +31,6 @@ $(function(){
             var user_score = parseFloat($(this).attr('data-rating'));
             for (var i =0; i<scores.length; i++){
                 if (scores[i] > user_score){
-                    debugger
                     raty_score = score_map[scores[i-1]]
                     break;
                 }

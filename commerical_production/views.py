@@ -81,7 +81,7 @@ def register(request, key):
         reg_form = RegForm()
 
     template_values = {
-        'page_title': "Registration",
+        'page_title': "register",
         'form' : reg_form,
         'user' : user,
     }
@@ -307,7 +307,7 @@ def edit_profile(request):
 
 
     template_values = {
-        "page_title": "Edit Your Profile",
+        "page_title": "Edit Profile",
         'user'  : request.user,
         'password': passwordForm,
         'shirtname': shirtNameForm,
@@ -322,7 +322,7 @@ search queries
 def profile_search(request, template_values, profile_user):
     get_dict = addUserToQuery(request.GET, profile_user.username)
     template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=profile_user)
-    template_values['header_classes'] = 'offset2 span8 narrow-header'
+    template_values['header_classes'] = 'offset2 span8'
 
     return render_to_response('profile_search.html', 
         template_values, context_instance=RequestContext(request))
