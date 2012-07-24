@@ -3,13 +3,13 @@
 echo Enter a commit message:
 read -e COMMIT
 git add .
-git commit -am $COMMIT
+git commit -m $COMMIT
 echo Starting...
 git pull staging staging
 git push staging staging
 git push staging staging:master
 
-echo Push production?(y/n)
+echo 'Push production?(y/n)'
 read -e MASTER
 if [$MASTER == 'y']
     then
