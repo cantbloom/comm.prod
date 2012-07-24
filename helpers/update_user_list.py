@@ -1,8 +1,5 @@
 #! /usr/bin/env python
 
-## crontab prefs
-## @daily source /home/cantbloom/commprod/venv/bin/activate >/dev/null; python /home/cantbloom/commprod/helpers/update_user_list.py >/dev/null
-
 from commProd.models import UserProfile
 import os
 
