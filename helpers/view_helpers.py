@@ -14,9 +14,9 @@ def getRandomUsername(user):
     potentials = [shirtname.name for shirtname in ShirtName.objects.filter(user_profile=user.profile)]
 
     potentials.append(user.username)
-    first_last = user.first_name.strip() + " " + user.last_name.strip()
-    if (first_last != " "):
-        potentials.append(first_last)
+    name = user.first_name.strip()
+    if (name != " "):
+        potentials.append(name)
     return random.choice(potentials)
 
 """ 
