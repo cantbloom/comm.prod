@@ -6,7 +6,10 @@ from django.core.context_processors import csrf
 from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib import auth
+from django.contrib.auth import views
+
+
 from django import forms
 
 from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email
@@ -68,7 +71,7 @@ def register(request, key):
             user.save()
             user.profile.save()
             
-            user = authenticate(username=user.username, password=request.POST['password'])
+            user = auth.authenticate(username=user.username, password=request.POST['password'])
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -92,7 +95,8 @@ def login(request, *args, **kwargs):
     if request.method == 'POST':
         if not request.POST.get('remember_me', None):
             request.session.set_expiry(0)
-    return auth_views.login(request, *args, **kwargs)
+
+    return views.login(request, *args, **kwargs)
 
 """
 Endpoint to confirm you are owner of email

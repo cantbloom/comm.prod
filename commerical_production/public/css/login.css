@@ -1,5 +1,5 @@
 #login{
-    margin-left: 17px;
+    margin-left: 0px;
 }
 
 
@@ -20,6 +20,10 @@
 	margin: 0px;
 }
 
-.form input{
+.form input[type="text"],.form input[type="password"]{
 	width:90%;
+}
+
+.remember-container{
+    margin: -14px 0 4px 0px!important;
 }
