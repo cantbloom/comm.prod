@@ -9,7 +9,7 @@ from helpers.renderers import commprod_renderer, profile_renderer, correction_re
 #from django.utils.safestring import mark_safe
 
 from datetime import datetime
-import random, time, numpy as np
+import random, time, operator, numpy as np
 
 
 """ 
@@ -105,7 +105,9 @@ Calculates trend data and returns response
 dictionary for given User object
 """
 def trend_data_manager(user):
-    trend_query_all = TrendData.objects.filter(date__gt=user.date_joined)
+    first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
+    
+    trend_query_all = TrendData.objects.filter(date__gt=first_trend_date)
     trend_query_class = trend_query_all.filter(user_profile__class_year=user.profile.class_year)
     trend_query_user = trend_query_class.filter(user_profile=user.profile)
     trend_data = {
@@ -182,12 +184,11 @@ def find_profile_faves(user):
             user_dict[username] = score
 
     if user_dict != {}:
-        most_loved = max(user_dict)
+        most_loved = max(user_dict.iteritems(), key=operator.itemgetter(1))[0]
         max_val = user_dict[most_loved]
-        most_hated = min(user_dict)
+        most_hated = min(user_dict.iteritems(), key=operator.itemgetter(1))[0]
         min_val = user_dict[most_hated]
 
-        
         most_loved = UserProfile.objects.filter(user__username=most_loved)[0]
         most_hated = UserProfile.objects.filter(user__username=most_hated)[0]
     else:
@@ -196,7 +197,7 @@ def find_profile_faves(user):
         min_val = 0
         max_val = 0
 
-    return  profile_renderer(dict(zip([most_loved, most_hated], [max_val,min_val])))
+    return  profile_renderer(zip([most_loved, most_hated], [max_val, min_val]))
 
 
 """ 
