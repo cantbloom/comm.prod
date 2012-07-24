@@ -14,7 +14,7 @@
         <div id="top_secret"> </div>
     </div>
     <div class="row">
-        <form class="form" method="post" action="{% url django.contrib.auth.views.login %}">
+        <form class="form" method="post" action="/login">
             {% csrf_token %}
             {% if form.errors %}
                     <div class="alert alert-error">
@@ -29,7 +29,9 @@
                 {{ form.password }}
             </p>
             <br>
-
+             <p class="remember-container">
+                <strong>Remember me:</strong> <input name="remember_me" type="checkbox" checked="" />
+            </p>
             <input class="btn btn-warning" id="login" type="submit" value="Login" />
 
             <input type="hidden" name="next" value="{{ next }}" />
