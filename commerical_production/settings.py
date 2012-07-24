@@ -4,7 +4,7 @@ from os import environ as env
 #custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
-DEBUG = True
+DEBUG = env['DEBUG']
 TEMPLATE_DEBUG = DEBUG
 
 if DEBUG:
