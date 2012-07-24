@@ -229,10 +229,9 @@ body {
 	width:27px;
 }
 
-
-.up-down-container > span {
-	color: #aaa;
-	cursor: pointer;
+.vote {
+  color: #aaa;
+  cursor: pointer;
 }
 
 .up-down-container > span:hover {
