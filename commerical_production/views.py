@@ -74,7 +74,7 @@ def register(request, key):
             user = auth.authenticate(username=user.username, password=request.POST['password'])
             if user is not None:
                 if user.is_active:
-                    login(request, user)
+                    auth.login(request, user)
                     # Redirect to a success page.
                     return redirect('/')
 
