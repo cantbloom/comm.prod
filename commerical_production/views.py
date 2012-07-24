@@ -320,7 +320,7 @@ def edit_profile(request):
     
     return render_to_response('edit_profile.html', template_values, context_instance=RequestContext(request))
 """
-Helper function to deal with recent/popular
+Helper function to deal with recent/best
 search queries
 """
 def profile_search(request, template_values, profile_user):

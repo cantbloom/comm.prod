@@ -20,9 +20,13 @@ def commprod_query_manager(get_dict, user, return_type="html"):
     valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted', 'orderBy']
 
     valid_types = {
-        'popular' : {
+        'best' : {
                     'orderBy': 'avg_score', 
                     'direction': 'lh',
+        },
+        'worst':{
+                'orderBy': 'avg_score', 
+                'direction': 'hl',
         },
         'recent' : {
                     'orderBy': 'date', 
