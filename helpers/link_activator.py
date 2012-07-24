@@ -1,4 +1,4 @@
-""" Given a parge and a request type (trending, popular, recent
+""" Given a parge and a request type (trending, best, recent
 etc) returns a tuple of (template_key, template_value, request).
 """
 def get_active_page(pageName, requestType):
@@ -6,13 +6,15 @@ def get_active_page(pageName, requestType):
     'home' : {
             "" : 'subnav_home',
             "trending" : 'subnav_trending',
-            "popular" : 'subnav_popular',
+            "best" : 'subnav_best',
+            "worst" : 'subnav_worst',
             "recent" : 'subnav_recent',
         },
     'profile' : {
             "" : 'subnav_statistics',
             "statistics" : 'subnav_statistics',
-            "popular" : 'subnav_popular',
+            "best" : 'subnav_best',
+            "worst" : 'subnav_worst',
             "recent" : 'subnav_recent',
         },
     }
