@@ -54,8 +54,8 @@ def profile_renderer(profiles):
     html_list = []
     for profile in profiles:
         c = {
-        'user_profile': profile, 
-        'score' : profiles[profile],
+        'user_profile': profile[0], 
+        'score' : profile[1]
         }
         html_list.append(render_to_string('profile_template.html', c))
     # happens when only one user profile is found

@@ -63,6 +63,8 @@ def register(request, key):
             if pic_url:
                 user.profile.pic_url = pic_url
 
+            user.profile.class_year = request.POST['class_year']
+
             alt_emails = request.POST.getlist('alt_email')
             for alt_email in alt_emails:
                 if alt_email != "":
@@ -74,7 +76,7 @@ def register(request, key):
             user = auth.authenticate(username=user.username, password=request.POST['password'])
             if user is not None:
                 if user.is_active:
-                    login(request, user)
+                    auth.login(request, user)
                     # Redirect to a success page.
                     return redirect('/')
 
@@ -320,7 +322,7 @@ def edit_profile(request):
     
     return render_to_response('edit_profile.html', template_values, context_instance=RequestContext(request))
 """
-Helper function to deal with recent/popular
+Helper function to deal with recent/best
 search queries
 """
 def profile_search(request, template_values, profile_user):
