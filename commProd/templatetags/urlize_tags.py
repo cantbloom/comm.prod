@@ -26,7 +26,7 @@ def urlize_commprod(commprod):
 Wraps the given text in an <a> tag.
 """
 def a_tag(url_match):
-    return "<a href='%s'>%s</a>" % (url_match, url_match)
+    return "<a target='_blank' href='%s'>%s</a>" % (url_match, url_match)
 
 
 """
