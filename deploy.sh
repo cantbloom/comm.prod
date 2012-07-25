@@ -3,7 +3,7 @@
 
 echo "Commit?(y/n) \c"
 read COMMIT
-`git commit -am $COMMIT`
+git commit -am $COMMIT
 # if [ $COMMIT == 'y' ] ; then
 #     echo "Enter a commit message: \c "
 #     read COMMIT_MSG
