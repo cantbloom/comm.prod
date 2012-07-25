@@ -4,7 +4,7 @@ from os import environ as env
 #custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
-DEBUG = True
+DEBUG = (not env['DEBUG'] == 'False') #convert from sting to bool
 TEMPLATE_DEBUG = DEBUG
 
 if DEBUG:
