@@ -15,7 +15,7 @@ def getRandomUsername(user):
 
     potentials.append(user.username)
     name = user.first_name.strip()
-    if (name != " "):
+    if (name != ""):
         potentials.append(name)
     return random.choice(potentials)
 

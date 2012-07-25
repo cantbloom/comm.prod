@@ -7,7 +7,7 @@ if [ $COMMIT == 'y' ] ; then
     echo "Enter a commit message: \c "
     read COMMIT_MSG
     git add .
-    git commit -m '$COMMIT_MSG'
+    git commit -am '$COMMIT_MSG'
 fi
 
 echo "Starting..."
