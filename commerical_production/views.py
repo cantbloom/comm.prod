@@ -195,9 +195,19 @@ def profile(request, username):
     if request_type != "":
         return profile_search(request, template_values, profile_user)
     else:
-        template_values.update(profile_query_manager(profile_user))
-        return render_to_response('profile.html', 
-        template_values, context_instance=RequestContext(request))
+        template_values.update(profile_query_manager(request.user, profile_user))
+        return render_to_response('profile.html', template_values, context_instance=RequestContext(request))
+
+"""
+Helper function to deal with recent/best pages for user
+"""
+def profile_search(request, template_values, profile_user):
+    get_dict = addUserToQuery(request.GET, profile_user.username)
+    template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=request.user)
+    template_values['header_classes'] = 'offset2 span8'
+
+    return render_to_response('profile_search.html', template_values, context_instance=RequestContext(request))
+
 """
 Edit profile page
 """
@@ -321,14 +331,4 @@ def edit_profile(request):
     }
     
     return render_to_response('edit_profile.html', template_values, context_instance=RequestContext(request))
-"""
-Helper function to deal with recent/best
-search queries
-"""
-def profile_search(request, template_values, profile_user):
-    get_dict = addUserToQuery(request.GET, profile_user.username)
-    template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=profile_user)
-    template_values['header_classes'] = 'offset2 span8'
 
-    return render_to_response('profile_search.html', 
-        template_values, context_instance=RequestContext(request))
