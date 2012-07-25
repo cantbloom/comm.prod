@@ -43,6 +43,7 @@ def search(request):
     subnav_key, subnav_value, title =  get_active_page('home', request.GET.get('type', ""))
     template_values = {
         'page_title' : subnav_key.split("_")[1],
+        'nav_commprod' : "active",
         'user': request.user,
         'commprod_timeline' : commprod_query_manager(request.GET, request.user),
         subnav_key : subnav_value
@@ -68,6 +69,7 @@ def permalink(request, username, cp_id):
     template_values = {
         'user': request.user,
         'page_title' : "permalink",
+        'nav_commprod' : "active",
         'rendered_commprod' : rendered_commprod,
         'commprod' : commprod,
         'corrections' : corrections,

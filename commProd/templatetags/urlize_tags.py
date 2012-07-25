@@ -1,5 +1,6 @@
 from django import template
 from django.template.defaultfilters import stringfilter
+from HTMLParser import HTMLParser
 
 import re 
 
@@ -11,6 +12,7 @@ with a standard <a> tag or embeds a youtube video in the page
 """
 @register.filter
 def urlize_commprod(commprod):
+    commprod = strip_tags(commprod)
     pattern = re.compile("(?P<url>https?://[^\s]+)", re.I)
     match = pattern.search(commprod)
     if match:
@@ -41,3 +43,20 @@ def youtube_tag(url_match):
         return a_tag(url_match) # couldn't extract the value return just a link.
     
     return '<br><br><iframe id="ytplayer" type="text/html" width="320" height="195" src="http://www.youtube.com/embed/%s" frameborder="0"></iframe><br><br>' % v
+
+"""
+Helper to remove anchor tags
+"""
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.fed = []
+    def handle_data(self, d):
+        self.fed.append(d)
+    def get_data(self):
+        return ''.join(self.fed)
+
+def strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()

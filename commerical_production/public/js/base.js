@@ -103,12 +103,21 @@ function filepicker_services(){
 	    filepicker.SERVICES.COMPUTER,
 	    filepicker.SERVICES.FACEBOOK,
 	    filepicker.SERVICES.DROPBOX,]
-	
 }
+
+function detailsCorrectionText(e, v) {
+	$(e.srcElement).text("Click for more")
+}
+
+function detailsDefaultText(e, v) {
+	$(e.srcElement).text("Details")
+}
+
 
 $(function(){
 	$(document).on('click', '.vote-container .vote', voteSelection)
-
+	$('.permalink').hover(detailsCorrectionText, detailsDefaultText)
+	$('.permalink').popover()
 	$(document).on('click', '.claim-profile', openClaimProfile)
 	$(document).on('click', '#email-claim-confirm', submitClaimProfile)
 
