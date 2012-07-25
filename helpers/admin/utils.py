@@ -32,7 +32,7 @@ def add_users(filePath):
                 email += '@mit.edu'
 
             username, host = email.split('@')
-            
+
             init_data = {
                 'username' : username,
                 'email' : email,
@@ -40,7 +40,7 @@ def add_users(filePath):
             }
             print init_data
             print createUser(**init_data)
-                                    
+
         f.close()
     except IOError:
         print "File not found, your current working directory is", os.getcwd()
@@ -67,7 +67,7 @@ def createUser(username, email, send_mail=False):
 
 
 """
-Email current users 
+Email current users
 user_emails is a list of emails to send to.
 """
 def emailUsers(subject, html_content, user_emails):
@@ -80,14 +80,14 @@ def emailUsers(subject, html_content, user_emails):
 
 
 """
-Send an email to inactive users who 
+Send an email to inactive users who
 have permission to receive mail to register
 """
 def emailInactive():
     users = User.objects.filter(is_staff = True)
     for user in users:
         sendRegEmail(user.username)
-        
+
     return 'done'
 
 """
@@ -102,7 +102,7 @@ def testRegex():
         query = raw_input("Enter input string to search: ")
         if pattern.search(query) == None:
             print "No match found"
-        
+
         else:
 
             for m in pattern.finditer(query):
@@ -111,7 +111,7 @@ def testRegex():
 def sendRegEmail(username):
     user = User.objects.get(username = username)
     if user:
-        content = registration['content'] % (user.username, 'http://commprod-staging.herokuapp.com/register/'+user.profile.activation_key + '/')
+        content = registration['content'] % (user.username, 'http://commprod.herokuapp.com/register/'+user.profile.activation_key + '/')
         subject = registration['subject']
         emails = [user.email]
         emailUsers(subject, content, emails)

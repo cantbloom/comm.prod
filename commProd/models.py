@@ -9,8 +9,8 @@ from helpers.admin import email_templates, utils
 from datetime import date, datetime, timedelta
 import sha, random
 
- 
-class UserProfile(models.Model):          
+
+class UserProfile(models.Model):
     user = models.OneToOneField(User)
     #other fields here
 
@@ -41,8 +41,8 @@ class UserProfile(models.Model):
         self.update_avg(save=False)
         self.update_data_point(save=False)
         if save:
-            self.save()   
-    
+            self.save()
+
     def to_json(self):
         return json.dumps({
             'username': self.user.username,
@@ -56,8 +56,8 @@ class UserProfile(models.Model):
 
 
     """
-    Takes an email, updates commprod objects 
-    associatd with the alt_email user to self. 
+    Takes an email, updates commprod objects
+    associatd with the alt_email user to self.
     Also updates Rating objects to self
     """
     def mergeAndDelete(self, email):
@@ -67,18 +67,18 @@ class UserProfile(models.Model):
 
             self.score += to_delete.score
             self.data_point_count += to_delete.data_point_count
-            
+
             CommProd.objects.filter(user_profile=to_delete).update(user_profile=self)
 
             CommProdEmail.objects.filter(user_profile=to_delete).update(user_profile=self) #very important!!
             TrendData.objects.filter(user_profile=to_delete).update(user_profile=self)
 
             self.update_avg()
-            
+
             to_delete.user.delete()
 
-    def __unicode__(self):  
-          return "%s's profile" % self.user  
+    def __unicode__(self):
+          return "%s's profile" % self.user
 
 User.profile = property(lambda u: u.get_profile())
 
@@ -91,7 +91,7 @@ class Email(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, 'http://commprod-staging.herokuapp.com/confirm_email/' + self.activation_key + '/')
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, 'http://commprod.herokuapp.com/confirm_email/' + self.activation_key + '/')
         subject = email_templates.alt_email['subject']
         emails = [self.email]
         utils.emailUsers(subject, content, emails)
@@ -146,7 +146,7 @@ class CommProd(models.Model):
     def update_avg(self, save=True):
     	self.avg_score = Rating.objects.filter(commprod=self).aggregate(Avg('score'))['score__avg']
     	if save:
-            self.save()  
+            self.save()
 
     def update_score(self, diff):
         self.score += diff
@@ -158,14 +158,14 @@ class CommProd(models.Model):
         if abs(diff) == 1:
             self.register_activity(save=False)
 
-        self.save()   
+        self.save()
 
     def register_activity(self, save=True):
         #fiddle with 400 to adjust how long a vote has an effect
         self.trending_score += 400;
 
         if save:
-            self.save()  
+            self.save()
 
     def calculate_score(votes, item_hour_age, gravity=1.8):
         return (votes - 1) / pow((item_hour_age+2), gravity)
@@ -221,7 +221,7 @@ class Correction(models.Model):
             Correction.objects.filter(commprod=self.commprod).update(active=False)
             self.active = False
             self.used = True
-            
+
             self.commprod.content = self.content
 
         self.save()
