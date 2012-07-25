@@ -59,7 +59,7 @@ def permalink(request, username, cp_id):
         rendered_commprod = commprod[0]
         cp_user = User.objects.filter(username=username)[0]
         commprod = CommProd.objects.filter(id=cp_id)[0]
-        corrections = correction_query_manager(commprod=commprod)
+        corrections = correction_query_manager(user=request.user, commprod=commprod)
         
         commprods = CommProd.objects.filter(email_content=commprod.email_content)
         email_content = urlize_email_content(commprod.email_content.content, commprods)
@@ -161,7 +161,7 @@ def correction(request):
         correction = Correction(user_profile=user.profile, content=content, commprod=commprod)
         correction.save()
         response_data = {
-            'correction' : correction_query_manager(correction.id)
+            'correction' : correction_query_manager(user=request.user, correction_id=correction.id)
         }
     else:
         response_data = {

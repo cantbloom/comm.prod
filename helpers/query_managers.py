@@ -57,11 +57,11 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 """
 Handles queries for user data to be displayed on profile page.
 """
-def profile_query_manager(user):
+def profile_query_manager(user, profile_user):
 
-    best_prod, worst_prod = find_profile_prods(user)
+    best_prod, worst_prod = find_profile_prods(user, profile_user)
 
-    most_loved, most_hated = find_profile_faves(user)
+    most_loved, most_hated = find_profile_faves(profile_user)
     
     response = {
         'best_prod' : best_prod,
@@ -120,7 +120,10 @@ def trend_data_manager(user):
 """
 Finds and renders active corrections for the given commprod
 """
-def correction_query_manager(correction_id=None, commprod=None):
+def correction_query_manager(user=None, correction_id=None, commprod=None):
+    if not user:
+        raise Expection('must specificy')
+
     query = None
     if correction_id:
         query =  Correction.objects.filter(id=correction_id, active=True)
@@ -141,22 +144,22 @@ exist. If none exists boolean is sent back and nothing is
 rentered.
 """
 
-def find_profile_prods(user):
+def find_profile_prods(user, profile_user):
     if CommProd.objects.filter(user_profile=user.profile).exists():
-        best_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Max('score'))['score__max']
-        worst_score = CommProd.objects.filter(user_profile=user.profile).aggregate(Min('score'))['score__min']  
+        best_score = CommProd.objects.filter(user_profile=profile_user.profile).aggregate(Max('score'))['score__max']
+        worst_score = CommProd.objects.filter(user_profile=profile_user.profile).aggregate(Min('score'))['score__min']  
 
         #all prods are the same, just return random
         if best_score == worst_score: 
-            query_set = CommProd.objects.filter(user_profile=user.profile, score=best_score)
+            query_set = CommProd.objects.filter(user_profile=profile_user.profile, score=best_score)
             best_prod = random.choice(query_set)
             worst_prod = random.choice(query_set)
         
         #otherwise return best/worst prods
         else: 
-            best_prod = CommProd.objects.filter(user_profile=user.profile, score=best_score)[0]
+            best_prod = CommProd.objects.filter(user_profile=profile_user.profile, score=best_score)[0]
         
-            worst_prod = CommProd.objects.filter(user_profile=user.profile, score=worst_score)[0]
+            worst_prod = CommProd.objects.filter(user_profile=profile_user.profile, score=worst_score)[0]
         
         #render html
         best_prod, worst_prod = commprod_renderer(user, [best_prod, worst_prod], 'list')
@@ -171,8 +174,8 @@ Finds the highest and least rated bomber from the
 given user. Returns a rendered list of highest and 
 lowest profiles found. 
 """
-def find_profile_faves(user):
-    ratings = Rating.objects.filter(user_profile=user.profile).select_related()
+def find_profile_faves(profile_user):
+    ratings = Rating.objects.filter(user_profile=profile_user.profile).select_related()
 
     user_dict = {}
     for rating in ratings:
