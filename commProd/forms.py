@@ -3,7 +3,7 @@ from django.core import validators
 from commProd.models import UserProfile, User
 from helpers.aws_put import put_profile_pic
 
-import datetime
+from datetime import datetime
 
 class RegForm(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label="")
@@ -33,7 +33,7 @@ class RegForm(forms.Form):
     def clean_class_year(self):
         try:
             class_year = int(self.cleaned_data['class_year'])
-            max_year = datetime.datetime.today().year + 4
+            max_year = datetime.today().year + 4
             if not class_year in range(1933, max_year):
                 raise forms.ValidationError('Enter a class year between 1933 and %s'%max_year)
         except ValueError:

@@ -109,9 +109,9 @@ dictionary for given User object
 """
 def trend_data_manager(user):
     try:
-	first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
+	   first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
     except IndexError:
-	first_trend_date = datetime.now()
+	   first_trend_date = datetime.now()
     trend_query_all = TrendData.objects.filter(date__gt=first_trend_date)
     trend_query_class = trend_query_all.filter(user_profile__class_year=user.profile.class_year)
     trend_query_user = trend_query_class.filter(user_profile=user.profile)
