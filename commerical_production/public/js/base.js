@@ -89,8 +89,10 @@ function postVote (e, d) {
         return;
     }
 
-    var max = 1;
-    var min = -1;
+
+    //note the below code probably only work for the permalink page. Be careful expecting this to work elsewhere
+    var max = 5;
+    var min = -5;
 
     var new_score = $commprod.find('.score').text()
 
