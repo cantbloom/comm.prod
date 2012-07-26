@@ -235,10 +235,10 @@ body {
 }
 
 .up-vote:active {
-  border-bottom-color: #222;
+  border-bottom-color: #8dad80;
 }
 .down-vote:active {
-  border-top-color: #222;
+  border-top-color: #e58585;
 }
 .up-vote.selected{
   border-bottom-color: #3cb371;

@@ -21,11 +21,11 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 
     valid_types = {
         'best' : {
-                    'orderBy': 'avg_score', 
+                    'orderBy': 'score', 
                     'direction': 'lh',
         },
         'worst':{
-                'orderBy': 'avg_score', 
+                'orderBy': 'score', 
                 'direction': 'hl',
         },
         'recent' : {
@@ -187,7 +187,7 @@ def find_profile_faves(profile_user):
     try:
         most_hated = UserProfile.objects.get(id=sorted_users[0]['commprod__user_profile'])
         most_loved =  UserProfile.objects.get(id=sorted_users.reverse()[0]['commprod__user_profile'])
-        
+
     except:
         print 'error'
         most_loved = UserProfile.objects.order_by('?')[0]
