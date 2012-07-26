@@ -1,15 +1,15 @@
 function insertCommprod(e, d){
-	var toAdd = $(data.commprods.shift());
+	var $toAdd = $(data.commprods.shift());
 	
-	toAdd.addClass('first');
-	toAdd.hide();
-	toAdd.css('opacity', 0);
+	$toAdd.addClass('first');
+	$toAdd.hide();
+	$toAdd.css('opacity', 0);
 	
 	$(e.currentTarget).find('.first').removeClass('first');
-	$(e.currentTarget).prepend(toAdd);
+	$(e.currentTarget).prepend($toAdd);
 	
-	toAdd.slideDown(function(){
-		toAdd.animate({opacity:1}, 150);
+	$toAdd.slideDown(function(){
+		$toAdd.animate({opacity:1}, 150);
 	});
 
 	if (data.commprods.length < 20){
@@ -17,6 +17,9 @@ function insertCommprod(e, d){
 			data.commprods = data.commprods.concat(res.res);
 		});
 	}
+
+	//add popover since this commprod wasn';'t arround when it was first added
+	$toAdd.find('.permalink').popover();
 }
 
 $(function(){

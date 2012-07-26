@@ -189,7 +189,6 @@ def find_profile_faves(profile_user):
         most_loved =  UserProfile.objects.get(id=sorted_users.reverse()[0]['commprod__user_profile'])
 
     except:
-        print 'error'
         most_loved = UserProfile.objects.order_by('?')[0]
         most_hated = UserProfile.objects.order_by('?')[0]
 
