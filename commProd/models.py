@@ -214,10 +214,10 @@ class Correction(models.Model):
         self.score = self.score + diff
         self.user_profile.score = self.user_profile.score +diff #update user for points
 
-        if self.score == -1:
+        if self.score == -5:
             self.active = False
 
-        elif self.score == 1:
+        elif self.score == 5:
             Correction.objects.filter(commprod=self.commprod).update(active=False)
             self.active = False
             self.used = True
