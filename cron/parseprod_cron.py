@@ -4,7 +4,8 @@
 ## * * * * * source /home/cantbloom/commprod/venv/bin/activate >/dev/null; python /home/cantbloom/commprod/cron/parseprod_cron.py >/dev/null
 from os import environ as env
 from optparse import OptionParser
-import email, sys, getpass, imaplib, re, logging, requests, datetime, time, os, simplejson as json
+from datetime import datetime
+import email, sys, getpass, imaplib, re, logging, requests,time, os, simplejson as json
 
 
 ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
@@ -74,8 +75,8 @@ def fetch_prods(url, login, password, mailbox, search_query):
             try:
                 result, data = mail.uid('fetch', msg_id, '(RFC822)')
                 email_message = email.message_from_string(data[0][1])
-                date = time.mktime(email.utils.parsedate(email_message['Date'])) # in milliseconds
-                date = datetime.datetime.fromtimestamp(date).isoformat()
+                date = email.utils.mktime_tz(email.utils.parsedate_tz(email_message['Date'])) # UTC timestamp
+                date = datetime.fromtimestamp(date).isoformat()
                 sender = (email.utils.parseaddr(email_message['From'])[1]).lower()
                 content = stripOld(get_first_text_block(email_message))
                 subject = str(email_message['Subject'])

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.db.models import Max, Min
+from django.db.models import Max, Min, Sum
 
 from commProd.models import CommProd, Rating, UserProfile, TrendData, Correction
 from commprod_search import commprod_search
@@ -21,11 +21,11 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 
     valid_types = {
         'best' : {
-                    'orderBy': 'avg_score', 
+                    'orderBy': 'score', 
                     'direction': 'lh',
         },
         'worst':{
-                'orderBy': 'avg_score', 
+                'orderBy': 'score', 
                 'direction': 'hl',
         },
         'recent' : {
@@ -39,10 +39,13 @@ def commprod_query_manager(get_dict, user, return_type="html"):
     }
     
     search_params = {k : v for k, v in get_dict.items() if k in valid_params}
+
     ## overwrite given parameters with default for type.
     type = get_dict.get('type', None)
     if type in valid_types:
         search_params = dict(search_params, **valid_types[type])
+
+    print search_params
 
     if 'unvoted' in search_params:
         search_params['unvoted'] = user.username
@@ -106,9 +109,9 @@ dictionary for given User object
 """
 def trend_data_manager(user):
     try:
-	first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
+	   first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
     except IndexError:
-	first_trend_date = datetime.now()
+	   first_trend_date = datetime.now()
     trend_query_all = TrendData.objects.filter(date__gt=first_trend_date)
     trend_query_class = trend_query_all.filter(user_profile__class_year=user.profile.class_year)
     trend_query_user = trend_query_class.filter(user_profile=user.profile)
@@ -179,30 +182,17 @@ lowest profiles found.
 def find_profile_faves(profile_user):
     ratings = Rating.objects.filter(user_profile=profile_user.profile).select_related()
 
-    user_dict = {}
-    for rating in ratings:
-        username = rating.commprod.user_profile.user.username
-        score = rating.score
-        if username in user_dict:
-            user_dict[username] += score
-        else:
-            user_dict[username] = score
+    sorted_users = Rating.objects.filter(user_profile=profile_user.profile).values('commprod__user_profile').order_by('commprod__user_profile').annotate(total=Sum('score')).order_by('total')
 
-    if user_dict != {}:
-        most_loved = max(user_dict.iteritems(), key=operator.itemgetter(1))[0]
-        max_val = user_dict[most_loved]
-        most_hated = min(user_dict.iteritems(), key=operator.itemgetter(1))[0]
-        min_val = user_dict[most_hated]
+    try:
+        most_hated = UserProfile.objects.get(id=sorted_users[0]['commprod__user_profile'])
+        most_loved =  UserProfile.objects.get(id=sorted_users.reverse()[0]['commprod__user_profile'])
 
-        most_loved = UserProfile.objects.filter(user__username=most_loved)[0]
-        most_hated = UserProfile.objects.filter(user__username=most_hated)[0]
-    else:
+    except:
         most_loved = UserProfile.objects.order_by('?')[0]
         most_hated = UserProfile.objects.order_by('?')[0]
-        min_val = 0
-        max_val = 0
 
-    return  profile_renderer(zip([most_loved, most_hated], [max_val, min_val]))
+    return  profile_renderer([most_loved, most_hated])
 
 
 """ 

@@ -1,5 +1,5 @@
 {% load urlize_tags %}
-<div id="{{ obj_type }}_object_{{ commprod.id }}" class='row commprod-container {{ obj_type }}' data-id="{{ commprod.id }}">
+<div id="{{ obj_type }}_object_{{ commprod.id }}" class='row commprod-container {{ obj_type }}' data-id="{{ commprod.id }}" data-type='{{ obj_type }}'>
 	<div class="author-container">
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
 			<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
@@ -18,7 +18,7 @@
 		{% endif %}
 		
 		<div class="vote-container" style="float:right">
-			<div class="up-down-container" data-id="{{ commprod.id }}" data-type='{{ obj_type }}'>
+			<div class="up-down-container" data-id="{{ commprod.id }}">
 				<div class="vote up-vote {{ upvote_selected }}"></div>
 				<div class="vote down-vote {{ downvote_selected }}"></div>
 			</div>
