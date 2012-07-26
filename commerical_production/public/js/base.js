@@ -82,6 +82,18 @@ function getImg() {
      );
 }
 
+function postVote (e, d) {
+	// $commprod = $(e.target);
+	// if (res.rm_all == true) {
+ //           var new_prod = $(div_id +'_content').html();
+ //           $('.commprod-content:first').html(new_prod);
+ //           $('.correction').remove();
+ //   }
+ //   else if (res.rm == true) {
+ //           $(div_id).remove();
+ //   }
+}
+
 
 function dropitemSelected (e, v) {
 	$('#search-bar').blur();
@@ -125,7 +137,7 @@ $(function(){
 
 	$(document).on('typeaheadItemSelected', dropitemSelected)
 
-	//$(document).on('voteSent', postVote) //not being used currenty
+	$(document).on('voteSent', postVote);
 
 	$('#search_bar').typeahead({
 		'source' : user_list
