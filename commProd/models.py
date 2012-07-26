@@ -223,6 +223,7 @@ class Correction(models.Model):
             self.used = True
 
             self.commprod.content = self.content
+            self.commprod.save()
 
         self.save()
 
