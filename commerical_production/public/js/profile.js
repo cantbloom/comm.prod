@@ -1,5 +1,7 @@
 $(function(){
     graph_data = {};
+
+    $(document).on('voteSent', updateProfileScore);
     //initialize rating on top div.
     $('#raty').raty({
         half : true,
@@ -44,6 +46,13 @@ $(function(){
     $('#trend_tab').trigger('click'); // vs class by default
 
 }); 
+
+//quickly change the ui -- must use diff to handle if user already voted
+function updateProfileScore (e, d) {
+    var $score = $('#raty-container .score_holder');
+    var new_score = parseInt($score.text()) + d.diff;
+    $score.html(new_score);
+}
 
 
 //Default event listener clears active tabs,

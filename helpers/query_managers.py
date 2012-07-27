@@ -145,23 +145,17 @@ rentered.
 
 def find_profile_prods(user, profile_user):
     if CommProd.objects.filter(user_profile=profile_user.profile).exists():
-        best_score = CommProd.objects.filter(user_profile=profile_user.profile).aggregate(Max('score'))['score__max']
-        worst_score = CommProd.objects.filter(user_profile=profile_user.profile).aggregate(Min('score'))['score__min']  
+            sorted_commprods = CommProd.objects.filter(user_profile=profile_user.profile).order_by('score')
+            count = sorted_commprods.count()
 
-        #all prods are the same, just return random
-        if best_score == worst_score: 
-            query_set = CommProd.objects.filter(user_profile=profile_user.profile, score=best_score)
-            best_prod = random.choice(query_set)
-            worst_prod = random.choice(query_set)
-        
-        #otherwise return best/worst prods
-        else: 
-            best_prod = CommProd.objects.filter(user_profile=profile_user.profile, score=best_score)[0]
-        
-            worst_prod = CommProd.objects.filter(user_profile=profile_user.profile, score=worst_score)[0]
-        
-        #render html
-        best_prod, worst_prod = commprod_renderer(user, [best_prod, worst_prod], 'list')
+            if count == 0:
+                return False, False
+            
+            worst_prod = sorted_commprods[0]
+            best_prod = sorted_commprods[count-1]
+
+            #render html
+            best_prod, worst_prod = commprod_renderer(user, [best_prod, worst_prod], 'list')
     else:
         best_prod = False
         worst_prod = False
