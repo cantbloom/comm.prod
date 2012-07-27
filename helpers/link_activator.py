@@ -21,5 +21,5 @@ def get_active_page(pageName, requestType):
     try: 
         result = (template_values[pageName][requestType], "active", requestType)
     except KeyError:
-        result = ("", "active", "")
+        result = ("_", "active", "") # returning '_' avoids index error at view on split('_')
     return result
