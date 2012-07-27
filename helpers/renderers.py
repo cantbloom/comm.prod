@@ -13,6 +13,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
     votes = Rating.objects.filter(user_profile__user=user)
     upvoted = votes.filter(score__gt=0).values_list('commprod__id', flat=True)
     downvoted = votes.filter(score__lt=0).values_list('commprod__id', flat=True)
+
     if return_type == "html":
         template_values =  {
             'commprods': paginator(page, commprods),
@@ -28,14 +29,9 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
     elif return_type == "list":       
         commprod_list = []
         for commprod in commprods:
-            upvote_selected = ''
-            downvote_selected = ''
-            if commprod.id in upvoted:
-                upvote_selected = 'selected'
-            elif commprod.id in downvoted:
-                downvote_selected = 'selected'
-            commprod_list.append(
-                str(render_to_string('commprod/commprod_template.html', {
+           upvote_selected, downvote_selected = vote_select_helper(commprod, upvoted, downvoted)
+           commprod_list.append(str(render_to_string('commprod/commprod_template.html', 
+                {
                     'commprod': commprod,
                     'upvote_selected': upvote_selected ,
                     'downvote_selected': downvote_selected,
@@ -74,18 +70,22 @@ def correction_renderer(user, corrections):
     downvoted = votes.filter(score__lt=0).values_list('id', flat=True)
     html_list = []
     for correction in corrections:
-        upvote_selected = ''
-        downvote_selected = ''
-        if correction.id in upvoted:
-            upvote_selected = 'selected'
-        elif correction.id in downvoted:
-            downvote_selected = 'selected'
+        upvote_selected, downvote_selected = vote_select_helper(correction, upvoted, downvoted)
         c = {
         'commprod': correction,
         'upvote_selected': upvote_selected ,
-        'downnvote_selected': downvote_selected,
+        'downvote_selected': downvote_selected,
         'obj_type' :'correction' #correction css class
         }
         html_list.append(render_to_string('commprod/commprod_template.html', c))
 
     return html_list
+
+def vote_select_helper(obj, upvoted, downvoted):
+    upvote_selected = ''
+    downvote_selected = ''
+    if obj.id in upvoted:
+        upvote_selected = 'selected'
+    elif obj.id in downvoted:
+        downvote_selected = 'selected'
+    return upvote_selected, downvote_selected
