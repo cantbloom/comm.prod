@@ -81,12 +81,11 @@ function getImg() {
 }
 
 function postVote (e, d) {
-    $commprod = $(e.target);
+    var $commprod = $(e.target);
 
     //quickly change the ui -- must use diff to handle if user already voted
     var new_score = parseInt($commprod.find('.score').text()) + d.diff;
     $commprod.find('.score').html(new_score);
-
 
     /*
     Below is correction only stuff
