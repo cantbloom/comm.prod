@@ -52,10 +52,14 @@ def clean_prod(commprod):
 Tries to determine if the url is an image and returns either an anchor tag or img tag
 """
 def img_or_url(url_match):
-    r = requests.get(url_match)
-    content_type  = r.headers['content-type']
-    if 'image' in content_type:
-        return img_tag(url_match)
+    try:
+        r = requests.get(url_match,timeout=1)
+        content_type  = r.headers['content-type']
+        if 'image' in content_type:
+            return img_tag(url_match)
+    except:
+        print 'timeout', url_match
+        pass
 
     return a_tag(url_match)
 
