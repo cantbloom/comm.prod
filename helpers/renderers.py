@@ -69,20 +69,17 @@ Renders a correction  block as a list of
 html items.
 """
 def correction_renderer(user, corrections):
-    votes = Correction.objects.filter(correctionrating__user_profile__user = user)
-    upvoted = votes.filter(score__gt = 0).values_list('id', flat=True)
-    downvoted = votes.filter(score__lt = 0).values_list('id', flat=True)
+    votes = Correction.objects.filter(correctionrating__user_profile__user=user)
+    upvoted = votes.filter(score__gt=0).values_list('id', flat=True)
+    downvoted = votes.filter(score__lt=0).values_list('id', flat=True)
     html_list = []
     for correction in corrections:
+        upvote_selected = ''
+        downvote_selected = ''
         if correction.id in upvoted:
             upvote_selected = 'selected'
-            downvote_selected = ''
         elif correction.id in downvoted:
-            upvote_selected = ''
             downvote_selected = 'selected'
-        else:
-            upvote_selected = ''
-            downvote_selected = ''
         c = {
         'commprod': correction,
         'upvote_selected': upvote_selected ,

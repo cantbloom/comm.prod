@@ -6,8 +6,6 @@ from commprod_search import commprod_search
 
 from helpers.renderers import commprod_renderer, profile_renderer, correction_renderer
 
-#from django.utils.safestring import mark_safe
-
 from datetime import datetime
 import random, time, operator, numpy as np
 
@@ -123,19 +121,17 @@ def trend_data_manager(user):
 """
 Finds and renders active corrections for the given commprod
 """
-def correction_query_manager(user=None, correction_id=None, commprod=None):
-    if not user:
-        raise Expection('must specificy')
+def correction_query_manager(user, correction_id=None, commprod=None):
 
-    query = None
+    corrections = None
     if correction_id:
-        query =  Correction.objects.filter(id=correction_id, active=True)
+        corrections =  Correction.objects.filter(id=correction_id, active=True)
     
     elif commprod:
-        query = Correction.objects.filter(commprod=commprod, active=True)
+        corrections = Correction.objects.filter(commprod=commprod, active=True)
     
-    if query and query.exists():
-        return correction_renderer(query[0].commprod.user_profile.user, query) 
+    if corrections and corrections.exists():
+        return correction_renderer(user, corrections) 
     else:
         return []
 
