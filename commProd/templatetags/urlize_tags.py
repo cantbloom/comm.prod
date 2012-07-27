@@ -92,7 +92,7 @@ def youtube_tag(url_match):
     except ValueError:
         return a_tag(url_match) # couldn't extract the value return just a link.
     
-    return '<br><br><iframe id="ytplayer" type="text/html" width="320" height="195" src="http://www.youtube.com/embed/%s" frameborder="0"></iframe><br><br>' % v
+    return '<br><br><iframe id="ytplayer" type="text/html" width="265px" height="195px" src="http://www.youtube.com/embed/%s" frameborder="0"></iframe><br><br>' % v
 
 """
 Helper to remove anchor tags
