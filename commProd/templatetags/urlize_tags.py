@@ -6,14 +6,17 @@ import re
 
 register = template.Library()
 
+url_regex = "(?P<url>https?://[^\s]+)"
+
 """
 Finds and replaces urls in the commprod content
 with a standard <a> tag or embeds a youtube video in the page
 """
 @register.filter
 def urlize_commprod(commprod):
+    commprod = clean_prod(commprod)
     commprod = strip_tags(commprod)
-    pattern = re.compile("(?P<url>https?://[^\s]+)", re.I)
+    pattern = re.compile(url_regex, re.I)
     match = pattern.search(commprod)
     if match:
         for m in pattern.finditer(commprod):
@@ -23,6 +26,25 @@ def urlize_commprod(commprod):
             else:
                 commprod = commprod.replace(url_match, a_tag(url_match))
     return commprod
+
+"""
+Does some cleanup to remove '<' and '>' characters from a link to account for weirdness with URL embedding. Commprod is then run through strip_tags to removed embedded tags.
+"""
+def clean_prod(commprod):
+    pattern = re.compile(url_regex, re.I)
+    match = pattern.search(commprod)
+    strip_chars = ['<', '>']
+    prod_list = list(commprod)
+    if match:
+        for m in pattern.finditer(commprod):
+            group = 'url'
+            start = max(m.start(group) - 1, 0)
+            end = min(m.end(group) + 1, len(prod_list)-1)
+            if prod_list[start] in strip_chars:
+                prod_list[start] = ""
+            elif prod_list[end] in strip_chars:
+                prod_list[end] = ""
+    return "".join(prod_list)
 
 """
 Wraps the given text in an <a> tag.

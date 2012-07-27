@@ -150,7 +150,7 @@ rentered.
 """
 
 def find_profile_prods(user, profile_user):
-    if CommProd.objects.filter(user_profile=user.profile).exists():
+    if CommProd.objects.filter(user_profile=profile_user.profile).exists():
         best_score = CommProd.objects.filter(user_profile=profile_user.profile).aggregate(Max('score'))['score__max']
         worst_score = CommProd.objects.filter(user_profile=profile_user.profile).aggregate(Min('score'))['score__min']  
 
