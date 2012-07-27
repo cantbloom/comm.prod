@@ -45,8 +45,6 @@ def commprod_query_manager(get_dict, user, return_type="html"):
     if type in valid_types:
         search_params = dict(search_params, **valid_types[type])
 
-    print search_params
-
     if 'unvoted' in search_params:
         search_params['unvoted'] = user.username
         

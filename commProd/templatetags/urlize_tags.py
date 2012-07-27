@@ -2,12 +2,12 @@ from django import template
 from django.template.defaultfilters import stringfilter
 from HTMLParser import HTMLParser
 
-import re 
+import re, requests
 
 register = template.Library()
 
 url_regex = "(?P<url>https?://[^\s]+)"
-
+group = 'url'
 """
 Finds and replaces urls in the commprod content
 with a standard <a> tag or embeds a youtube video in the page
@@ -20,11 +20,13 @@ def urlize_commprod(commprod):
     match = pattern.search(commprod)
     if match:
         for m in pattern.finditer(commprod):
-            url_match = m.group('url')
+            url_match = m.group(group)
             if 'youtube' in url_match:
                 commprod = commprod.replace(url_match, youtube_tag(url_match))
             else:
-                commprod = commprod.replace(url_match, a_tag(url_match))
+                tag = img_or_url(url_match)
+                commprod = commprod.replace(url_match, tag)
+
     return commprod
 
 """
@@ -33,24 +35,46 @@ Does some cleanup to remove '<' and '>' characters from a link to account for we
 def clean_prod(commprod):
     pattern = re.compile(url_regex, re.I)
     match = pattern.search(commprod)
-    strip_chars = ['<', '>']
-    prod_list = list(commprod)
+    prod_list = list(str(commprod))
+
     if match:
         for m in pattern.finditer(commprod):
-            group = 'url'
             start = max(m.start(group) - 1, 0)
             end = min(m.end(group) + 1, len(prod_list)-1)
-            if prod_list[start] in strip_chars:
+
+            if prod_list[start] == '<':
                 prod_list[start] = ""
-            elif prod_list[end] in strip_chars:
+            if prod_list[end] == '>':
                 prod_list[end] = ""
     return "".join(prod_list)
 
 """
+Tries to determine if the url is an image and returns either an anchor tag or img tag
+"""
+def img_or_url(url_match):
+    r = requests.get(url_match)
+    content_type  = r.headers['content-type']
+    if 'image' in content_type:
+        return img_tag(url_match)
+
+    return a_tag(url_match)
+
+
+"""
+Wraps the given url in a <img> tag
+"""
+def img_tag(url_match):
+    dim = '50%' #string format is dumb
+    tag = "<br><br><img src='%s' width='%s' height='%s'><br><br>"% (url_match, dim, dim)
+    return a_tag(url_match, tag)
+
+"""
 Wraps the given text in an <a> tag.
 """
-def a_tag(url_match):
-    return "<a target='_blank' href='%s'>%s</a>" % (url_match, url_match)
+def a_tag(url_match, text=None):
+    if not text:
+        text = url_match
+    return "<a target='_blank' href='%s'>%s</a>" % (url_match, text)
 
 
 """
