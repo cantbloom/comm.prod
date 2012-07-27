@@ -199,28 +199,6 @@ std, and mean.
 This is the worst code ever. 
 """
 def get_grade(user_score, std, mean):
-<<<<<<< Updated upstream
-    a = mean + std
-    b = mean
-    c = mean - std
-    d = c - std
-    f = d - std
-    if user_score >= a:
-        return "A" + grade_mod(user_score, a+std, a)
-    elif user_score < a and user_score >= b:
-        return "B" + grade_mod(user_score, a, b)
-    elif user_score < b and user_score >= c:
-        return "C" + grade_mod(user_score, b, c)
-    elif user_score < c and user_score >= d:
-        return "D" + grade_mod(user_score, c, d)
-    else:
-        return "F" + grade_mod(user_score, d, d-std)
-
-"""
-Returns +/- grades for user.
-Divides the upper and lower limit into three sections, return grade +  for upper, grade for middle, and grade - for lower. 
-"""
-def grade_mod(user_score, upper_limit, lower_limit):
     letters = ['A', 'B', 'C', 'D', 'F']
     grades = []
     scores = []
