@@ -97,7 +97,7 @@ function trendDataObject(trend_data) {
 function getVsData(filter, tab) {
     username = user_data.username,
     url = '/commprod/api/profile_data?type=vs_data&username=' + username;
-    if (filter) {
+    if (tab == 'vs_class') {
         url += '&filter=' + filter;
     }
 

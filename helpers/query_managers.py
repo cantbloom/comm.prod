@@ -88,7 +88,7 @@ def vs_data_manager(user, filter_year=None):
             score_dict[score] += 1
         else:
             score_dict[score] = 1
-    
+
     std = np.std(np.array(score_dict.keys()))
     mean = np.mean(np.array(score_dict.keys()))
     grade = get_grade(user.profile.score, std, mean)
@@ -203,6 +203,9 @@ def get_grade(user_score, std, mean):
     grades = []
     scores = []
     curr_std = 1.33
+
+    if std == 0:
+        return 'B'
 
     #make grades
     for letter in letters:

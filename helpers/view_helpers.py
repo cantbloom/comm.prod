@@ -13,10 +13,11 @@ first + last, username, and a shirt first_name.
 def getRandomUsername(user):
     potentials = [shirtname.name for shirtname in ShirtName.objects.filter(user_profile=user.profile)]
 
-    potentials.append(user.username)
     name = user.first_name.strip()
     if (name != ""):
         potentials.append(name)
+    else:
+        potentials.append(user.username)
     return random.choice(potentials)
 
 """ 

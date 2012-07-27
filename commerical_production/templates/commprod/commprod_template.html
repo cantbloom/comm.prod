@@ -1,4 +1,5 @@
 {% load urlize_tags %}
+{% load trim %}
 <div id="{{ obj_type }}_object_{{ commprod.id }}" class='row commprod-container {{ obj_type }}' data-id="{{ commprod.id }}" data-type='{{ obj_type }}'>
 	<div class="author-container">
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
@@ -26,13 +27,13 @@
 		</div>
 	</div>
 	<div id="{{ obj_type }}_object_{{ commprod.id }}_content" class="commprod-content">
-		a btb <b>"{{ commprod.content|urlize_commprod|safe }}"</b> comm.prod
+		a btb <b>"{{ commprod.content|urlize_commprod|safe }} </b>"comm.prod
 	</div>
 	<div class="commprod-footer">
 		{% if obj_type == 'correction' %}
 
 		{% else %}
-		<span class="date"> {{ commprod.date }} <a class="permalink" href="/commprod/{{ commprod.user_profile.user.username }}/{{ commprod.id }}" title='{{ commprod.email_content.subject }}' data-content='{{ commprod.email_content.content|linebreaks }}'>Details </a> </span> 
+		<span class="date"> {{ commprod.date }} <a class="permalink" href="/commprod/{{ commprod.user_profile.user.username }}/{{ commprod.id }}" title='{{ commprod.email_content.subject }}' data-content='{{ commprod.email_content.content|linebreaks|trim  }}'>Details </a> </span> 
 		{% endif %}
 		
 	</div>

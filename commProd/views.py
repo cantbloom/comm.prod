@@ -73,7 +73,7 @@ def permalink(request, username, cp_id):
         'rendered_commprod' : rendered_commprod,
         'commprod' : commprod,
         'corrections' : corrections,
-        'email_content' : email_content
+        'email_content' : email_content,
     }
     return render_to_response('commprod/permalink.html', template_values, context_instance=RequestContext(request))
 
