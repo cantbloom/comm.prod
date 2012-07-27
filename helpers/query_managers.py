@@ -107,9 +107,9 @@ dictionary for given User object
 """
 def trend_data_manager(user):
     try:
-	   first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
+	first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
     except IndexError:
-	   first_trend_date = datetime.now()
+	first_trend_date = datetime.now()
     trend_query_all = TrendData.objects.filter(date__gt=first_trend_date)
     trend_query_class = trend_query_all.filter(user_profile__class_year=user.profile.class_year)
     trend_query_user = trend_query_class.filter(user_profile=user.profile)
@@ -199,6 +199,7 @@ std, and mean.
 This is the worst code ever. 
 """
 def get_grade(user_score, std, mean):
+<<<<<<< Updated upstream
     a = mean + std
     b = mean
     c = mean - std
@@ -220,12 +221,31 @@ Returns +/- grades for user.
 Divides the upper and lower limit into three sections, return grade +  for upper, grade for middle, and grade - for lower. 
 """
 def grade_mod(user_score, upper_limit, lower_limit):
-    sect = (upper_limit - lower_limit)/3.0 #partition to three sections
-    if user_score >= upper_limit-sect:
-        return "+"
-    elif user_score <= lower_limit+sect:
-        return "-"
-    return ""
+    letters = ['A', 'B', 'C', 'D', 'F']
+    grades = []
+    scores = []
+    curr_std = 1.33
+
+    #make grades
+    for letter in letters:
+        grades.append(letter+'+')
+        scores.append(mean+std*curr_std)
+        curr_std-=.33
+
+        grades.append(letter)
+        scores.append(mean+std*curr_std)
+        curr_std-=.33
+
+        grades.append(letter+'-')
+        scores.append(mean+std*curr_std)
+        curr_std-=.33
+
+    scores.append(user_score);
+    scores.sort();
+
+    index = max(0, scores.index(user_score))
+
+    return grades[index]
 
 
 """
