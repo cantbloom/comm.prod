@@ -218,11 +218,11 @@ def get_grade(user_score, std, mean):
         scores.append(mean+std*curr_std)
         curr_std-=.33
 
-    scores.append(user_score);
-    scores.sort();
+    scores.append(user_score)
+    scores.sort()
+    grades.reverse()
 
-    index = max(0, scores.index(user_score))
-
+    index = max(0, scores.index(user_score)-1)
     return grades[index]
 
 
