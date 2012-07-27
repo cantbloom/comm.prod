@@ -13,21 +13,19 @@ function voteSelection (e, data){
     var id = $commprod.data('id'),
     type = $commprod.data('type');
 
-    //quickly change the ui -- must calc diff to see if user already voted
+    //diff is the change from this users previous score given to this commprod
     var diff = $commprod.find('.vote').hasClass('selected') ? score*2 : score;
-    var new_score = parseInt($commprod.find('.score').text()) + diff;
-    $commprod.find('.score').html(new_score);
 
     //only select one arrow at a time
     $src.addClass('selected').siblings().removeClass('selected');
 
-    sendVote(id, score, type);
+    sendVote(id, score, type, diff);
 }
 
-function sendVote(id, score, type){
+function sendVote(id, score, type, diff){
     var $commprod = $('#'+ type + '_object_'  + id);
 
-    var payload = {'id':id, 'score':score, 'type': type};
+    var payload = {'id':id, 'score':score, 'type': type, 'diff':diff};
 
     $.post('/commprod/vote/', payload, function(res){
         $commprod.trigger('voteResponse', res);
@@ -85,11 +83,17 @@ function getImg() {
 function postVote (e, d) {
     $commprod = $(e.target);
 
+    //quickly change the ui -- must use diff to handle if user already voted
+    var new_score = parseInt($commprod.find('.score').text()) + d.diff;
+    $commprod.find('.score').html(new_score);
+
+
+    /*
+    Below is correction only stuff
+    */
     if ($commprod.data('type') != 'correction'){
         return;
     }
-
-
     //note the below code probably only work for the permalink page. Be careful expecting this to work elsewhere
     var max = 5;
     var min = -5;
