@@ -4,6 +4,8 @@ from os import environ as env
 #custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
+BASE_URL = 'http://commprod.herokuapp.com/'
+
 DEBUG = (not env['DEBUG'] == 'False') #convert from sting to bool
 TEMPLATE_DEBUG = DEBUG
 

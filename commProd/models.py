@@ -3,7 +3,7 @@ from django.utils import simplejson as json
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db.models import Avg
-
+from django.conf.settings import BASE_URL
 from helpers.admin import email_templates, utils
 
 from datetime import date, datetime, timedelta
@@ -91,7 +91,7 @@ class Email(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, 'http://commprod.herokuapp.com/confirm_email/' + self.activation_key + '/')
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, BASE_URL + 'confirm_email/' + self.activation_key + '/')
         subject = email_templates.alt_email['subject']
         emails = [self.email]
         utils.emailUsers(subject, content, emails)

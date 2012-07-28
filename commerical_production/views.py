@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
 from django.contrib import auth
-from django.contrib.auth import views
+from django.contrib.auth import views, login
 
 
 from django import forms
@@ -332,3 +332,26 @@ def edit_profile(request):
     
     return render_to_response('edit_profile.html', template_values, context_instance=RequestContext(request))
 
+def forgot_password(request):
+    if request.POST:
+
+    elif type == "email":
+            emails = request.POST.getlist('email')
+            errors['email'] = []
+
+            for email in emails:
+                #makes sure email
+                if not validateEmail(email): 
+                    if email.strip() == "":
+                        errors['email'].append("Empty email entered.")
+                    else:
+                        errors['email'].append(email + ' is not a valid email.')
+
+                #make sure email doesn't exists
+                elif UserProfile.objects.filter(email__email=email, email__confirmed=True).exists() or UserProfile.objects.filter(user__email=email, send_mail=True).exists():
+                    errors['email'].append(email + ' is already registered with an account.')
+
+            if errors['email'] == []:
+                for email in emails:
+                    profile.add_email(email)
+                success = "Confirmation emails sent out!"
