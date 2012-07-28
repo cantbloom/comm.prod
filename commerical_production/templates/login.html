@@ -29,10 +29,12 @@
                 {{ form.password }}
             </p>
             <br>
-             <p class="remember-container">
+            <p class="remember-container">
                 <strong>Remember me:</strong> <input name="remember_me" type="checkbox" checked="" />
             </p>
+
             <input class="btn btn-warning" id="login" type="submit" value="Login" />
+            <a href="/reset_password"> Forgot Password? </a> 
 
             <input type="hidden" name="next" value="{{ next }}" />
         </form>

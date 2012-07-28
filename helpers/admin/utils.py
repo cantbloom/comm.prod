@@ -2,12 +2,13 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
-from django.conf.settings import BASE_URL
+from django.conf import settings 
+
 from email_templates import registration
 
 import os, sha, re, random
 
-
+BASE_URL = settings.BASE_URL
 """
 ssh to athena and:
 

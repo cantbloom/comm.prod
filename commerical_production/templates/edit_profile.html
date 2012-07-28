@@ -6,8 +6,8 @@
 {%  endblock %}
 
 {% block content %}
-<h1 class="span4 offset4">{{page_title}}</h1>
-<div class="accordion span8 offset2 well" id="accordion2">
+<h1 class="span4 offset5">{{page_title}}</h1>
+<div class="accordion span6 offset3 well" id="accordion2">
     <div class="accordion-group" >
       <div class="accordion-heading">
         <b>
@@ -19,15 +19,16 @@
       </div>
       <div id="collapseOne" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-          <form id="pic">
-              {% include 'alert_box.html' %}
-              <input type="hidden" name="form_type" value="pic">
+          <form id="pic" data-url="/edit">
+            {% csrf_token %}
+            {% include 'alert_box.html' %}
+            <input type="hidden" name="form_type" value="pic">
 
-              <input type='hidden' name='pic_url' value="{{ user.profile.pic_url }}" id='id_pic_url'>
-              <img id="profile_pic" class="author-pic" src="{{ user.profile.pic_url }}">
+            <input type='hidden' name='pic_url' value="{{ user.profile.pic_url }}" id='id_pic_url'>
+            <img id="profile_pic" class="author-pic" src="{{ user.profile.pic_url }}">
 
-              <input class="btn" name="upload" id="upload" type="button" value="Edit profile picture"/>
-              <input class="btn btn-warning disabled" disabled type="submit" value="Save" data-loading-text="Saving..." id="profile-pic-save"/>
+            <input class="btn" name="upload" id="upload" type="button" value="Edit profile picture"/>
+            <input class="btn btn-warning disabled" disabled type="submit" value="Save" data-loading-text="Saving..." id="profile-pic-save"/>
             </form>
         </div>
       </div>
@@ -43,8 +44,9 @@
       </div>
       <div id="collapseTwo" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-         <form id="password">
-          {% include 'alert_box.html' %}
+         <form id="password" data-url="/edit">
+            {% include 'alert_box.html' %}
+            {% csrf_token %}
             <input type="hidden" name="form_type" value="password">
             {% for input in password %}
                 <p><input type="password" placeholder="{{input.placeholder}}" name="{{input.name}}" id="id_{{input.name}} "></p>
@@ -65,12 +67,13 @@
       </div>
       <div id="collapseThree" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-            <form id="shirt_name">
-            {% include 'alert_box.html' %}
-            <input type="hidden" name="form_type" value="shirt_name">
-            {% for input in shirtname %}
-              <p>
-                <input type="text" class="removable_input" placeholder="{{input.placeholder}}" name="{{input.name}}" value="{{input.value}}">
+            <form id="shirt_name" data-url="/edit">
+                {% csrf_token %}
+                {% include 'alert_box.html' %}
+                <input type="hidden" name="form_type" value="shirt_name">
+                {% for input in shirtname %}
+                <p>
+                    <input type="text" class="removable_input" placeholder="{{input.placeholder}}" name="{{input.name}}" value="{{input.value}}">
                 <a class="btn remove-input remove-shirt-name">
                   <i class="icon-minus"></i>
                 </a>
@@ -96,15 +99,16 @@
       </div>
       <div id="collapseFour" class="accordion-body in collapse" style="height: 0px;">
         <div class="accordion-inner">
-          <form id="email">
-              {% include 'alert_box.html' %}
-              <input type="hidden" name="form_type" value="email">
-              {% for input in email %}
-                  <p><input type="text" value="{{input.value}}" class="disabled" disabled></p>
-              {% endfor %}
+          <form id="email" data-url="/edit" >
+            {% include 'alert_box.html' %}
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="email">
+            {% for input in email %}
+              <p><input type="text" value="{{input.value}}" class="disabled" disabled></p>
+            {% endfor %}
 
-              <p id=""><a id='add-email' class="btn" ><i class="icon-plus"></i> Add another email</a></p> <br>
-              <input class="btn btn-warning" data-loading-text="Saving..." type="submit" value="Save" id="email-save"/>
+            <p id=""><a id='add-email' class="btn" ><i class="icon-plus"></i> Add another email</a></p> <br>
+            <input class="btn btn-warning" data-loading-text="Saving..." type="submit" value="Save" id="email-save"/>
             </form>
         </div>
       </div>

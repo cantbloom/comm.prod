@@ -23,5 +23,7 @@ urlpatterns += patterns('commerical_production.views',
     url(r'^home$', 'home'),
     url(r'^feedback$', 'feedback'),
     url(r'^login$', 'login', {'template_name': 'login.html'}),
+    url(r'^reset_password/(?P<key>\w+)', 'reset_password_confirm'),
+    url(r'^reset_password', 'reset_password'),
     url(r'^$', 'home'),
 )

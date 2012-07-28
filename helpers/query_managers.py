@@ -125,10 +125,10 @@ def correction_query_manager(user, correction_id=None, commprod=None):
 
     corrections = None
     if correction_id:
-        corrections =  Correction.objects.filter(id=correction_id, active=True)
+        corrections =  Correction.objects.filter(id=correction_id, is_active=True)
     
     elif commprod:
-        corrections = Correction.objects.filter(commprod=commprod, active=True)
+        corrections = Correction.objects.filter(commprod=commprod, is_active=True)
     
     if corrections and corrections.exists():
         return correction_renderer(user, corrections) 

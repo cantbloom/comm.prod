@@ -12,30 +12,6 @@ function addEmailInput(){
 	$('#add-email').closest('p').before(template);
 }
 
-function submitForm(e, d){
-	e.preventDefault();
-	var $form = $(e.target);
-	var id = $(e.target).attr('id');
-	$form.find('.btn[type=submit]').button('loading')
-	$.post("/edit", $form.serialize(), function(res){
-		if (res.success){
-			var addClass = "alert-success";
-			var removeClass = "alert-error";
-			var text = '<p>' + res.success + '</p>';
-		} else {
-			var addClass = "alert-error";
-			var removeClass = "alert-success";
-			var text = "";
-			for (var i =0, max=res.errors[id].length; i<max; i++){
-				text += "<p>" + res.errors[id][i] + "</p>";
-			}
-		}
-		$form.find('.response_text').html(text)
-		$form.find('.alert').removeClass(removeClass).addClass(addClass).slideDown();
-		$form.find('.btn[type=submit]').button('reset')
-	});
-}
-
 function toggleAccordion (e, d){
 	var $accordion = $(e.target).closest('.accordion-group');
 
