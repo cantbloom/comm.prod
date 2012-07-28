@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db.models import Avg
 
+
 from helpers.admin import email_templates, utils
 
 from datetime import date, datetime, timedelta
@@ -149,6 +150,7 @@ class CommProd(models.Model):
             self.save()
 
     def update_score(self, diff):
+        print 'diff:' + str(diff)
         self.score += diff
         self.user_profile.update_score(diff)
 
@@ -182,8 +184,12 @@ class Rating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
-        super(Rating, self).save(force_insert, force_update)
+        print 'prev', self.score, self.previous_score
         diff = int(self.score) - int(self.previous_score)
+        self.previous_score = self.score;
+        super(Rating, self).save(force_insert, force_update)
+        
+
         self.commprod.update_score(diff)
 
     def __unicode__(self):
@@ -240,8 +246,9 @@ class CorrectionRating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
-        super(CorrectionRating, self).save(force_insert, force_update)
         diff = int(self.score) - int(self.previous_score)
+        self.previous_score = self.score
+        super(CorrectionRating, self).save(force_insert, force_update)
         self.correction.update_score(diff)
 
     def __unicode__(self):

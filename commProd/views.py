@@ -98,7 +98,6 @@ def vote (request):
             rating, obj = vote_correction(id, score, user)
     
         if rating and score in valid_votes:
-            rating.previous_score = rating.score
             rating.score = score
             rating.save() #updates object avg automatically during save
             

@@ -1,5 +1,5 @@
 function removeInput(e, d){
-    $(e.srcElement).closest('p').remove();
+    $(e.target).closest('p').remove();
 }
 
 function addShirtNameInput(){

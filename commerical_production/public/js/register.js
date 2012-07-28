@@ -11,7 +11,7 @@ function addEmail (e, d) {
 }
 
 function removeEmail(e, d){
-    $(e.srcElement).closest('.alt-email').remove();
+    $(e.target).closest('.alt-email').remove();
 }
 
 function addTips(){

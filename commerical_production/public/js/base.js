@@ -1,7 +1,6 @@
 function voteSelection (e, data){
-    var $src = $(e.srcElement);
+    var $src = $(e.target);
     var $commprod = $src.closest('.commprod-container');
-
     //don't submit again if already selected
     if ($src.hasClass('selected')){
         return; 
@@ -18,7 +17,6 @@ function voteSelection (e, data){
 
     //only select one arrow at a time
     $src.addClass('selected').siblings().removeClass('selected');
-
     sendVote(id, score, type, diff);
 }
 
@@ -35,7 +33,7 @@ function sendVote(id, score, type, diff){
 }
 
 function openClaimProfile(e, d){
-    var $src = $(e.srcElement);
+    var $src = $(e.target);
     var user = $src.data('user');
 
 
@@ -136,11 +134,11 @@ function filepicker_services(){
 }
 
 function detailsCorrectionText(e, v) {
-    $(e.srcElement).text("Click for more")
+    $(e.target).text("Click for more")
 }
 
 function detailsDefaultText(e, v) {
-    $(e.srcElement).text("Details")
+    $(e.target).text("Details")
 }
 
 
