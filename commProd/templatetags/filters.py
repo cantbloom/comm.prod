@@ -1,14 +1,9 @@
 from django import template
-import string
-
-from django.conf import settings
 
 register = template.Library()
 
 @register.simple_tag
-def include_script(script_name,
-                   load_minified=(not settings.DEBUG),
-                   overload=settings.DEBUG):
+def include_script(script_name):
 
     # clean up the script name
     script_name = script_name.replace(".min.js", "")

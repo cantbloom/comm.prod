@@ -3,6 +3,8 @@ from django.utils import simplejson as json
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.db.models import Avg
+from django.conf import settings 
+from django.utils import timezone
 
 
 from helpers.admin import email_templates, utils
@@ -10,6 +12,7 @@ from helpers.admin import email_templates, utils
 from datetime import date, datetime, timedelta
 import sha, random
 
+BASE_URL = settings.BASE_URL
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -92,7 +95,7 @@ class Email(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, 'http://commprod.herokuapp.com/confirm_email/' + self.activation_key + '/')
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, BASE_URL + 'confirm_email/' + self.activation_key + '/')
         subject = email_templates.alt_email['subject']
         emails = [self.email]
         utils.emailUsers(subject, content, emails)
@@ -213,7 +216,7 @@ class Correction(models.Model):
     date = models.DateTimeField(auto_now=True)
     score = models.IntegerField(default=0)
     content = models.TextField()
-    active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     used = models.BooleanField(default=False)
 
     def update_score(self, diff):
@@ -221,11 +224,11 @@ class Correction(models.Model):
         self.user_profile.score = self.user_profile.score +diff #update user for points
 
         if self.score == -5:
-            self.active = False
+            self.is_active = False
 
         elif self.score == 5:
-            Correction.objects.filter(commprod=self.commprod).update(active=False)
-            self.active = False
+            Correction.objects.filter(commprod=self.commprod).update(is_active=False)
+            self.is_active = False
             self.used = True
 
             self.commprod.content = self.content
@@ -254,6 +257,34 @@ class CorrectionRating(models.Model):
     def __unicode__(self):
         return "%s voted a %s on correction_id %s on %s " % (self.user_profile.user.username, self.score, self.correction.id, self.date)
 
+class PasswordReset(models.Model):
+    user_profile = models.ForeignKey(UserProfile)
+
+    is_active = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now=True)
+    activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
+
+    def sendConfirmEmail(self):
+        content = email_templates.forgot_password['content'] % (self.user_profile.user.first_name, 'localhost:5000/' + 'reset_password/' + self.activation_key + '/')
+        subject = email_templates.forgot_password['subject']
+        emails = [self.user_profile.user.email]
+        utils.emailUsers(subject, content, emails)
+
+    def is_valid(self):
+        now = timezone.make_aware(datetime.now(), timezone.get_default_timezone())
+        time_threshold = now - timedelta(hours=24)
+        return self.date_created > time_threshold
+
+    def getNewPassword(self):
+        def getRand():
+            return int(random.random()*333)
+        user = self.user_profile.user
+        start = getRand()
+        end = getRand()
+        password = str(start) + self.user_profile.user.username + str(end)
+        user.set_password(password)
+        user.save()
+        return password
 
 #fuck.
 import signals

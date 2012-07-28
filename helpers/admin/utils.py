@@ -2,12 +2,13 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
+from django.conf import settings 
 
 from email_templates import registration
 
 import os, sha, re, random
 
-
+BASE_URL = settings.BASE_URL
 """
 ssh to athena and:
 
@@ -111,7 +112,7 @@ def testRegex():
 def sendRegEmail(username):
     user = User.objects.get(username = username)
     if user:
-        content = registration['content'] % (user.username, 'http://commprod.herokuapp.com/register/'+user.profile.activation_key + '/')
+        content = registration['content'] % (user.username, BASE_URL+'register/'+user.profile.activation_key + '/')
         subject = registration['subject']
         emails = [user.email]
         emailUsers(subject, content, emails)

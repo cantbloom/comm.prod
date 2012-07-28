@@ -34,6 +34,21 @@ alt_email = {
 	"""
 }
 
+forgot_password = {
+	'subject': 'Reset your password',
+	'content': """
+		Hi %s, 
+		<br>
+		<br>
+		A password reset request was just issued, if you did not initiate this, please let us know. <br><br>
+		Otherwise your can reset your password by clicking <a href='%s'>here</a>.
+		<br>
+		<br>
+		Love,<br>
+		Josh and Max
+		"""
+}
+
 feedback = {
 	'subject': 'Feedback for commerical production',
 	'content': """

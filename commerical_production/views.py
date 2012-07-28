@@ -7,12 +7,12 @@ from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
 from django.contrib import auth
-from django.contrib.auth import views
+from django.contrib.auth import views, login
 
 
 from django import forms
 
-from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email
+from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email, PasswordReset
 from commProd.forms import RegForm
 
 from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail
@@ -212,7 +212,6 @@ def profile_search(request, template_values, profile_user):
 Edit profile page
 """
 @login_required
-@csrf_exempt
 def edit_profile(request):
     user = request.user
     profile = user.profile
@@ -331,4 +330,68 @@ def edit_profile(request):
     }
     
     return render_to_response('edit_profile.html', template_values, context_instance=RequestContext(request))
+
+def reset_password(request):
+    errors = {'username' : []} #setup for javascript error setting
+    success = False
+    if request.POST:
+        username = request.POST.get('username', None)
+        if not username or username.strip() == "":
+                errors['username'].append("Empty username entered.")
+
+            #make sure user exists
+        elif not UserProfile.objects.filter(user__username=username, send_mail=True).exists():
+                errors['username'].append(username + " is not registered with an account.")
+
+            #create password reset object
+        else:
+            user_profile = UserProfile.objects.filter(user__username=username)[0]
+            reset = PasswordReset(user_profile=user_profile, is_active=True)
+            reset.save()
+            reset.sendConfirmEmail()
+
+        if len(errors['username']) == 0:
+            success = "Password reset email sent out!"
+
+        return_obj = {
+            'success' : success,
+            'errors': errors
+        }
+
+        return HttpResponse(json.dumps(return_obj), mimetype='application/json')
+    else:
+        template_values = {
+                'page_title' : "Reset Password",
+                "hero_err_title": "",
+                'user'  : request.user,
+        }
+        
+    return render_to_response('reset_password.html', template_values, context_instance=RequestContext(request))
+
+def reset_password_confirm(request, key=None):
+    success = False
+    errors = False
+    if key:
+        reset = PasswordReset.objects.filter(activation_key=key)
+        if reset.exists and reset[0].is_active and reset[0].is_valid():
+            reset = reset[0]
+            reset.is_active = False
+            new_password = reset.getNewPassword()
+            reset.save()
+            success = "Your password has been reset to %s " % new_password
+        else:
+            errors = "Your key is no longer active."
+    else:
+        errors = "Your key is invalid." 
+
+    if errors:
+        errors += " Try again <a href='/reset_password'> Here </a>"
+    template_values = {
+        "page_title": "Password Reset",
+        'user'  : request.user,
+        'success': success,
+        'errors': errors,
+    }
+    print template_values
+    return render_to_response('password_reset_confirm.html', template_values, context_instance=RequestContext(request))
 

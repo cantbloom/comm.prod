@@ -13,10 +13,11 @@ first + last, username, and a shirt first_name.
 def getRandomUsername(user):
     potentials = [shirtname.name for shirtname in ShirtName.objects.filter(user_profile=user.profile)]
 
-    potentials.append(user.username)
     name = user.first_name.strip()
     if (name != ""):
         potentials.append(name)
+    else:
+        potentials.append(user.username)
     return random.choice(potentials)
 
 """ 
@@ -64,7 +65,7 @@ Submit vote for a commprod
 """
 def vote_commprod(id, score, user):
     commprod = commprod_search(cp_id=id)
-    if commprod.count() != 1:
+    if commprod.count() != 1: #make sure commprod is these
         return False, False
     commprod = commprod[0]
     rating, created = Rating.objects.get_or_create(commprod=commprod, user_profile=user.profile)

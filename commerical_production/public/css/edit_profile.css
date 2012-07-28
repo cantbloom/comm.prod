@@ -11,7 +11,3 @@
 input.disabled{
 	cursor: not-allowed!important;
 }
-
-p {
-    margin: 0px !important;
-}
