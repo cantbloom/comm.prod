@@ -95,7 +95,7 @@ class Email(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, BASE_URL + 'confirm_email/' + self.activation_key + '/')
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, BASE_URL + '/confirm_email/' + self.activation_key + '/')
         subject = email_templates.alt_email['subject']
         emails = [self.email]
         utils.emailUsers(subject, content, emails)
@@ -265,7 +265,7 @@ class PasswordReset(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.forgot_password['content'] % (self.user_profile.user.first_name, 'localhost:5000/' + 'reset_password/' + self.activation_key + '/')
+        content = email_templates.forgot_password['content'] % (self.user_profile.user.first_name, settings.BASE_URL_DEV + '/reset_password/' + self.activation_key + '/')
         subject = email_templates.forgot_password['subject']
         emails = [self.user_profile.user.email]
         utils.emailUsers(subject, content, emails)
