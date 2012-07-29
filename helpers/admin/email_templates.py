@@ -40,7 +40,7 @@ forgot_password = {
 		Hi %s, 
 		<br>
 		<br>
-		A password reset request was just issued, if you did not initiate this, please let us know. <br><br>
+		A password reset request was just issued, if you did not initiate this, ignore this. <br><br>
 		Otherwise your can reset your password by clicking <a href='%s'>here</a>.
 		<br>
 		<br>
