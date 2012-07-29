@@ -6,6 +6,7 @@ from django.db.models import Avg
 from django.conf import settings 
 from django.utils import timezone
 
+
 from helpers.admin import email_templates, utils
 
 from datetime import date, datetime, timedelta
@@ -94,7 +95,7 @@ class Email(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, BASE_URL + 'confirm_email/' + self.activation_key + '/')
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, BASE_URL + '/confirm_email/' + self.activation_key + '/')
         subject = email_templates.alt_email['subject']
         emails = [self.email]
         utils.emailUsers(subject, content, emails)
@@ -152,6 +153,7 @@ class CommProd(models.Model):
             self.save()
 
     def update_score(self, diff):
+        print 'diff:' + str(diff)
         self.score += diff
         self.user_profile.update_score(diff)
 
@@ -185,8 +187,12 @@ class Rating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
-        super(Rating, self).save(force_insert, force_update)
+        print 'prev', self.score, self.previous_score
         diff = int(self.score) - int(self.previous_score)
+        self.previous_score = self.score;
+        super(Rating, self).save(force_insert, force_update)
+        
+
         self.commprod.update_score(diff)
 
     def __unicode__(self):
@@ -243,8 +249,9 @@ class CorrectionRating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
-        super(CorrectionRating, self).save(force_insert, force_update)
         diff = int(self.score) - int(self.previous_score)
+        self.previous_score = self.score
+        super(CorrectionRating, self).save(force_insert, force_update)
         self.correction.update_score(diff)
 
     def __unicode__(self):
@@ -258,7 +265,7 @@ class PasswordReset(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.forgot_password['content'] % (self.user_profile.user.first_name, 'localhost:5000/' + 'reset_password/' + self.activation_key + '/')
+        content = email_templates.forgot_password['content'] % (self.user_profile.user.first_name, settings.BASE_URL_DEV + '/reset_password/' + self.activation_key + '/')
         subject = email_templates.forgot_password['subject']
         emails = [self.user_profile.user.email]
         utils.emailUsers(subject, content, emails)
