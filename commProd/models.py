@@ -6,6 +6,7 @@ from django.db.models import Avg
 from django.conf import settings 
 from django.utils import timezone
 
+from django.core import management
 
 from helpers.admin import email_templates, utils
 
@@ -79,6 +80,7 @@ class UserProfile(models.Model):
 
             self.update_avg()
 
+            management.call_command('update_user_list')
             to_delete.user.delete()
 
     def __unicode__(self):
