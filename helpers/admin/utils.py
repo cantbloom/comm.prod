@@ -107,7 +107,9 @@ def testRegex():
 
             for m in pattern.finditer(query):
                 print "\nI found the text '%s' starting at index '%d' and ending at index '%d'." % (m.group(), m.start(), m.end())
-
+"""
+Send reg email to given user
+"""
 def sendRegEmail(username):
     user = User.objects.get(username = username)
     if user:

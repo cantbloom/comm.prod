@@ -48,7 +48,6 @@ class UserProfile(models.Model):
         self.update_data_point(save=False)
         if save:
             self.save()
-        lock.release()
 
     def to_json(self):
         return json.dumps({
@@ -157,6 +156,7 @@ class CommProd(models.Model):
             self.save()
 
     def update_score(self, diff):
+        print 'score', diff
         self.score += diff
         self.user_profile.update_score(diff)
 
@@ -190,13 +190,13 @@ class Rating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
-        lock.acquire()
+        lock.acquire() #acquire global lock on ratings
         diff = int(self.score) - int(self.previous_score)
+        print 'diff', diff
         self.previous_score = self.score;
         super(Rating, self).save(force_insert, force_update)
-        
-
         self.commprod.update_score(diff)
+        lock.release() #release, commprod and user profile are updated by above line
 
     def __unicode__(self):
     	return "%s voted a %s on commprod_id %s on %s " % (self.user_profile.user.username, self.score, self.commprod.id, self.date)

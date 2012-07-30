@@ -194,7 +194,7 @@ def get_grade(user_score, std, mean):
     scores = []
     curr_std = 1.33
 
-    if std == 0:
+    if std == 0 or user_score == mean:
         return 'B'
 
     #make grades
