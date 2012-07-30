@@ -12,4 +12,4 @@ git commit -am "update to user_list"
 git pull staging master
 git push staging master
 
-git push origin master -- force
+git push origin master
