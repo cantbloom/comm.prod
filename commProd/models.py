@@ -11,9 +11,10 @@ from django.core import management
 from helpers.admin import email_templates, utils
 
 from datetime import date, datetime, timedelta
+from threading import Lock
 import sha, random
 
-BASE_URL = settings.BASE_URL
+lock = Lock()
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -47,6 +48,7 @@ class UserProfile(models.Model):
         self.update_data_point(save=False)
         if save:
             self.save()
+        lock.release()
 
     def to_json(self):
         return json.dumps({
@@ -97,7 +99,7 @@ class Email(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, BASE_URL + '/confirm_email/' + self.activation_key + '/')
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, settings.BASE_URL + '/confirm_email/' + self.activation_key + '/')
         subject = email_templates.alt_email['subject']
         emails = [self.email]
         utils.emailUsers(subject, content, emails)
@@ -155,7 +157,6 @@ class CommProd(models.Model):
             self.save()
 
     def update_score(self, diff):
-        print 'diff:' + str(diff)
         self.score += diff
         self.user_profile.update_score(diff)
 
@@ -189,7 +190,7 @@ class Rating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
-        print 'prev', self.score, self.previous_score
+        lock.acquire()
         diff = int(self.score) - int(self.previous_score)
         self.previous_score = self.score;
         super(Rating, self).save(force_insert, force_update)
@@ -267,7 +268,7 @@ class PasswordReset(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.forgot_password['content'] % (self.user_profile.user.first_name, settings.BASE_URL_DEV + '/reset_password/' + self.activation_key + '/')
+        content = email_templates.forgot_password['content'] % (self.user_profile.user.first_name, settings.BASE_URL + '/reset_password/' + self.activation_key + '/')
         subject = email_templates.forgot_password['subject']
         emails = [self.user_profile.user.email]
         utils.emailUsers(subject, content, emails)

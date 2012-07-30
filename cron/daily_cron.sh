@@ -1,6 +1,6 @@
 #! /bin/bash
 
-cd /home/cantbloom/commprod 
+cd /home/commprod/commprod 
 source venv/bin/activate
 
 #update production and staging

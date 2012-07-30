@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 
-## crontab prefs
-## * * * * * source /home/cantbloom/commprod/venv/bin/activate >/dev/null; python /home/cantbloom/commprod/cron/parseprod_cron.py >/dev/null
 from os import environ as env
 from optparse import OptionParser
 from datetime import datetime
