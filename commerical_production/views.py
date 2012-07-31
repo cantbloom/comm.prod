@@ -31,23 +31,12 @@ Registration page. Visitor arrives wih activation key
 """
 @csrf_exempt
 def register(request, key):
-    #crf shit
-    #c = {}
-    #c.update(csrf(request))
 
-    # #check if user is logged in
-    # if not request.user.is_authenticated:
-    #     page_title = "Oops"
-    #     hero_title ="It seems you've already registered..." 
-    #     return renderErrorMessage(request, page_title, hero_title)
-    # #grab user profile, check if they are already registeded
     profile = UserProfile.objects.filter(activation_key=key)
-    
-    # ##switch BACK DONT FORGET
+
     if not profile.exists() or profile[0].user.is_active:
-         page_title = "Oops"
          hero_title ="Hmm... that registration key is invalid."
-         return renderErrorMessage(request, page_title, hero_title)
+         return renderErrorMessage(request, hero_title)
 
     user = profile[0].user
 
@@ -80,7 +69,8 @@ def register(request, key):
                     # Redirect to a success page.
                     return redirect('/')
 
-            return redirect('/invalid_reg')
+        hero_title ="Looks an error. Sorry bro."
+        return renderErrorMessage(request, hero_title)
         
     else:
         reg_form = RegForm()
@@ -110,8 +100,8 @@ def confirm_email(request, key):
     if alt_email.exists():
         alt_email[0].confirm()
         return redirect('/')
-
-    return redirect('/invalid_reg')
+    hero_title ="We weren't able to complete your request..."
+    return renderErrorMessage(request, hero_title)
 
 """
 Endpoint to request an email be added to you profile
@@ -140,7 +130,7 @@ def feedback(request):
     subject = email_templates.feedback['subject']
     content = email_templates.feedback['content'] % (user.username, feedback)
     admin_emails = [admin[1] for admin in ADMINS]
-    emailUsers(subject, content, admin_emails)
+    emailUsers(subject, content, admin_emails, from_email=user.email)
     return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json') 
 
 """

@@ -105,15 +105,16 @@
         {% block subnav %}
         {% endblock %}
         <div class="container wrapper">
-        {% block content %} {% endblock%}
-
-        <!-- <div class="push"></div> -->
+            {% block content %} {% endblock%}
+            <div class="push"></div>
         </div> <!-- /container -->
 
-        <!-- <div class="navbar footer">
-            <div class="navbar-inner">
-                <div class="container pull-right">
-                        <ul class="nav">
+
+    <div id="footer">
+        <div class="navbar footer">
+            <div class="navbar-inner nav_bg">
+                <div class="container">
+                        <ul class="nav pull-right">
                             <li>
                                 <a href="http://github.com/cantbloom">
                                     A CantBloom Project
@@ -127,7 +128,7 @@
                             </li>
                             <li> <a>|</a> </li>
                             <li>
-                                <a href="mailto:comm.prod@mit.edu">
+                                <a data-toggle="modal" href="#send-feedback-modal">
                                     Contact
                                 </a>
                             </li>
@@ -140,9 +141,9 @@
                         </ul>
                 </div>
             </div>
-        </div> -->
-        <!--  javascript leave everything imported for dev,
-        cleanup for production --> 
+        </div>
+    </div>
+        <!--  javascript --> 
 
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
