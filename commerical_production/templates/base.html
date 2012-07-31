@@ -15,6 +15,7 @@
             seg.init('l37wedvl0ut'); // commprod's very own API key
             seg.verbose(true); // remove this in production to turn off logging
             var firstSemesterAdd = [6,7,8,9,10,11].indexOf((new Date()).getMonth()) ? 1 : 0
+            //seg.verbose(true); // remove this in production to turn off logging
             seg.identify("{{ user.email }}" == "" ? "anonymous_user":"{{ user.email }}", 
                 {
                 'class_year': '{{ user.profile.class_year }}' == "" ? "none":'{{ user.profile.class_year }}',
@@ -106,11 +107,11 @@
         {% endblock %}
         <div class="container wrapper">
             {% block content %} {% endblock%}
-            <div class="push"></div>
+            <!-- <div class="push"></div> -->
         </div> <!-- /container -->
 
 
-    <div id="footer">
+    <!-- <div id="footer">
         <div class="navbar footer">
             <div class="navbar-inner nav_bg">
                 <div class="container">
@@ -142,7 +143,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
         <!--  javascript --> 
 
         {% include "send_feedback.html" %}
