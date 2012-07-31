@@ -116,21 +116,9 @@ def vote (request):
 @login_required
 @csrf_exempt
 def api_search (request):
-    return_type =  request.GET.get("return_type", 'html')
-    res = { 'res':commprod_query_manager(request.GET, request.user, return_type)}
+    return_type = request.GET.get("return_type", 'html')
+    res = {'res' : commprod_query_manager(request.GET, request.user, return_type)}
     return HttpResponse(json.dumps(res), mimetype='application/json')
-    if score in valid_votes:
-        rating.previous_score = rating.score
-        rating.score = score
-        rating.save() #updates commprod avg automatically with postsave signal
-
-        payload = {
-            "success": True,
-            "cp_id": cp_id,
-            "rating": float(score),
-            "cp_score": commprod.score
-        }
-
 
 @login_required
 def profile_data(request):
@@ -161,11 +149,11 @@ def correction(request):
         correction.save()
         response_data = {
             'correction' : correction_query_manager(user=request.user, correction_id=correction.id)
-        }
+            }
     else:
         response_data = {
-        'nodata' : ''
-        }
+            'nodata' : ''
+            }
 
     return HttpResponse(json.dumps(response_data), mimetype="application/json") 
 

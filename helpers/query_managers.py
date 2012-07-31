@@ -50,9 +50,6 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 
     return commprod_renderer(user, commprods, return_type, type, get_dict.get('page',1))
 
-
-
-
 """
 Handles queries for user data to be displayed on profile page.
 """
@@ -105,9 +102,10 @@ dictionary for given User object
 """
 def trend_data_manager(user):
     try:
-	first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
+	   first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
     except IndexError:
-	first_trend_date = datetime.now()
+	   first_trend_date = datetime.now()
+
     trend_query_all = TrendData.objects.filter(date__gt=first_trend_date)
     trend_query_class = trend_query_all.filter(user_profile__class_year=user.profile.class_year)
     trend_query_user = trend_query_class.filter(user_profile=user.profile)
@@ -142,7 +140,6 @@ Finds the best and worst commprods for a given profile if they
 exist. If none exists boolean is sent back and nothing is
 rentered.
 """
-
 def find_profile_prods(user, profile_user):
     if CommProd.objects.filter(user_profile=profile_user.profile).exists():
             sorted_commprods = CommProd.objects.filter(user_profile=profile_user.profile).order_by('score')
