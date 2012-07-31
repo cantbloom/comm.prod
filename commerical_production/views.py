@@ -382,6 +382,5 @@ def reset_password_confirm(request, key=None):
         'success': success,
         'errors': errors,
     }
-    print template_values
     return render_to_response('reset_password_confirm.html', template_values, context_instance=RequestContext(request))
 
