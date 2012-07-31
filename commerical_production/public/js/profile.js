@@ -44,7 +44,11 @@ $(function(){
 
     $('.tab').click(tabListener);
     $('#trend_tab').trigger('click'); // vs class by default
+    $(document).trigger('profileVisit', user_data);
 
+    if (user_data.username == user_data.current_user){
+            $(document).trigger('myProfileVisit', user_data);
+    }
 }); 
 
 //quickly change the ui -- must use diff to handle if user already voted
@@ -75,6 +79,8 @@ function tabListener(){
         filter = user_data.class_year;
         getVsData(filter, tab);
     }
+
+    $(document).trigger('profileTab', {id:id})
 }
 
 //clear classes on tabs
