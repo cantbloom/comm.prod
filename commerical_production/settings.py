@@ -128,8 +128,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
 )
 
-FORCE_SCRIPT_NAME = 'http://bombers.mit.edu'
-
 ROOT_URLCONF = 'commerical_production.urls'
 LOGIN_REDIRECT_URL = "/home"
 LOGIN_URL = '/login'
