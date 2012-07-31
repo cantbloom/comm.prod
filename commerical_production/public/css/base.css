@@ -108,16 +108,6 @@
   }
 }
 
-.wrapper {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -3em;
-}
-.footer, .push {
-	height: 2em;
-}
-
 .logo {
 	width:32px;
 	height:32px;
@@ -139,10 +129,6 @@
 
 body {
 	background: url(/public/img/bg-body.png) repeat top left;	
-}
-
-.footer {
-	font-size:12px;
 }
 
 .topbar {
@@ -300,6 +286,25 @@ a:hover {
 a.links:link, a.links:visited, a.links:hover, a.links:active {
     color:#000000;
     text-decoration:none;
+}
+
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -3em;
+}
+.footer, .push {
+  height: 3em;
+  font-size:12px;
+  margin-top: 25px !important;
 }
 
 .author-pic {

@@ -31,19 +31,9 @@ Registration page. Visitor arrives wih activation key
 """
 @csrf_exempt
 def register(request, key):
-    #crf shit
-    #c = {}
-    #c.update(csrf(request))
 
-    # #check if user is logged in
-    # if not request.user.is_authenticated:
-    #     page_title = "Oops"
-    #     hero_title ="It seems you've already registered..." 
-    #     return renderErrorMessage(request, page_title, hero_title)
-    # #grab user profile, check if they are already registeded
     profile = UserProfile.objects.filter(activation_key=key)
-    
-    # ##switch BACK DONT FORGET
+
     if not profile.exists() or profile[0].user.is_active:
          hero_title ="Hmm... that registration key is invalid."
          return renderErrorMessage(request, hero_title)
