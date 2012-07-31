@@ -192,7 +192,6 @@ class Rating(models.Model):
     def save(self, force_insert=False, force_update=False, **kwargs):
         lock.acquire() #acquire global lock on ratings
         diff = int(self.score) - int(self.previous_score)
-        print 'diff', diff
         self.previous_score = self.score;
         super(Rating, self).save(force_insert, force_update)
         self.commprod.update_score(diff)

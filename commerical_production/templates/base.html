@@ -14,10 +14,12 @@
 
             seg.init('l37wedvl0ut'); // commprod's very own API key
             seg.verbose(true); // remove this in production to turn off logging
+            var firstSemesterAdd = [6,7,8,9,10,11].indexOf((new Date()).getMonth()) ? 1 : 0
             seg.identify("{{ user.email }}" == "" ? "anonymous_user":"{{ user.email }}", 
                 {
-                'class_year': '{{ user.profile.class_year }}' == "" ? "none":'{{ user.profile.class_year }}'
-                }
+                'class_year': '{{ user.profile.class_year }}' == "" ? "none":'{{ user.profile.class_year }}',
+                'alum' : {{user.profile.class_year}} ? {{user.profile.class_year}} < (new Date()).getFullYear()+firstSemesterAdd : 'maybe'
+                }   
             )
         </script>
 
