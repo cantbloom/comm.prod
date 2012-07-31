@@ -130,7 +130,7 @@ def feedback(request):
     subject = email_templates.feedback['subject']
     content = email_templates.feedback['content'] % (user.username, feedback)
     admin_emails = [admin[1] for admin in ADMINS]
-    emailUsers(subject, content, admin_emails)
+    emailUsers(subject, content, admin_emails, from_email=user.email)
     return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json') 
 
 """

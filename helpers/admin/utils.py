@@ -70,9 +70,8 @@ def createUser(username, email, send_mail=False):
 Email current users
 user_emails is a list of emails to send to.
 """
-def emailUsers(subject, html_content, user_emails):
+def emailUsers(subject, html_content, user_emails, from_email='bombers@mit.edu'):
     text_content = strip_tags(html_content)
-    from_email = 'bombers@mit.edu'
     msg = EmailMultiAlternatives(subject, text_content, from_email, user_emails)
     msg.attach_alternative(html_content, "text/html")
     msg.send()
