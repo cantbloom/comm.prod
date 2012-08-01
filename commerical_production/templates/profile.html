@@ -50,36 +50,33 @@
                 {{ most_hated }}
               <!--Sidebar content-->
             </div>
-            <div class="span8 border well">
-                <ul class="nav nav-tabs profile_tabs">
-                    <li id="trend_tab" class="tab">
-                        <a id="trends">Trends</a>
-                    </li>
-                    <li id="vs_class_tab" class="tab">
-                        <a id="vs_class" >{{ profile_user.username }} vs. The {{ profile_user.profile.class_year }}'s </a>
-                    </li>
-                    <li id="vs_floor_tab" class="tab">
-                        <a id="vs_floor">{{ profile_user.username }} vs. The Floor</a>
-                    </li>
-                </ul>
-                <div id ="stats" class="row"> 
-                    <p class="stat pull-left"> 
-                        <strong>  Standard Deviation: </strong> 
-                        <span id="std"> </span> 
-                    </p>
-                    <p class="stat pull-left">
-                        <strong>  Mean:  </strong>
-                        <span id="mean" > </span> 
-                    </p>
-                    <p class="stat pull-left">
-                        <strong>  {{ profile_user.username }}'s Grade:  </strong>
-                        <span id="grade" > </span> 
-                    </p>
+            <div class="span8 row border well">
+                <div>
+                    <div class="span6 statbox">
+                        <div class="header">Floor percentile</div>
+                        <div class="content">{{ floor_percentile }}%</div>
+                    </div>
+                    <div class="span6 statbox">
+                        <div class="header">30 day trend</div>
+                        <div class="content">
+                            {% if trend >= 0 %}
+                                <span class="green">+{{ trend }}</span>
+                            {% else %}
+                                <span class="red">{{ trend }}</span>
+                            {% endif %}                            
+                        </div>
+                    </div>
                 </div>
-                <div id="chart_container">
-                </div> 
-                
-            <!--Body content-->
+                <div>
+                    <div class="span6 statbox">
+                        <div class="header"># of comm.prod's</div>
+                        <div class="content">{{ num_commprods }}</div>
+                    </div>
+                    <div class="span6 statbox">
+                        <div class="header"># of votes</div>
+                        <div class="content">{{ num_votes }}</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

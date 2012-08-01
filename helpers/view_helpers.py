@@ -1,10 +1,14 @@
-from commProd.models import CommProd, Rating, UserProfile, ShirtName, Correction, CorrectionRating
+from commProd.models import CommProd, Rating, UserProfile, ShirtName, Correction, CorrectionRating, TrendData
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+from django.contrib.auth.models import User
+
 
 from helpers.commprod_search import commprod_search
 
 import random
+from datetime import date, datetime, timedelta
+
 
 """
 Returns a username to be rendered choosing randomly between
@@ -91,3 +95,12 @@ def validateEmail( email ):
         return True
     except ValidationError:
         return False
+def get_floor_percentile(profile):
+    everyone = float(UserProfile.objects.all().count())
+    worse = float(UserProfile.objects.filter(score__lt = profile.score).count())
+    return int(worse/everyone*100 + .5)
+
+def get_day_trend(profile, num_days=30):
+    time_threshold = datetime.now() - timedelta(days=num_days)
+    old_score = TrendData.objects.filter(date__gt=time_threshold)[0].score
+    return profile.score - old_score

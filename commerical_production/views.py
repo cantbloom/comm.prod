@@ -15,7 +15,7 @@ from django import forms
 from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email, PasswordReset
 from commProd.forms import RegForm
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail, get_floor_percentile, get_day_trend
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, profile_query_manager
 from helpers.link_activator import get_active_page
@@ -172,6 +172,7 @@ def profile(request, username):
 
     header = possesive(page_username, page_title)
     title = possesive(profile_user.username, page_title)
+
     template_values = {
         "page_title": title ,
         'nav_profile' : 'active',
@@ -179,7 +180,11 @@ def profile(request, username):
         'header' : header,
         'user'  : request.user,
         'profile_user' : profile_user,
-        'header-classes': ''
+        'header-classes': '', 
+        'floor_percentile' : get_floor_percentile(profile_user.profile),
+        "trend" : get_day_trend(profile_user.profile),
+        "num_commprods" : CommProd.objects.filter(user_profile=profile_user.profile).count(),
+        "num_votes" : Rating.objects.filter(commprod__user_profile=profile_user.profile).count()
     }
     
     if request_type != "":
