@@ -1,4 +1,4 @@
-ofrom django.db import models
+from django.db import models
 from django.utils import simplejson as json
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -12,7 +12,7 @@ from helpers.admin import email_templates, utils
 
 from datetime import date, datetime, timedelta
 from threading import Lock
-import sha, randomo
+import sha, random
 
 lock = Lock()
 
