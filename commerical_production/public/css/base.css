@@ -323,6 +323,14 @@ textarea {
   width:350px;
 }
 
+.green {
+  color:#3cb371;
+}
+
+.red {
+  color:#CD5C5C;
+}
+
 @media (max-width: 480px) {
   .modal.fade.in {
     top: 18% !important;

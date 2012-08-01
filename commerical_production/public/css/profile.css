@@ -33,17 +33,29 @@ img {
     height: 32px;
 }
 
-#chart_container{
-    min-width: 400px; 
-    height: 400px;
+.statbox{
+    height: 250px;
+    border: 1px solid #DDD;
+    margin: 8px 0px;
 }
 
-.stat {
-    padding-right:10px;
+.statbox .header{
+    font-size: 2em;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 11px;
 }
-#stats {
-    text-align:center;
-    padding: 5px 5px;
-    font-size: 20px;
-    margin-left:0px;
+
+.statbox .footer{
+    font-size: 2em;
+    font-weight: bolder;
+    text-align: center;
+    padding-top:85px;
+}
+
+.statbox .content{
+    font-size: 8em;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 90px;
 }

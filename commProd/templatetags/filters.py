@@ -1,7 +1,7 @@
 from django import template
 
 register = template.Library()
-
+base_url = "/public/"
 @register.simple_tag
 def include_script(script_name):
 
@@ -10,7 +10,7 @@ def include_script(script_name):
     script_name = script_name.replace(".js", "")
 
     # make the script path
-    path_prefix = "/public/js/"
+    path_prefix = base_url + "js/"
     path_suffix = ".js"
 
     script_path = path_prefix + script_name + path_suffix
@@ -20,7 +20,7 @@ def include_script(script_name):
 @register.simple_tag
 def include_style(style_name):
     style_name = style_name.replace('.css', '')
-    path_prefix = "/public/css/"
+    path_prefix =  base_url  + "css/"
     path_suffix = ".css"
 
     style_path = path_prefix + style_name + path_suffix

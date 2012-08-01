@@ -15,7 +15,7 @@ from django import forms
 from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email, PasswordReset
 from commProd.forms import RegForm
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail, get_floor_percentile, get_day_trend
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, profile_query_manager
 from helpers.link_activator import get_active_page
@@ -48,7 +48,7 @@ def register(request, key):
             user.last_name = request.POST['last_name']
             user.set_password(request.POST['password'])
 
-            pic_url = put_profile_pic(request.POST['pic_url'], user.profile) 
+            pic_url = put_profile_pic(request.POST['pic_url'], user.profile)
             if pic_url:
                 user.profile.pic_url = pic_url
 
@@ -58,10 +58,10 @@ def register(request, key):
             for alt_email in alt_emails:
                 if alt_email != "":
                     user.profile.add_email(alt_email)
-            
+
             user.save()
             user.profile.save()
-            
+
             user = auth.authenticate(username=user.username, password=request.POST['password'])
             if user is not None:
                 if user.is_active:
@@ -71,7 +71,7 @@ def register(request, key):
 
         hero_title ="Looks an error. Sorry bro."
         return renderErrorMessage(request, hero_title)
-        
+
     else:
         reg_form = RegForm()
 
@@ -113,8 +113,8 @@ def claim_email(request):
     email_user = User.objects.filter(email=email)
     if email_user.exists() and email_user[0].profile.send_mail == False:
         request.user.profile.add_email(email)
-        return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json') 
-    return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json') 
+        return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json')
+    return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json')
 
 """
 Endpoint to request an email be added to you profile
@@ -124,14 +124,14 @@ Endpoint to request an email be added to you profile
 def feedback(request):
     feedback = request.POST.get('feedback', None)
     if not feedback:
-        return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json') 
+        return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json')
     feedback.replace('\n', '<br>')
     user = request.user
     subject = email_templates.feedback['subject']
     content = email_templates.feedback['content'] % (user.username, feedback)
     admin_emails = [admin[1] for admin in ADMINS]
     emailUsers(subject, content, admin_emails, from_email=user.email)
-    return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json') 
+    return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json')
 
 """
 First page after successfully signing update
@@ -146,14 +146,14 @@ def welcome(request):
 
 
 """
-Landing page, top ten rated comm prods + ten newest commprods 
+Landing page, top ten rated comm prods + ten newest commprods
 """
 @login_required
 def home(request):
     return redirect('commprod/')
 
 """
-User profile page, 
+User profile page,
 displays avg. overall score + list of commprods
 Profile can be gotten to by user_id, username, or an alt_email
 """
@@ -172,6 +172,7 @@ def profile(request, username):
 
     header = possesive(page_username, page_title)
     title = possesive(profile_user.username, page_title)
+
     template_values = {
         "page_title": title ,
         'nav_profile' : 'active',
@@ -179,9 +180,13 @@ def profile(request, username):
         'header' : header,
         'user'  : request.user,
         'profile_user' : profile_user,
-        'header-classes': ''
+        'header-classes': '',
+        'floor_percentile' : get_floor_percentile(profile_user.profile),
+        "trend" : get_day_trend(profile_user.profile),
+        "num_commprods" : CommProd.objects.filter(user_profile=profile_user.profile).count(),
+        "num_votes" : Rating.objects.filter(user_profile=profile_user.profile).count()
     }
-    
+
     if request_type != "":
         return profile_search(request, template_values, profile_user)
     else:
@@ -224,7 +229,7 @@ def edit_profile(request):
                     errors['password'] = ["Passwords don't match."]
             else:
                 errors['password'] = ['Incorrect password.']
-        
+
         elif type == "shirt_name":
             try:
                 #delete all current shirt names
@@ -246,7 +251,7 @@ def edit_profile(request):
 
             for email in emails:
                 #makes sure email
-                if not validateEmail(email): 
+                if not validateEmail(email):
                     if email.strip() == "":
                         errors['email'].append("Empty email entered.")
                     else:
@@ -276,7 +281,7 @@ def edit_profile(request):
             'errors': errors
         }
 
-        return HttpResponse(json.dumps(return_obj), mimetype='application/json') 
+        return HttpResponse(json.dumps(return_obj), mimetype='application/json')
 
     #not post request
     passwordForm = [
@@ -318,7 +323,7 @@ def edit_profile(request):
         'shirtname': shirtNameForm,
         'email': emailForm
     }
-    
+
     return render_to_response('edit_profile.html', template_values, context_instance=RequestContext(request))
 
 def reset_password(request):
@@ -355,7 +360,7 @@ def reset_password(request):
                 "hero_err_title": "",
                 'user'  : request.user,
         }
-        
+
     return render_to_response('reset_password.html', template_values, context_instance=RequestContext(request))
 
 def reset_password_confirm(request, key=None):
@@ -372,7 +377,7 @@ def reset_password_confirm(request, key=None):
         else:
             errors = "Your key is no longer active."
     else:
-        errors = "Your key is invalid." 
+        errors = "Your key is invalid."
 
     if errors:
         errors += " Try again <a href='/reset_password'> Here </a>"
