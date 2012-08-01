@@ -4,8 +4,8 @@ from os import environ as env
 #custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
-BASE_URL = 'http://commprod.herokuapp.com'
-BASE_URL_DEV = 'http://commprod-staging.herokuapp.com'
+BASE_URL = 'http://www.burtonthird.com'
+BASE_URL_DEV = 'http://www.burtonthird.com'
 
 DEBUG = (not env['DEBUG'] == 'False') #convert from sting to bool
 TEMPLATE_DEBUG = DEBUG
@@ -102,9 +102,9 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = ( 
-    'django.contrib.messages.context_processors.messages', 
-    'django.contrib.auth.context_processors.auth', 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.messages.context_processors.messages',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.static',
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
