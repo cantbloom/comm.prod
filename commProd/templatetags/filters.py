@@ -1,7 +1,7 @@
 from django import template
 
 register = template.Library()
-base_url = "/bombers/public/"
+base_url = "/public/"
 @register.simple_tag
 def include_script(script_name):
 
