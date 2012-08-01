@@ -1,1 +1,1 @@
-web: python manage.py run_gunicorn --workers=4 --bind=0.0.0.0:$PORT
+web: gunicorn commerical_production.wsgi:application --workers=4 --bind=0.0.0.0:$PORT
