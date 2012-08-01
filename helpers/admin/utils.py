@@ -8,7 +8,6 @@ from email_templates import registration
 
 import os, sha, re, random
 
-BASE_URL = settings.BASE_URL
 """
 ssh to athena and:
 
@@ -71,9 +70,8 @@ def createUser(username, email, send_mail=False):
 Email current users
 user_emails is a list of emails to send to.
 """
-def emailUsers(subject, html_content, user_emails):
+def emailUsers(subject, html_content, user_emails, from_email='bombers@mit.edu'):
     text_content = strip_tags(html_content)
-    from_email = 'bombers@mit.edu'
     msg = EmailMultiAlternatives(subject, text_content, from_email, user_emails)
     msg.attach_alternative(html_content, "text/html")
     msg.send()
@@ -108,11 +106,13 @@ def testRegex():
 
             for m in pattern.finditer(query):
                 print "\nI found the text '%s' starting at index '%d' and ending at index '%d'." % (m.group(), m.start(), m.end())
-
+"""
+Send reg email to given user
+"""
 def sendRegEmail(username):
     user = User.objects.get(username = username)
     if user:
-        content = registration['content'] % (user.username, BASE_URL+'/register/'+user.profile.activation_key + '/')
+        content = registration['content'] % (user.username, settings.BASE_URL+'/register/'+user.profile.activation_key + '/')
         subject = registration['subject']
         emails = [user.email]
         emailUsers(subject, content, emails)

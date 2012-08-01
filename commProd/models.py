@@ -6,13 +6,15 @@ from django.db.models import Avg
 from django.conf import settings 
 from django.utils import timezone
 
+from django.core import management
 
 from helpers.admin import email_templates, utils
 
 from datetime import date, datetime, timedelta
+from threading import Lock
 import sha, random
 
-BASE_URL = settings.BASE_URL
+lock = Lock()
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -27,7 +29,7 @@ class UserProfile(models.Model):
     data_point_count = models.IntegerField(default=0)
 
     def update_data_point(self, save=True):
-        if self.data_point_count % 3: ##change mod value for less granularity
+        if not self.data_point_count % 1:
             data_point = TrendData(user_profile=self, score=self.score, avg_score=self.avg_score)
             data_point.save()
         self.data_point_count += 1
@@ -43,7 +45,7 @@ class UserProfile(models.Model):
     def update_score(self, diff, save=True):
         self.score = self.score + diff
         self.update_avg(save=False)
-        self.update_data_point(save=False)
+        ##self.update_data_point(save=False) ##this is now on a cron job
         if save:
             self.save()
 
@@ -79,6 +81,7 @@ class UserProfile(models.Model):
 
             self.update_avg()
 
+            management.call_command('update_user_list')
             to_delete.user.delete()
 
     def __unicode__(self):
@@ -95,7 +98,7 @@ class Email(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, BASE_URL + '/confirm_email/' + self.activation_key + '/')
+        content = email_templates.alt_email['content'] % (self.user_profile.user.first_name, self.email, settings.BASE_URL + '/confirm_email/' + self.activation_key + '/')
         subject = email_templates.alt_email['subject']
         emails = [self.email]
         utils.emailUsers(subject, content, emails)
@@ -153,7 +156,6 @@ class CommProd(models.Model):
             self.save()
 
     def update_score(self, diff):
-        print 'diff:' + str(diff)
         self.score += diff
         self.user_profile.update_score(diff)
 
@@ -187,13 +189,12 @@ class Rating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
-        print 'prev', self.score, self.previous_score
+        lock.acquire() #acquire global lock on ratings
         diff = int(self.score) - int(self.previous_score)
         self.previous_score = self.score;
         super(Rating, self).save(force_insert, force_update)
-        
-
         self.commprod.update_score(diff)
+        lock.release() #release, commprod and user profile are updated by above line
 
     def __unicode__(self):
     	return "%s voted a %s on commprod_id %s on %s " % (self.user_profile.user.username, self.score, self.commprod.id, self.date)
@@ -265,7 +266,7 @@ class PasswordReset(models.Model):
     activation_key = models.CharField(max_length=40, default=sha.new(sha.new(str(random.random())).hexdigest()[:5]).hexdigest())
 
     def sendConfirmEmail(self):
-        content = email_templates.forgot_password['content'] % (self.user_profile.user.first_name, settings.BASE_URL_DEV + '/reset_password/' + self.activation_key + '/')
+        content = email_templates.forgot_password['content'] % (self.user_profile.user.first_name, settings.BASE_URL + '/reset_password/' + self.activation_key + '/')
         subject = email_templates.forgot_password['subject']
         emails = [self.user_profile.user.email]
         utils.emailUsers(subject, content, emails)

@@ -123,6 +123,11 @@ MIDDLEWARE_CLASSES = (
     'pagination.middleware.PaginationMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'commerical_production.backends.EmailOrUsernameBackend',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
 ROOT_URLCONF = 'commerical_production.urls'
 LOGIN_REDIRECT_URL = "/home"
 LOGIN_URL = '/login'
@@ -152,6 +157,7 @@ INSTALLED_APPS = (
     'commProd',
     'helpers',
     'cron',
+    'gunicorn',
 )
 
 

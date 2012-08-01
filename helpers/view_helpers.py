@@ -25,7 +25,7 @@ Give helpful messages for the retards.
 Returns a hero_err_template with the given data.
 Return this function to give user back an error page.
 """
-def renderErrorMessage(request, page_title, hero_title):
+def renderErrorMessage(request, hero_title, page_title='Oops'):
     if request.user.is_authenticated:
         prof_href = "user/" + request.user.username
     else:

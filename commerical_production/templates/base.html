@@ -13,10 +13,14 @@
             var seg=seg||[];seg.load=function(a){var b,c,d,e,f,g=document;b=g.createElement("script"),b.type="text/javascript",b.async=!0,b.src=a,c=g.getElementsByTagName("script")[0],c.parentNode.insertBefore(b,c),d=function(a){return function(){seg.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["init","identify","track","callback","verbose"];for(f=0;f<e.length;f+=1)seg[e[f]]=d(e[f])};seg.load(document.location.protocol+'//d47xnnr8b1rki.cloudfront.net/api/js/v2/segmentio.js');
 
             seg.init('l37wedvl0ut'); // commprod's very own API key
+            seg.verbose(true); // remove this in production to turn off logging
+            var firstSemesterAdd = [6,7,8,9,10,11].indexOf((new Date()).getMonth()) ? 1 : 0
+            //seg.verbose(true); // remove this in production to turn off logging
             seg.identify("{{ user.email }}" == "" ? "anonymous_user":"{{ user.email }}", 
                 {
-                'class_year': '{{ user.profile.class_year }}' == "" ? "none":'{{ user.profile.class_year }}'
-                }
+                'class_year': '{{ user.profile.class_year }}' == "" ? "none":'{{ user.profile.class_year }}',
+                'alum' : {{user.profile.class_year}} ? {{user.profile.class_year}} < (new Date()).getFullYear()+firstSemesterAdd : 'maybe'
+                }   
             )
         </script>
 
@@ -102,15 +106,16 @@
         {% block subnav %}
         {% endblock %}
         <div class="container wrapper">
-        {% block content %} {% endblock%}
-
-        <!-- <div class="push"></div> -->
+            {% block content %} {% endblock%}
+            <!-- <div class="push"></div> -->
         </div> <!-- /container -->
 
-        <!-- <div class="navbar footer">
-            <div class="navbar-inner">
-                <div class="container pull-right">
-                        <ul class="nav">
+
+    <!-- <div id="footer">
+        <div class="navbar footer">
+            <div class="navbar-inner nav_bg">
+                <div class="container">
+                        <ul class="nav pull-right">
                             <li>
                                 <a href="http://github.com/cantbloom">
                                     A CantBloom Project
@@ -124,7 +129,7 @@
                             </li>
                             <li> <a>|</a> </li>
                             <li>
-                                <a href="mailto:cantbloom@mit.edu">
+                                <a data-toggle="modal" href="#send-feedback-modal">
                                     Contact
                                 </a>
                             </li>
@@ -137,9 +142,9 @@
                         </ul>
                 </div>
             </div>
-        </div> -->
-        <!--  javascript leave everything imported for dev,
-        cleanup for production --> 
+        </div>
+    </div> -->
+        <!--  javascript --> 
 
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
@@ -151,26 +156,24 @@
         {% include_script 'lib/filepicker' %}
         {% include_script 'lib/jquery.raty.min' %}
         {% include_script 'lib/mobile_detection' %}
-        
+        {% include_script 'lib/es5-shim.min' %}
         <!--  graphing -->
         {% include_script 'lib/highcharts' %}
-        {% include_script 'lib/exporting' %}
 
         <!--  bootstrap -->
         {% include_script 'lib/bootstrap-transition' %}
         {% include_script 'lib/bootstrap-alert' %}
         {% include_script 'lib/bootstrap-modal' %}
         {% include_script 'lib/bootstrap-dropdown' %}
-        {% include_script 'lib/bootstrap-scrollspy' %}
         {% include_script 'lib/bootstrap-tab' %}
         {% include_script 'lib/bootstrap-tooltip' %}
         {% include_script 'lib/bootstrap-popover' %}
         {% include_script 'lib/bootstrap-button' %}
         {% include_script 'lib/bootstrap-collapse' %}
-        {% include_script 'lib/bootstrap-carousel' %}
         {% include_script 'lib/bootstrap-typeahead' %}
 
         {% include_script 'base' %}
+        {% include_script 'analytics' %}
 
         {% block scripts %} 
         {% endblock %}

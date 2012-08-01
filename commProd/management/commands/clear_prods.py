@@ -17,6 +17,8 @@ class Command(NoArgsCommand):
         self.stdout.write('Deleting commprods...\n')
         #deletes all correction objects which deletes all correction ratings
         CommProd.objects.all().delete()
+        self.stdout.write('Deleting commprod emails...\n')
+        CommProdEmail.objects.all.delete()
         self.stdout.write('Deleting ratings...\n')
         Rating.objects.all().delete()
         self.stdout.write('Deleting TrendData...\n')
