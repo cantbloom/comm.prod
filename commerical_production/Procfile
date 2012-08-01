@@ -1,1 +1,0 @@
-web: gunicorn commerical_production.wsgi -b 0.0.0.0:$PORT
