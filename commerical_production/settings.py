@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'commProd',
     'helpers',
     'cron',
+    'gunicorn',
 )
 
 
