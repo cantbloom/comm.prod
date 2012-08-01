@@ -16,11 +16,11 @@
             var firstSemesterAdd = [6, 7, 8, 9, 10, 11].indexOf((new Date()).getMonth()) ? 1 : 0
             //seg.verbose(true); // remove this in production to turn off logging
             {% if user.is_authenticated %}
-            seg.identify("{{ user.email }}" == "{{ user.email }}", 
+            seg.identify("{{ user.email }}" == "{{ user.email }}",
                 {
                 'class_year': {{ user.profile.class_year }},
-                'alum' : {{ user.profile.class_year }} < (new Date()).getFullYear() + firstSemesterAdd 
-                }   
+                'alum' : {{ user.profile.class_year }} < (new Date()).getFullYear() + firstSemesterAdd
+                }
             )
             {% endif %}
         </script>
@@ -37,6 +37,19 @@
         <![endif]-->
 
         <link rel="shortcut icon" href="/public/favicon.ico">
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-33833631-1']);
+          _gaq.push(['_setDomainName', 'burtonthird.com']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
     </head>
 
     <body>
@@ -47,7 +60,7 @@
                     <a class="brand" href="/">
                         a
                         <img class="logo" src="/public/img/btb-logo.png"/>
-                        comm.prod 
+                        comm.prod
                     </a>
                     {% if user.is_authenticated %}
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -60,7 +73,7 @@
                             <li class={{ nav_commprod }}>
                                 <a href="/">comm.prod</a>
                             </li>
-                            
+
                             <li class={{ nav_profile }}>
                                  <a id="user_prof" href=/users/{{user.username}}>Profile </a>
                             </li>
@@ -80,13 +93,13 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                          <a href="/edit">
-                                            <i class="icon-wrench"></i> 
+                                            <i class="icon-wrench"></i>
                                             Edit Profile
                                         </a>
                                     </li>
                                     <li>
                                         <a data-toggle="modal" href="#send-feedback-modal" >
-                                            <i class="icon-envelope"></i> 
+                                            <i class="icon-envelope"></i>
                                             Send Feedback
                                         </a>
                                     </li>
@@ -145,7 +158,7 @@
             </div>
         </div>
     </div> -->
-        <!--  javascript --> 
+        <!--  javascript -->
 
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
@@ -176,7 +189,7 @@
         {% include_script 'base' %}
         {% include_script 'analytics' %}
 
-        {% block scripts %} 
+        {% block scripts %}
         {% endblock %}
     </body>
 </html>
