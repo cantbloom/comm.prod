@@ -1,0 +1,1 @@
+web: python manage.py run_unicorn --workers=4 --bind=0.0.0.0:$PORT
