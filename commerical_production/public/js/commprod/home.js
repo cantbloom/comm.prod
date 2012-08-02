@@ -23,41 +23,65 @@ function insertCommprod(e, d){
 }
 
 function setupTour(){
-	tour = new Tour();
+	tour = new Tour(
+		{
+			afterSetState : function(k,e){
+				if (k == "end" && e=="yes"){
+					$(document).trigger('tourEnded', {current:tour._current})
+				}
+			}
+		}
+	)
+
 
 	tour.addStep({
 	  element: ".commprod-timeline-container h1", /* html element next to which the step popover should be shown */
 	  placement: 'bottom',
 	  title: "Home", /* title of the popover */
-	  content: "On the home page, you see comm.prods that you haven't voted on and will like." /* content of the popover */
+	  content: "On the home page, you see comm.prods that you haven't voted on and will like.", /* content of the popover */
+	  onShow: function(tour){
+	  	$(document).trigger('toolTipShow', {type:'home'})
+	  }
 	});
 
 	tour.addStep({
 	  element: ".up-down-container:first", /* html element next to which the step popover should be shown */
 	  placement: 'right',
 	  title: "Voting", /* title of the popover */
-	  content: "Use these buttons to vote. Once you place a vote another comm.prod will slide in." /* content of the popover */
+	  content: "Use these buttons to vote. Once you place a vote another comm.prod will slide in." , /* content of the popover */
+	  onShow: function(){
+	  	$(document).trigger('toolTipShow', {type:'voting'})
+	  }
 	});
 
 	tour.addStep({
 	  element: ".date:first", /* html element next to which the step popover should be shown */
 	  placement: 'bottom',
 	  title: "Details", /* title of the popover */
-	  content: "Hover over this link and you'll see the email it was in. Click it and get taken to a page where you can see other comm.prods from the email and submit corrections." /* content of the popover */
+	  content: "Hover over this link and you'll see the email it was in. Click it and get taken to a page where you can see other comm.prods from the email and submit corrections." , /* content of the popover */
+	  onShow: function(){
+	  	$(document).trigger('toolTipShow', {type:'details'})
+	  }
 	});
 
 	tour.addStep({
 	  element: ".author-container:first", /* html element next to which the step popover should be shown */
 	  placement: 'left',
 	  title: "Profiles", /* title of the popover */
-	  content: "Click the name or photo to be taken to that user's profile page",
+	  content: "Click the name or photo to be taken to that user's profile page", /* content of the popover */
+	  onShow: function(){
+	  	$(document).trigger('toolTipShow', {type:'profiles'})
+	  }
 	});
 
 	tour.addStep({
 	  element: ".search-nav .nav:visible", /* html element next to which the step popover should be shown */
 	  placement: 'bottom',
 	  title: "Other Pages", /* title of the popover */
-	  content: "Use these links to change how comm.prods are ordered." /* content of the popover */
+	  content: "Use these links to change how comm.prods are ordered.", /* content of the popover */
+	  onShow: function(){
+	  	$(document).trigger('toolTipShow', {type:'other pages'})
+	  }
 	});
 
 	
