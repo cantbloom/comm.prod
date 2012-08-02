@@ -1,4 +1,4 @@
-<div class="commprod-timeline-container well span8">
+<div class="commprod-timeline-container well">
     {% for commprod in commprods %}
         {% if commprod.id in upvoted%}
         {% include "commprod/commprod_template.html" with commprod=commprod upvote_selected="selected"%}

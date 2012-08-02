@@ -4,8 +4,11 @@
 {% endblock%}
 
 {% block content %}     
-    <div class="row-fluid">
-	{% include "commprod/subnav.html"%}
-	{{commprod_timeline}}
+    <div class="row">
+		{% include "commprod/subnav.html"%}
+		<div class="commprod-timeline-container span8">
+			<h1 class="centered">{{page_title|capfirst}}</h1>
+			{{commprod_timeline}}
+		</div>
 	</div>
 {% endblock%}
