@@ -95,7 +95,7 @@ def emailInactive(alums=False):
 Send an email to can't send
 """
 def emailSendMailFalse(alums=False):
-    users = User.objects.filter(send_mail=False)
+    users = User.objects.filter(userprofile__send_mail=False)
     for user in users:
       print user
       #sendRegEmail(user.username)
