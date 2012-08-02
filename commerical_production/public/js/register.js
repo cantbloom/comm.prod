@@ -16,7 +16,7 @@ function removeEmail(e, d){
 
 function addTips(){
     makeTip('id_alt_email', "Important! Put your gmail or anything you use to send emails to the floor.");
-    makeTip('id_password', "Your password will be encrypted.");
+    makeTip('id_password', "Your password will be hashed.");
     makeTip('id_password_confirm',  "We promise.");
     makeTip('id_class_year',  "Graduation year por favor.");
     makeTip('upload',  "Be orginal. Upload your own profile picture!", null, 'hover');
