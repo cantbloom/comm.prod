@@ -98,7 +98,7 @@ def emailSendMailFalse(alums=False):
     users = User.objects.filter(userprofile__send_mail=False)
     for user in users:
       print user
-      #sendRegEmail(user.username)
+      sendRegEmail(user.username)
 
     return 'done'
 
