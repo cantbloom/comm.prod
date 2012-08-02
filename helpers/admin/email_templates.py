@@ -1,5 +1,5 @@
 registration = {
-	'subject': "Vote on comm.prod's!",
+	'subject': "Vote on comm.prods!",
 	'content': """
 		Hey %s!,
 		<p style="margin-top:5px">
