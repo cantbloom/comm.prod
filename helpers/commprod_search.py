@@ -1,5 +1,7 @@
 from commProd.models import CommProd, Rating, UserProfile
 
+import random
+
 """
 To test:
 python manage.py shell
@@ -32,7 +34,12 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
 			commprods = commprods.objects.filter(date__lte=endDate)
 
 		if unvoted:
-			commprods = commprods.exclude(rating__user_profile__user__username=unvoted)
+      commprods = commprods.exclude(rating__user_profile__user__username=unvoted)
+
+      if random.random() > 0:
+        commprods_exclude = commprods.exclude(score = 0)
+      if commprods_exclude.exists():
+        commprods = commprods_exclude
 
 		if limit:
 			commprods = commprods[:limit]
