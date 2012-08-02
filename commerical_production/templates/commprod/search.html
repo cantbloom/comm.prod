@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block subnav %}
-{% include "commprod/subnav.html"%}
 {% endblock%}
 
-{% block content %} 
-    <h1 class="centered page-title" >{{page_title|capfirst}}</h1>
-    
-    {{commprod_timeline}}
-
+{% block content %}     
+    <div class="row-fluid">
+	{% include "commprod/subnav.html"%}
+	{{commprod_timeline}}
+	</div>
 {% endblock%}

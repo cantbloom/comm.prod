@@ -1,17 +1,16 @@
-<div class="row">
-    <div class="commprod-timeline-container well span6 offset3">
-        {% for commprod in commprods %}
-            {% if commprod.id in upvoted%}
-            {% include "commprod/commprod_template.html" with commprod=commprod upvote_selected="selected"%}
-            {% elif commprod.id in downvoted %}
-            {% include "commprod/commprod_template.html" with commprod=commprod downvote_selected="selected"%}
-            {% else %}
-            {% include "commprod/commprod_template.html" with commprod=commprod%}
-            {% endif %}
+<div class="commprod-timeline-container well span8">
+    {% for commprod in commprods %}
+        {% if commprod.id in upvoted%}
+        {% include "commprod/commprod_template.html" with commprod=commprod upvote_selected="selected"%}
+        {% elif commprod.id in downvoted %}
+        {% include "commprod/commprod_template.html" with commprod=commprod downvote_selected="selected"%}
+        {% else %}
+        {% include "commprod/commprod_template.html" with commprod=commprod%}
+        {% endif %}
 
-        {% endfor %}
-    </div>
+    {% endfor %}
 </div>
+
 <div class="span6 offset3">
     <ul class="pager">
         {% if commprods.has_previous %}
