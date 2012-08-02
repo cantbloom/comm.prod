@@ -105,5 +105,7 @@ def get_day_trend(profile, num_days=30):
     trend_points = TrendData.objects.filter(date__gt=time_threshold)
     if trend_points.exists():
       old_score = trend_points[0].score
-      return profile.score - old_score
-    return 0
+    else:
+      old_score = 0
+
+    return profile.score - old_score
