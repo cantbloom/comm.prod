@@ -16,16 +16,16 @@ function switchTab(e, d) {
 	$('.tab').closest('li').removeClass("active");
 	$(e.target).closest('li').addClass("active");
 	var id = $(e.currentTarget).attr('id').split("-")[0];
-	$('form').addClass('hidden');
+	$('.edit').addClass('hidden');
 	$('#' + id).removeClass('hidden');
-	$('form').find('.alert').slideUp(0)
+	$('.edit').find('.alert').slideUp(0)
 }
 
 $(function(){
 	$('.tab').click(switchTab);;
 
     $('#upload').click(getImg);
-	$('form').submit(submitForm);
+	$('.edit').submit(submitForm);
 	$(document).on('click', '.remove-input', removeInput);
 	$(document).on('click', '#add-shirt-name', addShirtNameInput);
 	$(document).on('click', '#add-email', addEmailInput);

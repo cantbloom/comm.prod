@@ -5,19 +5,20 @@
     {% include_style "edit_profile" %}
 {%  endblock %}
 
-{% block content %}<br>
-<div class="row offset2">
-  <ul class="nav nav-tabs">
-  <li class="active">
-    <a id="pic-tab" class="tab">Change Profile Picture</a>
-  </li>
-  <li><a id="password-tab" class="tab">Change Password</a></li>
-  <li><a id="shirt_name-tab" class="tab">Add/Remove Shirt Names</a></li>
-  <li><a id="email-tab" class="tab">Change Emails</a></li>
-</ul>
+{% block content %}
+<div class="row offset2 span7">
+    <h2 class="offset2"> Edit Profile </h2> <br>
+    <ul class="nav nav-tabs">
+        <li class="active">
+        <a id="pic-tab" class="tab">Change Profile Picture</a>
+        </li>
+        <li><a id="password-tab" class="tab">Change Password</a></li>
+        <li><a id="shirt_name-tab" class="tab">Add/Remove Shirt Names</a></li>
+        <li><a id="email-tab" class="tab">Change Emails</a></li>
+    </ul>
 </div>
 <div class="well span4 offset4">
-    <form class="hidden" id="pic" data-url="/edit">
+    <form class="hidden edit" id="pic" data-url="/edit">
         {% csrf_token %}
         {% include 'alert_box.html' %}
         <input type="hidden" name="form_type" value="pic">
@@ -28,7 +29,7 @@
         <input class="btn" name="upload" id="upload" type="button" value="Edit profile picture"/>
         <input class="btn btn-warning disabled" disabled type="submit" value="Save" data-loading-text="Saving..." id="profile-pic-save"/>
     </form>
-    <form class="hidden" id="password" data-url="/edit">
+    <form class="hidden edit" id="password" data-url="/edit">
         {% include 'alert_box.html' %}
         {% csrf_token %}
         <input type="hidden" name="form_type" value="password">
@@ -39,7 +40,7 @@
         {% endfor %}
         <input class="btn btn-warning" type="submit" value="Save" data-loading-text="Saving..." id="password_save"/>
     </form>
-    <form class="hidden" id="shirt_name" data-url="/edit">
+    <form class="hidden edit" id="shirt_name" data-url="/edit">
         {% csrf_token %}
         {% include 'alert_box.html' %}
         <input type="hidden" name="form_type" value="shirt_name">
@@ -58,7 +59,7 @@
         <input class="btn btn-warning" type="submit" value="Save" data-loading-text="Saving..." id="shirt-name-save"/>
     </form> 
 
-    <form class="hidden" id="email" data-url="/edit" >
+    <form class="hidden edit" id="email" data-url="/edit" >
         {% include 'alert_box.html' %}
         {% csrf_token %}
         <input type="hidden" name="form_type" value="email">
