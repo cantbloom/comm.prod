@@ -77,20 +77,18 @@
                             <li class={{ nav_profile }}>
                                  <a id="user_prof" href=/users/{{user.username}}>Profile </a>
                             </li>
-                        </ul>
-                        <ul class="nav pull-right topbar">
-                            <li>
-                                <form id="navbar-search" class="navbar-search">
-                                    <input type="search" id="search_bar" class="search-query" placeholder="Find people..." autocomplete="off">
-                                </form>
-                            </li>
-                            <li class="divider-vertical"></li>
-                            <li class="dropdown">
+                            <li id="account_dropdown" class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             Account
                                             <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
+                                    <li>
+                                         <a href="/user/{{user.username}}">
+                                            <i class="icon-user"></i>
+                                            My Profile
+                                        </a>
+                                    </li>
                                     <li>
                                          <a href="/edit">
                                             <i class="icon-wrench"></i>
@@ -111,6 +109,15 @@
                                         {% endif %}
                                     </ul>
                             </li>
+                        </ul>
+                        <ul class="nav pull-right topbar">
+                            <li>
+                                <form id="navbar-search" class="navbar-search">
+                                    <input type="search" id="search_bar" class="search-query" placeholder="Find people..." autocomplete="off">
+                                </form>
+                            </li>
+                            <li class="divider-vertical"></li>
+                            
                         </ul>
                     </div><!--/.nav-collapse -->
                     {% endif %}
@@ -185,6 +192,8 @@
         {% include_script 'lib/bootstrap-button' %}
         {% include_script 'lib/bootstrap-collapse' %}
         {% include_script 'lib/bootstrap-typeahead' %}
+        {% include_script 'lib/jquery.cookie' %}
+        {% include_script 'lib/bootstrap-tour' %}
 
         {% include_script 'base' %}
         {% include_script 'analytics' %}
