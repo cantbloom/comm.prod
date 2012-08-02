@@ -145,7 +145,7 @@ function submitForm(e, d){
     e.preventDefault();
     var $form = $(e.target);
     var id = $form.attr('id');
-    var url = $form.data('url')
+    var url = $form.data('url');
     $form.find('.btn[type=submit]').button('loading')
     $.post(url, $form.serialize(), function(res){
         if (res.success){

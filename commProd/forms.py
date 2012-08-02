@@ -6,13 +6,13 @@ from helpers.aws_put import put_profile_pic
 from datetime import datetime
 
 class RegForm(forms.Form):
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name'}), label="")
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Last Name'}), label="")
-    class_year = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder':'1933'}), label="")
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'First Name', 'class': 'fancy-input'}), label="")
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder' : 'Last Name', 'class': 'fancy-input'}), label="")
+    class_year = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder':'1933', 'class': 'fancy-input'}), label="")
     pic_url = forms.CharField(label="", required=False)
-    password = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Password'}), label="" )
-    password_confirm = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Confirm Password'}), label="")
-    alt_email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder' : 'Alternative Email'}), label="", required=False)
+    password = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Password', 'class': 'fancy-input'}), label="" )
+    password_confirm = forms.CharField( widget=forms.PasswordInput(attrs={'placeholder' : 'Confirm Password', 'class': 'fancy-input'}), label="")
+    alt_email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder' : 'Alternative Email', 'class': 'fancy-input'}), label="", required=False)
 
     def clean_password_confirm(self):
         password = self.cleaned_data['password']

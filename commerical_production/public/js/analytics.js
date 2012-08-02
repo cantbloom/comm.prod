@@ -15,4 +15,10 @@ $(function(){
 	$(document).on('myProfileVisit', function(e, d){
 		seg.track('Visited own profile', d);
 	});
+	$(document).on('toolTipShow', function(e, d){
+		seg.track('Tool tip shown ' + d.type, d);
+	});
+	$(document).on('tourEnded', function(e, d){
+		seg.track('Tour ended', d);
+	});
 });

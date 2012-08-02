@@ -193,7 +193,7 @@ def profile(request, username):
         template_values.update(profile_query_manager(request.user, profile_user))
         return render_to_response('profile.html', template_values, context_instance=RequestContext(request))
 
-"""
+"""`
 Helper function to deal with recent/best pages for user
 """
 def profile_search(request, template_values, profile_user):
@@ -225,6 +225,7 @@ def edit_profile(request):
                 if new_password!=None and new_password == new_password_confirm:
                     user.set_password(new_password)
                     success = 'Password changed'
+                    user.save()
                 else:
                     errors['password'] = ["Passwords don't match."]
             else:
@@ -318,6 +319,7 @@ def edit_profile(request):
 
     template_values = {
         "page_title": "Edit Profile",
+        'nav_account' : 'active',
         'user'  : request.user,
         'password': passwordForm,
         'shirtname': shirtNameForm,
