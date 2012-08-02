@@ -61,7 +61,7 @@
                         <div class="content">
                             {% if trend > 0 %}
                                 <span class="green">+{{ trend }}</span>
-                            {% else trend == 0 %}
+                            {% elif trend == 0 %}
                                 <span> {{ trend }}</span>
                             {% else %}
                                 <span class="red">{{ trend }}</span>
