@@ -1,13 +1,13 @@
 function insertCommprod(e, d){
 	var $toAdd = $(data.commprods.shift());
-	
+
 	$toAdd.addClass('first');
 	$toAdd.hide();
 	$toAdd.css('opacity', 0);
-	
+
 	$(e.currentTarget).find('.first').removeClass('first');
 	$(e.currentTarget).prepend($toAdd);
-	
+
 	$toAdd.slideDown(function(){
 		$toAdd.animate({opacity:1}, 150);
 	});
@@ -16,6 +16,7 @@ function insertCommprod(e, d){
 		$.getJSON('/commprod/api/search', {unread:true, limit:10, return_type:'list'}, function(res){
 			data.commprods = data.commprods.concat(res.res);
 		});
+    $(document).trigger('requestMoreProds', {loc: 'home'})
 	}
 
 	//add popover since this commprod wasn';'t arround when it was first added
@@ -86,7 +87,7 @@ function setupTour(){
 	  }
 	});
 
-	
+
 
 	tour.start();
 }
@@ -100,9 +101,9 @@ $(function(){
 		//ignore if clicked on a commprod that isn't first
 		if (!$(e.target).is('.commprod-container.first')){
 			return;
-		} 
+		}
 
-		$commprod_timeline.trigger('needsCommprod');		
+		$commprod_timeline.trigger('needsCommprod');
 	});
 
 	$commprod_timeline.trigger('needsCommprod');
