@@ -2,9 +2,9 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
-from django.conf import settings 
+from django.conf import settings
 
-from email_templates import registration
+from email_templates import registration, sorry_email
 
 import os, sha, re, random
 
@@ -92,6 +92,17 @@ def emailInactive(alums=False):
     return 'done'
 
 """
+Send an email to can't send
+"""
+def emailSendMailFalse(alums=False):
+    users = User.objects.filter(userprofile__send_mail=False)
+    for user in users:
+      print user
+      sendSorryEmail(user.username)
+
+    return 'done'
+
+"""
 Test your regexs
 """
 def testRegex():
@@ -108,14 +119,28 @@ def testRegex():
 
             for m in pattern.finditer(query):
                 print "\nI found the text '%s' starting at index '%d' and ending at index '%d'." % (m.group(), m.start(), m.end())
+# """
+# Send reg email to given user
+# """
+# def sendSorryEmail(username):
+#     user = User.objects.get(username = username)
+#     if user:
+#         content = registration['content'] % (user.username, settings.BASE_URL+'/register/'+user.profile.activation_key + '/')
+#         subject = registration['subject']
+#         emails = [user.email]
+#         emailUsers(subject, content, emails)
+#         return True
+#     else:
+#         return False
+
 """
-Send reg email to given user
+Send sorry email to given user
 """
-def sendRegEmail(username):
+def sendSorryEmail(username):
     user = User.objects.get(username = username)
     if user:
-        content = registration['content'] % (user.username, settings.BASE_URL+'/register/'+user.profile.activation_key + '/')
-        subject = registration['subject']
+        content = sorry_email['content'] % (user.username)
+        subject = sorry_email['subject']
         emails = [user.email]
         emailUsers(subject, content, emails)
         return True

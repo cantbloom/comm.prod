@@ -34,6 +34,29 @@ alt_email = {
 	"""
 }
 
+sorry_email = {
+  'subject': 'Whoops!',
+  'content': """
+    Hi %s,
+    <br>
+    <br>
+    You should've just received an email, or two, to join our new site.
+    <br>
+    <br>
+    In order to actually register you must be a member of bombers@mit.edu or btb-alum@mit.edu
+    <br>
+    <br>
+    Please use register by clicking the link in the email to your address on one of those lists.
+    <br>
+    <br>
+    Let us know if you have problems. Sorry for the inconvience.
+    <br>
+    <br>
+    Love,<br>
+    Max and Josh
+  """
+}
+
 forgot_password = {
 	'subject': 'Reset your password',
 	'content': """
