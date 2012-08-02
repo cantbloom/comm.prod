@@ -199,7 +199,7 @@ Helper function to deal with recent/best pages for user
 def profile_search(request, template_values, profile_user):
     get_dict = addUserToQuery(request.GET, profile_user.username)
     template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=request.user)
-    template_values['header_classes'] = 'offset2 span8'
+    template_values['header_classes'] = ''
 
     return render_to_response('profile_search.html', template_values, context_instance=RequestContext(request))
 
