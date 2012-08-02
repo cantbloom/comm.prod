@@ -1,7 +1,5 @@
 function insertCommprod(e, d){
-  var desiredIndex = Math.floor(Math.random() * data.commprods.length);
-  toAdd = data.commprods.splice(desiredIndex, 1)[0]
-	var $toAdd = $(toAdd);
+	var $toAdd = $(data.commprods.shift());
 
 	$toAdd.addClass('first');
 	$toAdd.hide();
@@ -14,7 +12,7 @@ function insertCommprod(e, d){
 		$toAdd.animate({opacity:1}, 150);
 	});
 
-	if (data.commprods.length < 10){
+	if (data.commprods.length < 20){
 		$.getJSON('/commprod/api/search', {unread:true, limit:10, return_type:'list'}, function(res){
 			data.commprods = data.commprods.concat(res.res);
 		});

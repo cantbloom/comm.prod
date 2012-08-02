@@ -34,7 +34,7 @@ def home(request):
         'page_title' : "Vote on these comm.prods we think you'll like",
         'nav_commprod' : "active",
         'subnav_home' : "active",
-        'unvoted_commprods': str(commprod_query_manager({'unvoted':True, 'orderBy': '?', 'limit': 20}, request.user, 'list')),
+        'unvoted_commprods': str(commprod_query_manager({'unvoted':True, 'orderBy': '?', 'limit':30}, request.user, 'list')),
         'user_profile':request.user.profile
     }
 
