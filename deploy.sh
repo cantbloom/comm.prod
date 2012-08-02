@@ -6,7 +6,7 @@ git pull staging staging
 echo "Pushing staging staging"
 git push staging staging
 echo "Pushing staging to staging-master"
-git push staging staging:master
+git push staging staging:master --force
 
 
 echo "Push production?(y/n) \c"
