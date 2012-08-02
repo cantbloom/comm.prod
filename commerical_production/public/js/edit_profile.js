@@ -12,29 +12,26 @@ function addEmailInput(){
 	$('#add-email').closest('p').before(template);
 }
 
-function toggleAccordion (e, d){
-	var $accordion = $(e.target).closest('.accordion-group');
-
-	var $arrow = $accordion.find('.arrow');
-
-	$arrow.toggleClass('icon-chevron-down');
-	$arrow.toggleClass('icon-chevron-up');
+function switchTab(e, d) {
+	$('.tab').closest('li').removeClass("active");
+	$(e.target).closest('li').addClass("active");
+	var id = $(e.currentTarget).attr('id').split("-")[0];
+	$('form').addClass('hidden');
+	$('#' + id).removeClass('hidden');
+	$('form').find('.alert').slideUp(0)
 }
 
-
 $(function(){
-	$(".collapse").collapse()
-	$('form').find('.alert').slideUp(0);
+	$('.tab').click(switchTab);;
 
     $('#upload').click(getImg);
 	$('form').submit(submitForm);
-
 	$(document).on('click', '.remove-input', removeInput);
 	$(document).on('click', '#add-shirt-name', addShirtNameInput);
 	$(document).on('click', '#add-email', addEmailInput);
 	
-	$('#add-email').click()
-	$('#add-shirt-name').click()
-	
-	$(document).on('show hide', '.accordion-body', toggleAccordion)
+	$('#add-email').click();
+	$('#add-shirt-name').click();
+	$('#pic-tab').click();
+
 });
