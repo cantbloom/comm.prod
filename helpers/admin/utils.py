@@ -2,9 +2,9 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
-from django.conf import settings 
+from django.conf import settings
 
-from email_templates import registration
+from email_templates import registration, sorry_email
 
 import os, sha, re, random
 
@@ -92,6 +92,17 @@ def emailInactive(alums=False):
     return 'done'
 
 """
+Send an email to can't send
+"""
+def emailSendMailFalse(alums=False):
+    users = User.objects.filter(send_mail=False)
+    for user in users:
+      print user
+      #sendRegEmail(user.username)
+
+    return 'done'
+
+"""
 Test your regexs
 """
 def testRegex():
@@ -111,11 +122,25 @@ def testRegex():
 """
 Send reg email to given user
 """
-def sendRegEmail(username):
+def sendSorryEmail(username):
     user = User.objects.get(username = username)
     if user:
         content = registration['content'] % (user.username, settings.BASE_URL+'/register/'+user.profile.activation_key + '/')
         subject = registration['subject']
+        emails = [user.email]
+        emailUsers(subject, content, emails)
+        return True
+    else:
+        return False
+
+"""
+Send sorry email to given user
+"""
+def sendSorryEmail(username):
+    user = User.objects.get(username = username)
+    if user:
+        content = sorry_email['content'] % (user.username)
+        subject = sorry_email['subject']
         emails = [user.email]
         emailUsers(subject, content, emails)
         return True
