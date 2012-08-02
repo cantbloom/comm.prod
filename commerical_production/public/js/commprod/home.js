@@ -29,12 +29,12 @@ function setupTour(){
 	  element: ".commprod-timeline-container h1", /* html element next to which the step popover should be shown */
 	  placement: 'bottom',
 	  title: "Home", /* title of the popover */
-	  content: "On the home page, you see comm.prods that you haven't voted on and will like." /* content of the popover */
+	  content: "On the home page, you see comm.prods that you haven't voted on yet." /* content of the popover */
 	});
 
 	tour.addStep({
 	  element: ".up-down-container:first", /* html element next to which the step popover should be shown */
-	  placement: 'right',
+	  placement: 'bottom',
 	  title: "Voting", /* title of the popover */
 	  content: "Use these buttons to vote. Once you place a vote another comm.prod will slide in." /* content of the popover */
 	});
@@ -43,7 +43,7 @@ function setupTour(){
 	  element: ".date:first", /* html element next to which the step popover should be shown */
 	  placement: 'bottom',
 	  title: "Details", /* title of the popover */
-	  content: "Hover over this link and you'll see the email it was in. Click it and get taken to a page where you can see other comm.prods from the email and submit corrections." /* content of the popover */
+	  content: "Hover over this link and you'll see the email it was in. Click it to go to a page where you can see other comm.prods from the email and submit corrections." /* content of the popover */
 	});
 
 	tour.addStep({

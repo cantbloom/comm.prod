@@ -225,6 +225,7 @@ def edit_profile(request):
                 if new_password!=None and new_password == new_password_confirm:
                     user.set_password(new_password)
                     success = 'Password changed'
+                    user.save()
                 else:
                     errors['password'] = ["Passwords don't match."]
             else:

@@ -77,14 +77,14 @@
                             <li class={{ nav_profile }}>
                                  <a id="user_prof" href=/users/{{user.username}}>Profile </a>
                             </li>
-                            <li id="account_dropdown" class="dropdown">
+                            <li id="account_dropdown" class="dropdown {{ nav_account }}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             Account
                                             <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                         <a href="/user/{{user.username}}">
+                                         <a href="/users/{{user.username}}">
                                             <i class="icon-user"></i>
                                             My Profile
                                         </a>
