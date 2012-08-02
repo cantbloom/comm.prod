@@ -22,8 +22,8 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
 		if orderBy:
 			if direction == 'lh':
 				orderBy = '-' + orderBy
-				
-			commprods = commprods.order_by(orderBy)
+
+			commprods = commprods.order_by(orderBy, '?')
 
 		if startDate:
 			commprods = commprods.objects.filter(date__gte=startDate)
