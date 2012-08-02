@@ -14,7 +14,7 @@
     <div class="row {{header_classes}}">
         <h1 id='username' class="pull-left">
             <img id="profile_pic" class="author-pic" src="{{ profile_user.profile.pic_url }}">
-            {{ header }} 
+            {{ header }}
 
             {% if profile_user.profile.send_mail == 0 %}
             <button class="claim-profile btn btn-primary" data-user="{{ profile_user.username }}"> Claim Profile</button>
@@ -43,7 +43,7 @@
                 {{ worst_prod|safe}}
                 {% endif %}
                 <h3 class="sidebar" > Most Loved Bomber: </h3>
-                
+
                 {{ most_loved }}
 
                 <h3 class="sidebar" > Most Hated Bomber: </h3>
@@ -59,11 +59,13 @@
                     <div class="span6 statbox">
                         <div class="header">30 day trend</div>
                         <div class="content">
-                            {% if trend >= 0 %}
+                            {% if trend > 0 %}
                                 <span class="green">+{{ trend }}</span>
+                            {% else trend == 0 %}
+                                <span> {{ trend }}</span>
                             {% else %}
                                 <span class="red">{{ trend }}</span>
-                            {% endif %}                            
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -85,11 +87,11 @@
 
 {%  endblock %}
 
-{% block scripts %} 
+{% block scripts %}
 <script type="text/javascript">
     user_data = {
         'username' : '{{ profile_user.username }}',
-        'current_user' : '{{ user.username }}', 
+        'current_user' : '{{ user.username }}',
         'class_year' : {{ profile_user.profile.class_year }},
         'score' : {{ profile_user.profile.score }},
     }

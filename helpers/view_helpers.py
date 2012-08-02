@@ -24,7 +24,7 @@ def getRandomUsername(user):
         potentials.append(user.username)
     return random.choice(potentials)
 
-""" 
+"""
 Give helpful messages for the retards.
 Returns a hero_err_template with the given data.
 Return this function to give user back an error page.
@@ -39,9 +39,9 @@ def renderErrorMessage(request, hero_title, page_title='Oops'):
         'user_profile' : prof_href,
         'hero_err_title' : hero_title,
     }
-    return render_to_response('hero_err_template.html', 
-        template_values, context_instance=RequestContext(request)) 
-""" 
+    return render_to_response('hero_err_template.html',
+        template_values, context_instance=RequestContext(request))
+"""
 Returns proper ingrish for user profile page
 """
 def possesive(name, title):
@@ -77,7 +77,7 @@ def vote_commprod(id, score, user):
     return rating, commprod
 
 """
-Submit vote for a correction 
+Submit vote for a correction
 """
 def vote_correction(id, score, user):
     correction = Correction.objects.filter(id=id)
@@ -102,5 +102,8 @@ def get_floor_percentile(profile):
 
 def get_day_trend(profile, num_days=30):
     time_threshold = datetime.now() - timedelta(days=num_days)
-    old_score = TrendData.objects.filter(date__gt=time_threshold)[0].score
-    return profile.score - old_score
+    trend_points = TrendData.objects.filter(date__gt=time_threshold)
+    if trend_points.exists():
+      old_score = trend_points[0].score
+      return profile.score - old_score
+    return 0
