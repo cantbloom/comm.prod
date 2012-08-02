@@ -42,9 +42,12 @@ sorry_email = {
     <br>
     You should've just received an email, or two, to join our new site.
     <br>
-    In order to actually register you must be a member of bombers@mit.edu btb-alum@mit.edu
+    <br>
+    In order to actually register you must be a member of bombers@mit.edu or btb-alum@mit.edu
+    <br>
     <br>
     Please use register by clicking the link in the email to your address on one of those lists.
+    <br>
     <br>
     Let us know if you have problems. Sorry for the inconvience.
     <br>
