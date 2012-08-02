@@ -343,6 +343,9 @@ textarea {
   }
 }
 
+.navbar-fixed-top {
+  z-index: 10000!important;
+}
 /* Input Text */
 .fancy-input {
     background: #eee;
