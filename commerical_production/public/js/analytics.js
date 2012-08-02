@@ -19,6 +19,9 @@ $(function(){
 		seg.track('Tool tip shown ' + d.type, d);
 	});
 	$(document).on('tourEnded', function(e, d){
-		seg.track('Tour ended', d);
+    seg.track('Tour ended', d);
+  });
+  $(document).on('requestMoreProds', function(e, d){
+		seg.track('Request more commprod on ' + d.loc, d);
 	});
 });

@@ -26,7 +26,7 @@ from os import environ as env
 
 
 """
-Landing page, top ten rated comm prods + ten newest commprods 
+Landing page, top ten rated comm prods + ten newest commprods
 """
 @login_required
 def home(request):
@@ -34,7 +34,7 @@ def home(request):
         'page_title' : "Vote on these comm.prods we think you'll like",
         'nav_commprod' : "active",
         'subnav_home' : "active",
-        'unvoted_commprods': str(commprod_query_manager({'unvoted':True, 'orderBy': '?', 'limit':30}, request.user, 'list')),
+        'unvoted_commprods': str(commprod_query_manager({'unvoted':True, 'orderBy': '?', 'limit': 20}, request.user, 'list')),
         'user_profile':request.user.profile
     }
 
@@ -55,14 +55,14 @@ def search(request):
 @login_required
 def permalink(request, username, cp_id):
     get_dict = {'username' : username, 'cp_id' : cp_id}
-    
+
     commprod = commprod_query_manager(get_dict, request.user, return_type='list')
     if len(commprod) == 1:
         rendered_commprod = commprod[0]
         cp_user = User.objects.filter(username=username)[0]
         commprod = CommProd.objects.filter(id=cp_id)[0]
         corrections = correction_query_manager(user=request.user, commprod=commprod)
-        
+
         commprods = CommProd.objects.filter(email_content=commprod.email_content)
         email_content = urlize_email_content(commprod.email_content.content, commprods)
     else:
@@ -95,7 +95,7 @@ def admin(request):
 @csrf_exempt
 def vote (request):
     types = ['commprod' , 'correction']
-    valid_votes = ['-1','1'] #patlsotw 
+    valid_votes = ['-1','1'] #patlsotw
     payload = {'success' : False}
 
     score = request.POST.get("score", None)
@@ -109,11 +109,11 @@ def vote (request):
             rating, obj = vote_commprod(id, score, user)
         elif type == "correction":
             rating, obj = vote_correction(id, score, user)
-    
+
         if rating and score in valid_votes:
             rating.score = score
             rating.save() #updates object avg automatically during save
-            
+
             payload = {
                 "success": True,
                 "id": id,
@@ -121,7 +121,7 @@ def vote (request):
                 "score": obj.score,
                 "type": type
             }
-        
+
     return_data = json.dumps(payload)
 
     return HttpResponse(return_data, mimetype='application/json')
@@ -136,18 +136,18 @@ def api_search (request):
 @login_required
 def profile_data(request):
     response_data = None #patlsotw
-    
+
     type = request.GET.get('type', None)
     filter = request.GET.get('filter', None)
     username = request.GET.get('username', None)
     if username and User.objects.filter(username=username).exists():
         user = User.objects.filter(username=username)[0]
-        
+
         if type == "trend":
             response_data = trend_data_manager(user)
         elif type == "vs_data":
             response_data = vs_data_manager(user, filter)
-    
+
     return HttpResponse(json.dumps(response_data), mimetype="application/json")
 
 @login_required
@@ -168,7 +168,7 @@ def correction(request):
             'nodata' : ''
             }
 
-    return HttpResponse(json.dumps(response_data), mimetype="application/json") 
+    return HttpResponse(json.dumps(response_data), mimetype="application/json")
 
 @csrf_exempt
 def processProd(request):
@@ -192,15 +192,15 @@ def processProd(request):
             user = alt_email_search[0].user
         else:
             user, created = createUser(sender, sender)
-        
+
         resp += "\nUser %s with comm prods:\n %s" % (sender, commprods)
-        
+
         for commprod in commprods:
             email_content, created = CommProdEmail.objects.get_or_create(user_profile=user.profile, content=content, subject=subject, date=date)
             if created:
                 email_content.save()
-            
-            commprod, created = CommProd.objects.get_or_create(email_content=email_content, content=commprod, original_content=commprod, user_profile=user.profile, date=date) 
+
+            commprod, created = CommProd.objects.get_or_create(email_content=email_content, content=commprod, original_content=commprod, user_profile=user.profile, date=date)
             if created:
                 commprod.save()
             resp += "\nAdded? " + str(created)
