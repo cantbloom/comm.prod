@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 function addEmail (e, d) {
     e.preventDefault();
-    $('#add-email').before('<p class="alt-email"><input type="email" placeholder="Alternative Email" name="alt_email" data-original-title=""><a class="btn remove-email"><i class="icon-minus"></i></a></p>')
+    $('#add-email').before('<p class="alt-email"><input type="email" class="fancy-input" placeholder="Alternative Email" name="alt_email" data-original-title=""><a class="btn remove-email"><i class="icon-minus"></i></a></p>')
 }
 
 function removeEmail(e, d){

@@ -193,7 +193,7 @@ def profile(request, username):
         template_values.update(profile_query_manager(request.user, profile_user))
         return render_to_response('profile.html', template_values, context_instance=RequestContext(request))
 
-"""
+"""`
 Helper function to deal with recent/best pages for user
 """
 def profile_search(request, template_values, profile_user):
