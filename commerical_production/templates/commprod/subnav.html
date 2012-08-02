@@ -1,19 +1,12 @@
-<div class="subnav subnav-fixed">
-    <ul class="nav nav-pills">
-      <li class={{ subnav_home }}>
-        <a href="/">Home</a>
-      </li>
-      <li class={{ subnav_trending }}>
-        <a href="search?type=trending">Trending</a>
-      </li>
-      <li class={{ subnav_best }}>
-        <a href="search?type=best">Best</a>
-      </li>
-      <li class={{ subnav_worst }}>
-        <a href="search?type=worst">Worst</a>
-      </li>
-      <li class={{ subnav_recent }}>
-        <a href="search?type=recent">Recent</a>
-      </li>
+<div class="span2 offset1 search-nav hidden-phone">
+    <ul class="nav nav-list">
+    {% include 'commprod/subnav_content.html' %}
     </ul>
+</div>
+
+<div class="span2 offset1 search-nav visible-phone">
+    <ul class="nav nav-pills">
+    {% include 'commprod/subnav_content.html' %}
+    </ul>
+
 </div>

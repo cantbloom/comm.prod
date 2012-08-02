@@ -3,6 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+
 from django.core.context_processors import csrf
 from django.shortcuts import redirect
 from django.template import RequestContext
@@ -76,6 +78,17 @@ def permalink(request, username, cp_id):
         'email_content' : email_content,
     }
     return render_to_response('commprod/permalink.html', template_values, context_instance=RequestContext(request))
+
+
+"""
+Frontend endpoint for adding commprods that are not picked up by the parser
+"""
+@staff_member_required
+def admin(request):
+    template_values = {
+        'key' : env['SECRET_KEY']
+    }
+    return render_to_response('commprod/admin.html', template_values, context_instance=RequestContext(request))
 
 ###### request endpoints #######
 @login_required
@@ -161,10 +174,11 @@ def correction(request):
 def processProd(request):
     data = request.POST.get("data", None)
     key = request.POST.get("key", None)
-    
+    print data
+    print key
     resp = ""
     if data and str(key) == env['SECRET_KEY']:
-        data = json.loads(data) #{sender : (content, [comm_prods], date)}
+        data = json.loads(data) #{sender : (content, [comm_prods], date, subject)}
         sender = data.keys()[0]
         content, commprods, date, subject = data[sender]
 

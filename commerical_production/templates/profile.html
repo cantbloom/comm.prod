@@ -6,12 +6,12 @@
 {%  endblock %}
 
 {% block subnav %}
-{% include "profile_subnav.html"%}
 {% endblock%}
 
 
 {% block content %}
-    <div class="row {{header_classes}}">
+
+    <div class="row {{header_classes}} clearfix">
         <h1 id='username' class="pull-left">
             <img id="profile_pic" class="author-pic" src="{{ profile_user.profile.pic_url }}">
             {{ header }}
@@ -26,58 +26,58 @@
             <div id="raty" class="pull-left" data-rating="{{ profile_user.profile.score }}" > </div>
             <span id="target" class="pull-left score_holder"> {{ profile_user.profile.score }} </span>
         </div>
-
     </div>
+
+    {% include "profile_subnav.html"%}
+
     {% block prods %}
 
-    <div class="container-fluid content_container">
-        <div class="row-fluid">
-            <div class="span4 border well">
-                {% if best_prod %}
-                <h3 class="sidebar" > Best Prod: </h3>
-                {{ best_prod|safe}}
-                {% endif %}
+    <div class="row">
+        <div class="span4">
+            {% if best_prod %}
+            <h3 class="sidebar" > Best Prod: </h3>
+            {{ best_prod|safe}}
+            {% endif %}
 
-                {% if worst_prod %}
-                <h3 class="sidebar" > Worst Prod: </h3>
-                {{ worst_prod|safe}}
-                {% endif %}
-                <h3 class="sidebar" > Most Loved Bomber: </h3>
+            {% if worst_prod %}
+            <h3 class="sidebar" > Worst Prod: </h3>
+            {{ worst_prod|safe}}
+            {% endif %}
+            <h3 class="sidebar" > Most Loved Bomber: </h3>
 
-                {{ most_loved }}
+            {{ most_loved }}
 
-                <h3 class="sidebar" > Most Hated Bomber: </h3>
-                {{ most_hated }}
-              <!--Sidebar content-->
-            </div>
-            <div class="span8 row border well">
-                <div>
-                    <div class="span6 statbox">
-                        <div class="header">Floor percentile</div>
-                        <div class="content">{{ floor_percentile }}%</div>
-                    </div>
-                    <div class="span6 statbox">
-                        <div class="header">30 day trend</div>
-                        <div class="content">
-                            {% if trend > 0 %}
-                                <span class="green">+{{ trend }}</span>
-                            {% elif trend == 0 %}
-                                <span> {{ trend }}</span>
-                            {% else %}
-                                <span class="red">{{ trend }}</span>
-                            {% endif %}
-                        </div>
+            <h3 class="sidebar" > Most Hated Bomber: </h3>
+            {{ most_hated }}
+          <!--Sidebar content-->
+        </div>
+        <div class="span8 row">
+            <div>
+                <div class="statbox light-well">
+                    <div class="header">Floor percentile</div>
+                    <div class="content">{{ floor_percentile }}%</div>
+                </div>
+                <div class="statbox light-well">
+                    <div class="header">30 day trend</div>
+                    <div class="content">
+                        {% if trend > 0 %}
+                            <span class="green">+{{ trend }}</span>
+                        {% elif trend == 0 %}
+                            <span> {{ trend }}</span>
+                        {% else %}
+                            <span class="red">{{ trend }}</span>
+                        {% endif %}
                     </div>
                 </div>
-                <div>
-                    <div class="span6 statbox">
-                        <div class="content">{{ num_commprods }}</div>
-                        <div class="footer">comm.prod's</div>
-                    </div>
-                    <div class="span6 statbox">
-                        <div class="content">{{ num_votes }}</div>
-                        <div class="footer">votes</div>
-                    </div>
+            </div>
+            <div>
+                <div class="statbox light-well">
+                    <div class="content">{{ num_commprods }}</div>
+                    <div class="footer">comm.prod's</div>
+                </div>
+                <div class="statbox light-well">
+                    <div class="content">{{ num_votes }}</div>
+                    <div class="footer">votes</div>
                 </div>
             </div>
         </div>

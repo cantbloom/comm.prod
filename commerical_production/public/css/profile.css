@@ -35,8 +35,10 @@ img {
 
 .statbox{
     height: 250px;
-    border: 1px solid #DDD;
-    margin: 8px 0px;
+    width: 44%;
+    float:left;
+    margin: 8px 2%;
+    border-radius: 3px;
 }
 
 .statbox .header{
@@ -58,4 +60,8 @@ img {
     font-weight: bolder;
     text-align: center;
     margin-top: 90px;
+}
+
+.timeline-shift{
+    height:1px;
 }
