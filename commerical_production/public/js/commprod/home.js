@@ -17,7 +17,8 @@ function insertCommprod(e, d){
 	}
 
 	//add popover since this commprod wasn';'t arround when it was first added
-	$toAdd.find('.permalink').popover();
+	$toAdd.find('.permalink').popover().hover(detailsCorrectionText, detailsDefaultText)
+
 }
 
 function requestProds(cb){
@@ -116,6 +117,7 @@ $(function(){
 	});
 
 	requestProds(function(){
+		$('.commprod-timeline .loading').hide();
 		$commprod_timeline.trigger('needsCommprod');	
 	});
 })
