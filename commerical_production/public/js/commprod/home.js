@@ -117,7 +117,7 @@ $(function(){
 	});
 
 	requestProds(function(){
-		$('.commprod-timeline .loading').hide();
+		//$('.commprod-timeline .loading').hide();
 		$commprod_timeline.trigger('needsCommprod');	
 	});
 })
