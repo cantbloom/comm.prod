@@ -16,7 +16,7 @@
             var firstSemesterAdd = [6, 7, 8, 9, 10, 11].indexOf((new Date()).getMonth()) ? 1 : 0
             //seg.verbose(true); // remove this in production to turn off logging
             {% if user.is_authenticated %}
-            seg.identify("{{ user.email }}" == "{{ user.email }}",
+            seg.identify("{{ user.email }}",
                 {
                 'class_year': {{ user.profile.class_year }},
                 'alum' : {{ user.profile.class_year }} < (new Date()).getFullYear() + firstSemesterAdd
