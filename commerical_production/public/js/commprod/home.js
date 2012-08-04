@@ -12,15 +12,22 @@ function insertCommprod(e, d){
 		$toAdd.animate({opacity:1}, 150);
 	});
 
-	if (data.commprods.length < 20){
-		$.getJSON('/commprod/api/search', {unread:true, limit:10, return_type:'list'}, function(res){
-			data.commprods = data.commprods.concat(res.res);
-		});
-    $(document).trigger('requestMoreProds', {loc: 'home'})
+	if (data.commprods.length < 10){
+		requestProds();
 	}
 
 	//add popover since this commprod wasn';'t arround when it was first added
 	$toAdd.find('.permalink').popover();
+}
+
+function requestProds(cb){
+	$.getJSON('/commprod/api/search', {unvoted:true, limit:15, return_type:'list'}, function(res){
+			data.commprods = data.commprods.concat(res.res);
+			if (cb){
+				cb(res);
+			}
+	});
+    $(document).trigger('requestMoreProds', {loc: 'home'});
 }
 
 function setupTour(){
@@ -93,6 +100,8 @@ function setupTour(){
 }
 
 $(function(){
+	setupTour();
+
 	var $commprod_timeline = $('.commprod-timeline');
 
 	$commprod_timeline.on('needsCommprod', insertCommprod)
@@ -106,7 +115,7 @@ $(function(){
 		$commprod_timeline.trigger('needsCommprod');
 	});
 
-	$commprod_timeline.trigger('needsCommprod');
-
-	setupTour();
+	requestProds(function(){
+		$commprod_timeline.trigger('needsCommprod');	
+	});
 })

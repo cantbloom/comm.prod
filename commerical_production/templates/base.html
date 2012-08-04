@@ -19,7 +19,8 @@
             seg.identify("{{ user.email }}",
                 {
                 'class_year': {{ user.profile.class_year }},
-                'alum' : {{ user.profile.class_year }} < (new Date()).getFullYear() + firstSemesterAdd
+                'alum' : {{ user.profile.class_year }} < (new Date()).getFullYear() + firstSemesterAdd,
+                'is_staff' : {{ user.is_staff }}
                 }
             )
             {% endif %}
