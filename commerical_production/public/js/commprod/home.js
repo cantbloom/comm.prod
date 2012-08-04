@@ -30,6 +30,16 @@ function requestProds(cb){
     $(document).trigger('requestMoreProds', {loc: 'home'});
 }
 
+function checkTour() {
+	if (use_tour) {
+		if($.cookie('tour_end') == 'yes') {
+			end_tour();
+		} else {
+			setupTour();
+		}
+	}
+}
+
 function setupTour(){
 	tour = new Tour(
 		{
@@ -99,8 +109,14 @@ function setupTour(){
 	tour.start();
 }
 
+function end_tour(){
+	$.post('/commprod/end_tour');
+}
+
 $(function(){
-	setupTour();
+	checkTour();
+
+	$(document).on('tourEnded', end_tour); // listen to tour event and store that it ended in the db
 
 	var $commprod_timeline = $('.commprod-timeline');
 

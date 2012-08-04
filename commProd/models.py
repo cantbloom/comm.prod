@@ -27,6 +27,7 @@ class UserProfile(models.Model):
     pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
     score = models.IntegerField(default=0)
     data_point_count = models.IntegerField(default=0)
+    use_tour = models.BooleanField(default=True)
 
     def update_data_point(self, save=True):
         if not self.data_point_count % 1:
