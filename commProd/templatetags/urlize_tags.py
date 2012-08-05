@@ -1,7 +1,7 @@
 from django import template
 from django.template.defaultfilters import stringfilter
 from HTMLParser import HTMLParser
-
+from helpers.utils import strip_quotes
 import re, requests
 
 register = template.Library()
@@ -21,7 +21,7 @@ def urlize_commprod(commprod):
     if match:
         previous_matches = {}
         for m in pattern.finditer(commprod):
-            url_match = m.group(group)
+            url_match = strip_quotes(m.group(group))
             
             if url_match not in previous_matches:
                 if 'youtube' in url_match:
