@@ -1,7 +1,7 @@
 from django import template
 from django.template.defaultfilters import stringfilter
 from HTMLParser import HTMLParser
-from helpers.utils import strip_quotes
+from cron.parseprod_cron import strip_quotes
 import re, requests
 
 register = template.Library()
