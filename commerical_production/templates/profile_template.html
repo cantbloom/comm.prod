@@ -1,6 +1,6 @@
 <!--user_profile variable ref UserProfile model -->
 <div id="user_{{ user.id }}" class='row commprod-container' data-id="{{ user_profile.user.id }}">
-    <div class="author-container">
+    <div class="author-container pull-left">
         <a class="author-name" href='/users/{{ user_profile.user.username }}'>
             <img class="author-pic" src="{{ user_profile.pic_url }}"/>
             {% if user_profile.user.is_active and not user_profile.user.first_name == ''%}
@@ -10,5 +10,10 @@
             {% endif %}
         </a>
     </div>
+    {% if with_score %}
+    <div class="vote-container pull-right">
+        <span class='score'> {{ user_profile.score }} </span>
+    </div>
+    {% endif %}
 </div>
 

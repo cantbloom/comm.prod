@@ -5,12 +5,12 @@
     
     <div class="home-statbox light-well">
 	   	<div class="header centered">Best Bomber</div>
-	    <div class="content">{% include 'profile_template.html' with user_profile=best_user %}</div>
+	    <div class="content">{% include 'profile_template.html' with user_profile=best_user with_score='True' %}</div>
 	</div>
 
 	<div class="home-statbox light-well">
 		<div class="header centered">Worst Bomber</div>
-	    <div class="content">{% include 'profile_template.html' with user_profile=worst_user %}</div>
+	    <div class="content">{% include 'profile_template.html' with user_profile=worst_user with_score='True' %}</div>
 	</div>
 
     <div class="home-statbox light-well">
