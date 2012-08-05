@@ -224,7 +224,6 @@ class Correction(models.Model):
     def update_score(self, diff, rating_user):
         self.score = self.score + diff
         self.user_profile.score = self.user_profile.score + diff #update user for points
-        print diff, rating_user.is_staff
         if rating_user.is_staff and diff >= 0:
             self.use_correction()
 

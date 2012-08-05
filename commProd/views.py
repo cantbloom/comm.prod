@@ -183,8 +183,6 @@ def correction(request):
 def processProd(request):
     data = request.POST.get("data", None)
     key = request.POST.get("key", None)
-    print data
-    print key
     resp = ""
     if data and str(key) == env['SECRET_KEY']:
         data = json.loads(data) #{sender : (content, [comm_prods], date, subject)}

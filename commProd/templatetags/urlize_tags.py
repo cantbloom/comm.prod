@@ -36,12 +36,12 @@ def clean_prod(commprod):
     pattern = re.compile(url_regex, re.I)
     match = pattern.search(commprod)
     prod_list = list(str(commprod))
-
+    print prod_list
     if match:
         for m in pattern.finditer(commprod):
-            start = max(m.start(group) - 1, 0)
-            end = min(m.end(group) + 1, len(prod_list)-1)
-
+            start = max(m.start(group)-1, 0)
+            end = min(m.end(group)+1, len(prod_list)-1)
+            print prod_list[start], prod_list[end]
             if prod_list[start] == '<':
                 prod_list[start] = ""
             if prod_list[end] == '>':

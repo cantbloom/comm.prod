@@ -16,7 +16,6 @@ values and returns an HTMl template based on the search query
 """
 def commprod_query_manager(get_dict, user, return_type="html"):
     valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted', 'orderBy']
-    print get_dict
     valid_types = {
         'best' : {
                     'orderBy': 'score', 
@@ -35,11 +34,6 @@ def commprod_query_manager(get_dict, user, return_type="html"):
                 'direction':'lh',
         }   
     }
-
-    for k, v in get_dict.items():
-        print k in valid_params
-        print k,v
-
     
     search_params = {k : v for k, v in get_dict.items() if k in valid_params}
 
