@@ -1,12 +1,34 @@
-<div class="span2 offset1 search-nav hidden-phone">
+<div class="span3 offset1 search-nav hidden-phone">
     <ul class="nav nav-list">
     {% include 'commprod/subnav_content.html' %}
     </ul>
+    
+    <div class="home-statbox light-well">
+	   	<div class="header centered">Best Bomber</div>
+	    <div class="content">{% include 'profile_template.html' with user_profile=best_user %}</div>
+	</div>
+
+	<div class="home-statbox light-well">
+		<div class="header centered">Worst Bomber</div>
+	    <div class="content">{% include 'profile_template.html' with user_profile=worst_user %}</div>
+	</div>
+
+    <div class="home-statbox light-well">
+	    <div class="content big centered">{{ num_commprods }}</div>
+	    <div class="footer centered">Total comm.prods</div>
+	</div>
+
+	<div class="home-statbox light-well">
+	    <div class="content big centered">{{ num_votes }}</div>
+	    <div class="footer centered">Total Votes</div>
+	</div>
+
 </div>
 
 <div class="span2 offset1 search-nav visible-phone">
     <ul class="nav nav-pills">
     {% include 'commprod/subnav_content.html' %}
     </ul>
-
 </div>
+
+
