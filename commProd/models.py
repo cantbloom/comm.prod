@@ -224,24 +224,27 @@ class Correction(models.Model):
     def update_score(self, diff, rating_user):
         self.score = self.score + diff
         self.user_profile.score = self.user_profile.score + diff #update user for points
-        if rating_user.is_staff and diff > 0:
-            use_correction()
+        print diff, rating_user.is_staff
+        if rating_user.is_staff and diff >= 0:
+            self.use_correction()
 
         elif self.score == -5:
             self.is_active = False
 
         elif self.score == 5:
-            use_correction()
+            self.use_correction()
 
         self.save()
 
-        def use_correction(self):
-            Correction.objects.filter(commprod=self.commprod).update(is_active=False)
-            self.is_active = False
-            self.used = True
+    def use_correction(self, save=False):
+        Correction.objects.filter(commprod=self.commprod).update(is_active=False)
+        self.is_active = False
+        self.used = True
 
-            self.commprod.content = self.content
-            self.commprod.save()
+        self.commprod.content = self.content
+        self.commprod.save()
+        if save:
+            self.save() ##normally called at the end of update_score
 
     def __unicode__(self):
         return 'Correction by %s with content %s on %s' % (self.user_profile.user.username, self.content, str(self.date))
