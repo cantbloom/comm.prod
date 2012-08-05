@@ -17,11 +17,12 @@ function insertCommprod(e, d){
 	}
 
 	//add popover since this commprod wasn';'t arround when it was first added
-	$toAdd.find('.permalink').popover();
+	$toAdd.find('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()
+
 }
 
 function requestProds(cb){
-	$.getJSON('/commprod/api/search', {unvoted:true, limit:15, return_type:'list'}, function(res){
+	$.getJSON('/commprod/api/search', {unvoted:true, limit:15, orderBy: '?', return_type:'list'}, function(res){
 			data.commprods = data.commprods.concat(res.res);
 			if (cb){
 				cb(res);
@@ -131,6 +132,7 @@ $(function(){
 	});
 
 	requestProds(function(){
+		$('.commprod-timeline .loading').hide();
 		$commprod_timeline.trigger('needsCommprod');	
 	});
 })
