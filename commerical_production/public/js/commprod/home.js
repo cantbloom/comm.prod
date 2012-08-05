@@ -51,7 +51,6 @@ function setupTour(){
 		}
 	)
 
-
 	tour.addStep({
 	  element: ".commprod-timeline-container h1", /* html element next to which the step popover should be shown */
 	  placement: 'bottom',

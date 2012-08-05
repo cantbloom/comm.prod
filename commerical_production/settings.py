@@ -131,7 +131,6 @@ AUTHENTICATION_BACKENDS = (
 ROOT_URLCONF = 'commerical_production.urls'
 LOGIN_REDIRECT_URL = "/home"
 LOGIN_URL = '/login'
-APPEND_SLASH=False
 
 SESSION_COOKIE_AGE = 1000*60*60*24*7 #a week #31556926000 # 1 year in milliseconds so basically forever
 
