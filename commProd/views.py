@@ -40,7 +40,8 @@ def home(request):
         'num_commprods': CommProd.objects.all().count(),
         'num_votes': Rating.objects.all().count(),
         'worst_user': profiles[0],
-        'best_user': profiles.reverse()[0]
+        'best_user': profiles.reverse()[0],
+        'stats' : 'True'
 
     }
 
