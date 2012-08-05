@@ -5,5 +5,5 @@ django-pagination==1.0.7
 boto==2.5.2
 numpy==1.6.2
 requests==0.13.1
-gunicorn==0.14.6
 simplejson==2.5.2
+gunicorn==0.14.6
