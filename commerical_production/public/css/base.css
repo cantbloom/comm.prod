@@ -1,7 +1,7 @@
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 979px){
     html, body {
-        padding: 20px 0 0 0 ;
+        padding: 35px 0 0 0 ;
     }
 }
 
@@ -265,10 +265,6 @@ textarea {
 .fancy-input:focus {
     background: #fff;
     outline: 0 none;
-}
-
-.top-container {
-    margin-top: 35px;
 }
 
 .light-well {

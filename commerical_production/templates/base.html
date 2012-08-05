@@ -167,8 +167,8 @@
             </div>
         </div>
     </div> -->
-        <!--  javascript -->
 
+        <!--  javascript -->
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
 
@@ -202,5 +202,11 @@
 
         {% block scripts %}
         {% endblock %}
+        <script type="text/javascript">
+         var use_tour = true;
+            {% if not user.profile.use_tour %}
+                use_tour = false;
+            {% endif %}
+        </script>
     </body>
 </html>

@@ -97,6 +97,15 @@ def admin(request):
     return render_to_response('commprod/admin.html', template_values, context_instance=RequestContext(request))
 
 ###### request endpoints #######
+
+@login_required
+@csrf_exempt
+def end_tour(request):
+    user_profile = request.user.profile
+    user_profile.use_tour = False
+    user_profile.save()
+    return HttpResponse("Success!", mimetype='application/json')
+
 @login_required
 @csrf_exempt
 def vote (request):

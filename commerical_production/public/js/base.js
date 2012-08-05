@@ -170,8 +170,8 @@ function submitForm(e, d){
 
 $(function(){
     $(document).on('click', '.vote-container .vote', voteSelection)
-    $('.permalink').hover(detailsCorrectionText, detailsDefaultText)
-    $('.permalink').popover()
+    $('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()
+    
     $(document).on('click', '.claim-profile', openClaimProfile)
     $(document).on('click', '#email-claim-confirm', submitClaimProfile)
 

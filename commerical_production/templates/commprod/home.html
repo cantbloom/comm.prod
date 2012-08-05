@@ -5,12 +5,14 @@
 {% endblock%}
 
 {% block content %} 
-<div class="row top-container">
+<div class="row">
 	{% include "commprod/subnav.html"%}
 	<div class="commprod-timeline-container span7">
 		<h1 class="centered">{{page_title}}</h1>
 		<div class="commprod-timeline well">
-			<img class="loading" src='/public/img/loading.gif'/> 
+			<div class="loading-container">
+				<img class="loading" src='/public/img/loading.gif'/>
+			</div> 
 		</div>
 	</div>
 </div>
