@@ -21,3 +21,7 @@
     margin: 10px 0;
     font-weight: bolder;
 }
+
+.home-statbox .big {
+    font-size: 3em;
+}
