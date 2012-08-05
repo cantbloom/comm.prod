@@ -33,7 +33,7 @@ img {
     height: 32px;
 }
 
-.statbox{
+.profile-statbox{
     height: 250px;
     width: 44%;
     float:left;
@@ -41,22 +41,22 @@ img {
     border-radius: 3px;
 }
 
-.statbox .header{
+.profile-statbox .header{
     font-size: 2em;
     font-weight: bolder;
     text-align: center;
     margin-top: 11px;
 }
 
-.statbox .footer{
+.profile-statbox .footer{
     font-size: 2em;
     font-weight: bolder;
     text-align: center;
     padding-top:85px;
 }
 
-.statbox .content{
-    font-size: 7.5em;
+.profile-statbox .content{
+    font-size: 7.53em;
     font-weight: bolder;
     text-align: center;
     margin-top: 90px;
