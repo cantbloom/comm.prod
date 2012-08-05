@@ -137,7 +137,7 @@ def sendRegEmail(username):
 Send sorry email to given user
 """
 def sendSorryEmail(username):
-    user = User.objects.get(username = username)
+    user = User.objects.get(username=username)
     if user:
         content = sorry_email['content'] % (user.username)
         subject = sorry_email['subject']
