@@ -12,15 +12,33 @@ function insertCommprod(e, d){
 		$toAdd.animate({opacity:1}, 150);
 	});
 
-	if (data.commprods.length < 20){
-		$.getJSON('/commprod/api/search', {unread:true, limit:10, return_type:'list'}, function(res){
-			data.commprods = data.commprods.concat(res.res);
-		});
-    $(document).trigger('requestMoreProds', {loc: 'home'})
+	if (data.commprods.length < 10){
+		requestProds();
 	}
 
 	//add popover since this commprod wasn';'t arround when it was first added
-	$toAdd.find('.permalink').popover();
+	$toAdd.find('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()
+
+}
+
+function requestProds(cb){
+	$.getJSON('/commprod/api/search', {unvoted:true, limit:15, orderBy: '?', return_type:'list'}, function(res){
+			data.commprods = data.commprods.concat(res.res);
+			if (cb){
+				cb(res);
+			}
+	});
+    $(document).trigger('requestMoreProds', {loc: 'home'});
+}
+
+function checkTour() {
+	if (use_tour) {
+		if($.cookie('tour_end') == 'yes') {
+			end_tour();
+		} else {
+			setupTour();
+		}
+	}
 }
 
 function setupTour(){
@@ -33,7 +51,6 @@ function setupTour(){
 			}
 		}
 	)
-
 
 	tour.addStep({
 	  element: ".commprod-timeline-container h1", /* html element next to which the step popover should be shown */
@@ -92,7 +109,15 @@ function setupTour(){
 	tour.start();
 }
 
+function end_tour(){
+	$.post('/commprod/end_tour');
+}
+
 $(function(){
+	checkTour();
+
+	$(document).on('tourEnded', end_tour); // listen to tour event and store that it ended in the db
+
 	var $commprod_timeline = $('.commprod-timeline');
 
 	$commprod_timeline.on('needsCommprod', insertCommprod)
@@ -106,7 +131,8 @@ $(function(){
 		$commprod_timeline.trigger('needsCommprod');
 	});
 
-	$commprod_timeline.trigger('needsCommprod');
-
-	setupTour();
+	requestProds(function(){
+		$('.commprod-timeline .loading').hide();
+		$commprod_timeline.trigger('needsCommprod');	
+	});
 })

@@ -27,6 +27,7 @@ class UserProfile(models.Model):
     pic_url = models.CharField(max_length=1000, default="/public/img/placeholder.jpg")
     score = models.IntegerField(default=0)
     data_point_count = models.IntegerField(default=0)
+    use_tour = models.BooleanField(default=True)
 
     def update_data_point(self, save=True):
         if not self.data_point_count % 1:
@@ -220,23 +221,29 @@ class Correction(models.Model):
     is_active = models.BooleanField(default=True)
     used = models.BooleanField(default=False)
 
-    def update_score(self, diff):
+    def update_score(self, diff, rating_user):
         self.score = self.score + diff
-        self.user_profile.score = self.user_profile.score +diff #update user for points
+        self.user_profile.score = self.user_profile.score + diff #update user for points
+        if rating_user.is_staff and diff >= 0:
+            self.use_correction()
 
-        if self.score == -5:
+        elif self.score == -5:
             self.is_active = False
 
         elif self.score == 5:
-            Correction.objects.filter(commprod=self.commprod).update(is_active=False)
-            self.is_active = False
-            self.used = True
-
-            self.commprod.content = self.content
-            self.commprod.save()
+            self.use_correction()
 
         self.save()
 
+    def use_correction(self, save=False):
+        Correction.objects.filter(commprod=self.commprod).update(is_active=False)
+        self.is_active = False
+        self.used = True
+
+        self.commprod.content = self.content
+        self.commprod.save()
+        if save:
+            self.save() ##normally called at the end of update_score
 
     def __unicode__(self):
         return 'Correction by %s with content %s on %s' % (self.user_profile.user.username, self.content, str(self.date))
@@ -253,7 +260,7 @@ class CorrectionRating(models.Model):
         diff = int(self.score) - int(self.previous_score)
         self.previous_score = self.score
         super(CorrectionRating, self).save(force_insert, force_update)
-        self.correction.update_score(diff)
+        self.correction.update_score(diff, self.user_profile.user)
 
     def __unicode__(self):
         return "%s voted a %s on correction_id %s on %s " % (self.user_profile.user.username, self.score, self.correction.id, self.date)

@@ -30,12 +30,18 @@ Landing page, top ten rated comm prods + ten newest commprods
 """
 @login_required
 def home(request):
+    profiles = UserProfile.objects.order_by('score')
     template_values = {
         'page_title' : "Vote on these comm.prods we think you'll like",
         'nav_commprod' : "active",
         'subnav_home' : "active",
         'unvoted_commprods': str(commprod_query_manager({'unvoted':True, 'orderBy': '?', 'limit':30}, request.user, 'list')),
-        'user_profile':request.user.profile
+        'user_profile':request.user.profile,
+        'num_commprods': CommProd.objects.all().count(),
+        'num_votes': Rating.objects.all().count(),
+        'worst_user': profiles[0],
+        'best_user': profiles.reverse()[0]
+
     }
 
     return render_to_response('commprod/home.html', template_values, context_instance=RequestContext(request))
@@ -91,6 +97,15 @@ def admin(request):
     return render_to_response('commprod/admin.html', template_values, context_instance=RequestContext(request))
 
 ###### request endpoints #######
+
+@login_required
+@csrf_exempt
+def end_tour(request):
+    user_profile = request.user.profile
+    user_profile.use_tour = False
+    user_profile.save()
+    return HttpResponse("Success!", mimetype='application/json')
+
 @login_required
 @csrf_exempt
 def vote (request):
@@ -102,6 +117,8 @@ def vote (request):
     id = request.POST.get("id", None)
     type = request.POST.get("type", None)
     user = request.user
+
+    print "/*vote*/" + " user: " + user.username + " id: " + id + " type: " + type + " score: " + score + " /*vote*/"
 
 
     if type in types and score and id:
@@ -174,8 +191,6 @@ def correction(request):
 def processProd(request):
     data = request.POST.get("data", None)
     key = request.POST.get("key", None)
-    print data
-    print key
     resp = ""
     if data and str(key) == env['SECRET_KEY']:
         data = json.loads(data) #{sender : (content, [comm_prods], date, subject)}

@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title id="page_title"> commprod | {{ page_title }}</title>
+        <title id="page_title"> comm.prod | {{ page_title }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -16,10 +16,11 @@
             var firstSemesterAdd = [6, 7, 8, 9, 10, 11].indexOf((new Date()).getMonth()) ? 1 : 0
             //seg.verbose(true); // remove this in production to turn off logging
             {% if user.is_authenticated %}
-            seg.identify("{{ user.email }}" == "{{ user.email }}",
+            seg.identify("{{ user.email }}",
                 {
                 'class_year': {{ user.profile.class_year }},
-                'alum' : {{ user.profile.class_year }} < (new Date()).getFullYear() + firstSemesterAdd
+                'alum' : {{ user.profile.class_year }} < (new Date()).getFullYear() + firstSemesterAdd,
+                'is_staff' : "{{ user.is_staff }}" == "True"
                 }
             )
             {% endif %}
@@ -30,6 +31,7 @@
         {% include_style "bootstrap.min" %}
         {% include_style "bootstrap-responsive" %}
         {% include_style "base" %}
+        {% include_style "home" %}
         {% block styles %} {% endblock%}
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -165,8 +167,8 @@
             </div>
         </div>
     </div> -->
-        <!--  javascript -->
 
+        <!--  javascript -->
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
 
@@ -200,5 +202,11 @@
 
         {% block scripts %}
         {% endblock %}
+        <script type="text/javascript">
+         var use_tour = true;
+            {% if not user.profile.use_tour %}
+                use_tour = false;
+            {% endif %}
+        </script>
     </body>
 </html>

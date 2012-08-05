@@ -3,6 +3,7 @@
 from os import environ as env
 from optparse import OptionParser
 from datetime import datetime
+from helpers.utils import strip_quotes
 import email, sys, getpass, imaplib, re, logging, requests,time, os, simplejson as json
 
 
@@ -144,14 +145,6 @@ def parseProd(query):
     return None
 
 ####HELPERS#####
-
-def strip_quotes(string):
-    string = string.strip()
-    if (string.startswith('"') or string.startswith("'")):
-        string = string[1:]
-    if (string.endswith('"') or string.endswith("'")):
-        string = string[:-1]
-    return string
 
 """
 shitty hack

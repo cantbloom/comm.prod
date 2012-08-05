@@ -69,7 +69,7 @@ MEDIA_ROOT = os.path.join(ROOT_PATH, 'public')
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/public/'
 
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
@@ -131,7 +131,6 @@ AUTHENTICATION_BACKENDS = (
 ROOT_URLCONF = 'commerical_production.urls'
 LOGIN_REDIRECT_URL = "/home"
 LOGIN_URL = '/login'
-APPEND_SLASH=False
 
 SESSION_COOKIE_AGE = 1000*60*60*24*7 #a week #31556926000 # 1 year in milliseconds so basically forever
 

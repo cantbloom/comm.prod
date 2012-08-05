@@ -9,5 +9,6 @@ urlpatterns = patterns('commProd.views',
     url(r'^(?P<username>.+)/(?P<cp_id>\d+)$', 'permalink'),
     url(r'^correction?', 'correction'),
     url(r'^admin?', 'admin'),
-    url(r'^$', 'home')
+    url(r'^end_tour', 'end_tour'),
+    url(r'^$', 'home'),
 )

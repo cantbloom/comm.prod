@@ -1,12 +1,12 @@
 from django import template
 from django.template.defaultfilters import stringfilter
 from HTMLParser import HTMLParser
-
+from helpers.utils import strip_quotes
 import re, requests
 
 register = template.Library()
 
-url_regex = "(?P<url>https?://[^\s]+)"
+url_regex = "(?P<url>https?://[^\s][^>;]+)"
 group = 'url'
 """
 Finds and replaces urls in the commprod content
@@ -19,13 +19,18 @@ def urlize_commprod(commprod):
     pattern = re.compile(url_regex, re.I)
     match = pattern.search(commprod)
     if match:
+        previous_matches = {}
         for m in pattern.finditer(commprod):
-            url_match = m.group(group)
-            if 'youtube' in url_match:
-                commprod = commprod.replace(url_match, youtube_tag(url_match))
-            else:
-                tag = img_or_url(url_match)
-                commprod = commprod.replace(url_match, tag)
+            url_match = strip_quotes(m.group(group))
+            
+            if url_match not in previous_matches:
+                if 'youtube' in url_match:
+                    commprod = commprod.replace(url_match, youtube_tag(url_match))
+                else:
+                    tag = img_or_url(url_match)
+                    commprod = commprod.replace(url_match, tag)
+            
+                previous_matches[url_match] = url_match
 
     return commprod
 
@@ -36,16 +41,18 @@ def clean_prod(commprod):
     pattern = re.compile(url_regex, re.I)
     match = pattern.search(commprod)
     prod_list = list(str(commprod))
-
+    invalid = ["<", ">"]
     if match:
         for m in pattern.finditer(commprod):
-            start = max(m.start(group) - 1, 0)
-            end = min(m.end(group) + 1, len(prod_list)-1)
-
-            if prod_list[start] == '<':
-                prod_list[start] = ""
-            if prod_list[end] == '>':
-                prod_list[end] = ""
+            start = max(m.start(group), 0)
+            end = min(m.end(group), len(prod_list)-1)
+            start_minus = max(start-1, 0)
+            end_plus = min(end+1, len(prod_list)-1)
+            locations = [start, start_minus, end, end_plus]
+                                                                                                                                                                                                                                                                                                                                                         
+            for loc in locations:
+                if prod_list[loc] in invalid:
+                    prod_list[loc] = ""
     return "".join(prod_list)
 
 """

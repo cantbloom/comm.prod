@@ -25,7 +25,7 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
       if direction == 'lh':
         orderBy = '-' + orderBy
 
-      commprods = commprods.order_by(orderBy, '?')
+      commprods = commprods.order_by(orderBy, 'date')
 
     if startDate:
       commprods = commprods.objects.filter(date__gte=startDate)
@@ -36,7 +36,7 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
     if unvoted:
       commprods = commprods.exclude(rating__user_profile__user__username=unvoted)
       # if random.random() > .5:
-      #   commprods_exclude = commprods.exclude(score = 0)
+      #   commprods_exclude = commprods.exclude(score=0)
       #   if commprods_exclude.exists():
       #     commprods = commprods_exclude
 

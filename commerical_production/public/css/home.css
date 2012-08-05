@@ -1,0 +1,23 @@
+.commprod-timeline .loading-container {
+  width:200px;
+  margin: 5px auto;
+}
+
+.home-statbox{
+    border-radius: 3px;
+    padding: 5px 0;
+    margin: 5px 0;
+}
+
+.home-statbox .header{
+    font-weight: bolder;
+}
+
+.home-statbox .footer{
+    font-weight: bolder;
+}
+
+.home-statbox .content{
+    margin: 10px 0;
+    font-weight: bolder;
+}
