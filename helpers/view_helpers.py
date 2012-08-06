@@ -103,7 +103,7 @@ def get_floor_percentile(profile):
 
 def get_day_trend(profile, num_days=30):
     time_threshold = datetime.now() - timedelta(days=num_days)
-    trend_points = TrendData.objects.filter(date__gt=time_threshold)
+    trend_points = TrendData.objects.filter(date__gt=time_threshold, user_profile=profile)
     if trend_points.exists():
       old_score = trend_points[0].score
     else:
