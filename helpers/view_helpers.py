@@ -2,7 +2,8 @@ from commProd.models import CommProd, Rating, UserProfile, ShirtName, Correction
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.contrib.auth.models import User
-
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 from helpers.commprod_search import commprod_search
 
@@ -88,8 +89,6 @@ def vote_correction(id, score, user):
     return rating, correction[0]
 
 def validateEmail( email ):
-    from django.core.validators import validate_email
-    from django.core.exceptions import ValidationError
     try:
         validate_email( email )
         return True
