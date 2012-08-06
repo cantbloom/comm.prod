@@ -14,7 +14,10 @@ from datetime import date, datetime, timedelta
 from threading import Lock
 import sha, random
 
-lock = Lock()
+commprod_lock = Lock()
+
+
+correction_lock = Lock()
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -190,12 +193,12 @@ class Rating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
-        lock.acquire() #acquire global lock on ratings
+        commprod_lock.acquire() #acquire global lock on ratings
         diff = int(self.score) - int(self.previous_score)
         self.previous_score = self.score;
         super(Rating, self).save(force_insert, force_update)
         self.commprod.update_score(diff)
-        lock.release() #release, commprod and user profile are updated by above line
+        commprod_lock.release() #release, commprod and user profile are updated by above line
 
     def __unicode__(self):
     	return "%s voted a %s on commprod_id %s on %s " % (self.user_profile.user.username, self.score, self.commprod.id, self.date)
@@ -257,10 +260,12 @@ class CorrectionRating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False, **kwargs):
+        correction_lock.acquire()
         diff = int(self.score) - int(self.previous_score)
         self.previous_score = self.score
         super(CorrectionRating, self).save(force_insert, force_update)
         self.correction.update_score(diff, self.user_profile.user)
+        commprod_lock.release()
 
     def __unicode__(self):
         return "%s voted a %s on correction_id %s on %s " % (self.user_profile.user.username, self.score, self.correction.id, self.date)
