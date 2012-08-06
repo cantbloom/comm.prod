@@ -108,5 +108,4 @@ def get_day_trend(profile, num_days=30):
       old_score = trend_points[0].score
     else:
       old_score = 0
-    print profile.score, old_score
     return profile.score - old_score
