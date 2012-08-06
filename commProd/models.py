@@ -265,7 +265,7 @@ class CorrectionRating(models.Model):
         self.previous_score = self.score
         super(CorrectionRating, self).save(force_insert, force_update)
         self.correction.update_score(diff, self.user_profile.user)
-        commprod_lock.release()
+        correction_lock.release()
 
     def __unicode__(self):
         return "%s voted a %s on correction_id %s on %s " % (self.user_profile.user.username, self.score, self.correction.id, self.date)
