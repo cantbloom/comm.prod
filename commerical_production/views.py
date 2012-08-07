@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.context_processors import csrf
 from django.shortcuts import redirect
@@ -15,7 +15,7 @@ from django import forms
 from commProd.models import *
 from commProd.forms import RegForm
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail, get_floor_percentile, get_day_trend
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail, get_floor_percentile, get_day_trend, JSONResponse
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, profile_query_manager
 from helpers.link_activator import get_active_page
@@ -111,10 +111,12 @@ Endpoint to request an email be added to you profile
 def claim_email(request):
     email = request.POST.get('email', "")
     email_user = User.objects.filter(email=email)
+    payload = {'res':'failed'}
     if email_user.exists() and email_user[0].profile.send_mail == False:
         request.user.profile.add_email(email)
-        return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json')
-    return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json')
+        payload['res'] = 'success'
+
+    return JSONResponse(payload)
 
 """
 Endpoint to request an email be added to you profile
@@ -124,14 +126,14 @@ Endpoint to request an email be added to you profile
 def feedback(request):
     feedback = request.POST.get('feedback', None)
     if not feedback:
-        return HttpResponse(json.dumps({'res':'failed'}), mimetype='application/json')
+        return JSONResponse({'res':'failed'})
     feedback.replace('\n', '<br>')
     user = request.user
     subject = email_templates.feedback['subject']
     content = email_templates.feedback['content'] % (user.username, feedback)
     admin_emails = [admin[1] for admin in ADMINS]
     emailUsers(subject, content, admin_emails, from_email=user.email)
-    return HttpResponse(json.dumps({'res':'success'}), mimetype='application/json')
+    return JSONResponse({'res':'success'})
 
 """
 First page after successfully signing update
@@ -282,7 +284,7 @@ def edit_profile(request):
             'errors': errors
         }
 
-        return HttpResponse(json.dumps(return_obj), mimetype='application/json')
+        return JSONResponse(return_obj)
 
     #not post request
     passwordForm = [
@@ -355,7 +357,7 @@ def reset_password(request):
             'errors': errors
         }
 
-        return HttpResponse(json.dumps(return_obj), mimetype='application/json')
+        return JSONResponse(return_obj)
     else:
         template_values = {
                 'page_title' : "Reset Password",

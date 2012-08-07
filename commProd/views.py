@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render_to_response, get_object_or_404, HttpResponse
+from django.shortcuts import render_to_response, get_object_or_404
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
@@ -105,7 +105,7 @@ def end_tour(request):
     user_profile = request.user.profile
     user_profile.use_tour = False
     user_profile.save()
-    return HttpResponse("Success!", mimetype='application/json')
+    return JSONResponse("Success!")
 
 @login_required
 @csrf_exempt
@@ -139,9 +139,7 @@ def vote (request):
                 "type": type
             }
 
-    return_data = json.dumps(payload)
-
-    return HttpResponse(return_data, mimetype='application/json')
+    return JSONResponse(payload)
 
 @login_required
 @csrf_exempt
@@ -167,8 +165,8 @@ def favorite(request):
 @login_required
 def api_search (request):
     return_type = request.GET.get("return_type", 'html')
-    res = {'res' : commprod_query_manager(request.GET, request.user, return_type)}
-    return HttpResponse(json.dumps(res), mimetype='application/json')
+    payload = {'res' : commprod_query_manager(request.GET, request.user, return_type)}
+    return JSONResponse(payload)
 
 @login_required
 def profile_data(request):
@@ -185,7 +183,7 @@ def profile_data(request):
         elif type == "vs_data":
             response_data = vs_data_manager(user, filter)
 
-    return HttpResponse(json.dumps(response_data), mimetype="application/json")
+    return JSONResponse(response_data)
 
 @login_required
 @csrf_exempt
@@ -205,7 +203,7 @@ def correction(request):
             'nodata' : ''
             }
 
-    return HttpResponse(json.dumps(response_data), mimetype="application/json")
+    return JSONResponse(response_data)
 
 @csrf_exempt
 def processProd(request):
@@ -243,4 +241,4 @@ def processProd(request):
         resp = "No data"
         if str(key) != env['SECRET_KEY']: #patlsotw
             resp = "Success!"
-    return HttpResponse(resp, mimetype="text/plain")
+    return JSONResponse(resp)
