@@ -8,8 +8,6 @@ from django.template import RequestContext
 from django.http import Http404
 from django.contrib import auth
 from django.contrib.auth import views, login
-
-
 from django import forms
 
 from commProd.models import *
@@ -24,7 +22,6 @@ from helpers.admin import email_templates
 
 from commerical_production.settings import ADMINS
 
-import json
 
 """
 Registration page. Visitor arrives wih activation key
