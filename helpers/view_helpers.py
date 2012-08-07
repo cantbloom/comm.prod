@@ -11,7 +11,7 @@ from helpers.commprod_search import commprod_search
 from common.constants import REGEX
 
 from datetime import date, datetime, timedelta
-import random
+import random, re
 
 
 """
@@ -120,13 +120,14 @@ def JSONResponse(payload):
 
 
 """
-Detect if a commprod has media content
+Detect if a commprod content has media (url, img, youtube video)
 """
-def commprod_contains_media(commprod):
+def commprod_contains_media(commprod_content):
     url_regex = REGEX['url_regex']
     pattern = re.compile(url_regex, re.I)
-    match = pattern.search(commprod)
+    match = pattern.search(commprod_content)
     return bool(match)
+
 def validateEmail(email):
     try:
         validate_email(email)

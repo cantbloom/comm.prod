@@ -16,7 +16,7 @@ Finds and replaces urls in the commprod content
 with a standard <a> tag or embeds a youtube video in the page
 """
 @register.filter
-def urlize_commprod(commprod):
+def urlize_commprod(commprod, media):
     commprod = clean_prod(commprod)
     commprod = strip_tags(commprod)
     pattern = re.compile(url_regex, re.I)

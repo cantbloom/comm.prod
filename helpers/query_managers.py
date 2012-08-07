@@ -35,6 +35,7 @@ def commprod_query_manager(get_dict, user, return_type="html"):
         'media' : {
             'orderBy' : 'trending_score',
             'direction' : 'lh',
+            'media' : True,
         }   
     }
     
@@ -47,7 +48,7 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 
     if 'unvoted' in search_params:
         search_params['unvoted'] = user.username
-        
+    print search_params
     commprods = commprod_search(**search_params)
 
     return commprod_renderer(user, commprods, return_type, type, get_dict.get('page',1))

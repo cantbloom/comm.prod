@@ -9,8 +9,9 @@ from helpers.commprod_search import commprod_search
 
 unvoted: passing in username and receive commprods unvoted by user
 """
-def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None, unvoted=False):
+def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None, unvoted=False, media=False):
   commprods = CommProd.objects.all()
+  print media
   try:
     if cp_id:
       commprods = commprods.filter(id=cp_id)
@@ -37,7 +38,7 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
       commprods = commprods.exclude(rating__user_profile__user__username=unvoted)
     
     if media:
-      commprods = commprods.filter(media=True) #exclude False is faster?
+      commprods = commprods.objects.filter(media=True) #exclude False is faster?
 
       # if random.random() > .5:
       #   commprods_exclude = commprods.exclude(score=0)
