@@ -1,6 +1,6 @@
 from django import forms
 from django.core import validators
-from commProd.models import UserProfile, User
+from commProd.models import *
 from helpers.aws_put import put_profile_pic
 
 from datetime import datetime

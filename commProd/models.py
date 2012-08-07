@@ -278,6 +278,9 @@ class Favorite(models.Model):
 
     date = models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return "%s favorited (%s) the commprod %s on %s " % (self.user_profile.user.username, self.fav, self.commprod.id, self.date)
+
 
 class PasswordReset(models.Model):
     user_profile = models.ForeignKey(UserProfile)
@@ -307,6 +310,10 @@ class PasswordReset(models.Model):
         user.set_password(password)
         user.save()
         return password
+
+    def __unicode__(self):
+        return "Password reset request by %s on %s" % (self.user_profile.user.username, self.date)
+
 
 #fuck.
 import signals

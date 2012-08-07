@@ -12,7 +12,7 @@ from django.contrib.auth import views, login
 
 from django import forms
 
-from commProd.models import CommProd, Rating, UserProfile, ShirtName, Email, PasswordReset
+from commProd.models import *
 from commProd.forms import RegForm
 
 from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail, get_floor_percentile, get_day_trend

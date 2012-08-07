@@ -11,7 +11,7 @@ from django.template import RequestContext
 from django.http import Http404
 from django.contrib.auth import authenticate, login
 
-from commProd.models import CommProd, Rating, UserProfile, Correction, CorrectionRating, CommProdEmail
+from commProd.models import *
 
 from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction, fav_commprod, JSONResponse
 from helpers.commprod_search import commprod_search

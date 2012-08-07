@@ -1,24 +1,32 @@
 {% load urlize_tags %}
 {% load trim %}
+{# assignment for commprod timeline #}
+{% if commprod.id in upvoted %}
+    {% with upvote_selected as "selected" %}
+    {% endwith %}
+{% elif commprod.id in downvoted %}
+	{% with downvote_selected as "selected" %}
+	{% endwith %}
+{% endif %}
+{% if commprod.id in favorites %}
+	{% with fav_selected as True %} {% endwith %}
+{% endif %}
 <div id="{{ obj_type }}_object_{{ commprod.id }}" class='row commprod-container {{ obj_type }}' data-id="{{ commprod.id }}" data-type='{{ obj_type }}'>
 	<div class="author-container">
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
 			<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
 			{% if obj_type == "correction" %}
 			<b> Correction by: {{ commprod.user_profile.user.username }} </b> 
+			{% elif commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}
+			{{ commprod.user_profile.user.first_name }} {{ commprod.user_profile.user.last_name }}
 			{% else %}
-				{% if commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}
-				{{ commprod.user_profile.user.first_name }} {{ commprod.user_profile.user.last_name }}
-				{% else %}
-				{{ commprod.user_profile.user.username }}
-				{% endif %}
+			{{ commprod.user_profile.user.username }}
 			{% endif %}
 		</a>
 		{% if commprod.user_profile.send_mail == 0 %}
 		<button class="claim-profile btn btn-mini btn-primary" data-user="{{ commprod.user_profile.user.username }}"> Claim Profile</button>
 		{% endif %}
-		
-		<div class="vote-container" style="float:right">
+		<div class="vote-container pull-right">
 			<div class="up-down-container" data-id="{{ commprod.id }}">
 				<div class="vote up-vote {{ upvote_selected }}"></div>
 				<div class="vote down-vote {{ downvote_selected }}"></div>
@@ -34,7 +42,7 @@
 
 		{% else %}
 		<span class="date"> {{ commprod.date }} <a class="permalink" href="/commprod/{{ commprod.user_profile.user.username }}/{{ commprod.id }}" title='{{ commprod.email_content.subject }}' data-content='{{ commprod.email_content.content|linebreaks|trim  }}'>Details <span class="tour"></span> </a> </span> 
+		<i class="fav {% if fav_selected %} icon-star {% else %} icon-star-empty {% endif %}"> </i>
 		{% endif %}
-		
 	</div>
 </div>

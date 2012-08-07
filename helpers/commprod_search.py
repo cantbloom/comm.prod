@@ -1,4 +1,4 @@
-from commProd.models import CommProd, Rating, UserProfile
+from commProd.models import *
 
 import random
 

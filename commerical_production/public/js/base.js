@@ -133,11 +133,11 @@ function filepicker_services(){
         filepicker.SERVICES.DROPBOX,]
 }
 
-function detailsCorrectionText(e, v) {
+function detailsCorrectionText(e) {
     $(e.target).text("Click for more")
 }
 
-function detailsDefaultText(e, v) {
+function detailsDefaultText(e) {
     $(e.target).text("Details")
 }
 
@@ -166,12 +166,36 @@ function submitForm(e, d){
     });
 }
 
+function favToggle(e) {
+    $(e.target).toggleClass('icon-star icon-star-empty');
+}
 
+function favVote(e) {
+    var $src = $(e.target);
+    var $commprod = $src.closest('.commprod-container');
+    $src.toggleClass('icon-star icon-star-empty');
+    
+    var id = $commprod.data('id'),
+    type = $commprod.data('type'),
+    choice = $src.hasClass('icon-star-empty'),
+    payload = {'id':id, 'choice' : choice};
+    $commprod = $('#'+ type + '_object_'  + id);
+
+    $.post('/commprod/favorite/', payload, function(res){
+        console.log(res)
+        $commprod.trigger('favResponse', res);
+    });
+    
+    $commprod.trigger('favSent', payload)
+
+}
 
 $(function(){
     $(document).on('click', '.vote-container .vote', voteSelection)
     $('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()
-    
+
+    $('.fav').hover(favToggle).click(favVote);
+
     $(document).on('click', '.claim-profile', openClaimProfile)
     $(document).on('click', '#email-claim-confirm', submitClaimProfile)
 
