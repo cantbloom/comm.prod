@@ -326,25 +326,28 @@ class CommProdRec(models.Model):
 
     def update_scores(self):
         #similarity of when commprod was written to when user was on the floor
-        year_diff = user_profile.class_year - self.commprod.date.year
+        year_diff = self.user_profile.class_year - self.commprod.date.year
         if year_diff >= 5:
             self.time_period = 1.0
         else:
             self.time_period = 5.0/(year_diff*2.0)
 
         #how much does user like the author of the comm.prod (sum up ratings by user for author)
-        self.like_author = Rating.objects.filter(commprod__user_profile = commprod.user_profile, user_profile = user_profile).aggregate(Sum('score'))['score__sum']
+        self.like_author = Rating.objects.filter(commprod__user_profile = self.commprod.user_profile, user_profile = self.user_profile).aggregate(Sum('score'))['score__sum']
+        # if user hasn't voted
+        if not self.like_author:
+            self.like_author = 0
 
         #how popular is this author
-        self.author_popularity = UserProfile.objects.get(id = commprod.user_profile.id).score
+        # self.author_popularity = self.commprod.user_profile.score
+
 
         #other dimensions that don't need to be computed
         ## commprod.trending_score
         ### commprod.score
 
-        self.weighted_avg = self.time_period*5.0 + self.like_author/3.0 + self.author_popularity/10.0 + commprod.trending_score/500.0 + commprod.score*1.0
+        self.weighted_avg = self.time_period*5.0 + self.like_author/3.0 + self.author_popularity/10.0 + self.commprod.trending_score/500.0 + self.commprod.score*1.0
 
-        self.save()
 
 
 #fuck.
