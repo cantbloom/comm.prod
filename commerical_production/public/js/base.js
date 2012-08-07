@@ -182,7 +182,6 @@ function favVote(e) {
     $commprod = $('#'+ type + '_object_'  + id);
 
     $.post('/commprod/favorite/', payload, function(res){
-        console.log(res)
         $commprod.trigger('favResponse', res);
     });
     

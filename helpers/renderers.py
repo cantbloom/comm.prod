@@ -14,7 +14,6 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
     upvoted = votes.filter(score__gt=0).values_list('commprod__id', flat=True)
     downvoted = votes.filter(score__lt=0).values_list('commprod__id', flat=True)
     favorites = Favorite.objects.filter(user_profile__user=user, fav=True).values_list('commprod__id', flat=True)
-    print favorites
     if return_type == "html":
         template_values =  {
             'commprods' : paginator(page, commprods),
@@ -23,6 +22,7 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
             'favorites' : favorites,
             'obj_type' : obj_type,
         }
+        print template_values
         if type:
             template_values['link_mod'] = "&type=" + type
 

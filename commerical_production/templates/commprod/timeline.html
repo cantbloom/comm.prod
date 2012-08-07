@@ -1,6 +1,12 @@
 <div class="commprod-timeline-container well">
     {% for commprod in commprods %}
-        {% include "commprod/commprod_template.html" with commprod = commprod downvotes = downvoted upvote_selected = upvoted favorites = favorites %} {# commprod_template takes care of upvote, downvote, and favorites#}
+        {% if commprod.id in upvoted %}
+            {% include "commprod/commprod_template.html" with commprod=commprod upvote_selected="selected" favorites=favorites %}
+        {% elif commprod.id in downvoted %}
+            {% include "commprod/commprod_template.html" with commprod=commprod downvote_selected="selected" favorites=favorites %}
+        {% else %}
+            {% include "commprod/commprod_template.html" with commprod=commprod favorites=favorites %}
+        {% endif %}
 
     {% endfor %}
 </div>
