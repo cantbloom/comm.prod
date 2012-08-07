@@ -9,6 +9,7 @@ def get_active_page(pageName, requestType):
             "best" : 'subnav_best',
             "worst" : 'subnav_worst',
             "recent" : 'subnav_recent',
+            "media" : 'subnav_media'
         },
     'profile' : {
             "" : 'subnav_statistics',
@@ -16,6 +17,7 @@ def get_active_page(pageName, requestType):
             "best" : 'subnav_best',
             "worst" : 'subnav_worst',
             "recent" : 'subnav_recent',
+            "media" : 'subnav_media'
         },
     }
     try: 

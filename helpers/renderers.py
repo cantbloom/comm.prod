@@ -22,7 +22,6 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
             'favorites' : favorites,
             'obj_type' : obj_type,
         }
-        print template_values
         if type:
             template_values['link_mod'] = "&type=" + type
 

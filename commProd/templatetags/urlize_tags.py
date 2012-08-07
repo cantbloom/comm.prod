@@ -1,12 +1,15 @@
 from django import template
 from django.template.defaultfilters import stringfilter
+
 from HTMLParser import HTMLParser
+
 from cron.utils import strip_quotes
+from common.constants import REGEX
 import re, requests
 
 register = template.Library()
 
-url_regex = "(?P<url>https?://[^\s][^>;]+)"
+url_regex = REGEX['url_regex']
 group = 'url'
 """
 Finds and replaces urls in the commprod content
