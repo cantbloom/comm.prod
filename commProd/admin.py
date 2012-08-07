@@ -1,4 +1,4 @@
-from commProd.models import UserProfile, Email, ShirtName, CommProd, CommProdEmail, Rating, TrendData, Correction, CorrectionRating, PasswordReset
+from commProd.models import *
 from django.contrib import admin
 
 admin.site.register(UserProfile)
@@ -11,3 +11,4 @@ admin.site.register(Rating)
 admin.site.register(TrendData)
 admin.site.register(Correction)
 admin.site.register(CorrectionRating)
+admin.site.register(Favorite)

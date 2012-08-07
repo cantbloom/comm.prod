@@ -1,5 +1,5 @@
 from django.core.management.base import NoArgsCommand
-from commProd.models import CommProd, Rating, UserProfile, CommProdEmail, TrendData
+from commProd.models import *
 
 
 class Command(NoArgsCommand):

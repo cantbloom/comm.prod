@@ -1,9 +1,10 @@
-from commProd.models import CommProd, Rating, UserProfile, ShirtName, Correction, CorrectionRating, TrendData
+from commProd.models import *
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, HttpResponse
 from django.contrib.auth.models import User
-
-
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.utils import simplejson as json
 from helpers.commprod_search import commprod_search
 
 import random
@@ -68,13 +69,33 @@ def addUserToQuery(request_dict, username):
 Submit vote for a commprod
 """
 def vote_commprod(id, score, user):
-    commprod = commprod_search(cp_id=id)
-    if commprod.count() != 1: #make sure commprod is these
-        return False, False
-    commprod = commprod[0]
+    success, commprod = valid_prod(id)
+    if not success:
+        return success, commprod #False, False
+
     rating, created = Rating.objects.get_or_create(commprod=commprod, user_profile=user.profile)
 
     return rating, commprod
+
+"""
+Submit favorite for a commprod
+"""
+def fav_commprod(id, user):
+    success, commprod = valid_prod(id)
+    if not success:
+        return success, commprod #False, False
+    fav, created = Favorite.objects.get_or_create(commprod=commprod, user_profile=user.profile)
+
+    return fav
+
+"""
+Helper function to valididate commprod for vote or favoriteing
+"""
+def valid_prod(id):    
+    commprod = commprod_search(cp_id=id)
+    if commprod.count() != 1: #make sure commprod is there
+        return False, False
+    return True, commprod[0]
 
 """
 Submit vote for a correction
@@ -82,16 +103,21 @@ Submit vote for a correction
 def vote_correction(id, score, user):
     correction = Correction.objects.filter(id=id)
     if not correction.exists():
-        return None
+        return False, False
 
     rating, created = CorrectionRating.objects.get_or_create(correction=correction[0], user_profile=user.profile)
     return rating, correction[0]
 
-def validateEmail( email ):
-    from django.core.validators import validate_email
-    from django.core.exceptions import ValidationError
+"""
+Helper to return HttpResponse with json type
+json.dumps the payload given
+"""
+def JSONResponse(payload):
+    return HttpResponse(json.dumps(payload), mimetype='application/json')
+
+def validateEmail(email):
     try:
-        validate_email( email )
+        validate_email(email)
         return True
     except ValidationError:
         return False
@@ -103,10 +129,9 @@ def get_floor_percentile(profile):
 
 def get_day_trend(profile, num_days=30):
     time_threshold = datetime.now() - timedelta(days=num_days)
-    trend_points = TrendData.objects.filter(date__gt=time_threshold)
+    trend_points = TrendData.objects.filter(date__gt=time_threshold, user_profile=profile)
     if trend_points.exists():
       old_score = trend_points[0].score
     else:
       old_score = 0
-    print profile.score, old_score
     return profile.score - old_score

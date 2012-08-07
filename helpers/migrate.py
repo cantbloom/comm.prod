@@ -1,7 +1,7 @@
 #this won't do everything, you have to fill in stuff. it is just boiler plate code
 
 from django.contrib.auth.models import User
-from commProd.models import CommProd, Rating, UserProfile, ShirtName
+from commProd.models import *
 
 shirtnames = ShirtName.objects.all()
 

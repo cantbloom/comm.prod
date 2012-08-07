@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.models import User
-from commProd.models import Email
+from commProd.models import *
 
 class EmailOrUsernameBackend(object):
     def authenticate(self, username=None, password=None):

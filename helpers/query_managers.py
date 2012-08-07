@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models import Max, Min, Sum
 
-from commProd.models import CommProd, Rating, UserProfile, TrendData, Correction
+from commProd.models import *
 from commprod_search import commprod_search
 
 from helpers.renderers import commprod_renderer, profile_renderer, correction_renderer
