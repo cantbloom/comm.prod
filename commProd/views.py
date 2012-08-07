@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate, login
 
 from commProd.models import CommProd, Rating, UserProfile, Correction, CorrectionRating, CommProdEmail
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction, fav_commprod, JSONResponse
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
@@ -145,6 +145,26 @@ def vote (request):
 
 @login_required
 @csrf_exempt
+def favorite(request):
+    payload = {'success' : False}
+    id = request.POST.get("id", None)
+    choice = request.POST.get("choice", None)
+    user = request.user
+
+    if id and choice:
+        fav = fav_commprod(id, user)
+        if fav:
+            fav.fav = choice
+            fav.save()
+            payload = {
+                "success" : True,
+                "id" : id,
+                "fav" : choice,
+            }
+
+    return JSONResponse(payload)
+
+@login_required
 def api_search (request):
     return_type = request.GET.get("return_type", 'html')
     res = {'res' : commprod_query_manager(request.GET, request.user, return_type)}

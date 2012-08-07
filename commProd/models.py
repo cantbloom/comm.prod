@@ -270,6 +270,15 @@ class CorrectionRating(models.Model):
     def __unicode__(self):
         return "%s voted a %s on correction_id %s on %s " % (self.user_profile.user.username, self.score, self.correction.id, self.date)
 
+class Favorite(models.Model):
+    commprod = models.ForeignKey(CommProd)
+    user_profile = models.ForeignKey(UserProfile)
+
+    fav = models.BooleanField(default=True)
+
+    date = models.DateTimeField(auto_now=True)
+
+
 class PasswordReset(models.Model):
     user_profile = models.ForeignKey(UserProfile)
 
