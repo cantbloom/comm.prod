@@ -70,7 +70,7 @@ Submit vote for a commprod
 """
 def vote_commprod(id, score, user):
     commprod = commprod_search(cp_id=id)
-    if commprod.count() != 1: #make sure commprod is these
+    if commprod.count() != 1: #make sure commprod is there
         return False, False
     commprod = commprod[0]
     rating, created = Rating.objects.get_or_create(commprod=commprod, user_profile=user.profile)
@@ -83,7 +83,7 @@ Submit vote for a correction
 def vote_correction(id, score, user):
     correction = Correction.objects.filter(id=id)
     if not correction.exists():
-        return None
+        return False, False
 
     rating, created = CorrectionRating.objects.get_or_create(correction=correction[0], user_profile=user.profile)
     return rating, correction[0]

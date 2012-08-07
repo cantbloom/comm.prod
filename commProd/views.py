@@ -121,7 +121,6 @@ def vote (request):
 
     print "/*vote*/" + " user: " + user.username + " id: " + id + " type: " + type + " score: " + score + " /*vote*/"
 
-
     if type in types and score and id:
         if type == "commprod":
             rating, obj = vote_commprod(id, score, user)

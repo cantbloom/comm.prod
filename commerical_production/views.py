@@ -370,7 +370,7 @@ def reset_password_confirm(request, key=None):
     errors = False
     if key:
         reset = PasswordReset.objects.filter(activation_key=key)
-        if reset.exists and reset[0].is_active and reset[0].is_valid():
+        if reset.exists() and reset[0].is_active and reset[0].is_valid():
             reset = reset[0]
             reset.is_active = False
             new_password = reset.getNewPassword()
