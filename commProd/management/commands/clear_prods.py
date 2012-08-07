@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 from django.core.management.base import NoArgsCommand
 from commProd.models import *
 
