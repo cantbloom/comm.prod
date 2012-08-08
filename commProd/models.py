@@ -15,8 +15,6 @@ from threading import Lock
 import sha, random
 
 commprod_lock = Lock()
-
-
 correction_lock = Lock()
 
 class UserProfile(models.Model):
@@ -151,6 +149,7 @@ class CommProd(models.Model):
     avg_score = models.FloatField(default=0.0)
     score = models.IntegerField(default=0)
     trending_score = models.IntegerField(default=0)
+    media = models.BooleanField(default=False)
     date = models.DateTimeField()
     date_added = models.DateTimeField(auto_now=True)
 

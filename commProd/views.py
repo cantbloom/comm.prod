@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate, login
 
 from commProd.models import *
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction, fav_commprod, JSONResponse
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction, fav_commprod, JSONResponse, commprod_contains_media
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic
@@ -21,7 +21,6 @@ from helpers.query_managers import commprod_query_manager, vs_data_manager, tren
 from helpers.link_activator import get_active_page
 from helpers.renderers import commprod_renderer
 from helpers.urlize_email_content import urlize_email_content
-
 from os import environ as env
 
 
@@ -233,7 +232,8 @@ def processProd(request):
             if created:
                 email_content.save()
 
-            commprod, created = CommProd.objects.get_or_create(email_content=email_content, content=commprod, original_content=commprod, user_profile=user.profile, date=date)
+            media = commprod_contains_media(commprod)
+            commprod, created = CommProd.objects.get_or_create(email_content=email_content, content=commprod, original_content=commprod, user_profile=user.profile, media=media, date=date)
             if created:
                 commprod.save()
             resp += "\nAdded? " + str(created)

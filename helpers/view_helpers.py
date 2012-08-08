@@ -1,14 +1,17 @@
 from commProd.models import *
+
 from django.template import RequestContext
 from django.shortcuts import render_to_response, HttpResponse
 from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.utils import simplejson as json
-from helpers.commprod_search import commprod_search
 
-import random
+from helpers.commprod_search import commprod_search
+from common.constants import REGEX
+
 from datetime import date, datetime, timedelta
+import random, re
 
 
 """
@@ -114,6 +117,16 @@ json.dumps the payload given
 """
 def JSONResponse(payload):
     return HttpResponse(json.dumps(payload), mimetype='application/json')
+
+
+"""
+Detect if a commprod content has media (url, img, youtube video)
+"""
+def commprod_contains_media(commprod_content):
+    url_regex = REGEX['url_regex']
+    pattern = re.compile(url_regex, re.I)
+    match = pattern.search(commprod_content)
+    return bool(match)
 
 def validateEmail(email):
     try:
