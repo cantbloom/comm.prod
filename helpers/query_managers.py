@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models import Max, Min, Sum
 
-from commProd.models import CommProd, Rating, UserProfile, TrendData, Correction
+from commProd.models import *
 from commprod_search import commprod_search
 
 from helpers.renderers import commprod_renderer, profile_renderer, correction_renderer
@@ -18,20 +18,24 @@ def commprod_query_manager(get_dict, user, return_type="html"):
     valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted', 'orderBy']
     valid_types = {
         'best' : {
-                    'orderBy': 'score', 
-                    'direction': 'lh',
+                    'orderBy' : 'score', 
+                    'direction' : 'lh',
         },
         'worst':{
-                'orderBy': 'score', 
-                'direction': 'hl',
+                'orderBy' : 'score',
         },
         'recent' : {
-                    'orderBy': 'date', 
-                    'direction':'lh',
+                    'orderBy' : 'date', 
+                    'direction' : 'lh',
         },
         'trending' : {
-                'orderBy': 'trending_score', 
-                'direction':'lh',
+                'orderBy' : 'trending_score', 
+                'direction' : 'lh',
+        },
+        'media' : {
+            'orderBy' : 'trending_score',
+            'media' : True,
+            'direction' : 'lh',
         }   
     }
     
@@ -44,7 +48,6 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 
     if 'unvoted' in search_params:
         search_params['unvoted'] = user.username
-        
     commprods = commprod_search(**search_params)
 
     return commprod_renderer(user, commprods, return_type, type, get_dict.get('page',1))

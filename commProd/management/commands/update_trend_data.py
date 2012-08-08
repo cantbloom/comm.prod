@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 from django.core.management.base import NoArgsCommand
-from commProd.models import UserProfile
+from commProd.models import *
 
 
 class Command(NoArgsCommand):

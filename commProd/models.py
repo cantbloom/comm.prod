@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import simplejson as json
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from django.db.models import Avg
+from django.db.models import Avg, Sum
 from django.conf import settings
 from django.utils import timezone
 
@@ -15,8 +15,6 @@ from threading import Lock
 import sha, random
 
 commprod_lock = Lock()
-
-
 correction_lock = Lock()
 
 class UserProfile(models.Model):
@@ -151,6 +149,7 @@ class CommProd(models.Model):
     avg_score = models.FloatField(default=0.0)
     score = models.IntegerField(default=0)
     trending_score = models.IntegerField(default=0)
+    media = models.BooleanField(default=False)
     date = models.DateTimeField()
     date_added = models.DateTimeField(auto_now=True)
 
@@ -265,10 +264,22 @@ class CorrectionRating(models.Model):
         self.previous_score = self.score
         super(CorrectionRating, self).save(force_insert, force_update)
         self.correction.update_score(diff, self.user_profile.user)
-        commprod_lock.release()
+        correction_lock.release()
 
     def __unicode__(self):
         return "%s voted a %s on correction_id %s on %s " % (self.user_profile.user.username, self.score, self.correction.id, self.date)
+
+class Favorite(models.Model):
+    commprod = models.ForeignKey(CommProd)
+    user_profile = models.ForeignKey(UserProfile)
+
+    fav = models.BooleanField(default=True)
+
+    date = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s favorited (%s) the commprod %s on %s " % (self.user_profile.user.username, self.fav, self.commprod.id, self.date)
+
 
 class PasswordReset(models.Model):
     user_profile = models.ForeignKey(UserProfile)
@@ -298,6 +309,45 @@ class PasswordReset(models.Model):
         user.set_password(password)
         user.save()
         return password
+
+    def __unicode__(self):
+        return "Password reset request by %s on %s" % (self.user_profile.user.username, self.date)
+
+class CommProdRec(models.Model):
+    user_profile = models.ForeignKey(UserProfile)
+    commprod = models.ForeignKey(CommProd)
+
+    weighted_avg = models.FloatField(default=0.0)
+
+    time_period = models.FloatField(default=0.0)
+    like_author = models.FloatField(default=0.0)
+    author_popularity = models.FloatField(default=0.0)
+
+    def update_scores(self):
+        #similarity of when commprod was written to when user was on the floor
+        year_diff = self.user_profile.class_year - self.commprod.date.year
+        if year_diff >= 5:
+            self.time_period = 1.0
+        else:
+            self.time_period = 5.0/(year_diff*2.0)
+
+        #how much does user like the author of the comm.prod (sum up ratings by user for author)
+        self.like_author = Rating.objects.filter(commprod__user_profile = self.commprod.user_profile, user_profile = self.user_profile).aggregate(Sum('score'))['score__sum']
+        # if user hasn't voted
+        if not self.like_author:
+            self.like_author = 0
+
+        #how popular is this author
+        # self.author_popularity = self.commprod.user_profile.score
+
+
+        #other dimensions that don't need to be computed
+        ## commprod.trending_score
+        ### commprod.score
+
+        self.weighted_avg = self.time_period*5.0 + self.like_author/3.0 + self.author_popularity/10.0 + self.commprod.trending_score/500.0 + self.commprod.score*1.0
+
+
 
 #fuck.
 import signals
