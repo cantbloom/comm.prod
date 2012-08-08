@@ -11,10 +11,12 @@ function insertCommprod(e, d){
 	$toAdd.slideDown(function(){
 		$toAdd.animate({opacity:1}, 150);
 	});
-
+	if (data.commprods.length == 0) {
+		$(document).trigger('complete_rec')
+	}
 	if (data.commprods.length < 10){
 		requestProds();
-	}
+	} 
 
 	//add popover since this commprod wasn';'t arround when it was first added
 	$toAdd.find('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()
