@@ -15,7 +15,7 @@ class Command(NoArgsCommand):
         url = env['POST_URL_DUMP']
         commprods = CommProd.objects.filter(date_added__gt=dump_day, date__lt=day_zero).select_related()
         self.stdout.write("Starting...\n")
-        for commprod in commprods:
+        for commprod in commprods.iterator():
             self.stdout.write("\nAdding %s" % str(commprod.id))
             data = json.dumps({
                         commprod.user_profile.user.email : (

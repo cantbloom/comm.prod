@@ -7,7 +7,7 @@ class Command(NoArgsCommand):
     def handle(self, **options):
         self.stdout.write("Starting...\n")
         commprods = CommProd.objects.all()
-        for commprod in commprods:
+        for commprod in commprods.iterator():
             media = commprod_contains_media(commprod.content)
             self.stdout.write("Updating commprod id %s, media? %s\n" % (commprod.id, media))
             commprod.media = media
