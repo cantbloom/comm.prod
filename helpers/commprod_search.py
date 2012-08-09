@@ -10,14 +10,13 @@ from helpers.commprod_search import commprod_search
 rec: passing in username and receive commprods in ordered by recommentdation for user
 unvoted: passing in username and receive commprods unvoted by user
 """
-
-def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None, unvoted=False, rec=False):
+def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None, unvoted=False, rec=False, media=False):
   commprods = None
 
-  if rec:
-      rec_object = CommProdRec.objects.filter(user_profile__user__username=rec)
-      if rec_object.exists():
-        commprods = rec_object[0].get_prods()
+  # if rec:
+  #     rec_object = CommProdRec.objects.filter(user_profile__user__username=rec)
+  #     if rec_object.exists():
+  #       commprods = rec_object[0].get_prods()
 
   if not commprods:
     commprods = CommProd.objects.all()
@@ -60,6 +59,6 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
   except:
     commprods = CommProd.objects.all()
 
-  return commprods
+  return commprods.select_related()
 
 
