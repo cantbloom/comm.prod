@@ -1,30 +1,60 @@
 #! /usr/bin/env python
 
 from django.core.management.base import NoArgsCommand
-from commProd.models import UserProfile, CommProdRec, CommProd
+from commProd.models import *
 
-from datetime import date, datetime, timedelta
+from django.utils import simplejson as json
 
+import time, random
 
 class Command(NoArgsCommand):
     help = 'Updates commprod recommnedation list for each user'
 
     def handle(self, **options):
         print "Making CommProdRecs"
-        commprods = CommProd.objects.all();
+        commprods = CommProd.objects.all().select_related()
+        ratings = Rating.objects.all().select_related()
 
-        active_users = UserProfile.objects.filter(user__is_active = True)
+        active_users = UserProfile.objects.filter(user__is_active = True).select_related()
 
         to_add = []
-
+        start = time.time()
         for user_profile in active_users:
             print user_profile.user.username
+            ranked_list = []
             for commprod in commprods:
-                rec = CommProdRec(user_profile = user_profile, commprod = commprod)
-                rec.update_scores()
-                to_add.append(rec)
-                print rec.weighted_avg, rec.time_period*5.0, rec.like_author/3.0 , rec.author_popularity/10.0 , rec.commprod.trending_score/500.0 , rec.commprod.score*1.0
+                score = self.calc_score(user_profile, commprod, ratings)
+                ranked_list.append((commprod.id, score))
 
-        CommProdRec.objects.bulk_create(to_add)
-        print "Complete"
+            ranked_list.sort(key=lambda rating: -rating[1]) #was putting worst first
+            ranked_list = [x[0] for x in ranked_list]
+
+            rec, created = CommProdRec.objects.get_or_create(user_profile = user_profile)
+            rec.ranked_list = json.dumps(ranked_list)
+
+            rec.save()
+
+    def calc_score(self, user_profile, commprod, ratings):
+        #similarity of when commprod was written to when user was on the floor
+        year_diff = user_profile.class_year - commprod.date.year
+        if abs(year_diff) <= 5:
+            time_period = 1.0
+        else:
+            time_period = 5.0/(abs(year_diff)*3.0)
+
+        #how much does user like the author of the comm.prod (sum up ratings by user for author)
+        like_author = 0
+        for rating in ratings:
+            if rating.user_profile == user_profile and rating.commprod == commprod:
+                like_author += rating.score
+
+        #how popular is this author
+        author_popularity = commprod.user_profile.score
+
+
+        #other dimensions that don't need to be computed
+        ## commprod.trending_score
+        ### commprod.score
+
+        return time_period*10.0 + max(like_author/3.0,5) + max(author_popularity/10.0, 5) + max(commprod.trending_score/100.0,5) + commprod.score*1.0 + random.random()*20.0
 
