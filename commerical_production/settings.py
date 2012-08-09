@@ -153,6 +153,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'django_evolution',
     'pagination',
+    'migrations',
     'common',
     'gunicorn',
     'commProd',

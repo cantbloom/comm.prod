@@ -26,7 +26,13 @@
 		</div>
 	</div>
 	<div id="{{ obj_type }}_object_{{ commprod.id }}_content" class="commprod-content">
-		a btb <b>"{{ commprod.content|urlize_commprod:commprod.media|safe }} </b>"comm.prod
+		a btb <b>"
+		{% if commprod.media %}
+			{{ commprod.media_content|safe }}
+		{% else %}
+			{{ commprod.content|safe }}
+		{% endif %}
+		"</b>comm.prod
 	</div>
 	<div class="commprod-footer">
 		{% if obj_type == 'correction' %}
