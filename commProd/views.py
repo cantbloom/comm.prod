@@ -13,7 +13,8 @@ from django.contrib.auth import authenticate, login
 
 from commProd.models import *
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction, fav_commprod, JSONResponse, commprod_contains_media
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction, fav_commprod, JSONResponse
+from helpers.urlize_tags import commprod_contains_media
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
 from helpers.aws_put import put_profile_pic

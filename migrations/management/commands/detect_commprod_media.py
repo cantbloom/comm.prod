@@ -1,8 +1,6 @@
 from django.core.management.base import NoArgsCommand
+from helpers.urlize_tags import urlize_commprod, commprod_contains_media
 from commProd.models import *
-from helpers.view_helpers import commprod_contains_media
-from helpers.urlize_tags import urlize_commprod
-
 
 class Command(NoArgsCommand):
     help = "Detects if a commprod contains media (url, img, youtube video) and updates the column appropiately."
@@ -13,7 +11,7 @@ class Command(NoArgsCommand):
             media = commprod_contains_media(commprod.content)
             self.stdout.write("Updating commprod id %s, media? %s\n" % (commprod.id, media))
             commprod.media = media
-            if media:
+            if media: #write the media content
                 commprod.media_content = urlize_commprod(commprod.content)
             commprod.save()
         self.stdout.write("Done.\n")

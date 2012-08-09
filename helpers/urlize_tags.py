@@ -114,3 +114,12 @@ def strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
+
+"""
+Detect if a commprod content has media (url, img, youtube video)
+"""
+def commprod_contains_media(commprod_content):
+    url_regex = REGEX['url_regex']
+    pattern = re.compile(url_regex, re.I)
+    match = pattern.search(commprod_content)
+    return bool(match)
