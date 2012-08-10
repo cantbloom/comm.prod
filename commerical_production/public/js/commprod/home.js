@@ -123,6 +123,13 @@ $(function(){
 	var $commprod_timeline = $('.commprod-timeline');
 
 	$commprod_timeline.on('needsCommprod', insertCommprod)
+	
+	$(document).on('voteSent', function(e, d){
+		var $tot_votes = $("#tot_votes .content");
+		if(Math.abs(d.diff) == 1) {
+			$tot_votes.html(parseInt($tot_votes.html()) + 1);
+		}
+	});
 
 	$commprod_timeline.on('voteSent', function(e, d){
 		//ignore if clicked on a commprod that isn't first

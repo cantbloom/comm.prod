@@ -4,22 +4,22 @@
     </ul>
     
     {% if stats == 'True' %}
-	    <div class="home-statbox light-well">
+	    <div class="home-statbox light-well" id="best_bomber">
 		   	<div class="header centered">Best Bomber</div>
 		    <div class="content">{% include 'profile_template.html' with user_profile=best_user with_score='True' %}</div>
 		</div>
 
-		<div class="home-statbox light-well">
+		<div class="home-statbox light-well" id="worst_bomber">
 			<div class="header centered">Worst Bomber</div>
 		    <div class="content">{% include 'profile_template.html' with user_profile=worst_user with_score='True' %}</div>
 		</div>
 
-	    <div class="home-statbox light-well">
+	    <div class="home-statbox light-well" id="tot_comprods">
 		    <div class="content big centered">{{ num_commprods }}</div>
 		    <div class="footer centered">total comm.prods</div>
 		</div>
 
-		<div class="home-statbox light-well">
+		<div class="home-statbox light-well" id="tot_votes">
 		    <div class="content big centered">{{ num_votes }}</div>
 		    <div class="footer centered">total votes</div>
 		</div>
