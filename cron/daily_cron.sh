@@ -12,3 +12,9 @@ git commit -am "dailycron: update to user_list"
 git pull heroku master
 git push heroku master
 git push git master
+
+#backup database
+mysqldump -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_NAME | gzip > sql_dump/`data ' %m-%d-%Y'`.sql.gz 
+
+#cleanup old files
+find sql_dump/* -type f -mtime +30 -exec rm '{}' \;
