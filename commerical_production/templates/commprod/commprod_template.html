@@ -31,18 +31,18 @@
 		{% else %}
 			{{ commprod.content|safe }}
 		{% endif %}
-		"</b>comm.prod
+		"</b> comm.prod
 	</div>
 	<div class="commprod-footer">
 		{% if obj_type == 'correction' %}
 
 		{% else %}
 		<span class="date"> {{ commprod.date }} <a class="permalink" href="/commprod/{{ commprod.user_profile.user.username }}/{{ commprod.id }}" title='{{ commprod.email_content.subject }}' data-content='{{ commprod.email_content.content|linebreaks|trim  }}'>Details <span class="tour"></span> </a> </span> 
-			{% if commprod.id in favorites %}
+<!-- 			{% if commprod.id in favorites %}
 				<i class="fav icon-star"> </i>
 			{% else %}
 				<i class="fav {% if fav_selected %} icon-star {% else %} icon-star-empty {% endif %}"> </i>
-			{% endif %}
+			{% endif %} -->
 		{% endif %}
 	</div>
 </div>
