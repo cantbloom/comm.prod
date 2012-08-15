@@ -7,10 +7,20 @@ To test:
 python manage.py shell
 from helpers.commprod_search import commprod_search
 
+rec: passing in username and receive commprods in ordered by recommentdation for user
 unvoted: passing in username and receive commprods unvoted by user
 """
-def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None, unvoted=False, media=False):
-  commprods = CommProd.objects.all()
+def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None, unvoted=False, rec=False, media=False):
+  commprods = None
+
+  # if rec:
+  #     rec_object = CommProdRec.objects.filter(user_profile__user__username=rec)
+  #     if rec_object.exists():
+  #       commprods = rec_object[0].get_prods()
+
+  if not commprods:
+    commprods = CommProd.objects.all()
+  
   try:
     if cp_id:
       commprods = commprods.filter(id=cp_id)
@@ -21,7 +31,7 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
     if query:
       commprods = commprods.filter(content__contains=query)
 
-    if orderBy:
+    if orderBy and not rec:
       if direction == 'lh':
         orderBy = '-' + orderBy
 
@@ -45,7 +55,7 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
       commprods = commprods.filter(media=True) #exclude False is faster?
     if limit:
       commprods = commprods[:limit]
-
+      
   except:
     commprods = CommProd.objects.all()
 

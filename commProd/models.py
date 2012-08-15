@@ -31,7 +31,7 @@ class UserProfile(models.Model):
     use_tour = models.BooleanField(default=True)
 
     def update_data_point(self, save=True):
-        if not self.data_point_count % 1:
+        if not data_point_count % 1:
             data_point = TrendData(user_profile=self, score=self.score, avg_score=self.avg_score)
             data_point.save()
         self.data_point_count += 1
@@ -146,6 +146,7 @@ class CommProd(models.Model):
 
     content = models.TextField()
     original_content = models.TextField() #fuck corrections
+    #media_content = models.TextField() #commprod with url tags inserted
     avg_score = models.FloatField(default=0.0)
     score = models.IntegerField(default=0)
     trending_score = models.IntegerField(default=0)
@@ -315,37 +316,16 @@ class PasswordReset(models.Model):
 
 class CommProdRec(models.Model):
     user_profile = models.ForeignKey(UserProfile)
-    commprod = models.ForeignKey(CommProd)
 
-    weighted_avg = models.FloatField(default=0.0)
+    ranked_list = models.TextField()
 
-    time_period = models.FloatField(default=0.0)
-    like_author = models.FloatField(default=0.0)
-    author_popularity = models.FloatField(default=0.0)
+    def get_prods(self, limit=None):
+        #annoying hack to get a query set of commprods in the order of the ranked_list
+        pk_list = json.loads(self.ranked_list)
+        ordering = 'FIELD(`id`, %s)' % ','.join(str(id) for id in pk_list)
+        queryset = CommProd.objects.filter(pk__in=pk_list).extra(select={'ordering': ordering}, order_by=('ordering',))
+        return queryset
 
-    def update_scores(self):
-        #similarity of when commprod was written to when user was on the floor
-        year_diff = self.user_profile.class_year - self.commprod.date.year
-        if year_diff >= 5:
-            self.time_period = 1.0
-        else:
-            self.time_period = 5.0/(year_diff*2.0)
-
-        #how much does user like the author of the comm.prod (sum up ratings by user for author)
-        self.like_author = Rating.objects.filter(commprod__user_profile = self.commprod.user_profile, user_profile = self.user_profile).aggregate(Sum('score'))['score__sum']
-        # if user hasn't voted
-        if not self.like_author:
-            self.like_author = 0
-
-        #how popular is this author
-        # self.author_popularity = self.commprod.user_profile.score
-
-
-        #other dimensions that don't need to be computed
-        ## commprod.trending_score
-        ### commprod.score
-
-        self.weighted_avg = self.time_period*5.0 + self.like_author/3.0 + self.author_popularity/10.0 + self.commprod.trending_score/500.0 + self.commprod.score*1.0
 
 
 

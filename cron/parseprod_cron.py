@@ -101,7 +101,7 @@ def fetch_prods(url, login, password, mailbox, search_query):
                         })
                     
                     r = requests.post(url, data={'data' : data, 'key' : env['SECRET_KEY']})
-                    time.sleep(1) # don't overload poor heroku
+                    time.sleep(0.5) # don't overload poor heroku
                     logging.info(r.text)
                 
                 else:

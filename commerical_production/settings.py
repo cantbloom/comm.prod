@@ -28,7 +28,7 @@ DATABASES = {
         'USER': env['MYSQL_USER'], # Not used with sqlite3.
         'PASSWORD': env['MYSQL_PASSWORD'],# Not used with sqlite3.
         'HOST':env['MYSQL_HOST'], # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'PORT': '', # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -153,6 +153,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'django_evolution',
     'pagination',
+    'migrations',
     'common',
     'gunicorn',
     'commProd',

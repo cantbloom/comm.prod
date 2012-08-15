@@ -11,18 +11,21 @@ function insertCommprod(e, d){
 	$toAdd.slideDown(function(){
 		$toAdd.animate({opacity:1}, 150);
 	});
-
+	if (data.commprods.length == 0) {
+		$(document).trigger('complete_rec')
+	}
 	if (data.commprods.length < 10){
 		requestProds();
-	}
+	} 
 
-	//add popover since this commprod wasn';'t arround when it was first added
+	//add popover since this commprod wasn't arround when it was first added
 	$toAdd.find('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()
-
+	//same for favoriting
+	$toAdd.find('.fav').hover(favToggle).click(favVote);
 }
 
 function requestProds(cb){
-	$.getJSON('/commprod/api/search', {unvoted:true, limit:15, orderBy: '?', return_type:'list'}, function(res){
+	$.getJSON('/commprod/api/search', {unvoted:true, limit:15, rec: true, return_type:'list'}, function(res){
 			data.commprods = data.commprods.concat(res.res);
 			if (cb){
 				cb(res);
@@ -121,6 +124,13 @@ $(function(){
 	var $commprod_timeline = $('.commprod-timeline');
 
 	$commprod_timeline.on('needsCommprod', insertCommprod)
+	
+	$(document).on('voteSent', function(e, d){
+		var $tot_votes = $("#tot_votes .content");
+		if(Math.abs(d.diff) == 1) {
+			$tot_votes.html(parseInt($tot_votes.html()) + 1);
+		}
+	});
 
 	$commprod_timeline.on('voteSent', function(e, d){
 		//ignore if clicked on a commprod that isn't first

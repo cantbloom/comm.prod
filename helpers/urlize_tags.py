@@ -1,13 +1,8 @@
-from django import template
-from django.template.defaultfilters import stringfilter
-
 from HTMLParser import HTMLParser
 
 from cron.utils import strip_quotes
 from common.constants import REGEX
 import re, requests
-
-register = template.Library()
 
 url_regex = REGEX['url_regex']
 group = 'url'
@@ -15,8 +10,7 @@ group = 'url'
 Finds and replaces urls in the commprod content
 with a standard <a> tag or embeds a youtube video in the page
 """
-@register.filter
-def urlize_commprod(commprod, media):
+def urlize_commprod(commprod):
     commprod = clean_prod(commprod)
     commprod = strip_tags(commprod)
     pattern = re.compile(url_regex, re.I)
@@ -120,3 +114,12 @@ def strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
+
+"""
+Detect if a commprod content has media (url, img, youtube video)
+"""
+def commprod_contains_media(commprod_content):
+    url_regex = REGEX['url_regex']
+    pattern = re.compile(url_regex, re.I)
+    match = pattern.search(commprod_content)
+    return bool(match)

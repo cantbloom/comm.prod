@@ -39,6 +39,14 @@ body {
     background: url(/public/img/bg-body.png) repeat top left;   
 }
 
+.star-on {
+  background: url(/public/img/star-on.png) repeat top left;
+}
+
+.star-off {
+  background: url(/public/img/star-off.png) repeat top left;
+}
+
 .topbar {
     padding-top:3px;
 }

@@ -163,6 +163,8 @@ function submitForm(e, d){
         $form.find('.response_text').html(text)
         $form.find('.alert').removeClass(removeClass).addClass(addClass).slideDown();
         $form.find('.btn[type=submit]').button('reset')
+
+        $('#pic').find('.btn[type=submit]').addClass('disabled')//reset pic submit to be disabled.
     });
 }
 
