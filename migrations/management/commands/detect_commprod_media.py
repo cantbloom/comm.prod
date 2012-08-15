@@ -13,6 +13,5 @@ class Command(NoArgsCommand):
             commprod.media = media
             if media: #write the media content
                 commprod.media_content = urlize_commprod(commprod.content)
-                print urlize_commprod(commprod.content)
             commprod.save()
         self.stdout.write("Done.\n")
