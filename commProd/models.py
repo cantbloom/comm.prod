@@ -146,7 +146,7 @@ class CommProd(models.Model):
 
     content = models.TextField()
     original_content = models.TextField() #fuck corrections
-    #media_content = models.TextField() #commprod with url tags inserted
+    media_content = models.TextField() #commprod with url tags inserted
     avg_score = models.FloatField(default=0.0)
     score = models.IntegerField(default=0)
     trending_score = models.IntegerField(default=0)
