@@ -18,9 +18,10 @@ function insertCommprod(e, d){
 		requestProds();
 	} 
 
-	//add popover since this commprod wasn';'t arround when it was first added
+	//add popover since this commprod wasn't arround when it was first added
 	$toAdd.find('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()
-
+	//same for favoriting
+	$toAdd.find('.fav').hover(favToggle).click(favVote);
 }
 
 function requestProds(cb){

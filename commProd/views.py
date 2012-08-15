@@ -146,10 +146,9 @@ def vote (request):
 def favorite(request):
     payload = {'success' : False}
     id = request.POST.get("id", None)
-    choice = request.POST.get("choice", None)
+    choice = json.loads(request.POST.get("choice", None)) #convert string to boolean
     user = request.user
-
-    if id and choice:
+    if id and choice != None:
         fav = fav_commprod(id, user)
         if fav:
             fav.fav = choice
