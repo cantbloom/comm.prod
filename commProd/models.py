@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.core import management
 
 from helpers.admin import email_templates, utils
+from helpers.urlize_tags import urlize_commprod, commprod_contains_media
 
 from datetime import date, datetime, timedelta
 from threading import Lock
@@ -244,6 +245,8 @@ class Correction(models.Model):
         self.used = True
 
         self.commprod.content = self.content
+        self.commprod.media_content = urlize_commprod(self.content)
+        self.commprod.media = commprod_contains_media(self.content)
         self.commprod.save()
         if save:
             self.save() ##normally called at the end of update_score
