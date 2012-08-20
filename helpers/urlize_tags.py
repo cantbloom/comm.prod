@@ -1,6 +1,6 @@
 from HTMLParser import HTMLParser
 
-from cron.utils import strip_quotes
+# from cron.utils import strip_quotes
 from common.constants import REGEX
 import re, requests
 
@@ -11,15 +11,15 @@ Finds and replaces urls in the commprod content
 with a standard <a> tag or embeds a youtube video in the page
 """
 def urlize_commprod(commprod):
-    commprod = clean_prod(commprod)
-    commprod = strip_tags(commprod)
+#     commprod = clean_prod(commprod)
+#     commprod = strip_tags(commprod)
     pattern = re.compile(url_regex, re.I)
     match = pattern.search(commprod)
     if match:
         previous_matches = {}
         for m in pattern.finditer(commprod):
-            url_match = strip_quotes(m.group(group))
-            
+            # url_match = strip_quotes(m.group(group))
+            url_match = m.group(group)
             if url_match not in previous_matches:
                 if 'youtube' in url_match:
                     commprod = commprod.replace(url_match, youtube_tag(url_match))
@@ -119,7 +119,6 @@ def strip_tags(html):
 Detect if a commprod content has media (url, img, youtube video)
 """
 def commprod_contains_media(commprod_content):
-    url_regex = REGEX['url_regex']
     pattern = re.compile(url_regex, re.I)
     match = pattern.search(commprod_content)
     return bool(match)

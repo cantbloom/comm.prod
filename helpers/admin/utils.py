@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserManager
 from django.db import IntegrityError
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
@@ -56,6 +56,8 @@ def createUser(username, email, send_mail=False):
         user, created = User.objects.get_or_create(username=username, email=email)
         if created:
             user.is_active = False
+            password = User.objects.make_random_password()
+            user.set_password(password)
             user.save()
             if send_mail:
                 user.profile.activation_key = sha.new(sha.new(str(random.random())).hexdigest()[:5]+username).hexdigest()
