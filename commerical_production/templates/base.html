@@ -169,10 +169,12 @@
     </div> -->
 
         <!--  javascript -->
+        
+        {% if user.is_authenticated %}
+            {% include_script 'user_list' %}
+        {% endif %}
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
-
-        {% include_script 'user_list' %}
         {% include_script 'lib/jquery.min' %}
 
         <!--  helpers -->
