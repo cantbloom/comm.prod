@@ -18,4 +18,7 @@ mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_NAME_DEV < dumpfile
 echo "Cleaning up..."
 rm dumpfile.sql
 
+echo "Removing user access to dev site..."
+python manange.py set_users_inactive
+
 echo "Done."
