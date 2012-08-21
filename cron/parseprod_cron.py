@@ -70,8 +70,6 @@ def fetch_prods(url, login, password, mailbox, search_query):
         result, data = mail.uid('search', None, search_query)
 
         unread_mail = data[0].split() #list of unread uids
-        print len(unread_mail)
-        return
         for msg_id in unread_mail:
             try:
                 result, data = mail.uid('fetch', msg_id, '(RFC822)')
