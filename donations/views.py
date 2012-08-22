@@ -1,6 +1,8 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 
+from donations.models import *
+
 """
 Donation home page. Return all of the donation objects that are found.
 """
@@ -26,6 +28,9 @@ def donate(request):
             amount = form.cleaned_data['amount']
             is_anonymous = form.cleaned_data['is_anonymous']
             user_profile = request.user.profile
+            
+            donation = Donation(reason=reason, amount=amount, is_anonymous=is_anonymous, user_profile=user_profile)
+            donation.save()
     else:
         form = DonateForm()
         template_values = {

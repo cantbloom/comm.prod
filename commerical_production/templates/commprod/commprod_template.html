@@ -6,7 +6,7 @@
 		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
 			<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
 			{% if obj_type == "correction" %}
-			<b> Correction by: {{ commprod.user_profile.user.username }} </b> 
+			<strong> Correction by: {{ commprod.user_profile.user.username }} </strong> 
 			{% elif commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}
 			{{ commprod.user_profile.user.first_name }} {{ commprod.user_profile.user.last_name }}
 			{% else %}
