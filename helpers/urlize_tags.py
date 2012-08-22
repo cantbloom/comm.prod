@@ -66,7 +66,7 @@ If this fails it returns a <a> tag wrapped string.
 def youtube_tag(url_match):
     try:
         vid_url = url_match[url_match.index('v=')+2:]
-        vid_url = v.split('/')[0]
+        vid_url = vid_url.split('/')[0]
     except ValueError:
         return a_tag(url_match) # couldn't extract the value return just a link.
     
