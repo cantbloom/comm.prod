@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     url(r'^logout$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
     url(r'^commprod/', include('commProd.urls')),
+    url(r'^donations/', include('donations.urls')),
     url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain")),
 )
 

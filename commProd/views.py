@@ -1,26 +1,21 @@
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
-from django.core.context_processors import csrf
-from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
-from django.contrib.auth import authenticate, login
 
 from commProd.models import *
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, vote_commprod, vote_correction, fav_commprod, JSONResponse
+from helpers.view_helpers import vote_commprod, vote_correction, fav_commprod, JSONResponse
 from helpers.urlize_tags import commprod_contains_media
 from helpers.commprod_search import commprod_search
 from helpers.admin.utils import createUser
-from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, vs_data_manager, trend_data_manager, correction_query_manager
 from helpers.link_activator import get_active_page
-from helpers.renderers import commprod_renderer
 from helpers.urlize_email_content import urlize_email_content
 from os import environ as env
 
