@@ -21,7 +21,7 @@
 <div class="well span4 offset3">
     <form class="hidden edit" id="pic" data-url="/edit">
         {% csrf_token %}
-        {% include 'alert_box.html' %}
+        {% include 'snippets/alert_box.html' %}
         <input type="hidden" name="form_type" value="pic">
 
         <input type='hidden' name='pic_url' value="{{ user.profile.pic_url }}" id='id_pic_url'>
@@ -31,7 +31,7 @@
         <input class="btn btn-warning disabled" disabled type="submit" value="Save" data-loading-text="Saving..." id="profile-pic-save"/>
     </form>
     <form class="hidden edit" id="password" data-url="/edit">
-        {% include 'alert_box.html' %}
+        {% include 'snippets/alert_box.html' %}
         {% csrf_token %}
         <input type="hidden" name="form_type" value="password">
         {% for input in password %}
@@ -43,7 +43,7 @@
     </form>
     <form class="hidden edit" id="shirt_name" data-url="/edit">
         {% csrf_token %}
-        {% include 'alert_box.html' %}
+        {% include 'snippets/alert_box.html' %}
         <input type="hidden" name="form_type" value="shirt_name">
         {% for input in shirtname %}
         <p>
@@ -61,7 +61,7 @@
     </form> 
 
     <form class="hidden edit" id="email" data-url="/edit" >
-        {% include 'alert_box.html' %}
+        {% include 'snippets/alert_box.html' %}
         {% csrf_token %}
         <input type="hidden" name="form_type" value="email">
         {% for input in email %}
