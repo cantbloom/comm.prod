@@ -123,8 +123,8 @@
                             </li>
                             
                         </ul>
+                        {% endif %}
                     </div><!--/.nav-collapse -->
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -172,6 +172,10 @@
         
         {% if user.is_authenticated %}
             {% include_script 'user_list' %}
+        {% else %}
+            <script type="text/javascript">
+                var user_list={};
+            </script>
         {% endif %}
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}

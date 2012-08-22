@@ -50,10 +50,10 @@ Renders a donation as html block.
 """
 def donation_renderer(donations, page):
     template_values =  {
-        'commprods' : paginator(page, donations) ## use commprod timeline since it has pagination and builds out the html block
+        'donations' : paginator(page, donations) ## use commprod timeline since it has pagination and builds out the html block
     }
 
-    return render_to_string('commprod/timeline.html',template_values)
+    return render_to_string('donations/timeline.html',template_values)
 
 """ 
 Input is a dictionary of UserProfile : score.

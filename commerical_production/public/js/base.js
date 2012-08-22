@@ -206,6 +206,7 @@ $(function(){
 
     $(document).on('voteSent', postVote);
 
+
     $('#search_bar').typeahead({
         'source' : user_list
     });

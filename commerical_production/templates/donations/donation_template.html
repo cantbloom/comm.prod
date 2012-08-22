@@ -1,23 +1,26 @@
-
 <div id="{{ donation.id }}" class='row commprod-container'>
     <div class="author-container">
+        {% if donation.is_anonymous %}
+            <a class="author-name" href='/'>
+            <img class="author-pic" src="/public/img/placeholder.jpg"/>
+            <strong> Donation by: </strong>
+            Anonymous
+        </a>
+        {% else %}
         <a class="author-name" href='/users/{{ donation.user_profile.user.username }}'>
             <img class="author-pic" src="{{ donation.user_profile.pic_url }}"/>
-            <strong> Donated by: </strong>
-            {% if donation.is_anonymous %}
-                Anonymous
-            {% elif donation.user_profile.user.is_active and not donation.user_profile.user.first_name == ''%}
+            <strong> Donation by: </strong>
+            {% if donation.user_profile.user.is_active and not donation.user_profile.user.first_name == ''%}
                 {{ donation.user_profile.user.first_name }} {{ donation.user_profile.user.last_name }}
             {% else %}
                 {{ donation.user_profile.user.username }}
             {% endif %}
         </a>
+        {% endif %}
         <div class="vote-container pull-right">
-            <div class="input-prepend input-append">
-              <span class="add-on">$</span>
-              <span> {{ donation.amount }}</span>
-              <span class="add-on">.00</span>
-            </div>
+            <span class='score donation-amount'> 
+                ${{ donation.amount }}.00
+            </span>
         </div>
     </div>
     <div class="commprod-content">
