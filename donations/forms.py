@@ -8,14 +8,12 @@ class DonateForm(forms.Form):
     RUSH = 'Rush/anti-rush week'
     DTYD = 'DTYD'
     GEN_FUN = 'General floor donation'
-    PARTY = 'Any party throughout the year'
     DONATION_CHOICES = (
-        (DTYD, DTYD),
-        (GEN_FUN, GEN_FUN),
         (RUSH, RUSH),
-        (PARTY, PARTY),
+        (GEN_FUN, GEN_FUN),
+        (DTYD, DTYD),
     )
-    reason = models.CharField(max_length=2, choices=DONATION_CHOICES, default=RUSH)
-    amount = forms.FloatField(widget=forms.TextInput(attrs={'placeholder' : 'Amount', 'class': 'fancy-input'}), label="")
-    is_anonymous = forms.BooleanField(required=False)
+    reason = forms.ChoiceField(choices=DONATION_CHOICES)
+    amount = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'span1'}), label="")
+    is_anonymous = forms.BooleanField(required=False, label="Anonymous Donation?")
 

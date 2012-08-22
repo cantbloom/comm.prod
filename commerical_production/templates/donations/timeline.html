@@ -1,0 +1,10 @@
+<div class="commprod-timeline-container well">
+    
+    {% for donation in donations %}
+        {% include "donation/donation_template.html" with donation=donation %}
+    {% endfor %}
+
+</div>
+
+{% include 'snippets/pagination.html' with objs=donations %}
+

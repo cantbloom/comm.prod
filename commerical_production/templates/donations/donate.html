@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block styles %}
+{% include_style 'donations/donate' %}
+{% endblock %}
+
+{% block content %}
+    {% if form.errors %}
+        {% include "snippets/form_error.html" %}
+    {% endif %}
+    <div class='row'>
+        <form id="donate-form" class="form form-inline span4 offset4" method='post' action='/donations/donate/' >
+            {% csrf_token %}
+            <p class="controls">
+                <label class="control-label" for="id_reason">Reason:</label>
+                {{ form.reason }}
+            </p>
+            <p class="input-prepend controls input-append">
+                <label class="control-label" for="id_message">Amount:</label>
+                <span class="add-on">$</span>{{ form.amount }}<span class="add-on">.00</span>
+            </p>
+            <p class="controls">
+                <label class="control-label" for="id_is_anonymous">Anonymous Donation?</label>
+                {{ form.is_anonymous }}
+            </p>
+            <input class="btn btn-primary" type="submit" value="Donate!" id="submit"/>
+        </form>
+    </div>
+    <div class="row span2 offset5"> 
+        <a class="btn btn-primary btn-large" href="/donations" >
+            Past Donations
+        </a>
+    </div> 
+
+{% endblock%}

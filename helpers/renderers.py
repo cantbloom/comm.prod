@@ -46,6 +46,16 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
         return commprod_list
 
 """ 
+Renders a donation as html block.
+"""
+def donation_renderer(donations, page):
+    template_values =  {
+        'commprods' : paginator(page, donations) ## use commprod timeline since it has pagination and builds out the html block
+    }
+
+    return render_to_string('commprod/timeline.html',template_values)
+
+""" 
 Input is a dictionary of UserProfile : score.
 Renders a user information block as a list of
 html items.
@@ -85,6 +95,9 @@ def correction_renderer(user, corrections):
 
     return html_list
 
+"""
+Helper function to assign upvoted/downvoted classes to commprod objects
+"""
 def vote_select(obj, upvoted, downvoted):
     upvote_selected = ''
     downvote_selected = ''
@@ -94,6 +107,9 @@ def vote_select(obj, upvoted, downvoted):
         downvote_selected = 'selected'
     return upvote_selected, downvote_selected
 
+"""
+Helper function to find if object has been favorited
+"""
 def fav_select(obj, favorites):
     fav = False
     if obj.id in favorites:

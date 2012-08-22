@@ -65,9 +65,6 @@ def register(request, key):
                     # Redirect to a success page.
                     return redirect('/')
 
-        hero_title = "Looks an error. Sorry bro."
-        return renderErrorMessage(request, hero_title)
-
     else:
         reg_form = RegForm()
 

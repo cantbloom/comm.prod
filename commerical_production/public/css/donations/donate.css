@@ -1,0 +1,8 @@
+.form {
+    padding:25px !important;
+}
+
+.controls {
+    margin:7px;
+    margin-bottom: 7px !important; /*prepend/append */
+}
