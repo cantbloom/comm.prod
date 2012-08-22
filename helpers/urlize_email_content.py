@@ -7,6 +7,7 @@ permalink of each commprod found.
 
 def urlize_email_content(email_content, commprods):
     for commprod in commprods:
-        url  = '<a href=/commprod/%s/%s>%s</a>' % (commprod.user_profile.user.username, commprod.id, commprod.original_content)
-        email_content = email_content.replace(commprod.original_content, url)
+        url  = '<a href=/commprod/%s/%s>%s</a>' % (commprod.user_profile.user.username, commprod.id, commprod.content)
+        content = commprod.content.strip()
+        email_content = email_content.replace(content, url)
     return email_content
