@@ -37,6 +37,7 @@ def donate(request):
     template_values = {
         'page_title' : "Make a Donation",
         'nav_donate' : "active",
+        'stripe_public_key' : env['STRIPE_PUBLIC_KEY']
     }
 
     if request.method == 'POST':
@@ -46,7 +47,8 @@ def donate(request):
             amount = form.cleaned_data['amount']
             is_anonymous = form.cleaned_data['is_anonymous']
             user_profile = request.user.profile
-            save_card = form.cleaned_data['save_card']
+
+            description = 'Donation of $%s by %s on %s for %s' % (amount, user_profile.user.username, str(datetime.now()), reason)
 
             # set your secret key: remember to change this to your live secret key in production
             # see your keys here https://manage.stripe.com/account
@@ -54,41 +56,30 @@ def donate(request):
 
             # get the credit card details submitted by the form
             token = request.POST['stripeToken']
-            
-            if save_card:
-                customer_id = user_profile.stripe_customer_id
-                
-                description = 'Donation of $%s by %s on %s for %s' % (amount, user_profile.user.username, str(datetime.now()), reason)
 
-                if str(user_profile.stripe_customer_id) == 'no_id': #user did not save card in the past
+            customer_id = user_profile.stripe_customer_id
 
-                    # create a Customer
-                    customer = stripe.Customer.create(
-                        card=token,
-                        description=description
-                    )
+            if customer_id == "no_id": #user did not save card in the past 
 
-                    customer_id = customer.id
-
-                    # save the customer ID in your database so you can use it later
-                    user_profile.stripe_customer_id = customer_id
-                    user_profile.save()
-
-                # charge the Customer instead of the card
-                stripe.Charge.create(
-                    amount=amount*100, # in cents
-                    currency="usd",
-                    customer=customer_id
-                )
-            
-            else:
-                # create the charge on Stripe's servers - this will charge the user's card
-                charge = stripe.Charge.create(
-                    amount=amount*100, # amount in cents, again
-                    currency="usd",
+                # create a Customer
+                customer = stripe.Customer.create(
                     card=token,
                     description=description
                 )
+
+                customer_id = customer.id
+
+                # save the customer ID in your database so you can use it later
+                user_profile.stripe_customer_id = customer_id
+                user_profile.save()
+
+            # charge the Customer
+            stripe.Charge.create(
+                amount=amount*100, # in cents
+                currency="usd",
+                customer=customer_id
+            )
+            
             #charge has gone through successfully
             donation = Donation(reason=reason, amount=amount, is_anonymous=is_anonymous, user_profile=user_profile)
             donation.save()

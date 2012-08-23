@@ -12,7 +12,7 @@
     <!-- to display errors returned by createToken -->
     <div class='row'>
         <span class="payment-errors alert alert-error span4 offset4 hidden"></span>
-        <form id="payment-form" class="form form-inline span4 offset4" method='POST' action='/donations/donate/' >
+        <form id="payment-form" class="form form-inline span4 offset4" method='POST' action='/donations/donate/' data-use-stripe='false' >
             {% csrf_token %}
             <p class="controls">
                 <label class="control-label" for="id_reason">Reason:</label>
@@ -27,29 +27,18 @@
                 {{ form.is_anonymous }}
             </p>
             <hr/>
-            <div class="stripe-form hidden">
-                <p class="controls">
-                    <input type="text" size="20" autocomplete="off" class="card-number" placeholder="Card Number"/>
-                </p>
-                <p class="controls">
-                    <input type="text" size="4" autocomplete="off" class="card-cvc" placeholder="CVC"/>
-                </p>
-                <p class="controls input-prepend controls input-append">
-                    <label class="control-label">Expiration </label>
-                    <input type="text" size="2" class="card-expiry-month" placeholder="MM"/><span class="add-on">/</span><input type="text" size="4" class="card-expiry-year input-small" placeholder="YYYY"/>
-                </p>
-                <p class="controls">
-                    <label class="control-label" for="id_save_card">Save Card?</label>
-                    {{ form.save_card }}
-                </p>
-            </div>
-            <div class="saved-info hidden">
-                <h3> You opted to saved card info last time.</h3>
-                <p> If you would like to remove this you can go to <a class="btn" href="/edit#card_info"> Edit Profile </a> </p>
-                <p> Or, if you want, you can <a class="btn"> Add a new card </a></p>
-            </div>
+            <p class="controls">
+                <input type="text" size="20" autocomplete="off" class="card-number" placeholder="Card Number"/>
+            </p>
+            <p class="controls">
+                <input type="text" size="4" autocomplete="off" class="card-cvc" placeholder="CVC"/>
+            </p>
+            <p class="controls input-prepend controls input-append">
+                <label class="control-label">Expiration </label>
+                <input type="text" size="2" class="card-expiry-month" placeholder="MM"/><span class="add-on">/</span><input type="text" size="4" class="card-expiry-year input-small" placeholder="YYYY"/>
+            </p>
             <p>
-                <input class="btn btn-primary submit-button" type="submit" value="Donate!"/>
+                <input class="btn btn-primary submit-button" type="submit" id="submit_button" value="Donate!"/>
             </p>
         </form>
     </div>
@@ -63,7 +52,8 @@
 
 {% block scripts %}
     <script type="text/javascript">
-        var saved_card_info = "{{ user.profile.stripe_customer_id }}" == "no_id";
+        var stripe_public_key = "{{ stripe_public_key }}";
+        var card_info = "{{ user.profile.stripe_customer_id }}" != "no_id";
     </script>
     {% include_script 'donations/donate' %}
 {% endblock %}
