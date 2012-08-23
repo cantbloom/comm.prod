@@ -30,6 +30,7 @@ class UserProfile(models.Model):
     score = models.IntegerField(default=0)
     data_point_count = models.IntegerField(default=0)
     use_tour = models.BooleanField(default=True)
+    stripe_customer_id = models.CharField(max_length=1000, default="no_id")
 
     def update_data_point(self, save=True):
         if not data_point_count % 1:

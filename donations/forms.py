@@ -10,10 +10,11 @@ class DonateForm(forms.Form):
     GEN_FUN = 'General floor donation'
     DONATION_CHOICES = (
         (RUSH, RUSH),
-        (GEN_FUN, GEN_FUN),
         (DTYD, DTYD),
+        (GEN_FUN, GEN_FUN),
     )
     reason = forms.ChoiceField(choices=DONATION_CHOICES)
-    amount = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'span1'}), label="")
+    amount = forms.IntegerField(widget=forms.TextInput(attrs={'class' : 'span1', "autocomplete" : "off"}), label="")
     is_anonymous = forms.BooleanField(required=False, label="Anonymous Donation?")
+    save_card = forms.BooleanField(required=False, label="Save Card?")
 

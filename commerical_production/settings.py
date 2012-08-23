@@ -14,6 +14,8 @@ if DEBUG:
     env['MYSQL_NAME'] = env['MYSQL_NAME_DEV']
     env['DATABASE_URL'] = env['DATABASE_URL_DEV']
     env['AWS_BUCK'] = env['AWS_BUCK_DEV']
+    env['STRIPE_SECRET_KEY'] = env['STRIPE_TEST_SECRET_KEY']
+    env['STRIPE_PUBLIC_KEY'] = env['STRIPE_TEST_PUBLIC_KEY']
 
 ADMINS = (
     ('Joshua Blum', 'joshblum@mit.edu'),

@@ -187,6 +187,7 @@
         {% include_script 'lib/mobile_detection' %}
         {% include_script 'lib/es5-shim.min' %}
         {% include_script 'basket' %}
+        
         <!--  graphing -->
         {% include_script 'lib/highcharts' %}
 
@@ -207,12 +208,16 @@
         {% include_script 'base' %}
         {% include_script 'analytics' %}
 
+        <!-- stripe -->
+        <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+
         {% block scripts %}
         {% endblock %}
         <script type="text/javascript">
-         var use_tour = true;
-            {% if not user.profile.use_tour %}
-                use_tour = false;
+            {% if user.profile.use_tour %}
+                var use_tour = true;
+            {% else %}
+                var use_tour = false;
             {% endif %}
         </script>
     </body>
