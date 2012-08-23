@@ -9,6 +9,7 @@ from donations.models import *
 
 import stripe
 
+from datetime import datetime
 from os import environ as env
 
 """
@@ -56,8 +57,10 @@ def donate(request):
             
             if save_card:
                 customer_id = user_profile.stripe_customer_id
+                
+                description = 'Donation of $%s by %s on %s for %s' % (amount, user_profile.user.username, str(datetime.now()), reason)
 
-                description = 'Donation of $%s by %s on %s for %s' % (amount, user_profile.user.username, str(date.now()), reason): #user did not save card in the past
+                if str(user_profile.stripe_customer_id) == 'no_id': #user did not save card in the past
 
                     # create a Customer
                     customer = stripe.Customer.create(
@@ -86,8 +89,7 @@ def donate(request):
                     card=token,
                     description=description
                 )
-                
-            ## charge has gone through
+            #charge has gone through successfully
             donation = Donation(reason=reason, amount=amount, is_anonymous=is_anonymous, user_profile=user_profile)
             donation.save()
 

@@ -18,7 +18,21 @@ function stripeResponseHandler(status, response) {
     }
 }
 
+function addTips() {
+    makeTip('id_save_card', "Your card information never touches our servers and is handled entirely by the Stripe API.", 'right', 'hover');
+}
+
+function displayPaymentOptions() {
+    if (saved_card_info) {
+        $('.stripe-form').removeClass('hidden');
+    } else {
+        $('.saved-info').removeClass('hidden');
+    }
+}
+
 $(document).ready(function() {
+    addTips();
+    displayPaymentOptions();
     $("#payment-form").submit(function(event) {
         // disable the submit button to prevent repeated clicks
         $('.submit-button').attr("disabled", "disabled");

@@ -191,6 +191,18 @@ function favVote(e) {
 
 }
 
+//defaults to placing right and focus trigger if 
+//no values given.
+function makeTip(div, title, placement, trigger) {
+    placement = placement || 'right';
+    trigger = trigger || 'focus'
+    $('#' + div).tooltip({
+        "placement" : placement,
+        "title" : title,
+        "trigger" : trigger,
+    });
+}
+
 $(function(){
     $(document).on('click', '.vote-container .vote', voteSelection)
     $('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()

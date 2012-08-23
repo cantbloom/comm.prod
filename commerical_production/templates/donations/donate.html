@@ -25,21 +25,29 @@
             <p class="controls">
                 <label class="control-label" for="id_is_anonymous">Anonymous Donation?</label>
                 {{ form.is_anonymous }}
-            </p><hr/>
-            <p class="controls">
-                <input type="text" size="20" autocomplete="off" class="card-number" placeholder="Card Number"/>
             </p>
-            <p class="controls">
-                <input type="text" size="4" autocomplete="off" class="card-cvc" placeholder="CVC"/>
-            </p>
-            <p class="controls input-prepend controls input-append">
-                <label class="control-label">Expiration </label>
-                <input type="text" size="2" class="card-expiry-month" placeholder="MM"/><span class="add-on">/</span><input type="text" size="4" class="card-expiry-year input-small" placeholder="YYYY"/>
-            </p>
-            <p class="controls">
-                <label class="control-label" for="id_save_card">Save Card?</label>
-                {{ form.save_card }}
-            </p>
+            <hr/>
+            <div class="stripe-form hidden">
+                <p class="controls">
+                    <input type="text" size="20" autocomplete="off" class="card-number" placeholder="Card Number"/>
+                </p>
+                <p class="controls">
+                    <input type="text" size="4" autocomplete="off" class="card-cvc" placeholder="CVC"/>
+                </p>
+                <p class="controls input-prepend controls input-append">
+                    <label class="control-label">Expiration </label>
+                    <input type="text" size="2" class="card-expiry-month" placeholder="MM"/><span class="add-on">/</span><input type="text" size="4" class="card-expiry-year input-small" placeholder="YYYY"/>
+                </p>
+                <p class="controls">
+                    <label class="control-label" for="id_save_card">Save Card?</label>
+                    {{ form.save_card }}
+                </p>
+            </div>
+            <div class="saved-info hidden">
+                <h3> You opted to saved card info last time.</h3>
+                <p> If you would like to remove this you can go to <a class="btn" href="/edit#card_info"> Edit Profile </a> </p>
+                <p> Or, if you want, you can <a class="btn"> Add a new card </a></p>
+            </div>
             <p>
                 <input class="btn btn-primary submit-button" type="submit" value="Donate!"/>
             </p>
@@ -54,5 +62,8 @@
 {% endblock%}
 
 {% block scripts %}
+    <script type="text/javascript">
+        var saved_card_info = "{{ user.profile.stripe_customer_id }}" == "no_id";
+    </script>
     {% include_script 'donations/donate' %}
 {% endblock %}

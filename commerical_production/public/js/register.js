@@ -15,18 +15,6 @@ function addTips(){
     makeTip('upload',  "Be orginal. Upload your own profile picture!", null, 'hover');
 }
 
-//defaults to placing right and focus trigger if 
-//no values given.
-function makeTip(div, title, placement, trigger) {
-    placement = placement || 'right';
-    trigger = trigger || 'focus'
-    $('#' + div).tooltip({
-        "placement" : placement,
-        "title" : title,
-        "trigger" : trigger,
-    });
-}
-
 $(document).ready(function() {
     $('#upload').click(getImg);
     $('#add-email').click(addEmail)
