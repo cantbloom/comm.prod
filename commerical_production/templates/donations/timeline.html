@@ -4,7 +4,7 @@
         {% include "donations/donation_template.html" with donation=donation %}
     {% endfor %}
 
-    {% if donations.count == '' %}
+    {% if donations|length == 0 %}
         {% include "snippets/empty_search.html" %}
     {% endif %}
 

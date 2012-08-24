@@ -9,7 +9,7 @@
         {% endif %}
 
     {% endfor %}
-    {% if commprods.count == '' %}
+    {% if commprods|length == 0 %}
         {% include "snippets/empty_search.html" %}
     {% endif %}
 </div>
