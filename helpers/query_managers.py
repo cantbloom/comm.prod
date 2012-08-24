@@ -33,7 +33,7 @@ def commprod_query_manager(get_dict, user, return_type="html"):
                 'direction' : 'lh',
         },
         'media' : {
-            'orderBy' : 'trending_score',
+            'orderBy' : 'date',
             'media' : True,
             'direction' : 'lh',
         },
