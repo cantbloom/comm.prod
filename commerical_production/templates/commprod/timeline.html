@@ -9,6 +9,9 @@
         {% endif %}
 
     {% endfor %}
+    {% if commprods.count == '' %}
+        {% include "snippets/empty_search.html" with obj_name='commprods' %}
+    {% endif %}
 </div>
 
 {% include 'snippets/pagination.html' with objs=commprods link_mod=link_mod %}

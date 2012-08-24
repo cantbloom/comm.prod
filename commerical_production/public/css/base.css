@@ -289,3 +289,7 @@ textarea {
 .donation-amount {
 	margin-top: 15px !important;
 }
+
+.empty-search {
+	text-align: center;
+}
