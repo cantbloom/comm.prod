@@ -4,6 +4,10 @@
         {% include "donations/donation_template.html" with donation=donation %}
     {% endfor %}
 
+    {% if donations.count == '' %}
+        {% include "snippets/empty_search.html" %}
+    {% endif %}
+
 </div>
 
 {% include 'snippets/pagination.html' with objs=donations %}
