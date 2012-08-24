@@ -80,7 +80,8 @@ def donate(request):
             stripe.Charge.create(
                 amount=amount*100, # in cents
                 currency="usd",
-                customer=customer_id
+                customer=customer_id,
+                description=description
             )
             
             #charge has gone through successfully
