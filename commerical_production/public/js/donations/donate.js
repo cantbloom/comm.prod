@@ -31,7 +31,7 @@ function submitPaymentForm(e) {
 }
 
 function addTips() {
-    makeTip('submit_button', "Your card information never touches our servers and is handled entirely by the Stripe API. Fear not.", 'right', 'hover');
+    makeTip('submit_button', "Your card information never touches our servers and is handled entirely by the Stripe API. Fear not :)", 'right', 'hover');
 }
 
 $(document).ready(function() {

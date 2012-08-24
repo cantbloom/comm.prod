@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from django.db.models import Sum
 
 from helpers.renderers import donation_renderer
 
@@ -19,11 +20,13 @@ Donation home page. Return all of the donation objects that are found.
 def home(request):
     donations = Donation.objects.order_by('-date')
     page = request.GET.get('page', 1)
-    donations = donation_renderer(donations, page)
+    rendered_donations = donation_renderer(donations, page)
     template_values = {
         'page_title' : "Past Donations",
         'nav_donate' : "active",
-        'donation_timeline' : donations,
+        'donation_timeline' : rendered_donations,
+        'tot_donations' : donations.count(),
+        'sum_donations' : donations.aggregate(Sum('amount'))['amount__sum']
     }
 
     return render_to_response('donations/home.html', template_values, context_instance=RequestContext(request))
