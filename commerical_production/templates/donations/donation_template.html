@@ -1,3 +1,5 @@
+{% load humanize %}
+
 <div id="{{ donation.id }}" class='row commprod-container'>
     <div class="author-container">
         {% if donation.is_anonymous %}
@@ -19,7 +21,7 @@
         {% endif %}
         <div class="vote-container pull-right">
             <span class='score donation-amount'> 
-                ${{ donation.amount }}.00
+                ${{ donation.amount|intcomma }}.00
             </span>
         </div>
     </div>

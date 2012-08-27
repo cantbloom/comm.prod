@@ -1,4 +1,5 @@
 {% load trim %}
+{% load humanize %}
 {# assignment for commprod timeline #}
 
 <div id="{{ obj_type }}_object_{{ commprod.id }}" class='row commprod-container {{ obj_type }}' data-id="{{ commprod.id }}" data-type='{{ obj_type }}'>
@@ -21,7 +22,7 @@
 				<div class="vote up-vote {{ upvote_selected }}"></div>
 				<div class="vote down-vote {{ downvote_selected }}"></div>
 			</div>
-			<span class='score'> {{ commprod.score }} </span>
+			<span class='score'> {{ commprod.score|intcomma }} </span>
 		</div>
 	</div>
 	<div id="{{ obj_type }}_object_{{ commprod.id }}_content" class="commprod-content">
