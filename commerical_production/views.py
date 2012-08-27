@@ -332,7 +332,7 @@ def reset_password(request):
                 errors['username'].append("Empty username entered.")
 
             #make sure user exists
-        elif not UserProfile.objects.filter(user__username=username, send_mail=True).exists():
+        elif not UserProfile.objects.filter(user__username=username, send_mail=True, user__is_active=True).exists():
                 errors['username'].append(username + " is not registered with an account.")
 
             #create password reset object

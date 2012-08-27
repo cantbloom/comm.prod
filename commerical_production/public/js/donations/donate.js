@@ -4,7 +4,7 @@ Stripe.setPublishableKey(stripe_public_key);
 function stripeResponseHandler(status, response) {
     if (response.error) {
         // show the errors on the form
-        $(".payment-errors").text(response.error.message);
+        $(".payment-errors").text(response.error.message).removeClass('hidden');
         $(".submit-button").removeAttr("disabled");
     } else {
         var form$ = $("#payment-form");
@@ -20,6 +20,7 @@ function stripeResponseHandler(status, response) {
 function submitPaymentForm(e) {
     // disable the submit button to prevent repeated clicks
     $('.submit-button').attr("disabled", "disabled");
+    $(".payment-errors").addClass('hidden')
     // createToken returns immediately - the supplied callback submits the form if there are no errors
     Stripe.createToken({
         number: $('.card-number').val(),
