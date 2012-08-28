@@ -26,13 +26,8 @@
 		</div>
 	</div>
 	<div id="{{ obj_type }}_object_{{ commprod.id }}_content" class="commprod-content">
-		a btb <b>"
-		{% if commprod.media %}
-			{{ commprod.media_content|safe }}
-		{% else %}
-			{{ commprod.content|safe }}
-		{% endif %}
-		"</b> comm.prod
+		a btb <b>"{% if commprod.media %}{{ commprod.media_content|safe }}
+		{% else %}{{ commprod.content|safe }}{% endif %}"</b> comm.prod {# remove the annoying spaces surrounding the commprods by scrunching the text here #}
 	</div>
 	<div class="commprod-footer">
 		{% if obj_type == 'correction' %}
