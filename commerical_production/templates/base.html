@@ -81,7 +81,7 @@
                                 <a id="user_prof" href=/users/{{user.username}}>Profile</a>
                             </li>
                             <li class={{ nav_donate }}>
-                                 <a id="user_prof" href="/donations/donate">Donate</a>
+                                 <a href="/donations/donate">Donate</a>
                             </li>
                             <li id="account_dropdown" class="dropdown {{ nav_account }}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -121,9 +121,15 @@
                                     <input type="search" id="search_bar" class="search-query" placeholder="Find people..." autocomplete="off"> 
                                 </form>
                             </li>
-                            
-                        </ul>
+                        {% else %}
+                            <li class={{ nav_donate }}>
+                                 <a href="/donations/donate">Donate</a>
+                            </li>
+                            <li class={{ nav_login }}>
+                                 <a href={% url django.contrib.auth.views.login %}>Login</a>
+                            </li>
                         {% endif %}
+                        </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>

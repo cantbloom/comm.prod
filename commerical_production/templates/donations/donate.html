@@ -15,18 +15,11 @@
         <span class="payment-errors alert alert-error span4 offset4 hidden"></span>
         <form id="payment-form" class="form form-inline span4 offset4" method='POST' action='/donations/donate/' data-use-stripe='false' >
             {% csrf_token %}
-            <p class="controls">
-                <label class="control-label" for="id_reason">Reason:</label>
-                {{ form.reason }}
-            </p>
-            <p class="input-prepend controls input-append">
-                <label class="control-label" for="id_message">Amount:</label>
-                <span class="add-on">$</span>{{ form.amount }}<span class="add-on">.00</span>
-            </p>
-            <p class="controls">
-                <label class="control-label" for="id_is_anonymous">Anonymous Donation?</label>
-                {{ form.is_anonymous }}
-            </p>
+            {% if user.is_authenticated %}
+                {% include 'donations/donate_form.html' with form=form %}
+            {% else %}
+                {% include 'donations/anon_donate_form.html' with form=form %}
+            {% endif %}
             <hr/>
             <p class="controls">
                 <input type="text" size="20" autocomplete="off" class="card-number" placeholder="Card Number"/>
@@ -44,9 +37,11 @@
         </form>
     </div>
     <div class="row span2 offset5"> 
-        <a class="btn btn-primary btn-large" href="/donations" >
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary btn-large" href="/donations">
             Past Donations
         </a>
+        {% endif %}
     </div> 
 
 {% endblock%}

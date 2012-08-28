@@ -19,8 +19,8 @@ function stripeResponseHandler(status, response) {
 
 function submitPaymentForm(e) {
     // disable the submit button to prevent repeated clicks
-    $('.submit-button').attr("disabled", "disabled");
-    $(".payment-errors").addClass('hidden')
+    $('.submit-button').attr("disabled", "disabled").tooltip('hide');
+    $('.payment-errors').addClass('hidden')
     // createToken returns immediately - the supplied callback submits the form if there are no errors
     Stripe.createToken({
         number: $('.card-number').val(),

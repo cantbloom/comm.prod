@@ -11,3 +11,13 @@ class Donation(models.Model):
 
     def __unicode__(self):
         return 'Donation of $%s by %s on %s for %s' % (self.amount, self.user_profile.user.username, str(self.date), self.reason)
+
+class AnonDonation(models.Model):
+
+    is_anonymous = models.BooleanField(default=True)
+    date = models.DateTimeField(auto_now=True)
+    reason = models.TextField()
+    amount = models.IntegerField(default=0.0)
+
+    def __unicode__(self):
+        return 'AnonDonation of $%s on %s for %s' % (self.amount, str(self.date), self.reason)
