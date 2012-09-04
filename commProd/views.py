@@ -228,6 +228,7 @@ def processProd(request):
                 email_content.save()
 
             media = commprod_contains_media(commprod)
+            media_content = ""
             if media:
                 media_content = urlize_text(commprod)
             commprod, created = CommProd.objects.get_or_create(email_content=email_content, content=commprod, original_content=commprod, user_profile=user.profile, media=media, media_content=media_content, date=date)
