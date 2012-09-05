@@ -53,7 +53,8 @@ def commprod_query_manager(get_dict, user, return_type="html"):
         search_params['rec'] = user.username
 
     if type == 'favorites':
-        commprods = get_commprod_favs(user.username)
+        #user who's profile is being viewed
+        commprods = get_commprod_favs(get_dict['username']) 
     
     else:
         commprods = commprod_search(**search_params)
