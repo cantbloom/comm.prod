@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load filters %}
+
+
+{% block styles %}
+{% include_style 'donations/donate' %}
+{% endblock %}
+
+{% block content %}
+    {% if form.errors %}
+        {% include "snippets/form_error.html" %}
+    {% endif %}
+    <!-- to display errors returned by createToken -->
+    <div class='row'>
+        <span class="payment-errors alert alert-error span4 offset4 hidden"></span>
+        <form id="payment-form" class="form form-inline span4 offset4" method='POST' action='/donations/donate/' data-use-stripe='false' >
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+                {% include 'donations/donate_form.html' with form=form %}
+            {% else %}
+                {% include 'donations/anon_donate_form.html' with form=form %}
+            {% endif %}
+            <hr/>
+            <p class="controls">
+                <input type="text" size="20" autocomplete="off" class="card-number" placeholder="Card Number"/>
+            </p>
+            <p class="controls">
+                <input type="text" size="4" autocomplete="off" class="card-cvc" placeholder="CVC"/>
+            </p>
+            <p class="controls input-prepend controls input-append">
+                <label class="control-label">Expiration </label>
+                <input type="text" size="2" class="card-expiry-month" placeholder="MM"/><span class="add-on">/</span><input type="text" size="4" class="card-expiry-year input-small" placeholder="YYYY"/>
+            </p>
+            <p>
+                <input class="btn btn-primary submit-button" type="submit" id="submit_button" value="Donate!"/>
+            </p>
+        </form>
+    </div>
+    <div class="row span2 offset5"> 
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary btn-large" href="/donations">
+            Past Donations
+        </a>
+        {% endif %}
+    </div> 
+
+{% endblock%}
+
+{% block scripts %}
+    <script type="text/javascript">
+        var stripe_public_key = "{{ stripe_public_key }}";
+        var card_info = "{{ user.profile.stripe_customer_id }}" != "no_id";
+    </script>
+    {% include_script 'donations/donate' %}
+{% endblock %}

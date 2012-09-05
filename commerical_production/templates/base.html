@@ -60,11 +60,8 @@
             <div class="navbar-inner nav_bg">
                 <div class="container-fluid">
                     <a class="brand" href="/">
-                        a
-                        <img class="logo" src="/public/img/btb-logo.png"/>
-                        comm.prod
+                        a <img class="logo" src="/public/img/btb-logo.png"/> comm.prod
                     </a>
-                    {% if user.is_authenticated %}
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -72,27 +69,33 @@
                     </a>
                     <div class="nav-collapse">
                         <ul class="nav topbar">
+                            <li class={{ nav_blog }}>
+                                <a href="http://blog.burtonthird.com">Blog</a>
+                            </li>
+                        {% if user.is_authenticated %}
                             <li class={{ nav_commprod }}>
                                 <a href="/">comm.prod</a>
                             </li>
 
                             <li class={{ nav_profile }}>
-                                 <a id="user_prof" href=/users/{{user.username}}>Profile </a>
+                                <a id="user_prof" href=/users/{{user.username}}>Profile</a>
                             </li>
+<!--                             <li class={{ nav_donate }}>
+                                 <a href="/donations/donate">Donate</a>
+                            </li> -->
                             <li id="account_dropdown" class="dropdown {{ nav_account }}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            Account
-                                            <b class="caret"></b>
+                                    Account<b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                         <a href="/users/{{user.username}}">
+                                        <a href="/users/{{user.username}}">
                                             <i class="icon-user"></i>
                                             My Profile
                                         </a>
                                     </li>
                                     <li>
-                                         <a href="/edit">
+                                        <a href="/edit">
                                             <i class="icon-wrench"></i>
                                             Edit Profile
                                         </a>
@@ -118,11 +121,13 @@
                                     <input type="search" id="search_bar" class="search-query" placeholder="Find people..." autocomplete="off"> 
                                 </form>
                             </li>
-                            <li class="divider-vertical"></li>
-                            
+                        {% else %}
+<!--                             <li class={{ nav_donate }}>
+                                 <a href="/donations/donate">Donate</a>
+                            </li> -->
+                        {% endif %}
                         </ul>
                     </div><!--/.nav-collapse -->
-                    {% endif %}
                 </div>
             </div>
         </div>
@@ -167,10 +172,16 @@
     </div> -->
 
         <!--  javascript -->
+        
+        {% if user.is_authenticated %}
+            {% include_script 'user_list' %}
+        {% else %}
+            <script type="text/javascript">
+                var user_list={};
+            </script>
+        {% endif %}
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
-
-        {% include_script 'user_list' %}
         {% include_script 'lib/jquery.min' %}
 
         <!--  helpers -->
@@ -179,6 +190,7 @@
         {% include_script 'lib/mobile_detection' %}
         {% include_script 'lib/es5-shim.min' %}
         {% include_script 'basket' %}
+        
         <!--  graphing -->
         {% include_script 'lib/highcharts' %}
 
@@ -199,12 +211,16 @@
         {% include_script 'base' %}
         {% include_script 'analytics' %}
 
+        <!-- stripe -->
+        <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+
         {% block scripts %}
         {% endblock %}
         <script type="text/javascript">
-         var use_tour = true;
-            {% if not user.profile.use_tour %}
-                use_tour = false;
+            {% if user.profile.use_tour %}
+                var use_tour = true;
+            {% else %}
+                var use_tour = false;
             {% endif %}
         </script>
     </body>

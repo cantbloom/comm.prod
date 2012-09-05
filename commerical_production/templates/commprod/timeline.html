@@ -9,24 +9,10 @@
         {% endif %}
 
     {% endfor %}
+    {% if commprods|length == 0 %}
+        {% include "snippets/empty_search.html" %}
+    {% endif %}
 </div>
 
-<div class="span7">
-    <ul class="pager">
-        {% if commprods.has_previous %}
-       <li class="previous"> 
-            <a href="?page={{ commprods.previous_page_number }}{{ link_mod }}">
-                &larr; previous
-            </a>
-        </li>
-        {% endif %}
+{% include 'snippets/pagination.html' with objs=commprods link_mod=link_mod %}
 
-        {% if commprods.has_next %}
-        <li class="next">
-            <a href="?page={{ commprods.next_page_number }}{{ link_mod }}">
-                next &rarr; 
-            </a>
-        </li>
-        {% endif %}
-    </ul>
-</div>

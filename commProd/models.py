@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.core import management
 
 from helpers.admin import email_templates, utils
+from helpers.urlize_tags import urlize_text, commprod_contains_media
 
 from datetime import date, datetime, timedelta
 from threading import Lock
@@ -29,6 +30,7 @@ class UserProfile(models.Model):
     score = models.IntegerField(default=0)
     data_point_count = models.IntegerField(default=0)
     use_tour = models.BooleanField(default=True)
+    stripe_customer_id = models.CharField(max_length=1000, default="no_id")
 
     def update_data_point(self, save=True):
         if not data_point_count % 1:
@@ -244,6 +246,8 @@ class Correction(models.Model):
         self.used = True
 
         self.commprod.content = self.content
+        self.commprod.media_content = urlize_text(self.content)
+        self.commprod.media = commprod_contains_media(self.content)
         self.commprod.save()
         if save:
             self.save() ##normally called at the end of update_score

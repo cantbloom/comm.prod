@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+    <div class="row">
+        <div class="span3 offset1">
+            <div> 
+                <a class="btn btn-primary btn-large" href="/donations/donate" >
+                    Make Donation
+                </a>
+            </div>
+            <div class="home-statbox light-well" id="tot_donations">
+                <div class="content big centered">{{ tot_donations|intcomma }}</div>
+                <div class="footer centered">donations</div>
+            </div>
+
+            <div class="home-statbox light-well" id="sum_donations">
+                <div class="content big centered">${{ sum_donations|intcomma }}</div>
+                <div class="footer centered">donated</div>
+            </div>
+        </div>
+
+        <div class="commprod-timeline-container span7">
+            <h1 class="centered"> {{ page_title|capfirst }} </h1>
+            {{ donation_timeline }}
+        </div>
+    </div>
+
+{% endblock %}

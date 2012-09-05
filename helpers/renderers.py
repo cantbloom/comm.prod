@@ -10,6 +10,7 @@ Can render a commprod as html block or list of
 html items. User is the user requesting the view.
 """
 def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_type="commprod"):
+
     votes = Rating.objects.filter(user_profile__user=user)
     upvoted = votes.filter(score__gt=0).values_list('commprod__id', flat=True)
     downvoted = votes.filter(score__lt=0).values_list('commprod__id', flat=True)
@@ -43,6 +44,16 @@ def commprod_renderer(user, commprods, return_type, type=None, page=None, obj_ty
             )
 
         return commprod_list
+
+""" 
+Renders a donation as html block.
+"""
+def donation_renderer(donations, page):
+    template_values =  {
+        'donations' : paginator(page, donations) ## use commprod timeline since it has pagination and builds out the html block
+    }
+
+    return render_to_string('donations/timeline.html',template_values)
 
 """ 
 Input is a dictionary of UserProfile : score.
@@ -84,6 +95,9 @@ def correction_renderer(user, corrections):
 
     return html_list
 
+"""
+Helper function to assign upvoted/downvoted classes to commprod objects
+"""
 def vote_select(obj, upvoted, downvoted):
     upvote_selected = ''
     downvote_selected = ''
@@ -93,6 +107,9 @@ def vote_select(obj, upvoted, downvoted):
         downvote_selected = 'selected'
     return upvote_selected, downvote_selected
 
+"""
+Helper function to find if object has been favorited
+"""
 def fav_select(obj, favorites):
     fav = False
     if obj.id in favorites:

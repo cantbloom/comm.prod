@@ -43,7 +43,7 @@ def renderErrorMessage(request, hero_title, page_title='Oops'):
         'user_profile' : prof_href,
         'hero_err_title' : hero_title,
     }
-    return render_to_response('hero_err_template.html',
+    return render_to_response('snippets/hero_err_template.html',
         template_values, context_instance=RequestContext(request))
 """
 Returns proper ingrish for user profile page

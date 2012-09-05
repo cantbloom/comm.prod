@@ -1,0 +1,14 @@
+<div class="commprod-timeline-container well">
+    
+    {% for donation in donations %}
+        {% include "donations/donation_template.html" with donation=donation %}
+    {% endfor %}
+
+    {% if donations|length == 0 %}
+        {% include "snippets/empty_search.html" %}
+    {% endif %}
+
+</div>
+
+{% include 'snippets/pagination.html' with objs=donations %}
+

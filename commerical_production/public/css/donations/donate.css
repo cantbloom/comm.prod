@@ -1,0 +1,20 @@
+.form {
+    padding:25px !important;
+}
+
+.controls {
+    margin:7px;
+    margin-bottom: 7px !important; /*prepend/append */
+}
+
+.card-number {
+    width:20em;
+}
+
+.card-cvc, .card-expiry-year{
+    width:4em;
+}
+
+.card-expiry-month {
+    width:2em;
+}

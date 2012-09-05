@@ -1,56 +1,30 @@
-from HTMLParser import HTMLParser
-
-from cron.utils import strip_quotes
 from common.constants import REGEX
 import re, requests
 
 url_regex = REGEX['url_regex']
 group = 'url'
+
 """
-Finds and replaces urls in the commprod content
+Finds and replaces urls in the text content
 with a standard <a> tag or embeds a youtube video in the page
 """
-def urlize_commprod(commprod):
-    commprod = clean_prod(commprod)
-    commprod = strip_tags(commprod)
+def urlize_text(text):
     pattern = re.compile(url_regex, re.I)
-    match = pattern.search(commprod)
+    match = pattern.search(text)
     if match:
         previous_matches = {}
-        for m in pattern.finditer(commprod):
-            url_match = strip_quotes(m.group(group))
-            
+        for m in pattern.finditer(text):
+            url_match = m.group(group)
             if url_match not in previous_matches:
                 if 'youtube' in url_match:
-                    commprod = commprod.replace(url_match, youtube_tag(url_match))
+                    text = text.replace(url_match, youtube_tag(url_match))
                 else:
                     tag = img_or_url(url_match)
-                    commprod = commprod.replace(url_match, tag)
+                    text = text.replace(url_match, tag)
             
                 previous_matches[url_match] = url_match
 
-    return commprod
-
-"""
-Does some cleanup to remove '<' and '>' characters from a link to account for weirdness with URL embedding. Commprod is then run through strip_tags to removed embedded tags.
-"""
-def clean_prod(commprod):
-    pattern = re.compile(url_regex, re.I)
-    match = pattern.search(commprod)
-    prod_list = list(str(commprod))
-    invalid = ["<", ">"]
-    if match:
-        for m in pattern.finditer(commprod):
-            start = max(m.start(group), 0)
-            end = min(m.end(group), len(prod_list)-1)
-            start_minus = max(start-1, 0)
-            end_plus = min(end+1, len(prod_list)-1)
-            locations = [start, start_minus, end, end_plus]
-                                                                                                                                                                                                                                                                                                                                                         
-            for loc in locations:
-                if prod_list[loc] in invalid:
-                    prod_list[loc] = ""
-    return "".join(prod_list)
+    return text
 
 """
 Tries to determine if the url is an image and returns either an anchor tag or img tag
@@ -91,35 +65,17 @@ If this fails it returns a <a> tag wrapped string.
 """
 def youtube_tag(url_match):
     try:
-        v = url_match[url_match.index('v=')+2:]
-        v = v.split('/')[0]
+        vid_url = url_match[url_match.index('v=')+2:]
+        vid_url = vid_url.split('/')[0]
     except ValueError:
         return a_tag(url_match) # couldn't extract the value return just a link.
     
-    return '<br><br><iframe id="ytplayer" type="text/html" width="265px" height="195px" src="http://www.youtube.com/embed/%s" frameborder="0"></iframe><br><br>' % v
-
-"""
-Helper to remove anchor tags
-"""
-class MLStripper(HTMLParser):
-    def __init__(self):
-        self.reset()
-        self.fed = []
-    def handle_data(self, d):
-        self.fed.append(d)
-    def get_data(self):
-        return ''.join(self.fed)
-
-def strip_tags(html):
-    s = MLStripper()
-    s.feed(html)
-    return s.get_data()
+    return '<br><br><iframe id="ytplayer" type="text/html" width="265px" height="195px" src="http://www.youtube.com/embed/%s" frameborder="0"></iframe><br><br>' % vid_url
 
 """
 Detect if a commprod content has media (url, img, youtube video)
 """
 def commprod_contains_media(commprod_content):
-    url_regex = REGEX['url_regex']
     pattern = re.compile(url_regex, re.I)
     match = pattern.search(commprod_content)
     return bool(match)

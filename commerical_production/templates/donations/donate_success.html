@@ -1,0 +1,15 @@
+{% extends "snippets/hero_err_template.html" %}
+
+{% block hero_title %} Success! {% endblock%}
+{% block hero_content %} 
+    <p> 
+        Thanks for the donation!
+    </p>
+    <p> 
+        {% if user.is_authenticated %}
+        Back to  <a href="/donations" class="btn btn-primary">Donation Home</a>
+        {% else %}
+            Visit our <a href="http://blog.burtonthird.com" class="btn btn-primary">Blog</a>
+        {% endif %}
+    </p>
+{% endblock %}

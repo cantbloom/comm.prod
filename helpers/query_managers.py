@@ -15,7 +15,7 @@ Takes in a get request's dictionary of
 values and returns an HTMl template based on the search query
 """
 def commprod_query_manager(get_dict, user, return_type="html"):
-    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted', 'orderBy', 'rec', 'media']
+    valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted', 'orderBy', 'rec']
     valid_types = {
         'best' : {
                     'orderBy' : 'score', 
@@ -33,10 +33,10 @@ def commprod_query_manager(get_dict, user, return_type="html"):
                 'direction' : 'lh',
         },
         'media' : {
-            'orderBy' : 'trending_score',
+            'orderBy' : 'date',
             'media' : True,
             'direction' : 'lh',
-        }   
+        },
     }
     
     search_params = {k : v for k, v in get_dict.items() if k in valid_params}
@@ -51,8 +51,12 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 
     if 'rec' in search_params:
         search_params['rec'] = user.username
-        
-    commprods = commprod_search(**search_params)
+
+    if type == 'favorites':
+        commprods = get_commprod_favs(user.username)
+    
+    else:
+        commprods = commprod_search(**search_params)
 
     return commprod_renderer(user, commprods, return_type, type, get_dict.get('page',1))
 
@@ -139,6 +143,15 @@ def correction_query_manager(user, correction_id=None, commprod=None):
     else:
         return []
 
+"""
+Finds and returns a list of commprod objects that have been favorited by the given user
+"""
+def get_commprod_favs(username):
+    favs = Favorite.objects.filter(user_profile__user__username=username, fav=True).select_related()
+    commprods = []
+    for fav in favs:
+        commprods.append(fav.commprod)
+    return commprods
 
 ########### Helpers #############
 """

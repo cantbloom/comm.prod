@@ -1,8 +1,7 @@
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
-from django.core.context_processors import csrf
 from django.shortcuts import redirect
 from django.template import RequestContext
 from django.http import Http404
@@ -41,15 +40,15 @@ def register(request, key):
         reg_form = RegForm(request.POST)
         if reg_form.is_valid():
             user.is_active = True
-            user.first_name = request.POST['first_name']
-            user.last_name = request.POST['last_name']
-            user.set_password(request.POST['password'])
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.set_password(form.cleaned_data['password'])
 
-            pic_url = put_profile_pic(request.POST['pic_url'], user.profile)
+            pic_url = put_profile_pic(form.cleaned_data['pic_url'], user.profile)
             if pic_url:
                 user.profile.pic_url = pic_url
 
-            user.profile.class_year = request.POST['class_year']
+            user.profile.class_year = form.cleaned_data['class_year']
 
             alt_emails = request.POST.getlist('alt_email')
             for alt_email in alt_emails:
@@ -59,15 +58,12 @@ def register(request, key):
             user.save()
             user.profile.save()
 
-            user = auth.authenticate(username=user.username, password=request.POST['password'])
+            user = auth.authenticate(username=user.username, password=form.cleaned_data['password'])
             if user is not None:
                 if user.is_active:
                     auth.login(request, user)
                     # Redirect to a success page.
                     return redirect('/')
-
-        hero_title ="Looks an error. Sorry bro."
-        return renderErrorMessage(request, hero_title)
 
     else:
         reg_form = RegForm()
@@ -336,7 +332,7 @@ def reset_password(request):
                 errors['username'].append("Empty username entered.")
 
             #make sure user exists
-        elif not UserProfile.objects.filter(user__username=username, send_mail=True).exists():
+        elif not UserProfile.objects.filter(user__username=username, send_mail=True, user__is_active=True).exists():
                 errors['username'].append(username + " is not registered with an account.")
 
             #create password reset object
