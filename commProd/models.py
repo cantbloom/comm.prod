@@ -33,7 +33,7 @@ class UserProfile(models.Model):
     stripe_customer_id = models.CharField(max_length=1000, default="no_id")
 
     def update_data_point(self, save=True):
-        if not data_point_count % 1:
+        if not self.data_point_count % 1:
             data_point = TrendData(user_profile=self, score=self.score, avg_score=self.avg_score)
             data_point.save()
         self.data_point_count += 1
