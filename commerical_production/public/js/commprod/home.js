@@ -128,7 +128,9 @@ $(function(){
 	$(document).on('voteSent', function(e, d){
 		var $tot_votes = $("#tot_votes .content");
 		if(Math.abs(d.diff) == 1) {
-			$tot_votes.html(parseInt($tot_votes.html()) + 1);
+			var num_votes = parseInt($tot_votes.data('votes')) + 1;
+			$tot_votes.data('votes', num_votes);
+			$tot_votes.html(numberWithCommas(num_votes));
 		}
 	});
 

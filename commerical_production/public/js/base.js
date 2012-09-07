@@ -203,6 +203,11 @@ function makeTip(div, title, placement, trigger) {
     });
 }
 
+//helper function for fomatting numbers with commas
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 $(function(){
     $(document).on('click', '.vote-container .vote', voteSelection)
     $('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()
