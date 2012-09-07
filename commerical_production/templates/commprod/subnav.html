@@ -22,7 +22,7 @@
 		</div>
 
 		<div class="home-statbox light-well" id="tot_votes">
-		    <div class="content big centered">{{ num_votes|intcomma }}</div>
+		    <div class="content big centered" data-votes="{{ num_votes }}">{{ num_votes|intcomma }}</div>
 		    <div class="footer centered">total votes</div>
 		</div>
 	{% endif %}

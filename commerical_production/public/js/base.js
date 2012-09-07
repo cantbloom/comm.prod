@@ -82,8 +82,11 @@ function postVote (e, d) {
     var $commprod = $(e.target);
 
     //quickly change the ui -- must use diff to handle if user already voted
-    var new_score = parseInt($commprod.find('.score').text()) + d.diff;
-    $commprod.find('.score').html(new_score);
+    var $commprod_score = $commprod.find('.score');
+    var new_score = parseInt($commprod_score.data('score')) + d.diff;
+    $commprod_score.data('score', new_score); // update the data with the int score
+
+    $commprod_score.html(numberWithCommas(new_score)); //format with commas for
 
     /*
     Below is correction only stuff
@@ -201,6 +204,11 @@ function makeTip(div, title, placement, trigger) {
         "title" : title,
         "trigger" : trigger,
     });
+}
+
+//helper function for fomatting numbers with commas
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 $(function(){
