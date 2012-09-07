@@ -22,7 +22,7 @@
 				<div class="vote up-vote {{ upvote_selected }}"></div>
 				<div class="vote down-vote {{ downvote_selected }}"></div>
 			</div>
-			<span class='score'> {{ commprod.score|intcomma }} </span>
+			<span class='score' data-score="{{ commprod.score }}"> {{ commprod.score|intcomma }} </span>
 		</div>
 	</div>
 	<div id="{{ obj_type }}_object_{{ commprod.id }}_content" class="commprod-content">
