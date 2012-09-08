@@ -129,7 +129,7 @@ before passing in.
 """
 def parseProd(query):
     btb_regex = '((^)|(\s))((a btb)|(abtb)|(btb))'
-    comm_regex = '(comm)(()|( )|(\.)|(\. )|( \.))|(\,)|(\, )|( \,))'
+    comm_regex = '(comm)(()|( )|(\.)|(\. )|( \.)|(\,)|(\, )|( \,))'
     prod_regex = '((prod)|(prodd))((\s)|(\.\s)|(\.\.\s))'
     
     commprod_regex = '((%s%s)|(%s\s%s))'%(comm_regex, prod_regex, comm_regex, prod_regex)
