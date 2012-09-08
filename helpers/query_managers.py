@@ -49,8 +49,8 @@ def commprod_query_manager(get_dict, user, return_type="html"):
     if 'unvoted' in search_params:
         search_params['unvoted'] = user.username
 
-    if 'rec' in search_params:
-        search_params['rec'] = user.username
+    # if 'rec' in search_params:
+    #     search_params['rec'] = user.username
 
     if type == 'favorites':
         #user who's profile is being viewed
