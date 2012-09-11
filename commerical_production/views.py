@@ -40,15 +40,15 @@ def register(request, key):
         reg_form = RegForm(request.POST)
         if reg_form.is_valid():
             user.is_active = True
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
-            user.set_password(form.cleaned_data['password'])
+            user.first_name = reg_form.cleaned_data['first_name']
+            user.last_name = reg_form.cleaned_data['last_name']
+            user.set_password(reg_form.cleaned_data['password'])
 
-            pic_url = put_profile_pic(form.cleaned_data['pic_url'], user.profile)
+            pic_url = put_profile_pic(reg_form.cleaned_data['pic_url'], user.profile)
             if pic_url:
                 user.profile.pic_url = pic_url
 
-            user.profile.class_year = form.cleaned_data['class_year']
+            user.profile.class_year = reg_form.cleaned_data['class_year']
 
             alt_emails = request.POST.getlist('alt_email')
             for alt_email in alt_emails:
@@ -58,7 +58,7 @@ def register(request, key):
             user.save()
             user.profile.save()
 
-            user = auth.authenticate(username=user.username, password=form.cleaned_data['password'])
+            user = auth.authenticate(username=user.username, password=reg_form.cleaned_data['password'])
             if user is not None:
                 if user.is_active:
                     auth.login(request, user)
