@@ -26,12 +26,16 @@ def home(request):
     sorted_donations = sorted(list(chain(donations, anon_donations)), key=attrgetter('date'), reverse=True)
     page = request.GET.get('page', 1)
     rendered_donations = donation_renderer(sorted_donations, page)
+    tot_donations = donations.count()
+    sum_donations = 0
+    if tot_donations != 0:
+        sum_donations =  donations.aggregate(Sum('amount'))['amount__sum']
     template_values = {
         'page_title' : "Past Donations",
         'nav_donate' : "active",
         'donation_timeline' : rendered_donations,
-        'tot_donations' : donations.count(),
-        'sum_donations' : donations.aggregate(Sum('amount'))['amount__sum']
+        'tot_donations' : tot_donations,
+        'sum_donations' : sum_donations,
     }
 
     return render_to_response('donations/home.html', template_values, context_instance=RequestContext(request))
