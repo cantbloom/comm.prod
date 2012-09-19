@@ -8,12 +8,10 @@ from datetime import datetime
 Take a donation from a user with an account.
 """
 class DonateForm(forms.Form):
-    RUSH = 'Rush/anti-rush week'
-    DTYD = 'DTYD'
+    ABC = 'ABC Party ($10)'
     GEN_FUN = 'General floor donation'
     DONATION_CHOICES = (
-        (RUSH, RUSH),
-        (DTYD, DTYD),
+        (ABC, ABC),
         (GEN_FUN, GEN_FUN),
     )
     reason = forms.ChoiceField(choices=DONATION_CHOICES)
