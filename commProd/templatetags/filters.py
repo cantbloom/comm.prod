@@ -25,4 +25,4 @@ def include_style(style_name):
 
     style_path = path_prefix + style_name + path_suffix
 
-    return """<link rel="stylesheet" href="%s" />""" % style_path
+    return """<link type="text/css" rel="stylesheet" href="%s" />""" % style_path
