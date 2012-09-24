@@ -17,7 +17,6 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
     #     rec_object = CommProdRec.objects.filter(user_profile__user__username=rec)
     #     if rec_object.exists():
     #       commprods = rec_object[0].get_prods()
-
     if not commprods:
         commprods = CommProd.objects.all()
     
@@ -34,7 +33,6 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
         if orderBy:
             if direction == 'lh':
                 orderBy = '-' + orderBy
-
             commprods = commprods.order_by(orderBy, 'date')
 
         if startDate:
