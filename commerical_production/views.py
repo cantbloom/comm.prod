@@ -80,7 +80,7 @@ def login(request, *args, **kwargs):
     if request.method == 'POST':
         if not request.POST.get('remember_me', None):
             request.session.set_expiry(0)
-
+    print request.POST
     return views.login(request, *args, **kwargs)
 
 """
