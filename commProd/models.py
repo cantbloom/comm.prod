@@ -64,13 +64,12 @@ class UserProfile(models.Model):
         email.sendConfirmEmail();
         email.save()
 
-
-    """
-    Takes an email, updates commprod objects
-    associatd with the alt_email user to self.
-    Also updates Rating objects to self
-    """
-    def mergeAndDelete(self, email):
+    def mergeAndDelete(self, email):   
+        """
+        Takes an email, updates commprod objects
+        associatd with the alt_email user to self.
+        Also updates Rating objects to self
+        """
         to_delete = User.objects.filter(email=email)
         if to_delete.exists():
             to_delete = to_delete[0].profile

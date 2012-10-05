@@ -2,15 +2,16 @@ from commProd.models import *
 
 import random
 
-"""
-To test:
-python manage.py shell
-from helpers.commprod_search import commprod_search
-
-rec: passing in username and receive commprods in ordered by recommentdation for user
-unvoted: passing in username and receive commprods unvoted by user
-"""
 def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='hl', username=None, startDate=None, endDate=None, limit=None, unvoted=False, rec=False, media=False):
+    
+    """
+    To test:
+    python manage.py shell
+    from helpers.commprod_search import commprod_search
+
+    rec: passing in username and receive commprods in ordered by recommentdation for user
+    unvoted: passing in username and receive commprods unvoted by user
+    """
     commprods = None
 
     # if rec:

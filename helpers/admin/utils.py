@@ -8,21 +8,22 @@ from email_templates import registration, sorry_email
 
 import os, sha, re, random
 
-"""
-ssh to athena and:
-
-blanche bombers > bombers.txt
-blanche btb-alum >> bombers.txt
-
-Replace bombers.txt that lives in comm.prod
-Use this to add new users the database each year:
-
-python manage.py shell
-
-import helpers.admin.utils as admin
-admin.add_users('bombers.txt')
-"""
 def add_users(filePath):
+
+    """
+    ssh to athena and:
+
+    blanche bombers > bombers.txt
+    blanche btb-alum >> bombers.txt
+
+    Replace bombers.txt that lives in comm.prod
+    Use this to add new users the database each year:
+
+    python manage.py shell
+
+    import helpers.admin.utils as admin
+    admin.add_users('bombers.txt')
+    """
     try:
         f = open(filePath)
 
@@ -48,10 +49,10 @@ def add_users(filePath):
         print "What is the actual path?"
 
 
-"""
-Create a new user with the given parameters
-"""
 def createUser(username, email, send_mail=False):
+    """
+    Create a new user with the given parameters
+    """
     try:
         user, created = User.objects.get_or_create(username=username, email=email)
         if created:
@@ -68,23 +69,22 @@ def createUser(username, email, send_mail=False):
         return None
 
 
-"""
-Email current users
-user_emails is a list of emails to send to.
-"""
 def emailUsers(subject, html_content, user_emails, from_email='bombers@mit.edu'):
+    """
+    Email current users
+    user_emails is a list of emails to send to.
+    """
     text_content = strip_tags(html_content)
     msg = EmailMultiAlternatives(subject, text_content, from_email, user_emails)
     msg.attach_alternative(html_content, "text/html")
     msg.send()
 
 
-
-"""
-Send an email to inactive users who
-have permission to receive mail to register
-"""
 def emailInactive(alums=False):
+    """
+    Send an email to inactive users who
+    have permission to receive mail to register
+    """
     users = User.objects.filter(is_active=False, send_mail=True)
     if not alums:
         users = users.filter(email__contains = '@mit.edu')
@@ -93,10 +93,10 @@ def emailInactive(alums=False):
 
     return 'done'
 
-"""
-Send an email to can't send
-"""
 def emailSendMailFalse(alums=False):
+    """
+    Send an email to can't send
+    """
     users = User.objects.filter(userprofile__send_mail=False)
     for user in users:
       print user
@@ -104,10 +104,10 @@ def emailSendMailFalse(alums=False):
 
     return 'done'
 
-"""
-Test your regexs
-"""
 def testRegex():
+    """
+    Test your regexs
+    """
     while True:
         cmd = raw_input("Type EXIT to quit, press enter to continue: ")
         if cmd == "EXIT":
@@ -121,10 +121,11 @@ def testRegex():
 
             for m in pattern.finditer(query):
                 print "\nI found the text '%s' starting at index '%d' and ending at index '%d'." % (m.group(), m.start(), m.end())
-"""
-Send reg email to given user
-"""
+
 def sendRegEmail(username):
+    """
+    Send reg email to given user
+    """
     user = User.objects.get(username = username)
     if user:
         content = registration['content'] % (user.username, settings.BASE_URL+'/register/'+user.profile.activation_key + '/')
@@ -135,10 +136,10 @@ def sendRegEmail(username):
     else:
         return False
 
-"""
-Send sorry email to given user
-"""
 def sendSorryEmail(username):
+    """
+    Send sorry email to given user
+    """
     user = User.objects.get(username=username)
     if user:
         content = sorry_email['content'] % (user.username)

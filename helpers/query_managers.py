@@ -10,11 +10,11 @@ from datetime import datetime
 import random, time, operator, numpy as np
 
 
-""" 
-Takes in a get request's dictionary of
-values and returns an HTMl template based on the search query
-"""
 def commprod_query_manager(get_dict, user, return_type="html"):
+    """ 
+    Takes in a get request's dictionary of
+    values and returns an HTMl template based on the search query
+    """
     valid_params = ['cp_id', 'query', 'direction', 'username', 'startDate', 'endDate', 'limit', 'unvoted', 'orderBy', 'rec']
     valid_types = {
         'best' : {

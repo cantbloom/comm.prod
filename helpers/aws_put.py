@@ -8,11 +8,11 @@ from urllib import urlretrieve
 import md5, os, requests
 
 
-"""
-Takes a url from filepicker and uploads
-it to our aws s3 account.
-"""
 def put_profile_pic(url, profile):
+    """
+    Takes a url from filepicker and uploads
+    it to our aws s3 account.
+    """
     try:
         r = requests.get(url)
         size = r.headers.get('content-length')

@@ -16,11 +16,12 @@ from itertools import chain
 from operator import attrgetter
 
 
-"""
-Donation home page. Return all of the donation objects that are found.
-"""
+
 @login_required
 def home(request):
+    """
+    Donation home page. Return all of the donation objects that are found.
+    """
     donations = Donation.objects.all()
     anon_donations = AnonDonation.objects.all()
     sorted_donations = sorted(list(chain(donations, anon_donations)), key=attrgetter('date'), reverse=True)
@@ -40,11 +41,10 @@ def home(request):
 
     return render_to_response('donations/home.html', template_values, context_instance=RequestContext(request))
 
-"""
-Donate page returns the form for submitting a donation
-"""
 def donate(request):
-
+    """
+    Donate page returns the form for submitting a donation
+    """
     template_values = {
         'page_title' : "Make a Donation",
         'nav_donate' : "active",
@@ -56,11 +56,12 @@ def donate(request):
 
     return anon_donate(request, template_values)
 
-"""
-Method for dealing with donations from users with accounts. Saves the stripe customer id for later use.
-"""
+
 @login_required
 def user_donate(request, template_values):
+    """
+    Method for dealing with donations from users with accounts. Saves the stripe customer id for later use.
+    """
     if request.method == 'POST':
         form = DonateForm(request.POST)
         if form.is_valid():
@@ -114,10 +115,11 @@ def user_donate(request, template_values):
     template_values['form'] = form
 
     return render_to_response('donations/donate.html', template_values, context_instance=RequestContext(request))
-"""
-Method for dealing with donations from users without accounts. Does not save a stripe customer id and just charges the card directly.
-"""
+
 def anon_donate(request, template_values):
+    """
+    Method for dealing with donations from users without accounts. Does not save a stripe customer id and just charges the card directly.
+    """
     if request.method == 'POST':
         form = AnonDonateForm(request.POST)
         if form.is_valid():

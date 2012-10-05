@@ -13,12 +13,11 @@ from common.constants import REGEX
 from datetime import date, datetime, timedelta
 import random, re
 
-
-"""
-Returns a username to be rendered choosing randomly between
-first + last, username, and a shirt first_name.
-"""
 def getRandomUsername(user):
+    """
+    Returns a username to be rendered choosing randomly between
+    first + last, username, and a shirt first_name.
+    """
     potentials = [shirtname.name for shirtname in ShirtName.objects.filter(user_profile=user.profile)]
 
     name = user.first_name.strip()
@@ -28,12 +27,12 @@ def getRandomUsername(user):
         potentials.append(user.username)
     return random.choice(potentials)
 
-"""
-Give helpful messages for the retards.
-Returns a hero_err_template with the given data.
-Return this function to give user back an error page.
-"""
 def renderErrorMessage(request, hero_title, page_title='Oops'):
+    """
+    Give helpful messages for the retards.
+    Returns a hero_err_template with the given data.
+    Return this function to give user back an error page.
+    """
     if request.user.is_authenticated:
         prof_href = "user/" + request.user.username
     else:
@@ -45,10 +44,11 @@ def renderErrorMessage(request, hero_title, page_title='Oops'):
     }
     return render_to_response('snippets/hero_err_template.html',
         template_values, context_instance=RequestContext(request))
-"""
-Returns proper ingrish for user profile page
-"""
+
 def possesive(name, title):
+    """
+    Returns proper ingrish for user profile page
+    """
     if unicode(name)[-1] == 's':
         result = "%s' " % name
     else:
@@ -57,21 +57,21 @@ def possesive(name, title):
         title = " Profile"
     return result + title.capitalize()
 
-"""
-Adds the specified username to the given dictionary
-"""
 
 def addUserToQuery(request_dict, username):
+    """
+    Adds the specified username to the given dictionary
+    """
     d = {}
     for key, value in request_dict.items():
         d[key] = value
     d['username'] = username
     return d
 
-"""
-Submit vote for a commprod
-"""
 def vote_commprod(id, score, user):
+    """
+    Submit vote for a commprod
+    """
     success, commprod = valid_prod(id)
     if not success:
         return success, commprod #False, False
@@ -80,10 +80,10 @@ def vote_commprod(id, score, user):
 
     return rating, commprod
 
-"""
-Submit favorite for a commprod
-"""
 def fav_commprod(id, user):
+    """
+    Submit favorite for a commprod
+    """
     success, commprod = valid_prod(id)
     if not success:
         return success, commprod #False, False
@@ -91,19 +91,19 @@ def fav_commprod(id, user):
 
     return fav
 
-"""
-Helper function to valididate commprod for vote or favoriteing
-"""
 def valid_prod(id):    
+    """
+    Helper function to valididate commprod for vote or favoriteing
+    """
     commprod = commprod_search(cp_id=id)
     if commprod.count() != 1: #make sure commprod is there
         return False, False
     return True, commprod[0]
 
-"""
-Submit vote for a correction
-"""
 def vote_correction(id, score, user):
+    """
+    Submit vote for a correction
+    """
     correction = Correction.objects.filter(id=id)
     if not correction.exists():
         return False, False
@@ -111,11 +111,11 @@ def vote_correction(id, score, user):
     rating, created = CorrectionRating.objects.get_or_create(correction=correction[0], user_profile=user.profile)
     return rating, correction[0]
 
-"""
-Helper to return HttpResponse with json type
-json.dumps the payload given
-"""
 def JSONResponse(payload):
+    """
+    Helper to return HttpResponse with json type
+    json.dumps the payload given
+    """
     return HttpResponse(json.dumps(payload), mimetype='application/json')
 
 def validateEmail(email):

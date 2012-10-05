@@ -22,12 +22,11 @@ from helpers.admin import email_templates
 from commerical_production.settings import ADMINS
 
 
-"""
-Registration page. Visitor arrives wih activation key
-"""
 @csrf_exempt
 def register(request, key):
-
+    """
+    Registration page. Visitor arrives wih activation key
+    """ 
     profile = UserProfile.objects.filter(activation_key=key)
 
     if not profile.exists() or profile[0].user.is_active:
@@ -82,12 +81,12 @@ def login(request, *args, **kwargs):
             request.session.set_expiry(0)
     return views.login(request, *args, **kwargs)
 
-"""
-Endpoint to confirm you are owner of email
-"""
 @login_required
 @csrf_exempt
 def confirm_email(request, key):
+    """
+    Endpoint to confirm you are owner of email
+    """
     alt_email = Email.objects.filter(activation_key=key)
     if alt_email.exists():
         alt_email[0].confirm()
@@ -95,12 +94,12 @@ def confirm_email(request, key):
     hero_title ="We weren't able to complete your request..."
     return renderErrorMessage(request, hero_title)
 
-"""
-Endpoint to request an email be added to you profile
-"""
 @login_required
 @csrf_exempt
 def claim_email(request):
+    """
+    Endpoint to request an email be added to you profile
+    """
     email = request.POST.get('email', "")
     email_user = User.objects.filter(email=email)
     payload = {'res':'failed'}
@@ -110,12 +109,12 @@ def claim_email(request):
 
     return JSONResponse(payload)
 
-"""
-Endpoint to request an email be added to you profile
-"""
 @login_required
 @csrf_exempt
 def feedback(request):
+    """
+    Endpoint to request an email be added to you profile
+    """
     feedback = request.POST.get('feedback', None)
     if not feedback:
         return JSONResponse({'res':'failed'})
@@ -127,11 +126,11 @@ def feedback(request):
     emailUsers(subject, content, admin_emails, from_email=user.email)
     return JSONResponse({'res':'success'})
 
-"""
-First page after successfully signing update
-"""
 @login_required
 def welcome(request):
+    """
+    First page after successfully signing update
+    """
     template_values = {
         'user': request.user
     }
@@ -139,20 +138,20 @@ def welcome(request):
     return render_to_response('welcome.html', template_values, context_instance=RequestContext(request))
 
 
-"""
-Landing page, top ten rated comm prods + ten newest commprods
-"""
 @login_required
 def home(request):
+    """
+    Landing page, top ten rated comm prods + ten newest commprods
+    """
     return redirect('commprod/')
 
-"""
-User profile page,
-displays avg. overall score + list of commprods
-Profile can be gotten to by user_id, username, or an alt_email
-"""
 @login_required
 def profile(request, username):
+    """
+    User profile page,
+    displays avg. overall score + list of commprods
+    Profile can be gotten to by user_id, username, or an alt_email
+    """
     if User.objects.filter(username=username).exists():
         profile_user = User.objects.filter(username=username)[0]
     else:
@@ -187,21 +186,23 @@ def profile(request, username):
         template_values.update(profile_query_manager(request.user, profile_user))
         return render_to_response('profile.html', template_values, context_instance=RequestContext(request))
 
-"""`
-Helper function to deal with recent/best pages for user
-"""
+
 def profile_search(request, template_values, profile_user):
+    """`
+    Helper function to deal with recent/best pages for user
+    """
     get_dict = addUserToQuery(request.GET, profile_user.username)
     template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=request.user)
     template_values['header_classes'] = ''
 
     return render_to_response('profile_search.html', template_values, context_instance=RequestContext(request))
 
-"""
-Edit profile page
-"""
 @login_required
 def edit_profile(request):
+    """
+    Edit profile page
+    """
+
     user = request.user
     profile = user.profile
     ##update for post request
