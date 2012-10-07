@@ -4,7 +4,7 @@
 
 <div id="{{ obj_type }}_object_{{ commprod.id }}" class='row commprod-container {{ obj_type }}' data-id="{{ commprod.id }}" data-type='{{ obj_type }}'>
 	<div class="author-container">
-		<a class="author-name" href='/users/{{ commprod.user_profile.user.username }}'>
+		<a class="author-name" href="/users/{{ commprod.user_profile.user.username }}">
 			<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
 			{% if obj_type == "correction" %}
 			<strong> Correction by: {{ commprod.user_profile.user.username }} </strong> 
