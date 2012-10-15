@@ -107,8 +107,6 @@ function setupTour(){
 	  }
 	});
 
-
-
 	tour.start();
 }
 

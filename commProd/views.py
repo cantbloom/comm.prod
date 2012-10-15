@@ -20,11 +20,11 @@ from helpers.urlize_email_content import urlize_email_content
 from os import environ as env
 
 
-"""
-Landing page, top ten rated comm prods + ten newest commprods
-"""
 @login_required
 def home(request):
+    """
+    Landing page, top ten rated comm prods + ten newest commprods
+    """
     profiles = UserProfile.objects.order_by('score')
     template_values = {
         'page_title' : "Vote on these comm.prods we think you'll like",
@@ -82,11 +82,11 @@ def permalink(request, username, cp_id):
     return render_to_response('commprod/permalink.html', template_values, context_instance=RequestContext(request))
 
 
-"""
-Frontend endpoint for adding commprods that are not picked up by the parser
-"""
 @staff_member_required
 def admin(request):
+    """
+    Frontend endpoint for adding commprods that are not picked up by the parser
+    """
     template_values = {
         'key' : env['SECRET_KEY']
     }

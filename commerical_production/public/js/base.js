@@ -1,4 +1,4 @@
-function voteSelection (e, data){
+function voteSelection (e, data) {
     var $src = $(e.target);
     var $commprod = $src.closest('.commprod-container');
     //don't submit again if already selected
@@ -20,7 +20,7 @@ function voteSelection (e, data){
     sendVote(id, score, type, diff);
 }
 
-function sendVote(id, score, type, diff){
+function sendVote(id, score, type, diff) {
     var $commprod = $('#'+ type + '_object_'  + id);
 
     var payload = {'id':id, 'score':score, 'type': type, 'diff':diff};
@@ -32,10 +32,9 @@ function sendVote(id, score, type, diff){
     $commprod.trigger('voteSent', payload)
 }
 
-function openClaimProfile(e, d){
+function openClaimProfile(e, d) {
     var $src = $(e.target);
     var user = $src.data('user');
-
 
     var $modal = $('#claim-email-modal');
     $modal.find('.replace-email').text(user);
