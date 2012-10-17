@@ -20,6 +20,7 @@ if DEBUG:
 ADMINS = (
     ('Joshua Blum', 'joshblum@mit.edu'),
     ('Max Kanter', 'kanter@mit.edu'),
+    ('comm.prod-admins', 'comm.prod@mit.edu'),
 )
 
 MANAGERS = ADMINS
