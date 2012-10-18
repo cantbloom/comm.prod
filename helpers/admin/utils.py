@@ -85,9 +85,9 @@ def emailInactive(alums=False):
     Send an email to inactive users who
     have permission to receive mail to register
     """
-    users = User.objects.filter(is_active=False, send_mail=True)
+    users = User.objects.filter(is_active=False, userprofile__send_mail=True)
     if not alums:
-        users = users.filter(email__contains = '@mit.edu')
+        users = users.filter(email__contains='@mit.edu')
     for user in users:
         sendRegEmail(user.username)
 
