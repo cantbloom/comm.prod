@@ -1,5 +1,5 @@
 def get_active_page(pageName, requestType):
-    """ Given a parge and a request type (trending, best, recent, etc) returns a tuple of (template_key, template_value, request).
+    """ Given a page and a request type (trending, best, recent, etc) returns a tuple of (template_key, template_value, request).
     """
     template_values = {
     'home' : {
