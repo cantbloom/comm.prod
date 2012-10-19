@@ -34,7 +34,7 @@ class RegForm(forms.Form):
         try:
             class_year = int(self.cleaned_data['class_year'])
             max_year = datetime.today().year + 4
-            if not class_year in range(1933, max_year):
+            if not class_year in range(1933, max_year+1):
                 raise forms.ValidationError('Enter a class year between 1933 and %s'%max_year)
         except ValueError:
             raise forms.ValidationError('Enter a class year between 1933 and %s'%max_year)
