@@ -112,7 +112,4 @@ def fav_select(obj, favorites):
     """
     Helper function to find if object has been favorited
     """
-    fav = False
-    if obj.id in favorites:
-        fav = True
-    return fav
+    return obj.id in favorites
