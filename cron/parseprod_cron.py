@@ -120,7 +120,6 @@ def fetch_prods(url, login, password, mailbox, search_query):
 
     print "\nDone"
 
-
 """
 Returns a list of commprods if any
 are found in the query, otherise 

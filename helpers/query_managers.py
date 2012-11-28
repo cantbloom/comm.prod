@@ -61,10 +61,11 @@ def commprod_query_manager(get_dict, user, return_type="html"):
 
     return commprod_renderer(user, commprods, return_type, type, get_dict.get('page',1))
 
-"""
-Handles queries for user data to be displayed on profile page.
-"""
+
 def profile_query_manager(user, profile_user):
+    """
+    Handles queries for user data to be displayed on profile page.
+    """
 
     best_prod, worst_prod = find_profile_prods(user, profile_user)
 
@@ -78,12 +79,13 @@ def profile_query_manager(user, profile_user):
     }
     return response
 
-""" 
-Returns a dictionary of data needed for graphing
-data with the given filter. Returns data_points for
-graphing, std, mean, and a grade for the given user.
-"""
+
 def vs_data_manager(user, filter_year=None):
+    """ 
+    Returns a dictionary of data needed for graphing
+    data with the given filter. Returns data_points for
+    graphing, std, mean, and a grade for the given user.
+    """
     profiles = UserProfile.objects.all()
     if filter_year:
         profiles = profiles.filter(class_year=filter_year)
@@ -107,11 +109,11 @@ def vs_data_manager(user, filter_year=None):
 
     return vs_data
 
-"""
-Calculates trend data and returns response
-dictionary for given User object
-"""
 def trend_data_manager(user):
+    """
+    Calculates trend data and returns response
+    dictionary for given User object
+    """
     try:
 	   first_trend_date = TrendData.objects.filter(user_profile=user.profile).order_by('date')[0].date
     except IndexError:
@@ -127,11 +129,10 @@ def trend_data_manager(user):
     }
     return trend_data
 
-"""
-Finds and renders active corrections for the given commprod
-"""
 def correction_query_manager(user, correction_id=None, commprod=None):
-
+    """
+    Finds and renders active corrections for the given commprod
+    """
     corrections = None
     if correction_id:
         corrections =  Correction.objects.filter(id=correction_id, is_active=True)
@@ -144,10 +145,11 @@ def correction_query_manager(user, correction_id=None, commprod=None):
     else:
         return []
 
-"""
-Finds and returns a list of commprod objects that have been favorited by the given user
-"""
+
 def get_commprod_favs(username):
+    """
+    Finds and returns a list of commprod objects that have been favorited by the given user
+    """
     favs = Favorite.objects.filter(user_profile__user__username=username, fav=True).select_related()
     commprods = []
     for fav in favs:
@@ -155,12 +157,13 @@ def get_commprod_favs(username):
     return commprods
 
 ########### Helpers #############
-"""
-Finds the best and worst commprods for a given profile if they
-exist. If none exists boolean is sent back and nothing is
-rentered.
-"""
+
 def find_profile_prods(user, profile_user):
+    """
+    Finds the best and worst commprods for a given profile if they
+    exist. If none exists boolean is sent back and nothing is
+    rentered.
+    """
     if CommProd.objects.filter(user_profile=profile_user.profile).exists():
             sorted_commprods = CommProd.objects.filter(user_profile=profile_user.profile).order_by('score')
             count = sorted_commprods.count()
@@ -179,12 +182,13 @@ def find_profile_prods(user, profile_user):
 
     return best_prod, worst_prod
 
-"""
-Finds the highest and least rated bomber from the 
-given user. Returns a rendered list of highest and 
-lowest profiles found. 
-"""
+
 def find_profile_faves(profile_user):
+    """
+    Finds the highest and least rated bomber from the 
+    given user. Returns a rendered list of highest and 
+    lowest profiles found. 
+    """
     ratings = Rating.objects.filter(user_profile=profile_user.profile).select_related()
 
     sorted_users = Rating.objects.filter(user_profile=profile_user.profile).values('commprod__user_profile').order_by('commprod__user_profile').annotate(total=Sum('score')).order_by('total')
@@ -200,12 +204,13 @@ def find_profile_faves(profile_user):
     return  profile_renderer([most_loved, most_hated])
 
 
-""" 
-Returns a letter grade for a given score,
-std, and mean. 
-This is the worst code ever. 
-"""
+
 def get_grade(user_score, std, mean):
+    """ 
+    Returns a letter grade for a given score,
+    std, and mean. 
+    This is the worst code ever. 
+    """
     letters = ['A', 'B', 'C', 'D', 'F']
     grades = []
     scores = []
@@ -236,9 +241,9 @@ def get_grade(user_score, std, mean):
     return grades[index]
 
 
-"""
-Helper for trend data manager.
-Returns a list of data point tuples
-"""
-def get_trend_data(query_set):
+def get_trend_data(query_set): 
+    """
+    Helper for trend data manager.
+    Returns a list of data point tuples
+    """
     return [(time.mktime(trend.date.timetuple())*1000, trend.score) for trend in query_set]
