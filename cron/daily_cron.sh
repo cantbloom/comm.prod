@@ -19,4 +19,4 @@ DATE=$(date +"%m-%d-%Y")
 mysqldump -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_NAME | gzip > "sql_dump/backup-"$DATE.sql.gz 
 
 #cleanup old files
-#find sql_dump -type f -mtime +30 -exec rm '{}' \;
+find sql_dump -type f -mtime +30 -exec rm '{}' \;
