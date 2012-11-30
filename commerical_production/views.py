@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User
-from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
@@ -22,7 +21,6 @@ from helpers.admin import email_templates
 from commerical_production.settings import ADMINS
 
 
-@csrf_exempt
 def register(request, key):
     """
     Registration page. Visitor arrives wih activation key
@@ -82,7 +80,6 @@ def login(request, *args, **kwargs):
     return views.login(request, *args, **kwargs)
 
 @login_required
-@csrf_exempt
 def confirm_email(request, key):
     """
     Endpoint to confirm you are owner of email
@@ -95,7 +92,6 @@ def confirm_email(request, key):
     return renderErrorMessage(request, hero_title)
 
 @login_required
-@csrf_exempt
 def claim_email(request):
     """
     Endpoint to request an email be added to you profile
@@ -110,7 +106,6 @@ def claim_email(request):
     return JSONResponse(payload)
 
 @login_required
-@csrf_exempt
 def feedback(request):
     """
     Endpoint to request an email be added to you profile
