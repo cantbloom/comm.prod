@@ -95,7 +95,6 @@ def admin(request):
 ###### request endpoints #######
 
 @login_required
-@csrf_exempt
 def end_tour(request):
     user_profile = request.user.profile
     user_profile.use_tour = False
@@ -103,7 +102,6 @@ def end_tour(request):
     return JSONResponse("Success!")
 
 @login_required
-@csrf_exempt
 def vote (request):
     types = ['commprod' , 'correction']
     valid_votes = ['-1','1'] #patlsotw
@@ -137,7 +135,6 @@ def vote (request):
     return JSONResponse(payload)
 
 @login_required
-@csrf_exempt
 def favorite(request):
     payload = {'success' : False}
     id = request.POST.get("id", None)
@@ -180,7 +177,6 @@ def profile_data(request):
     return JSONResponse(response_data)
 
 @login_required
-@csrf_exempt
 def correction(request):
     user = request.user
     cp_id = request.POST.get('cp_id', None)
