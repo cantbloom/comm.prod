@@ -134,11 +134,9 @@ $(function(){
 
 	$commprod_timeline.on('voteSent', function(e, d){
 		//ignore if clicked on a commprod that isn't first
-		if (!$(e.target).is('.commprod-container.first')){
-			return;
+		if ($(e.target).is('.commprod-container.first')){
+			$commprod_timeline.trigger('needsCommprod');
 		}
-
-		$commprod_timeline.trigger('needsCommprod');
 	});
 
 	requestProds(function(){
