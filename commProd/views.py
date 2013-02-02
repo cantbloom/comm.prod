@@ -112,8 +112,6 @@ def vote (request):
     type = request.POST.get("type", None)
     user = request.user
 
-    print "/*vote*/" + " user: " + user.username + " id: " + id + " type: " + type + " score: " + score + " /*vote*/"
-
     if type in types and score and id:
         if type == "commprod":
             rating, obj = vote_commprod(id, score, user)

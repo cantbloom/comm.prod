@@ -248,17 +248,17 @@ $(function(){
             }
         }
     });
-    $(document).on('click', '.vote-container .vote', voteSelection)
-    $('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover()
+    $(document).on('click', '.vote-container .vote', voteSelection);
+    $('.permalink').hover(detailsCorrectionText, detailsDefaultText).popover();
 
     $('.fav').hover(favToggle).click(favVote);
 
     $(document).on('click', '.claim-profile', openClaimProfile)
-    $(document).on('click', '#email-claim-confirm', submitClaimProfile)
+    $(document).on('click', '#email-claim-confirm', submitClaimProfile);
 
-    $(document).on('click', '#submit_feedback', submitFeedBack)
+    $(document).on('click', '#submit_feedback', submitFeedBack);
 
-    $(document).on('typeaheadItemSelected', dropitemSelected)
+    $(document).on('typeaheadItemSelected', dropitemSelected);
 
     $(document).on('voteSent', postVote);
 
