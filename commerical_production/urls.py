@@ -16,6 +16,9 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('commerical_production.views',
+    url(r'^googlead6c3c617c310b08.html$', 'google_verify'),
+
+
     url(r'^register/(?P<key>\w+)', 'register'),
     url(r'^confirm_email/(?P<key>\w+)', 'confirm_email'),
     url(r'^claim_email$', 'claim_email'),

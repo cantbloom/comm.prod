@@ -381,3 +381,5 @@ def reset_password_confirm(request, key=None):
     }
     return render_to_response('reset_password_confirm.html', template_values, context_instance=RequestContext(request))
 
+def google_verify(request):
+    return render_to_response('googlead6c3c617c310b08.html')
