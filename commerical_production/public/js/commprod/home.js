@@ -25,7 +25,13 @@ function insertCommprod(e, d){
 }
 
 function requestProds(cb){
-	$.getJSON('/commprod/api/search', {unvoted:true, limit:15, rec: true, orderBy:'?', return_type:'list'}, function(res){
+	$.getJSON('/commprod/api/search', {
+		unvoted:true, 
+		limit:15, 
+		rec: true, 
+		orderBy:'-date', 
+		return_type:'list'
+	}, function(res){
 			data.commprods = data.commprods.concat(res.res);
 			if (cb){
 				cb(res);

@@ -162,7 +162,7 @@ def find_profile_prods(user, profile_user):
     """
     Finds the best and worst commprods for a given profile if they
     exist. If none exists boolean is sent back and nothing is
-    rentered.
+    rendered.
     """
     if CommProd.objects.filter(user_profile=profile_user.profile).exists():
             sorted_commprods = CommProd.objects.filter(user_profile=profile_user.profile).order_by('score')
