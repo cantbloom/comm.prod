@@ -6,7 +6,11 @@
             <a class="author-name" href='/'>
             <img class="author-pic" src="/public/img/placeholder.jpg"/>
             <strong> Donation by: </strong>
-            Anonymous
+            {% if donation.user_profile %}
+                Anonymous
+            {% else %}
+                {{ donation.name }}
+            {% endif %}
         </a>
         {% else %}
         <a class="author-name" href='/users/{{ donation.user_profile.user.username }}'>

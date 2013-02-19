@@ -106,6 +106,7 @@
                                             Send Feedback
                                         </a>
                                     </li>
+                                        
                                         {% if user.is_authenticated %}
                                             <li class="divider"></li>
                                             <li>
@@ -124,6 +125,9 @@
                         {% else %}
                             <li class={{ nav_donate }}>
                                  <a href="/donations/donate">Donate</a>
+                            </li> 
+                            <li>
+                                <a href="/login"> Login </a>
                             </li>
                         {% endif %}
                         </ul>

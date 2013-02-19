@@ -1,41 +1,45 @@
 // this identifies your website in the createToken call below
 Stripe.setPublishableKey(stripe_public_key);
 
-function stripeResponseHandler(status, response) {
-    if (response.error) {
+function stripeResponseHandler(res) {
+    if (res.error) {
         // show the errors on the form
-        $(".payment-errors").text(response.error.message).removeClass('hidden');
-        $(".submit-button").removeAttr("disabled");
+        $(".payment-errors").text(res.error.message).removeClass('hidden');
     } else {
-        var form$ = $("#payment-form");
+        var $form = $("#payment-form");
         // token contains id, last4, and card type
-        var token = response['id'];
+        var token = res.id;
         // insert the token into the form so it gets submitted to the server
-        form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+        $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
         // and submit
-        form$.get(0).submit();
+        $form.get(0).submit();
     }
 }
 
-function submitPaymentForm(e) {
-    // disable the submit button to prevent repeated clicks
-    $('.submit-button').attr("disabled", "disabled").tooltip('hide');
-    $('.payment-errors').addClass('hidden')
-    // createToken returns immediately - the supplied callback submits the form if there are no errors
-    Stripe.createToken({
-        number: $('.card-number').val(),
-        cvc: $('.card-cvc').val(),
-        exp_month: $('.card-expiry-month').val(),
-        exp_year: $('.card-expiry-year').val()
-    }, stripeResponseHandler);
-    return false; // submit from callback
-}
+function submitPaymentForm(e){
+    $('.payment-errors').addClass('hidden');
+      var token = stripeResponseHandler;
+      var amount = parseInt($("#id_amount").val());
+      var description = $("#id_reason").val();
+      if (!isNaN(amount)) {
+        description += " ($" + amount + ".00)"
+        amount = amount*100;//in cents
+      } else {
+        amount = null
+      }
+      StripeCheckout.open({
+        key:         stripe_public_key,
+        amount:      amount, 
+        name:        "Burton Third Online",
+        description:  description,
+        image:       "/public/img/btb-logo.png",
+        panelLabel:  "Checkout",
+        token:       token,
+      });
 
-function addTips() {
-    makeTip('submit_button', "Your card information never touches our servers and is handled entirely by the Stripe API. Fear not :)", 'right', 'hover');
-}
+      return false;
+    }
 
 $(document).ready(function() {
-    addTips(); // on submit button
-    $("#payment-form").submit(submitPaymentForm);
+    $('#customButton').click(submitPaymentForm);
 });
