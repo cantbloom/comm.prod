@@ -30,7 +30,13 @@ def home(request):
     tot_donations = donations.count() + anon_donations.count()
     sum_donations = 0
     if tot_donations != 0:
-        sum_donations =  donations.aggregate(Sum('amount'))['amount__sum'] + anon_donations.aggregate(Sum('amount'))['amount__sum']
+        donations_sum =  donations.aggregate(Sum('amount'))['amount__sum']
+        anon_sum = anon_donations.aggregate(Sum('amount'))['amount__sum']
+        if not donations_sum:
+            donations_sum = 0
+        if not anon_sum:
+            anon_sum = 0
+        sum_donations = donations_sum + anon_sum
     template_values = {
         'page_title' : "Past Donations",
         'nav_donate' : "active",
