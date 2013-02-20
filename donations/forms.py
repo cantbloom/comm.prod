@@ -8,10 +8,13 @@ class DonateForm(forms.Form):
     """
     Take a donation from a user with an account.
     """
-    # ABC = 'ABC Party ($10)'
-    SPEAK = "Speakeasy Party"
+    # ABC = 'ABC'
+    # HOLIDAY = 'Holiday Party'
+    SPEAK = "Speakeasy"
+    DTYD = "DTYD"
     GEN_FUN = 'General floor donation'
     DONATION_CHOICES = (
+        (DTYD, DTYD),
         (SPEAK, SPEAK),
         (GEN_FUN, GEN_FUN),
     )
