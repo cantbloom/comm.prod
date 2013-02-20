@@ -35,7 +35,7 @@ def home(request):
         'num_commprods': CommProd.objects.all().count(),
         'num_votes': Rating.objects.all().count(),
         'worst_user': profiles[0],
-        'best_user': profiles.reverse()[0],
+        'best_user': profiles[len(profiles)-1],
         'stats' : 'True'
 
     }
@@ -111,8 +111,6 @@ def vote (request):
     id = request.POST.get("id", None)
     type = request.POST.get("type", None)
     user = request.user
-
-    print "/*vote*/" + " user: " + user.username + " id: " + id + " type: " + type + " score: " + score + " /*vote*/"
 
     if type in types and score and id:
         if type == "commprod":

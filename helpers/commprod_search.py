@@ -55,7 +55,8 @@ def commprod_search(page=0, cp_id=None, query=None, orderBy='date', direction='h
         if limit:
             commprods = commprods[:limit]
             
-    except:
+    except Exception as e:
+        print e
         commprods = CommProd.objects.all()
 
     return commprods.select_related()

@@ -14,6 +14,7 @@ class Command(NoArgsCommand):
             if user.email not in admins:
                 self.stdout.write('Updating %s\n' % user.username)
                 user.active = False
+                user.set_unusable_password()
                 user.save()
 
         self.stdout.write('Update complete.\n')

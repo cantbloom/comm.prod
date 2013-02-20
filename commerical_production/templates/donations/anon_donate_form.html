@@ -1,3 +1,9 @@
+{% if anon == "True" %}
+<p class="controls">
+    <label class="control-label" for="id_name">Name:</label>
+    {{ form.name }}
+</p>
+{% endif %}
 <p class="controls">
     <label class="control-label" for="id_reason">Reason:</label>
     {{ form.reason }}

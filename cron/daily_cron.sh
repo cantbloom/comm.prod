@@ -10,7 +10,7 @@ python manage.py update_trend_data
 #python manage.py update_user_list
 #git commit -am "dailycron: update to user_list"
 
-#git pull heroku master
+git pull heroku master
 #git push heroku master
 #git push git master
 

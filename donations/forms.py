@@ -8,10 +8,11 @@ class DonateForm(forms.Form):
     """
     Take a donation from a user with an account.
     """
-    ABC = 'ABC Party ($10)'
+    # ABC = 'ABC Party ($10)'
+    SPEAK = "Speakeasy Party"
     GEN_FUN = 'General floor donation'
     DONATION_CHOICES = (
-        (ABC, ABC),
+        (SPEAK, SPEAK),
         (GEN_FUN, GEN_FUN),
     )
     reason = forms.ChoiceField(choices=DONATION_CHOICES)
@@ -23,5 +24,6 @@ class AnonDonateForm(forms.Form):
     """ 
     Anonymous donation form.
     """
+    name = forms.CharField(widget=forms.TextInput(attrs={ "autocomplete" : "off"}), label="", initial='Anonymous')
     reason = forms.CharField(widget=forms.TextInput(attrs={ "autocomplete" : "off"}), label="")
     amount = forms.IntegerField(widget=forms.TextInput(attrs={'class' : 'span1', "autocomplete" : "off"}), label="")

@@ -1,9 +1,10 @@
 {% extends "snippets/hero_err_template.html" %}
+{% load humanize %}
 
 {% block hero_title %} Success! {% endblock%}
 {% block hero_content %} 
     <p> 
-        Thanks for the donation!
+        You just dontated <strong> ${{ amount|intcomma }}.00 </strong> for <strong> {{ reason }}</strong>. Thanks!
     </p>
     <p> 
         {% if user.is_authenticated %}

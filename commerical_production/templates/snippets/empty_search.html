@@ -1,3 +1,8 @@
 <div class='row commprod-container'>
-    <h1 class='empty-search'> A btb "nothing to see here" comm.prod </h1>
+    <h2 class='empty-search'> 
+        {% if msg %} 
+            {{ msg|safe }} 
+        {% else %} A btb "nothing to see here" comm.prod 
+        {% endif %}
+    </h2>
 </div>

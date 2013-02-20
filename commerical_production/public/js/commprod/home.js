@@ -25,7 +25,13 @@ function insertCommprod(e, d){
 }
 
 function requestProds(cb){
-	$.getJSON('/commprod/api/search', {unvoted:true, limit:15, rec: true, orderBy:'?', return_type:'list'}, function(res){
+	$.getJSON('/commprod/api/search', {
+		unvoted:true, 
+		limit:15, 
+		rec: true, 
+		orderBy:'-date', 
+		return_type:'list'
+	}, function(res){
 			data.commprods = data.commprods.concat(res.res);
 			if (cb){
 				cb(res);
@@ -134,11 +140,9 @@ $(function(){
 
 	$commprod_timeline.on('voteSent', function(e, d){
 		//ignore if clicked on a commprod that isn't first
-		if (!$(e.target).is('.commprod-container.first')){
-			return;
+		if ($(e.target).is('.commprod-container.first')){
+			$commprod_timeline.trigger('needsCommprod');
 		}
-
-		$commprod_timeline.trigger('needsCommprod');
 	});
 
 	requestProds(function(){

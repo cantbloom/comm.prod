@@ -15,7 +15,7 @@ from os import environ as env
 from itertools import chain
 from operator import attrgetter
 
-
+THANKS_MSG = """a btb "You can thank Darragh at Stripe for making it extra easy to donate your money." comm.prod"""
 
 @login_required
 def home(request):
@@ -27,10 +27,16 @@ def home(request):
     sorted_donations = sorted(list(chain(donations, anon_donations)), key=attrgetter('date'), reverse=True)
     page = request.GET.get('page', 1)
     rendered_donations = donation_renderer(sorted_donations, page)
-    tot_donations = donations.count()
+    tot_donations = donations.count() + anon_donations.count()
     sum_donations = 0
     if tot_donations != 0:
-        sum_donations =  donations.aggregate(Sum('amount'))['amount__sum']
+        donations_sum =  donations.aggregate(Sum('amount'))['amount__sum']
+        anon_sum = anon_donations.aggregate(Sum('amount'))['amount__sum']
+        if not donations_sum:
+            donations_sum = 0
+        if not anon_sum:
+            anon_sum = 0
+        sum_donations = donations_sum + anon_sum
     template_values = {
         'page_title' : "Past Donations",
         'nav_donate' : "active",
@@ -70,7 +76,7 @@ def user_donate(request, template_values):
             is_anonymous = form.cleaned_data['is_anonymous']
             user_profile = request.user.profile
 
-            description = 'Donation of $%s by %s on %s for %s' % (amount, user_profile.user.username, str(datetime.now()), reason)
+            description = 'Donation of $%s.00 by %s on %s for %s' % (amount, user_profile.user.username, str(datetime.now()), reason)
 
             # set your secret key: remember to change this to your live secret key in production
             # see your keys here https://manage.stripe.com/account
@@ -107,12 +113,20 @@ def user_donate(request, template_values):
             donation = Donation(reason=reason, amount=amount, is_anonymous=is_anonymous, user_profile=user_profile)
             donation.save()
 
+            template_values = {
+                "amount" : amount,
+                "reason" : reason,
+            }
+
             return render_to_response('donations/donate_success.html', template_values, context_instance=RequestContext(request))
 
     else:
         form = DonateForm()
 
-    template_values['form'] = form
+    template_values.update({
+        'form' : form,
+        'msg' : THANKS_MSG
+    })
 
     return render_to_response('donations/donate.html', template_values, context_instance=RequestContext(request))
 
@@ -125,8 +139,9 @@ def anon_donate(request, template_values):
         if form.is_valid():
             reason = form.cleaned_data['reason']
             amount = form.cleaned_data['amount']
+            name = form.cleaned_data['name']
 
-            description = 'AnonDonation of $%s on %s for %s' % (amount, str(datetime.now()), reason)
+            description = 'AnonDonation by %s of $%s.00 on %s for %s' % (name, amount, str(datetime.now()), reason)
 
             # set your secret key: remember to change this to your live secret key in production
             # see your keys here https://manage.stripe.com/account
@@ -144,14 +159,22 @@ def anon_donate(request, template_values):
             )
             
             #charge has gone through successfully
-            donation = AnonDonation(reason=reason, amount=amount)
+            donation = AnonDonation(name=name, reason=reason, amount=amount)
             donation.save()
+
+            template_values = {
+                "amount" : amount,
+                "reason" : reason,
+            }
 
             return render_to_response('donations/donate_success.html', template_values, context_instance=RequestContext(request))
 
     else:
         form = AnonDonateForm()
 
-    template_values['form'] = form
+    template_values.update({
+        'form' : form,
+        'msg' : THANKS_MSG
+    })
 
     return render_to_response('donations/donate.html', template_values, context_instance=RequestContext(request))
