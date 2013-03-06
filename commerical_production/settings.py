@@ -93,6 +93,13 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+##### settings for django-compressor
+# COMPRESS_ENABLED = True ##todo move to static files
+COMPRESS_CSS_FILTERS = (
+    'compressor.filters.template.TemplateFilter',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -155,12 +162,17 @@ INSTALLED_APPS = (
      'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    
+    # third party
+    'compressor',
     'django_evolution',
     'pagination',
+    'gunicorn',
+    
+    #comm.prod
     'migrations',
     'donations',
     'common',
-    'gunicorn',
     'commProd',
     'helpers',
     'cron',
