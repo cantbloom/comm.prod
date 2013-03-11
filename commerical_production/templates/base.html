@@ -29,13 +29,13 @@
         </script>
 
         <!--  styles -->
-        {% compress css %}
+        {# compress css #}
         {% include_style "bootstrap.min" %}
         {% include_style "bootstrap-responsive" %}
         {% include_style "base" %}
         {% include_style "home" %}
         {% block styles %} {% endblock%}
-        {% endcompress %}
+        {# endcompress #}
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -185,7 +185,7 @@
     </div> -->
 
         <!--  javascript -->
-        {% compress js %}
+        {# compress js #}
         {% if user.is_authenticated %}
             {% include_script 'user_list' %}
         {% else %}
@@ -227,7 +227,7 @@
         <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 
         {% block scripts %}
-        {% endblock %}
+        {# endblock #}
         <script type="text/javascript">
             {% if user.profile.use_tour %}
                 var use_tour = true;
