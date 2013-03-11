@@ -16,7 +16,7 @@ if [ $MASTER == "y" ] ; then
     git checkout master
     git fetch staging
     git reset --hard staging/master
-    echo "Pusing to origin master"
+    echo "Pushing to origin master"
     git push origin master --force
 fi
 

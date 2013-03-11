@@ -227,7 +227,7 @@
         <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 
         {% block scripts %}
-        {# endblock #}
+        {% endblock %}
         <script type="text/javascript">
             {% if user.profile.use_tour %}
                 var use_tour = true;
@@ -235,6 +235,6 @@
                 var use_tour = false;
             {% endif %}
         </script>
-        {% endcompress %}
+        {# endcompress #}
     </body>
 </html>
