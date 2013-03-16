@@ -59,18 +59,18 @@ def gravatar_for_email(email, size=None, rating=None, img_url=None):
     #if we have an image uploaded for them
     if img_url != settings.DEFAULT_IMG:
         return img_url
-    else:
-        img_url = settings.BASE_URL_PROD + img_url
-        parameters = [p for p in (
-            ('d', img_url or GRAVATAR_DEFAULT_IMAGE),
-            ('s', size or GRAVATAR_DEFAULT_SIZE),
-            ('r', rating or GRAVATAR_DEFAULT_RATING),
-        ) if p[1]]
 
-        if parameters:
-            gravatar_url += '?' + urllib.urlencode(parameters, doseq=True)
+    img_url = settings.BASE_URL_PROD + img_url
+    parameters = [p for p in (
+        ('d', img_url or GRAVATAR_DEFAULT_IMAGE),
+        ('s', size or GRAVATAR_DEFAULT_SIZE),
+        ('r', rating or GRAVATAR_DEFAULT_RATING),
+    ) if p[1]]
 
-        return escape(gravatar_url)
+    if parameters:
+        gravatar_url += '?' + urllib.urlencode(parameters, doseq=True)
+
+    return escape(gravatar_url)
 
 
 @register.simple_tag
