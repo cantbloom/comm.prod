@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load filters %}
+{% load gravatar %}
 
 {% block styles %}
     {% include_style "edit_profile" %}
@@ -24,8 +25,8 @@
         {% include 'snippets/alert_box.html' %}
         <input type="hidden" name="form_type" value="pic">
 
-        <input type='hidden' name='pic_url' value="{{ user.profile.pic_url }}" id='id_pic_url'>
-        <img id="profile_pic" class="author-pic" src="{{ user.profile.pic_url }}">
+        <input type='hidden' name='pic_url' value="{% gravatar_for_user user 40 %}" id='id_pic_url'>
+        <img id="profile_pic" class="author-pic" src="{% gravatar_for_user user 40 %}">
 
         <input class="btn" name="upload" id="upload" type="button" value="Edit profile picture"/>
         <input class="btn btn-warning disabled" disabled type="submit" value="Save" data-loading-text="Saving..." id="profile-pic-save"/>

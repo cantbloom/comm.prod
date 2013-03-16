@@ -1,11 +1,12 @@
 {% load trim %}
 {% load humanize %}
+{% load gravatar %}
 {# assignment for commprod timeline #}
 
 <div id="{{ obj_type }}_object_{{ commprod.id }}" class='row commprod-container {{ obj_type }}' data-id="{{ commprod.id }}" data-type='{{ obj_type }}'>
 	<div class="author-container">
 		<a class="author-name" href="/users/{{ commprod.user_profile.user.username }}">
-			<img class="author-pic" src="{{ commprod.user_profile.pic_url }}"/>
+			<img class="author-pic" src="{% gravatar_for_user commprod.user_profile.user 40 %}"/>
 			{% if obj_type == "correction" %}
 			<strong> Correction by: {{ commprod.user_profile.user.username }} </strong> 
 			{% elif commprod.user_profile.user.is_active and not commprod.user_profile.user.first_name == ''%}

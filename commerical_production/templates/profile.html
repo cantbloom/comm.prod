@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load filters %}
+{% load gravatar %}
 
 {% block styles %}
 {% include_style 'profile' %}
@@ -9,7 +10,7 @@
 
     <div class="row {{header_classes}} clearfix">
         <h1 id='username' class="pull-left">
-            <img id="profile_pic" class="author-pic" src="{{ profile_user.profile.pic_url }}">
+            <img id="profile_pic" class="author-pic" src="{% gravatar_for_user profile_user 40 %}">
             {{ header }}
 
             {% if profile_user.profile.send_mail == 0 %}

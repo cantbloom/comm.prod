@@ -1,5 +1,6 @@
 {% load filters %}
 {% load compress %}
+{% load gravatar %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,9 +87,17 @@
                             <li class={{ nav_donate }}>
                                  <a href="/donations/donate">Donate</a>
                             </li>
+                            <li>
+                                <form id="navbar-search" class="navbar-search">
+                                    <input type="search" id="search_bar" class="search-query" placeholder="Find people..." autocomplete="off"> 
+                                </form>
+                            </li>
+                        </ul>
+                        <ul class="nav pull-right topbar">
                             <li id="account_dropdown" class="dropdown {{ nav_account }}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    Account<b class="caret"></b>
+                                    <img src="{% gravatar_for_user user 24 %}" class="nav-prof-img">
+                                    {{user.username}} <i class="icon-cog icon-white"></i>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
@@ -100,7 +109,7 @@
                                     <li>
                                         <a href="/edit">
                                             <i class="icon-wrench"></i>
-                                            Edit Profile
+                                            Settings
                                         </a>
                                     </li>
                                     <li>
@@ -117,14 +126,8 @@
                                             </li>
                                         {% endif %}
                                     </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav pull-right topbar">
-                            <li>
-                                <form id="navbar-search" class="navbar-search">
-                                    <input type="search" id="search_bar" class="search-query" placeholder="Find people..." autocomplete="off"> 
-                                </form>
-                            </li>
+                                </li>
+
                         {% else %}
                             <li class={{ nav_donate }}>
                                  <a href="/donations/donate">Donate</a>
@@ -156,25 +159,29 @@
                             <ul class="nav pull-right">
                                 <li>
                                     <a href="http://github.com/cantbloom">
-                                        A CantBloom Project
-                                    </a>
-                                </li>
-                                <li> <a>|</a> </li>
-                                <li>
-                                    <a href="mailto:avianap@mit.edu">
-                                        Avi Ideas
-                                    </a>
-                                </li>
-                                <li> <a>|</a> </li>
-                                <li>
-                                    <a data-toggle="modal" href="#send-feedback-modal">
-                                        Contact
+                                        <img class="icon" src="https://github.com/favicon.ico">
+                                        cantbloom project
                                     </a>
                                 </li>
                                 <li> <a>|</a> </li>
                                 <li>
                                     <a href="twitter.com/cantbloom">
+                                        <img src="https://si0.twimg.com/favicons/favicon.ico">
                                         @cantbloom
+                                    </a>
+                                </li>
+                                <li> <a>|</a> </li>
+                                <li>
+                                    <a data-toggle="modal" href="#send-feedback-modal">
+                                        <i class="icon-envelope icon-white"></i>
+                                        contact
+                                    </a>
+                                </li>
+                                <li> <a>|</a> </li>
+                                <li>
+                                    <a href="mailto:avianap@mit.edu">
+                                         <i class="icon-heart icon-white"></i>
+                                        avi ideas
                                     </a>
                                 </li>
                             </ul>

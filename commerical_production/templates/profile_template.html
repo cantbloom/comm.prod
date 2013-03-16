@@ -1,10 +1,11 @@
+{% load gravatar %}
 <!--user_profile variable ref UserProfile model -->
-<div id="user_{{ user.id }}" class='row commprod-container' data-id="{{ user_profile.user.id }}">
+<div id="user_{{ user_profile.user.username }}" class='row commprod-container' data-id="{{ user_profile.user.id }}">
     <div class="author-container pull-left">
         <a class="author-name" href='/users/{{ user_profile.user.username }}'>
-            <img class="author-pic" src="{{ user_profile.pic_url }}"/>
+            <img class="author-pic" src="{% gravatar_for_user user_profile.user 40 %}"/>
             {% if user_profile.user.is_active and not user_profile.user.first_name == ''%}
-            {{ user_profile.user.first_name }} {{ user_profile.user.last_name }}
+            {{ user_profile.user.get_full_name }}
             {% else %}
             {{ user_profile.user.username }}
             {% endif %}

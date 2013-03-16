@@ -4,7 +4,7 @@ from os import environ as env
 #custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
-BASE_URL = 'http://www.burtonthird.com'
+BASE_URL_PROD = 'http://www.burtonthird.com'
 BASE_URL_DEV = 'http://www.burtonthird.com'
 
 DEBUG = (not env['DEBUG'] == 'False') #convert from sting to bool
@@ -186,6 +186,10 @@ EMAIL_HOST_USER = env['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = env['PASSWORD']
 EMAIL_PORT = env['EMAIL_PORT']
 EMAIL_USE_TLS = env['EMAIL_USE_TLS']
+
+# gravatar settings
+GRAVATAR_IMG_CLASS = "author-pic"
+DEFAULT_IMG = "/public/img/placeholder.jpg"
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
