@@ -15,7 +15,7 @@
         </a>
         {% else %}
         <a class="author-name" href='/users/{{ donation.user_profile.user.username }}'>
-            <img class="author-pic" src="{% gravatar_for_user user 40 %}"/>
+            <img class="author-pic" src="{% gravatar_for_user donation.user_profile.user 40 %}"/>
             <strong> Donation by: </strong>
             {% if donation.user_profile.user.is_active and not donation.user_profile.user.first_name == ''%}
                 {{ donation.user_profile.user.first_name }} {{ donation.user_profile.user.last_name }}
