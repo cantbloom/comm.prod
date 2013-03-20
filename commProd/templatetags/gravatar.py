@@ -56,7 +56,6 @@ def gravatar_for_email(email, size=None, rating=None, img_url=None):
     """
     gravatar_url = "%savatar/%s" % (GRAVATAR_URL_PREFIX,
             _get_gravatar_id(email))
-    print "email:", email =="", "img_url:", img_url
     #if we have an image uploaded for them
     if img_url != settings.DEFAULT_IMG or email == "":
         return img_url

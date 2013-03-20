@@ -85,27 +85,27 @@ def user_donate(request, template_values):
             # get the credit card details submitted by the form
             token = request.POST['stripeToken']
 
-            customer_id = user_profile.stripe_customer_id
+            # customer_id = user_profile.stripe_customer_id
 
-            if customer_id == "no_id": #user did not save card in the past 
+            # if customer_id == "no_id": #user did not save card in the past 
 
-                # create a Customer
-                customer = stripe.Customer.create(
-                    card=token,
-                    description=description
-                )
+            #     # create a Customer
+            #     customer = stripe.Customer.create(
+            #         card=token,
+            #         description=description
+            #     )
 
-                customer_id = customer.id
+            #     customer_id = customer.id
 
-                # save the customer ID in your database so you can use it later
-                user_profile.stripe_customer_id = customer_id
-                user_profile.save()
+            #     # save the customer ID in your database so you can use it later
+            #     user_profile.stripe_customer_id = customer_id
+            #     user_profile.save()
 
             # charge the Customer
             stripe.Charge.create(
                 amount=amount*100, # in cents
                 currency="usd",
-                customer=customer_id,
+                card=token,
                 description=description
             )
             

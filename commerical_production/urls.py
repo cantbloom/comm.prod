@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^logout$', 'django.contrib.auth.views.logout', {'template_name': 'logout.html'}),
     url(r'^commprod/', include('commProd.urls')),
     url(r'^donations/', include('donations.urls')),
+    url(r'^donate/', 'donations.views.donate'),
     url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain")),
 )
 
