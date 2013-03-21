@@ -15,7 +15,6 @@ from os import environ as env
 from itertools import chain
 from operator import attrgetter
 
-THANKS_MSG = """a btb "You can thank Darragh at Stripe for making it extra easy to donate your money." comm.prod"""
 
 @login_required
 def home(request):
@@ -125,7 +124,6 @@ def user_donate(request, template_values):
 
     template_values.update({
         'form' : form,
-        'msg' : THANKS_MSG
     })
 
     return render_to_response('donations/donate.html', template_values, context_instance=RequestContext(request))
@@ -174,7 +172,6 @@ def anon_donate(request, template_values):
 
     template_values.update({
         'form' : form,
-        'msg' : THANKS_MSG
     })
 
     return render_to_response('donations/donate.html', template_values, context_instance=RequestContext(request))

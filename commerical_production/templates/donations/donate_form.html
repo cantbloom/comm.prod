@@ -1,5 +1,5 @@
 {% include 'donations/anon_donate_form.html' with form=form anon=anon %}
-<p class="controls">
-    <label class="control-label" for="id_is_anonymous">Anonymous Donation?</label>
-    {{ form.is_anonymous }}
+<p class="controls anon-input">
+    <label class="control-label" for="id_is_anonymous">
+    {{ form.is_anonymous }} Anonymous Donation?</label>
 </p>

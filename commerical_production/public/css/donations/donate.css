@@ -3,18 +3,17 @@
 }
 
 .controls {
-    margin:7px;
-    margin-bottom: 7px !important; /*prepend/append */
+    margin:5px 0px;
 }
 
-.card-number {
-    width:20em;
+.amount-input {
+    margin-bottom:14px;
 }
 
-.card-cvc, .card-expiry-year{
-    width:4em;
+.anon-input {
+    margin-bottom:14px;
 }
 
-.card-expiry-month {
-    width:2em;
+.pay-with-btn {
+    margin-bottom: 0px;
 }

@@ -27,6 +27,6 @@ class AnonDonateForm(forms.Form):
     """ 
     Anonymous donation form.
     """
-    name = forms.CharField(widget=forms.TextInput(attrs={ "autocomplete" : "off"}), label="", initial='Anonymous')
+    name = forms.CharField(widget=forms.TextInput(attrs={ "autocomplete" : "off", "placeholder" : "Anonymous"}), label="")
     reason = forms.CharField(widget=forms.TextInput(attrs={ "autocomplete" : "off"}), label="")
     amount = forms.IntegerField(widget=forms.TextInput(attrs={'class' : 'span1', "autocomplete" : "off"}), label="")
