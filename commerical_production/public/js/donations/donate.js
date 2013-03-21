@@ -30,7 +30,7 @@ function submitPaymentForm(e){
       StripeCheckout.open({
         key:         stripe_public_key,
         amount:      amount, 
-        name:        "Burton Third Online",
+        name:        "Burton Third Bombers",
         description:  description,
         image:       "/public/img/btb-logo.png",
         panelLabel:  "Checkout",
