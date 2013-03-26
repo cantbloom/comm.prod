@@ -21,4 +21,4 @@ class AnonDonation(models.Model):
     amount = models.IntegerField(default=0.0)
 
     def __unicode__(self):
-        return 'AnonDonation by %s of $%s.00 on %s for %s' % (name, amount, str(datetime.now()), reason)
+        return 'AnonDonation by %s of $%s.00 on %s for %s' % (self.name, self.amount, str(self.date), self.reason)

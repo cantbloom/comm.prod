@@ -128,7 +128,7 @@ def sendRegEmail(username):
     """
     user = User.objects.get(username = username)
     if user:
-        content = registration['content'] % (user.username, settings.BASE_URL+'/register/'+user.profile.activation_key + '/')
+        content = registration['content'] % (user.username, settings.BASE_URL_PROD + '/register/' + user.profile.activation_key + '/')
         subject = registration['subject']
         emails = [user.email]
         emailUsers(subject, content, emails)
