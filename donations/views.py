@@ -28,9 +28,7 @@ def home(request):
 
     sorted_donations = sorted(list(chain(donations, anon_donations)), key=attrgetter('date'), reverse=True)
     page = request.GET.get('page', 1)
-    rendered_donations = donation_renderer(sorted_donations, page)
-    
-    donation_stats = get_donation_stats(donations, anon_donations)   
+    rendered_donations = donation_renderer(sorted_donations, page) 
 
     template_values = {
         'page_title' : "Past Donations",
@@ -38,12 +36,29 @@ def home(request):
         'donation_timeline' : rendered_donations,
     }
 
-    template_values.update(get_donation_stats(donations, anon_donations))
+    template_values.update(_get_donation_stats(donations, anon_donations))
 
     return render_to_response('donations/home.html', template_values, context_instance=RequestContext(request))
 
+def donate(request):
+    """
+    Donate page returns the form for submitting a donation
+    """ 
+    
+    template_values = {
+        'page_title' : "Make a Donation",
+        'nav_donate' : "active",
+        'stripe_public_key' : env['STRIPE_PUBLIC_KEY'],
+    }
 
-def get_donation_stats(donations=None, anon_donations=None):
+    template_values.update(_get_donation_stats())
+
+    if request.user.is_authenticated():
+        return user_donate(request, template_values)
+
+    return anon_donate(request, template_values)
+
+def _get_donation_stats(donations=None, anon_donations=None):
     """
         Helper to yield dotation stats for home and anon page
     """
@@ -71,25 +86,6 @@ def get_donation_stats(donations=None, anon_donations=None):
         "sum_donations" : sum_donations,
         "avg_donation" : int(avg_donation),
     }
-
-def donate(request):
-    """
-    Donate page returns the form for submitting a donation
-    """ 
-    
-    template_values = {
-        'page_title' : "Make a Donation",
-        'nav_donate' : "active",
-        'stripe_public_key' : env['STRIPE_PUBLIC_KEY'],
-    }
-
-    template_values.update(get_donation_stats())
-
-    if request.user.is_authenticated():
-        return user_donate(request, template_values)
-
-    return anon_donate(request, template_values)
-
 
 @login_required
 def user_donate(request, template_values):
