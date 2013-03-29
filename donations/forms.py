@@ -19,7 +19,7 @@ class DonateForm(forms.Form):
         (GEN_FUN, GEN_FUN),
     )
     reason = forms.ChoiceField(choices=DONATION_CHOICES)
-    amount = forms.IntegerField(widget=forms.TextInput(attrs={'class' : 'span1', "autocomplete" : "off"}), label="")
+    amount = forms.IntegerField(widget=forms.TextInput(attrs={'class' : 'span1', "autocomplete" : "off", "placeholder" : "33"}), label="")
     is_anonymous = forms.BooleanField(required=False, label="Anonymous Donation?")
 
 class AnonDonateForm(forms.Form):
@@ -28,5 +28,5 @@ class AnonDonateForm(forms.Form):
     Anonymous donation form.
     """
     name = forms.CharField(widget=forms.TextInput(attrs={ "autocomplete" : "off", "placeholder" : "Anonymous"}), label="")
-    reason = forms.CharField(widget=forms.TextInput(attrs={ "autocomplete" : "off"}), label="")
-    amount = forms.IntegerField(widget=forms.TextInput(attrs={'class' : 'span1', "autocomplete" : "off"}), label="")
+    reason = forms.CharField(widget=forms.TextInput(attrs={ "autocomplete" : "off", "placeholder" : "DTYD"}), label="")
+    amount = forms.IntegerField(widget=forms.TextInput(attrs={'class' : 'span1', "autocomplete" : "off", "placeholder" : "33"}), label="")

@@ -17,3 +17,7 @@
 .pay-with-btn {
     margin-bottom: 0px;
 }
+
+#id_amount {
+    text-align: right;
+}
