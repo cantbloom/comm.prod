@@ -1,0 +1,18 @@
+{% load humanize %}
+{% load filters %}
+
+
+<div class="home-statbox light-well" id="avg_donations">
+    <div class="content big centered">${{ avg_donation|intcomma }}</div>
+    <div class="footer centered">average donation</div>
+</div>
+
+<div class="home-statbox light-well" id="tot_donations">
+    <div class="content big centered">{{ tot_donations|intcomma }}</div>
+    <div class="footer centered">donations</div>
+</div>
+
+<div class="home-statbox light-well" id="sum_donations">
+    <div class="content big centered">${{ sum_donations|intcomma }}</div>
+    <div class="footer centered">donated</div>
+</div>

@@ -9,15 +9,7 @@
                     Make Donation
                 </a>
             </div>
-            <div class="home-statbox light-well" id="tot_donations">
-                <div class="content big centered">{{ tot_donations|intcomma }}</div>
-                <div class="footer centered">donations</div>
-            </div>
-
-            <div class="home-statbox light-well" id="sum_donations">
-                <div class="content big centered">${{ sum_donations|intcomma }}</div>
-                <div class="footer centered">donated</div>
-            </div>
+            {% include "donations/donation_stats.html" with tot_donations=tot_donations sum_donations=sum_donations %}
         </div>
 
         <div class="commprod-timeline-container span7">

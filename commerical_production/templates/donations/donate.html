@@ -12,8 +12,11 @@
     {% endif %}
     <!-- to display errors returned by createToken -->
     <div class='row'>
-        <span class="payment-errors alert alert-error span4 offset4 hidden"></span>
-        <div class="span4 offset4">
+        <div class="span3 offset1">
+            {% include "donations/donation_stats.html" with tot_donations=tot_donations sum_donations=sum_donations %}
+        </div>
+        <div class="span4">
+            <span class="payment-errors alert alert-error hidden"></span>
             <form id="payment-form" class="form" method='POST' action='/donations/donate/'>
 
                 <h3 class="centered"> Donate to Burton Third </h3>
@@ -39,7 +42,6 @@
             </div>
         </div>
     </div>
-    <br>
 
 {% endblock%}
 

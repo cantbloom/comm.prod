@@ -8,12 +8,13 @@ from helpers.renderers import donation_renderer
 from donations.forms import AnonDonateForm, DonateForm
 from donations.models import *
 
-import stripe
-
 from datetime import datetime
 from os import environ as env
 from itertools import chain
 from operator import attrgetter
+
+import stripe
+import math
 
 
 @login_required
@@ -21,13 +22,39 @@ def home(request):
     """
     Donation home page. Return all of the donation objects that are found.
     """
+    
     donations = Donation.objects.all()
     anon_donations = AnonDonation.objects.all()
+
     sorted_donations = sorted(list(chain(donations, anon_donations)), key=attrgetter('date'), reverse=True)
     page = request.GET.get('page', 1)
     rendered_donations = donation_renderer(sorted_donations, page)
+    
+    donation_stats = get_donation_stats(donations, anon_donations)   
+
+    template_values = {
+        'page_title' : "Past Donations",
+        'nav_donate' : "active",
+        'donation_timeline' : rendered_donations,
+    }
+
+    template_values.update(get_donation_stats(donations, anon_donations))
+
+    return render_to_response('donations/home.html', template_values, context_instance=RequestContext(request))
+
+
+def get_donation_stats(donations=None, anon_donations=None):
+    """
+        Helper to yield dotation stats for home and anon page
+    """
+    if not donations:
+        donations = Donation.objects.all()
+    if not anon_donations:
+        anon_donations = AnonDonation.objects.all()
+    
     tot_donations = donations.count() + anon_donations.count()
     sum_donations = 0
+    avg_donation = 0
     if tot_donations != 0:
         donations_sum =  donations.aggregate(Sum('amount'))['amount__sum']
         anon_sum = anon_donations.aggregate(Sum('amount'))['amount__sum']
@@ -36,25 +63,27 @@ def home(request):
         if not anon_sum:
             anon_sum = 0
         sum_donations = donations_sum + anon_sum
-    template_values = {
-        'page_title' : "Past Donations",
-        'nav_donate' : "active",
-        'donation_timeline' : rendered_donations,
-        'tot_donations' : tot_donations,
-        'sum_donations' : sum_donations,
-    }
+        avg_donation = math.ceil(float(sum_donations)/tot_donations)
 
-    return render_to_response('donations/home.html', template_values, context_instance=RequestContext(request))
+
+    return {
+        "tot_donations": tot_donations, 
+        "sum_donations" : sum_donations,
+        "avg_donation" : int(avg_donation),
+    }
 
 def donate(request):
     """
     Donate page returns the form for submitting a donation
-    """
+    """ 
+    
     template_values = {
         'page_title' : "Make a Donation",
         'nav_donate' : "active",
-        'stripe_public_key' : env['STRIPE_PUBLIC_KEY']
+        'stripe_public_key' : env['STRIPE_PUBLIC_KEY'],
     }
+
+    template_values.update(get_donation_stats())
 
     if request.user.is_authenticated():
         return user_donate(request, template_values)
