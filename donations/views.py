@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.db.models import Sum
 
 from helpers.renderers import donation_renderer
+from helpers.view_helpers import _get_donation_stats
 
 from donations.forms import AnonDonateForm, DonateForm
 from donations.models import *
@@ -14,8 +15,6 @@ from itertools import chain
 from operator import attrgetter
 
 import stripe
-import math
-
 
 @login_required
 def home(request):
@@ -57,35 +56,6 @@ def donate(request):
         return user_donate(request, template_values)
 
     return anon_donate(request, template_values)
-
-def _get_donation_stats(donations=None, anon_donations=None):
-    """
-        Helper to yield dotation stats for home and anon page
-    """
-    if not donations:
-        donations = Donation.objects.all()
-    if not anon_donations:
-        anon_donations = AnonDonation.objects.all()
-    
-    tot_donations = donations.count() + anon_donations.count()
-    sum_donations = 0
-    avg_donation = 0
-    if tot_donations != 0:
-        donations_sum =  donations.aggregate(Sum('amount'))['amount__sum']
-        anon_sum = anon_donations.aggregate(Sum('amount'))['amount__sum']
-        if not donations_sum:
-            donations_sum = 0
-        if not anon_sum:
-            anon_sum = 0
-        sum_donations = donations_sum + anon_sum
-        avg_donation = math.ceil(float(sum_donations)/tot_donations)
-
-
-    return {
-        "tot_donations": tot_donations, 
-        "sum_donations" : sum_donations,
-        "avg_donation" : int(avg_donation),
-    }
 
 @login_required
 def user_donate(request, template_values):

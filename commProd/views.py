@@ -17,6 +17,7 @@ from helpers.admin.utils import createUser
 from helpers.query_managers import commprod_query_manager, vs_data_manager, trend_data_manager, correction_query_manager
 from helpers.link_activator import get_active_page
 from helpers.urlize_email_content import urlize_email_content
+
 from os import environ as env
 
 
@@ -26,6 +27,7 @@ def home(request):
     Landing page, top ten rated comm prods + ten newest commprods
     """
     profiles = UserProfile.objects.order_by('score')
+
     template_values = {
         'page_title' : "Vote on these comm.prods we think you'll like",
         'nav_commprod' : "active",

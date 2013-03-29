@@ -1,4 +1,5 @@
 from commProd.models import *
+from donations.models import *
 
 from django.template import RequestContext
 from django.shortcuts import render_to_response, HttpResponse
@@ -11,7 +12,10 @@ from helpers.commprod_search import commprod_search
 from common.constants import REGEX
 
 from datetime import date, datetime, timedelta
-import random, re
+
+import random
+import re
+import math
 
 def getRandomUsername(user):
     """
@@ -138,3 +142,32 @@ def get_day_trend(profile, num_days=30):
     else:
       old_score = 0
     return profile.score - old_score
+
+def _get_donation_stats(donations=None, anon_donations=None):
+    """
+        Helper to yield dotation stats for home and anon page
+    """
+    if not donations:
+        donations = Donation.objects.all()
+    if not anon_donations:
+        anon_donations = AnonDonation.objects.all()
+    
+    tot_donations = donations.count() + anon_donations.count()
+    sum_donations = 0
+    avg_donation = 0
+    if tot_donations != 0:
+        donations_sum =  donations.aggregate(Sum('amount'))['amount__sum']
+        anon_sum = anon_donations.aggregate(Sum('amount'))['amount__sum']
+        if not donations_sum:
+            donations_sum = 0
+        if not anon_sum:
+            anon_sum = 0
+        sum_donations = donations_sum + anon_sum
+        avg_donation = math.ceil(float(sum_donations)/tot_donations)
+
+
+    return {
+        "tot_donations": tot_donations, 
+        "sum_donations" : sum_donations,
+        "avg_donation" : int(avg_donation),
+    }
