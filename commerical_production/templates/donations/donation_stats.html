@@ -7,6 +7,7 @@
     <div class="footer centered">average donation</div>
 </div>
 
+{% if user.is_authenticated %}
 <div class="home-statbox light-well" id="tot_donations">
     <div class="content big centered">{{ tot_donations|intcomma }}</div>
     <div class="footer centered">total donations</div>
@@ -16,3 +17,4 @@
     <div class="content big centered">${{ sum_donations|intcomma }}</div>
     <div class="footer centered">total donated</div>
 </div>
+{% endif %}
