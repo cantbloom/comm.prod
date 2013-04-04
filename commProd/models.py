@@ -315,7 +315,7 @@ class PasswordReset(models.Model):
         return password
 
     def __unicode__(self):
-        return "Password reset request by %s on %s" % (self.user_profile.user.username, self.date)
+        return "Password reset request by %s on %s" % (self.user_profile.user.username, self.date_created)
 
 class CommProdRec(models.Model):
     user_profile = models.ForeignKey(UserProfile)
