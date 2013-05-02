@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.utils import simplejson as json
+from django.db.models import Sum
 
 from helpers.commprod_search import commprod_search
 from common.constants import REGEX
