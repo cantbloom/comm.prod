@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from django.db.models import Sum
+from django.shortcuts import redirect
 
 from helpers.renderers import donation_renderer
 from helpers.view_helpers import _get_donation_stats
@@ -77,7 +77,10 @@ def user_donate(request, template_values):
             stripe.api_key = env["STRIPE_SECRET_KEY"]
 
             # get the credit card details submitted by the form
-            token = request.POST['stripeToken']
+            token = request.POST.get('stripeToken', '')
+
+            if not token:
+                return redirect('/donate')
 
             # customer_id = user_profile.stripe_customer_id
 
