@@ -1,10 +1,12 @@
 from commProd.models import *
 from donations.models import *
 
+from annoying.decorators import render_to
+
 from django.template import RequestContext
 from django.shortcuts import render_to_response, HttpResponse
 from django.contrib.auth.models import User
-from django.core.validators import validate_email
+from django.core.validators import validate_email as _validate_email
 from django.core.exceptions import ValidationError
 from django.utils import simplejson as json
 from django.db.models import Sum
@@ -32,6 +34,7 @@ def getRandomUsername(user):
         potentials.append(user.username)
     return random.choice(potentials)
 
+@render_to("snippets/hero_err_template.html")
 def renderErrorMessage(request, hero_title, page_title='Oops'):
     """
     Give helpful messages for the retards.
@@ -42,13 +45,11 @@ def renderErrorMessage(request, hero_title, page_title='Oops'):
         prof_href = "user/" + request.user.username
     else:
         prof_href = "/"
-    template_values = {
-        'page_title': page_title,
-        'user_profile' : prof_href,
-        'hero_err_title' : hero_title,
-    }
-    return render_to_response('snippets/hero_err_template.html',
-        template_values, context_instance=RequestContext(request))
+    return dict(
+        page_title=page_title,
+        user_profile=prof_href,
+        hero_err_title=hero_title,
+    )
 
 def possesive(name, title):
     """
@@ -68,7 +69,7 @@ def addUserToQuery(request_dict, username):
     Adds the specified username to the given dictionary
     """
     d = {}
-    for key, value in request_dict.items():
+    for key, value in request_dict.iteritems():
         d[key] = value
     d['username'] = username
     return d
@@ -123,9 +124,9 @@ def JSONResponse(payload):
     """
     return HttpResponse(json.dumps(payload), mimetype='application/json')
 
-def validateEmail(email):
+def validate_email(email):
     try:
-        validate_email(email)
+        _validate_email(email)
         return True
     except ValidationError:
         return False

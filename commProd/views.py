@@ -4,9 +4,10 @@ from django.shortcuts import render_to_response
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-
 from django.template import RequestContext
 from django.http import Http404
+
+from annoying.decorators import render_to, ajax_request
 
 from commProd.models import *
 
@@ -22,13 +23,14 @@ from os import environ as env
 
 
 @login_required
+@render_to("commprod/home.html")
 def home(request):
     """
     Landing page, top ten rated comm prods + ten newest commprods
     """
     profiles = UserProfile.objects.order_by('score')
 
-    template_values = {
+    return {
         'page_title' : "Vote on these comm.prods we think you'll like",
         'nav_commprod' : "active",
         'subnav_home' : "active",
@@ -42,21 +44,21 @@ def home(request):
 
     }
 
-    return render_to_response('commprod/home.html', template_values, context_instance=RequestContext(request))
-
 @login_required
+@render_to("commprod/search.html")
 def search(request):
     subnav_key, subnav_value, title =  get_active_page('home', request.GET.get('type', ""))
-    template_values = {
+    return {
         'page_title' : subnav_key.split("_")[1],
         'nav_commprod' : "active",
         'user': request.user,
         'commprod_timeline' : commprod_query_manager(request.GET, request.user),
         subnav_key : subnav_value
     }
-    return render_to_response('commprod/search.html', template_values, context_instance=RequestContext(request))
+
 
 @login_required
+@render_to("commprod/permalink.html")
 def permalink(request, username, cp_id):
     get_dict = {'username' : username, 'cp_id' : cp_id}
 
@@ -72,7 +74,7 @@ def permalink(request, username, cp_id):
     else:
         raise Http404
 
-    template_values = {
+    return {
         'user': request.user,
         'page_title' : "permalink",
         'nav_commprod' : "active",
@@ -81,29 +83,29 @@ def permalink(request, username, cp_id):
         'corrections' : corrections,
         'email_content' : email_content,
     }
-    return render_to_response('commprod/permalink.html', template_values, context_instance=RequestContext(request))
-
 
 @staff_member_required
+@render_to("commprod/admin.html")
 def admin(request):
     """
     Frontend endpoint for adding commprods that are not picked up by the parser
     """
-    template_values = {
+    return {
         'key' : env['SECRET_KEY']
     }
-    return render_to_response('commprod/admin.html', template_values, context_instance=RequestContext(request))
 
 ###### request endpoints #######
 
 @login_required
+@ajax_request
 def end_tour(request):
     user_profile = request.user.profile
     user_profile.use_tour = False
     user_profile.save()
-    return JSONResponse("Success!")
+    return dict(res="Success!")
 
 @login_required
+@ajax_request
 def vote (request):
     types = ['commprod' , 'correction']
     valid_votes = ['-1','1'] #patlsotw
@@ -132,9 +134,10 @@ def vote (request):
                 "type": type
             }
 
-    return JSONResponse(payload)
+    return payload
 
 @login_required
+@ajax_request
 def favorite(request):
     payload = {'success' : False}
     id = request.POST.get("id", None)
@@ -151,15 +154,16 @@ def favorite(request):
                 "fav" : choice,
             }
 
-    return JSONResponse(payload)
+    return payload
 
 @login_required
-def api_search (request):
+@ajax_request
+def api_search(request):
     return_type = request.GET.get("return_type", 'html')
-    payload = {'res' : commprod_query_manager(request.GET, request.user, return_type)}
-    return JSONResponse(payload)
+    return {'res' : commprod_query_manager(request.GET, request.user, return_type)}
 
 @login_required
+@ajax_request
 def profile_data(request):
     response_data = None #patlsotw
 
@@ -174,9 +178,10 @@ def profile_data(request):
         elif type == "vs_data":
             response_data = vs_data_manager(user, filter)
 
-    return JSONResponse(response_data)
+    return response_data
 
 @login_required
+@ajax_request
 def correction(request):
     user = request.user
     cp_id = request.POST.get('cp_id', None)
@@ -193,9 +198,10 @@ def correction(request):
             'nodata' : ''
             }
 
-    return JSONResponse(response_data)
+    return response_data
 
 @csrf_exempt
+@ajax_request
 def processProd(request):
     data = request.POST.get("data", None)
     key = request.POST.get("key", None)
@@ -235,4 +241,4 @@ def processProd(request):
         resp = "No data"
         if str(key) != env['SECRET_KEY']: #patlsotw
             resp = "Success!"
-    return JSONResponse(resp)
+    return dict(res=resp)

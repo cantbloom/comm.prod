@@ -1,6 +1,7 @@
 # Django settings for commerical_production project.
-import os
 from os import environ as env
+import os
+
 #custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
@@ -142,7 +143,8 @@ ROOT_URLCONF = 'commerical_production.urls'
 LOGIN_REDIRECT_URL = "/home"
 LOGIN_URL = '/login'
 
-SESSION_COOKIE_AGE = 1000*60*60*24*7 #a week in milliseconds so basically forever
+#a week in milliseconds 
+SESSION_COOKIE_AGE = 1000*60*60*24*7 #so basically forever
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'commerical_production.wsgi.application'

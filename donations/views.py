@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.shortcuts import redirect
 
+from annoying.decorators import render_to
+
 from helpers.renderers import donation_renderer
 from helpers.view_helpers import _get_donation_stats
 
@@ -17,6 +19,7 @@ from operator import attrgetter
 import stripe
 
 @login_required
+@render_to("donations/home.html")
 def home(request):
     """
     Donation home page. Return all of the donation objects that are found.
@@ -37,7 +40,7 @@ def home(request):
 
     template_values.update(_get_donation_stats(donations, anon_donations))
 
-    return render_to_response('donations/home.html', template_values, context_instance=RequestContext(request))
+    return template_values
 
 def donate(request):
     """

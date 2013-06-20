@@ -8,10 +8,12 @@ from django.contrib import auth
 from django.contrib.auth import views, login
 from django import forms
 
+from annoying.decorators import render_to, ajax_request
+
 from commProd.models import *
 from commProd.forms import RegForm
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validateEmail, get_floor_percentile, get_day_trend, JSONResponse
+from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validate_email, get_floor_percentile, get_day_trend, JSONResponse
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, profile_query_manager
 from helpers.link_activator import get_active_page
@@ -92,6 +94,7 @@ def confirm_email(request, key):
     return renderErrorMessage(request, hero_title)
 
 @login_required
+@ajax_request
 def claim_email(request):
     """
     Endpoint to request an email be added to you profile
@@ -103,35 +106,34 @@ def claim_email(request):
         request.user.profile.add_email(email)
         payload['res'] = 'success'
 
-    return JSONResponse(payload)
+    return payload
 
 @login_required
+@ajax_request
 def feedback(request):
     """
     Endpoint to request an email be added to you profile
     """
     feedback = request.POST.get('feedback', None)
     if not feedback:
-        return JSONResponse({'res':'failed'})
+        return {'res':'failed'}
     feedback.replace('\n', '<br>')
     user = request.user
     subject = email_templates.feedback['subject']
     content = email_templates.feedback['content'] % (user.username, feedback)
     admin_emails = [admin[1] for admin in ADMINS]
     emailUsers(subject, content, admin_emails, from_email=user.email)
-    return JSONResponse({'res':'success'})
+    return {'res':'success'}
 
 @login_required
+@render_to("welcome.html")
 def welcome(request):
     """
     First page after successfully signing update
     """
-    template_values = {
-        'user': request.user
-    }
-
-    return render_to_response('welcome.html', template_values, context_instance=RequestContext(request))
-
+    return  dict(
+        user=request.user
+    )
 
 @login_required
 def home(request):
@@ -242,7 +244,7 @@ def edit_profile(request):
 
             for email in emails:
                 #makes sure email
-                if not validateEmail(email):
+                if not validate_email(email):
                     if email.strip() == "":
                         errors['email'].append("Empty email entered.")
                     else:
@@ -355,6 +357,7 @@ def reset_password(request):
 
     return render_to_response('reset_password.html', template_values, context_instance=RequestContext(request))
 
+@render_to("reset_password_confirm.html")
 def reset_password_confirm(request, key=None):
     success = False
     errors = False
@@ -373,13 +376,16 @@ def reset_password_confirm(request, key=None):
 
     if errors:
         errors += " Try again <a href='/reset_password'> Here </a>"
-    template_values = {
-        "page_title": "Password Reset",
-        'user'  : request.user,
-        'success': success,
-        'errors': errors,
-    }
-    return render_to_response('reset_password_confirm.html', template_values, context_instance=RequestContext(request))
+    return dict(
+        page_title="Password Reset",
+        user=request.user,
+        success=success,
+        errors=errors,
+    )
 
+@render_to("googlead6c3c617c310b08.html")
 def google_verify(request):
-    return render_to_response('googlead6c3c617c310b08.html')
+    """
+        page used to verify for chrome store
+    """
+    return {}
