@@ -1,7 +1,7 @@
-"""
-Remove leading or trailing quotes from a string
-"""
 def strip_quotes(string):
+    """
+        Remove leading or trailing quotes from a string
+    """
     string = string.strip()
     if (string.startswith('"') or string.startswith("'")):
         string = string[1:]
@@ -9,29 +9,35 @@ def strip_quotes(string):
         string = string[:-1]
     return string
 
-"""
-shitty hack
-"""
-def stripOld(query):
-    strip_params = [ "---------- Forwarded message ----------",
+def strip_old(query):
+    """
+        shitty hack
+    """
+    strip_params = [
+        "---------- Forwarded message ----------",
         "-----Original message-----",
         "wrote:",
         "________________________________________",
         'Quoting',
         '\r\n>',
         '\n>',
-        'From:'
+        'From:',
         ]
-    if query != None:
+    if query is not None:
         for param in strip_params:
             query = query.split(param)[0]
-        query+="\n" ## if there is not newline at the end, add it to pick up the commprod
+        #if there is not newline at the end, 
+        #add it to pick up the commprod
+        query += "\n"
         return query
 
-def clean_content(query, type):
-    if type == "email":
+def clean_content(query, content_type="commprod"):
+    """
+        remove weird email encodings
+    """
+    if content_type == "email":
         query = query.replace('=\r\n', '\n')
-    elif type == "commprod":
+    elif content_type == "commprod":
         query = query.replace('=\r\n', '')
     query = query.replace('=92', '\'')
     query = query.replace('=93', '"')
@@ -39,10 +45,10 @@ def clean_content(query, type):
     query = query.replace('=20', '')
     return query
                              
-"""
-Helper to read message content
-"""
 def get_first_text_block(msg):
+    """
+        Helper to read message content
+    """
     for part in msg.walk():
         if part.get_content_type() == 'text/plain':
             return part.get_payload()

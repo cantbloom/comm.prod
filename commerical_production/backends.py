@@ -8,7 +8,6 @@ class EmailOrUsernameBackend(object):
             user = self.get_user_alt_email(username, password)
             if user:
                 return user
-
         else:
             kwargs = {'username': username}
         try:

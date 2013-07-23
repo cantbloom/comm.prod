@@ -11,13 +11,6 @@ BASE_URL_DEV = 'http://www.burtonthird.com'
 DEBUG = (not env['DEBUG'] == 'False') #convert from sting to bool
 TEMPLATE_DEBUG = DEBUG
 
-if DEBUG:
-    env['MYSQL_NAME'] = env['MYSQL_NAME_DEV']
-    env['DATABASE_URL'] = env['DATABASE_URL_DEV']
-    env['AWS_BUCK'] = env['AWS_BUCK_DEV']
-    env['STRIPE_SECRET_KEY'] = env['STRIPE_TEST_SECRET_KEY']
-    env['STRIPE_PUBLIC_KEY'] = env['STRIPE_TEST_PUBLIC_KEY']
-
 ADMINS = (
     ('Joshua Blum', 'joshblum@mit.edu'),
     ('Max Kanter', 'kanter@mit.edu'),
@@ -36,7 +29,7 @@ DATABASES = {
     }
 }
 
-ROOT_PATH = os.path.dirname(os.path.realpath(__file__))
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -66,7 +59,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(ROOT_PATH, 'public')
+MEDIA_ROOT = os.path.join(SITE_ROOT, 'public')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -78,7 +71,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(ROOT_PATH, 'static')
+STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -150,7 +143,7 @@ SESSION_COOKIE_AGE = 1000*60*60*24*7 #so basically forever
 WSGI_APPLICATION = 'commerical_production.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(ROOT_PATH, 'templates'),
+    os.path.join(SITE_ROOT, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -218,12 +211,12 @@ LOGGING = {
         # Log to a text file that can be rotated by logrotate
         'logfile': {
             'class': 'logging.handlers.WatchedFileHandler',
-            'filename': os.path.join(ROOT_PATH, 'logs/log.log'),
+            'filename': os.path.join(SITE_ROOT, 'logs/log.log'),
         },
         # Log to a text file that can be rotated by logrotate
         'errorfile': {
             'class': 'logging.handlers.WatchedFileHandler',
-            'filename': os.path.join(ROOT_PATH, 'logs/error_log.log'),
+            'filename': os.path.join(SITE_ROOT, 'logs/error_log.log'),
         },
     },
     'loggers': {
@@ -240,7 +233,6 @@ LOGGING = {
             'propagate': False,
             'formatter': 'simple',
         },
-        # Your own app - this assumes all your logger names start with "myapp."
         'commProd.views': {
             'handlers': ['logfile'],
             'level': 'INFO', # Or maybe INFO or DEBUG
@@ -249,3 +241,18 @@ LOGGING = {
         },
     },
 }
+
+if DEBUG:
+    # allowing for local_settings overides
+    # how this should ultimately be set up
+    # is that common or default settings go in here,
+    # and each different deploy location has a differnt
+    # settings override that is specified by environment 
+    # variable or hard code.
+
+    try:
+        local_settings_file = open("%s/%s" % (SITE_ROOT, "local_settings.py"))
+        local_settings_script = local_settings_file.read()
+        exec local_settings_script
+    except IOError, e:
+        print "Unable to open local settings! %s" % e

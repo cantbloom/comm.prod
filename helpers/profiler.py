@@ -7,14 +7,14 @@ from cStringIO import StringIO
 
 class ProfileMiddleware(object):
     """
-    Displays hotshot profiling for any view.
-    http://yoursite.com/yourview/?prof
+        Displays hotshot profiling for any view.
+        http://yoursite.com/yourview/?prof
 
-    Add the "prof" key to query string by appending ?prof (or &prof=)
-    and you'll see the profiling results in your browser.
-    It's set up to only be available in django's debug mode,
-    but you really shouldn't add this middleware to any production configuration.
-    * Only tested on Linux
+        Add the "prof" key to query string by appending ?prof (or &prof=)
+        and you'll see the profiling results in your browser.
+        It's set up to only be available in django's debug mode,
+        but you really shouldn't add this middleware to any production configuration.
+        * Only tested on Linux
     """
     def process_request(self, request):
         if settings.DEBUG and request.GET.has_key('prof'):

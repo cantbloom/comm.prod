@@ -10,14 +10,18 @@ from django import forms
 
 from annoying.decorators import render_to, ajax_request
 
-from commProd.models import *
+import commProd.models as cpm
 from commProd.forms import RegForm
 
-from helpers.view_helpers import getRandomUsername, renderErrorMessage, possesive, addUserToQuery, validate_email, get_floor_percentile, get_day_trend, JSONResponse
+from helpers.view_helpers import get_rand_username, \
+render_err_msg, possesive, add_usr_to_query, \
+validate_email, get_floor_percentile, \
+get_day_trend, JSONResponse
 from helpers.aws_put import put_profile_pic
-from helpers.query_managers import commprod_query_manager, profile_query_manager
+from helpers.query_managers import commprod_query_manager, \
+profile_query_manager
 from helpers.link_activator import get_active_page
-from helpers.admin.utils import emailUsers
+from helpers.admin.utils import email_users
 from helpers.admin import email_templates
 
 from commerical_production.settings import ADMINS
@@ -27,11 +31,11 @@ def register(request, key):
     """
     Registration page. Visitor arrives wih activation key
     """ 
-    profile = UserProfile.objects.filter(activation_key=key)
+    profile = cpm.UserProfile.objects.filter(activation_key=key)
 
     if not profile.exists() or profile[0].user.is_active:
          hero_title ="Hmm... that registration key is invalid."
-         return renderErrorMessage(request, hero_title)
+         return render_err_msg(request, hero_title)
 
     user = profile[0].user
 
@@ -86,12 +90,12 @@ def confirm_email(request, key):
     """
     Endpoint to confirm you are owner of email
     """
-    alt_email = Email.objects.filter(activation_key=key)
+    alt_email = cpm.Email.objects.filter(activation_key=key)
     if alt_email.exists():
         alt_email[0].confirm()
         return redirect('/')
     hero_title ="We weren't able to complete your request..."
-    return renderErrorMessage(request, hero_title)
+    return render_err_msg(request, hero_title)
 
 @login_required
 @ajax_request
@@ -102,7 +106,7 @@ def claim_email(request):
     email = request.POST.get('email', "")
     email_user = User.objects.filter(email=email)
     payload = {'res':'failed'}
-    if email_user.exists() and email_user[0].profile.send_mail == False:
+    if email_user.exists() and not email_user[0].profile.send_mail:
         request.user.profile.add_email(email)
         payload['res'] = 'success'
 
@@ -122,7 +126,7 @@ def feedback(request):
     subject = email_templates.feedback['subject']
     content = email_templates.feedback['content'] % (user.username, feedback)
     admin_emails = [admin[1] for admin in ADMINS]
-    emailUsers(subject, content, admin_emails, from_email=user.email)
+    email_users(subject, content, admin_emails, from_email=user.email)
     return {'res':'success'}
 
 @login_required
@@ -154,7 +158,7 @@ def profile(request, username):
     else:
         raise Http404
 
-    page_username = getRandomUsername(profile_user)
+    page_username = get_rand_username(profile_user)
 
     request_type = request.GET.get('type', "")
 
@@ -173,31 +177,36 @@ def profile(request, username):
         'header-classes': '',
         'floor_percentile' : get_floor_percentile(profile_user.profile),
         "trend" : get_day_trend(profile_user.profile),
-        "num_commprods" : CommProd.objects.filter(user_profile=profile_user.profile).count(),
-        "num_votes" : Rating.objects.filter(user_profile=profile_user.profile).count()
+        "num_commprods" : cpm.CommProd.objects.filter(user_profile=profile_user.profile).count(),
+        "num_votes" : cpm.Rating.objects.filter(user_profile=profile_user.profile).count()
     }
 
     if request_type != "":
         return profile_search(request, template_values, profile_user)
-    else:
-        template_values.update(profile_query_manager(request.user, profile_user))
-        return render_to_response('profile.html', template_values, context_instance=RequestContext(request))
+    template_values.update(profile_query_manager(request.user, profile_user))
+    return render_to_response('profile.html', 
+        template_values, 
+        context_instance=RequestContext(request))
 
 
 def profile_search(request, template_values, profile_user):
-    """`
-    Helper function to deal with recent/best pages for user
     """
-    get_dict = addUserToQuery(request.GET, profile_user.username)
-    template_values['commprod_timeline'] = commprod_query_manager(get_dict, user=request.user)
+        Helper function to deal with recent/best pages for user
+    """
+    get_dict = add_usr_to_query(request.GET, 
+        profile_user.username)
+    template_values['commprod_timeline'] = commprod_query_manager(
+            get_dict, user=request.user)
     template_values['header_classes'] = ''
 
-    return render_to_response('profile_search.html', template_values, context_instance=RequestContext(request))
+    return render_to_response('profile_search.html', 
+        template_values, 
+        context_instance=RequestContext(request))
 
 @login_required
 def edit_profile(request):
     """
-    Edit profile page
+        Edit profile page
     """
 
     user = request.user
@@ -207,14 +216,15 @@ def edit_profile(request):
     if request.POST and request.is_ajax():
         success = False
         errors = {}
-        type = request.POST.get('form_type', None)
-        if type == "password":
+        request_type = request.POST.get('form_type', None)
+        if request_type == "password":
             password = request.POST.get('current_password', None)
             new_password = request.POST.get('new_password', None)
             new_password_confirm = request.POST.get('new_password_confirm', None)
 
             if user.check_password(password):
-                if new_password!=None and new_password == new_password_confirm:
+                if new_password is not None \
+                and new_password == new_password_confirm:
                     user.set_password(new_password)
                     success = 'Password changed'
                     user.save()
@@ -223,43 +233,46 @@ def edit_profile(request):
             else:
                 errors['password'] = ['Incorrect password.']
 
-        elif type == "shirt_name":
+        elif request_type == "shirt_name":
             try:
                 #delete all current shirt names
-                ShirtName.objects.filter(user_profile=profile, editable = True).delete()
+                cpm.ShirtName.objects.filter(user_profile=profile, editable = True).delete()
 
                 #add in all new shirt names
                 shirt_names = request.POST.getlist('shirt_name')
                 for name in shirt_names:
                     name = name.strip()
-                    if name != "":
-                        ShirtName(user_profile=profile, name=name).save()
+                    if not name:
+                        cpm.ShirtName(user_profile=profile, name=name).save()
                 success = "Shirt names added!"
             except:
                 errors['shirt_name'] = ['Oops -- something went wrong.']
 
-        elif type == "email":
+        elif request_type == "email":
             emails = request.POST.getlist('email')
             errors['email'] = []
 
             for email in emails:
                 #makes sure email
                 if not validate_email(email):
-                    if email.strip() == "":
+                    if not email.strip():
                         errors['email'].append("Empty email entered.")
                     else:
                         errors['email'].append(email + ' is not a valid email.')
 
                 #make sure email doesn't exists
-                elif UserProfile.objects.filter(email__email=email, email__confirmed=True).exists() or UserProfile.objects.filter(user__email=email, send_mail=True).exists():
-                    errors['email'].append(email + ' is already registered with an account.')
+                elif cpm.UserProfile.objects.filter(email__email=email, 
+                    email__confirmed=True).exists() \
+                or cpm.UserProfile.objects.filter(user__email=email, 
+                    send_mail=True).exists():
+                    errors['email'].append(email + ' is already re\gistered with an account.')
 
-            if errors['email'] == []:
+            if not errors['email']:
                 for email in emails:
                     profile.add_email(email)
                 success = "Confirmation emails sent out!"
 
-        elif type == 'pic':
+        elif request_type == 'pic':
             pic_url = request.POST.get('pic_url')
             pic_url = put_profile_pic(pic_url, user.profile) #download and upload to our S3
             if pic_url: #no errors/less than 1mb #patlsotw
@@ -293,7 +306,7 @@ def edit_profile(request):
     ]
 
     shirtNameForm = []
-    for name in ShirtName.objects.filter(user_profile = profile).values_list('name', flat=True):
+    for name in cpm.ShirtName.objects.filter(user_profile = profile).values_list('name', flat=True):
         field = {
             'name': 'shirt_name',
             'placeholder': 'Shirt name',
@@ -302,7 +315,7 @@ def edit_profile(request):
         shirtNameForm.append(field)
 
     emailForm = [{'value':user.email}]
-    for email in Email.objects.filter(user_profile = profile, confirmed=True).values_list('email', flat=True):
+    for email in cpm.Email.objects.filter(user_profile = profile, confirmed=True).values_list('email', flat=True):
         field = {
             'value': email
         }
@@ -325,21 +338,21 @@ def reset_password(request):
     success = False
     if request.POST:
         username = request.POST.get('username', None)
-        if not username or username.strip() == "":
+        if not username or not username.strip():
                 errors['username'].append("Empty username entered.")
 
             #make sure user exists
-        elif not UserProfile.objects.filter(user__username=username, send_mail=True, user__is_active=True).exists():
+        elif not cpm.UserProfile.objects.filter(user__username=username, send_mail=True, user__is_active=True).exists():
                 errors['username'].append(username + " is not registered with an account.")
 
             #create password reset object
         else:
-            user_profile = UserProfile.objects.filter(user__username=username)[0]
-            reset = PasswordReset(user_profile=user_profile, is_active=True)
+            user_profile = cpm.UserProfile.objects.filter(user__username=username)[0]
+            reset = cpm.PasswordReset(user_profile=user_profile, is_active=True)
             reset.save()
-            reset.sendConfirmEmail()
+            reset.send_confirm_email()
 
-        if len(errors['username']) == 0:
+        if not len(errors['username']):
             success = "Password reset email sent out!"
 
         return_obj = {
@@ -362,11 +375,11 @@ def reset_password_confirm(request, key=None):
     success = False
     errors = False
     if key:
-        reset = PasswordReset.objects.filter(activation_key=key)
+        reset = cpm.PasswordReset.objects.filter(activation_key=key)
         if reset.exists() and reset[0].is_active and reset[0].is_valid():
             reset = reset[0]
             reset.is_active = False
-            new_password = reset.getNewPassword()
+            new_password = reset.get_new_passwd()
             reset.save()
             success = "Your password has been reset to %s " % new_password
         else:
@@ -375,7 +388,7 @@ def reset_password_confirm(request, key=None):
         errors = "Your key is invalid."
 
     if errors:
-        errors += " Try again <a href='/reset_password'> Here </a>"
+        errors += " <a href='/reset_password'> Try again </a>"
     return dict(
         page_title="Password Reset",
         user=request.user,

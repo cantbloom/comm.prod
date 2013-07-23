@@ -4,18 +4,18 @@ from django.contrib.auth.models import User
 from commProd.models import *
 
 class Command(NoArgsCommand):
-    help = 'Used to migrate old shirtname objects and ratings'
+    help = "Used to migrate old shirtname objects and ratings"
     def handle(self, **options):
         shirtnames = ShirtName.objects.all()
 
         for shirtname in shirtnames:
-            self.stdout.write('shirt id: ' + str(shirtname.id))
+            self.stdout.write("shirt id: %s" % shirtname.id)
             shirtname.user_profile = UserProfile.objects.get(user=shirtname.user)
             shirtname.save()
 
         ratings = Rating.objects.all()
         for rating in ratings:
-            self.stdout.write('rating id: ' + str(rating.id))
+            self.stdout.write("rating id: %s " % rating.id)
             rating.user_profile = UserProfile.objects.get(user=rating.user)
             rating.save()
 
