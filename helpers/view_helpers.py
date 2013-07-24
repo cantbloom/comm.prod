@@ -1,8 +1,9 @@
 import commProd.models as cpm
 import donations.models as dm
 
-from django.shortcuts import HttpResponse
-from django.contrib.auth.models import User
+from django.shortcuts import HttpResponse, \
+render_to_response as _render_to_response
+from django.template import RequestContext
 from django.core.validators import \
 validate_email as _validate_email
 from django.core.exceptions import ValidationError
@@ -11,7 +12,7 @@ from django.db.models import Sum
 from annoying.decorators import render_to
 from helpers.commprod_search import commprod_search
 
-from datetime import date, datetime, timedelta
+from datetime import datetime, timedelta
 
 import random
 import re
@@ -120,6 +121,11 @@ def vote_correction(id, score, user):
     rating, created = cpm.CorrectionRating.objects.get_or_create(
         correction=correction[0], user_profile=user.profile)
     return rating, correction[0]
+
+def render_to_response(template, template_values, request):
+    return _render_to_response(template, 
+        template_values, 
+        context_instance=RequestContext(request))
 
 def JSONResponse(payload):
     """

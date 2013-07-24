@@ -1,5 +1,5 @@
-from donations.models import *
+import donations.models as dm
 from django.contrib import admin
 
-admin.site.register(Donation)
-admin.site.register(AnonDonation)
+admin.site.register(dm.Donation)
+admin.site.register(dm.AnonDonation)

@@ -1,7 +1,5 @@
 from django import forms
-from django.core import validators
-from commProd.models import *
-from helpers.aws_put import put_profile_pic
+import commProd.models as cpm
 
 from datetime import datetime
 
@@ -52,9 +50,9 @@ class RegForm(forms.Form):
 
     def clean_alt_email(self):
         data = self.cleaned_data['alt_email']
-        if UserProfile.objects.filter(
+        if cpm.UserProfile.objects.filter(
             email__email=data, email__confirmed=True).exists() \
-        or UserProfile.objects.filter(user__email=data, 
+        or cpm.UserProfile.objects.filter(user__email=data, 
             send_mail=True).exists():
             raise forms.ValidationError('Email already in use.')
         return data

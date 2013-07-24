@@ -15,8 +15,8 @@ urlpatterns = patterns('',
     url(r'^commprod/', include('commProd.urls')),
     url(r'^donations/', include('donations.urls')),
     url(r'^donate/', 'donations.views.donate'),
-    url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", 
-                    mimetype="text/plain")),
+    url(r'^robots\.txt$', lambda r: HttpResponse(
+        "User-agent: *\nDisallow: /", mimetype="text/plain")),
 )
 
 urlpatterns += patterns('commerical_production.views',
@@ -31,7 +31,8 @@ urlpatterns += patterns('commerical_production.views',
     url(r'^home$', 'home'),
     url(r'^feedback$', 'feedback'),
     url(r'^login$', 'login', {'template_name': 'login.html'}),
-    url(r'^reset_password/(?P<key>\w+)', 'reset_password_confirm'),
+    url(r'^reset_password/(?P<key>\w+)', 
+        'reset_password_confirm'),
     url(r'^reset_password', 'reset_password'),
     url(r'^$', 'home'),
 )

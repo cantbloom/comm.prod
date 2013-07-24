@@ -116,7 +116,7 @@ def email_send_mail_false(alums=False):
     users = User.objects.filter(userprofile__send_mail=False)
     for user in users:
       print user
-      sendSorryEmail(user.username)
+      send_sorry_email(user.username)
 
     return 'done'
 
@@ -162,7 +162,7 @@ def send_reg_email(username):
     email_users(subject, content, emails)
     return True
 
-def sendSorryEmail(username):
+def send_sorry_email(username):
     """
         Send sorry email to given user
     """

@@ -1,6 +1,8 @@
 def get_active_page(pageName, requestType):
     """ 
-        Given a page and a request type (trending, best, recent, etc) returns a tuple of (template_key, template_value, request).
+        Given a page and a request type 
+        (trending, best, recent, etc) returns 
+        a tuple of (template_key, template_value, request).
     """
     template_values = {
     'home' : {
@@ -22,7 +24,9 @@ def get_active_page(pageName, requestType):
         },
     }
     try: 
-        result = (template_values[pageName][requestType], "active", requestType)
+        result = (template_values[pageName][requestType],
+         "active", requestType)
     except KeyError:
-        result = ("_", "active", "") # returning '_' avoids index error at view on split('_')
+        # returning '_' avoids index error at view on split('_')
+        result = ("_", "active", "") 
     return result
