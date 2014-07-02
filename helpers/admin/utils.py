@@ -17,8 +17,8 @@ def add_users(path):
     """
         ssh to athena and:
 
-        blanche bombers > bombers.txt
-        blanche btb-alum >> bombers.txt
+        blanche -r bombers > bombers.txt
+        blanche -r btb-alum >> bombers.txt
 
         Replace bombers.txt that lives in comm.prod
         Use this to add new users the database each year:
