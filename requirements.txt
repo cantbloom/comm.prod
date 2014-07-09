@@ -8,6 +8,6 @@ django-compressor==1.2
 django-pagination==1.0.7
 simplejson==3.0.8
 boto==2.8.0
-numpy==1.7.0
+numpy
 requests==1.1.0
 stripe==1.7.9
