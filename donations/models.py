@@ -10,7 +10,13 @@ class Donation(models.Model):
     amount = models.IntegerField(default=0.0)
 
     def __unicode__(self):
-        return 'Donation of $%s.00 by %s on %s for %s' % (self.amount, self.user_profile.user.username, str(self.date), self.reason)
+        return """Donation of $%(amount)s.00 by 
+        %(username)s on %(date)s for %(reason)s""" % {
+            'amount' : self.amount,
+            'username' :  self.user_profile.username(), 
+            'date' : self.date,
+            'reason' : self.reason,
+        }
 
 class AnonDonation(models.Model):
 
@@ -21,4 +27,10 @@ class AnonDonation(models.Model):
     amount = models.IntegerField(default=0.0)
 
     def __unicode__(self):
-        return 'AnonDonation by %s of $%s.00 on %s for %s' % (self.name, self.amount, str(self.date), self.reason)
+        return """AnonDonation by %(name)s of 
+        $%(amount)s.00 on %(date)s for %(reason)s""" % {
+            'name' : self.name,
+            'amount' :  self.amount, 
+            'date' : self.date,
+            'reason' :  self.reason,
+        }

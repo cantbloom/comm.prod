@@ -2,11 +2,9 @@
 
 echo "Starting..."
 echo "Pulling staging staging"
-git pull staging staging
-echo "Pushing staging staging"
-git push staging staging
+git pull staging master
 echo "Pushing staging to staging-master"
-git push staging staging:master --force
+git push staging master
 
 
 echo "Push production?(y/n) \c"
@@ -19,7 +17,5 @@ if [ $MASTER == "y" ] ; then
     echo "Pushing to origin master"
     git push origin master --force
 fi
-
-git checkout staging
 
 echo "Done!"

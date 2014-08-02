@@ -1,14 +1,14 @@
-from commProd.models import *
+import commProd.models as cpm
 from django.contrib import admin
 
-admin.site.register(UserProfile)
-admin.site.register(Email)
-admin.site.register(PasswordReset)
-admin.site.register(ShirtName)
-admin.site.register(CommProd)
-admin.site.register(CommProdEmail)
-admin.site.register(Rating)
-admin.site.register(TrendData)
-admin.site.register(Correction)
-admin.site.register(CorrectionRating)
-admin.site.register(Favorite)
+admin.site.register(cpm.UserProfile)
+admin.site.register(cpm.Email)
+admin.site.register(cpm.PasswordReset)
+admin.site.register(cpm.ShirtName)
+admin.site.register(cpm.CommProd)
+admin.site.register(cpm.CommProdEmail)
+admin.site.register(cpm.Rating)
+admin.site.register(cpm.TrendData)
+admin.site.register(cpm.Correction)
+admin.site.register(cpm.CorrectionRating)
+admin.site.register(cpm.Favorite)

@@ -8,8 +8,12 @@ echo "Starting"
 echo "Exporting data..."
 mysqldump -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_NAME > dumpfile.sql
 
-echo "Importing data..."
+echo "Importing local data..."
+mysql -h $MYSQL_HOST_LOCAL -u $MYSQL_USER_LOCAL -p$MYSQL_PASSWORD_LOCAL $MYSQL_NAME_LOCAL < dumpfile.sql;
+
+echo "Importing staging data..."
 mysql -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_NAME_DEV < dumpfile.sql;
+
 
 echo "Cleaning up..."
 rm dumpfile.sql

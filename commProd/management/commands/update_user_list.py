@@ -1,32 +1,40 @@
 #! /usr/bin/env python
 
-
 from django.core.management.base import NoArgsCommand
-from commProd.models import *
+import commProd.models as cpm
 import os
 
 class Command(NoArgsCommand):
     help = 'Updates autocomplete for the user list.'
 
     def handle(self, **options):
-        print "Updating user list..."
-        path = os.path.abspath(os.path.join('commerical_production/public/js/', os.path.pardir))
-        path += "/js/user_list.js"
-        profiles = UserProfile.objects.all().select_related()
+        print "Updating user list...\n"
+        profiles = cpm.UserProfile.objects.all().select_related()
         user_list = []
         user_dict = {}
-        for profile in profiles:
+        for profile in profiles.iterator():
             username = profile.user.username
-            name = profile.user.first_name + " " + profile.user.last_name
-            if name == " ":
-                name = profile.user.username
-            user_dict[str(name)] = str(username)
-            user_list.append(str(name))
+            name = profile.user.get_full_name()
+            if not name:
+                name = username
+            user_dict[name] = username
+            user_list.append(name)
             print "Added", name
-        data = "var user_list = " + str(user_list)
-        data += "\nvar user_dict =" + str(user_dict)
-        f = open(path, 'w')
-        f.write(data)
-        f.close()
-        print "Complete"
+        
+        data = """
+            var user_list = %(user_list)s\n
+            var user_dict = %(user_dict)s""" % {
+                'user_list' : user_list,
+                'user_dict' : user_dict,
+            }
+
+        path = os.path.abspath(
+            os.path.join('commerical_production/public/js/',
+             os.path.pardir))
+        path = "%s/js/user_list.js" % path  
+        
+        with open(path, 'w') as f:
+            f.write(data)
+        
+        print "Complete.\n"
 
