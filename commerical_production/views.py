@@ -180,6 +180,8 @@ def profile(request, username):
   if User.objects.filter(username=username).exists():
     profile_user = User.objects.filter(
         username=username)[0]
+    if 'paige' in profile_user.username:
+      raise Http404
   else:
     raise Http404
 

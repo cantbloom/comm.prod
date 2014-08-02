@@ -187,7 +187,7 @@ def anon_donate(request, template_values):
 
       # get the credit card details submitted
       # by the form
-      token = request.POST['stripeToken']
+      token = request.POST.get('stripeToken', '')
 
       # charge the Customer
       stripe.Charge.create(

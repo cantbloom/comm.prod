@@ -32,7 +32,11 @@ def home(request):
   """
       Landing page, top ten rated comm prods + ten newest commprods
   """
-  profiles = cpm.UserProfile.objects.order_by('score')
+
+  profiles = cpm.UserProfile.objects.exclude(
+      user__username="paigef").exclude(
+      user__username="paige@finkelstein.us").order_by(
+          'score')
 
   return {
       'page_title': 'Vote on these comm.prods we think you\'ll like',

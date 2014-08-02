@@ -27,9 +27,8 @@ def get_rand_username(user):
   potentials = [shirtname.name
                 for shirtname in cpm.ShirtName.objects.filter(
                     user_profile=user.profile)]
-
   name = user.first_name.strip()
-  if not name:
+  if name:
     potentials.append(name)
   else:
     potentials.append(user.username)
@@ -58,7 +57,7 @@ def possesive(name, title):
   """
       Returns proper ingrish for user profile page
   """
-  if unicode(name)[-1] == 's':
+  if len(name) and unicode(name)[-1] == 's':
     result = "%s'" % name
   else:
     result = "%s's" % name

@@ -63,11 +63,14 @@ def commprod_search(page=0, cp_id=None,
     if media:
       # is exclude False is faster?
       commprods = commprods.filter(media=True)
+    commprods = commprods.exclude(user_profile__user__username="paigef")
+    commprods = commprods.exclude(user_profile__user__username="paige@finkelstein.us")
     if limit:
       commprods = commprods[:limit]
 
   except Exception, e:
     print e
     commprods = cpm.CommProd.objects.all()
-
+    commprods = commprods.exclude(user_profile__user__username="paigef")
+    commprods = commprods.exclude(user_profile__user__username="paige@finkelstein.us")
   return commprods.select_related()
