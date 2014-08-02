@@ -3,43 +3,44 @@ import commProd.models as cpm
 
 from datetime import datetime
 
+
 class RegForm(forms.Form):
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={
-            'placeholder' : 'First Name', 
+            'placeholder': 'First Name',
             'class': 'fancy-input'
-            }), label="")
+        }), label="")
     last_name = forms.CharField(
         widget=forms.TextInput(attrs={
-            'placeholder' : 'Last Name', 
+            'placeholder': 'Last Name',
             'class': 'fancy-input'
-            }), label="")
+        }), label="")
     class_year = forms.IntegerField(
         widget=forms.TextInput(attrs={
-            'placeholder':'1933', 
+            'placeholder': '1933',
             'class': 'fancy-input'
-            }), label="")
+        }), label="")
     pic_url = forms.CharField(label="", required=False)
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'placeholder' : 'Password', 
+            'placeholder': 'Password',
             'class': 'fancy-input'
-            }), label="" )
+        }), label="")
     password_confirm = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'placeholder' : 'Confirm Password',
+            'placeholder': 'Confirm Password',
             'class': 'fancy-input'
-            }), label="")
+        }), label="")
     alt_email = forms.EmailField(
         widget=forms.TextInput(attrs={
-            'placeholder' : 'Alternative Email', 
+            'placeholder': 'Alternative Email',
             'class': 'fancy-input'
-            }), label="", required=False)
+        }), label="", required=False)
 
     def clean_password_confirm(self):
         password = self.cleaned_data['password']
         password_confirm = self.cleaned_data['password_confirm']
-        
+
         if not password_confirm:
             raise forms.ValidationError(
                 "You must confirm your password")
@@ -52,8 +53,8 @@ class RegForm(forms.Form):
         data = self.cleaned_data['alt_email']
         if cpm.UserProfile.objects.filter(
             email__email=data, email__confirmed=True).exists() \
-        or cpm.UserProfile.objects.filter(user__email=data, 
-            send_mail=True).exists():
+            or cpm.UserProfile.objects.filter(user__email=data,
+                                              send_mail=True).exists():
             raise forms.ValidationError('Email already in use.')
         return data
 
@@ -68,4 +69,3 @@ class RegForm(forms.Form):
             raise forms.ValidationError(
                 'Enter a class year between 1933 and %s' % max_year)
         return class_year
-

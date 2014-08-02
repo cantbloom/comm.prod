@@ -5,9 +5,9 @@ from helpers.pagination import paginator
 import commProd.models as cpm
 
 
-def commprod_renderer(user, commprods, 
-    return_type, search_type=None, page=None,
-     obj_type="commprod"):
+def commprod_renderer(user, commprods,
+                      return_type, search_type=None, page=None,
+                      obj_type="commprod"):
     """ 
         Can render a commprod as html block or list of
         html items. User is the user requesting the view.
@@ -21,36 +21,36 @@ def commprod_renderer(user, commprods,
         user_profile__user=user, fav=True).values_list(
         'commprod__id', flat=True)
     if return_type == "html":
-        template_values =  {
-            'commprods' : paginator(page, commprods),
-            'upvoted' : upvoted,
-            'downvoted' : downvoted,
-            'favorites' : favorites,
-            'obj_type' : obj_type,
+        template_values = {
+            'commprods': paginator(page, commprods),
+            'upvoted': upvoted,
+            'downvoted': downvoted,
+            'favorites': favorites,
+            'obj_type': obj_type,
         }
         if search_type:
             template_values['link_mod'] = "&type=%s" % \
-            search_type
+                search_type
 
         return render_to_string('commprod/timeline.html',
-            template_values)
+                                template_values)
 
-    elif return_type == "list":       
+    elif return_type == "list":
         commprod_list = []
         for commprod in commprods:
-           upvote_selected, downvote_selected = vote_select(
-            commprod, upvoted, downvoted)
-           fav_selected = fav_select(commprod, favorites)
-           commprod_list.append(
-            str(render_to_string(
-                'commprod/commprod_template.html', 
-                {
-                    'commprod' : commprod,
-                    'upvote_selected' : upvote_selected,
-                    'downvote_selected' : downvote_selected,
-                    'fav_selected' : fav_selected,
-                    'obj_type' : obj_type,
-                }))
+            upvote_selected, downvote_selected = vote_select(
+                commprod, upvoted, downvoted)
+            fav_selected = fav_select(commprod, favorites)
+            commprod_list.append(
+                str(render_to_string(
+                    'commprod/commprod_template.html',
+                    {
+                        'commprod': commprod,
+                        'upvote_selected': upvote_selected,
+                        'downvote_selected': downvote_selected,
+                        'fav_selected': fav_selected,
+                        'obj_type': obj_type,
+                    }))
             )
 
         return commprod_list
@@ -60,10 +60,10 @@ def donation_renderer(donations, page):
     """ 
         Renders a donation as html block.
     """
-    # use commprod timeline since it has 
-    #pagination and builds out the html block
-    template_values =  {
-        'donations' : paginator(page, donations) 
+    # use commprod timeline since it has
+    # pagination and builds out the html block
+    template_values = {
+        'donations': paginator(page, donations)
     }
 
     return render_to_string(
@@ -79,7 +79,7 @@ def profile_renderer(profiles):
     html_list = []
     for profile in profiles:
         c = {
-            'user_profile': profile, 
+            'user_profile': profile,
         }
         html_list.append(render_to_string(
             'profile_template.html', c))
@@ -89,6 +89,7 @@ def profile_renderer(profiles):
         html_list += html_list
 
     return html_list
+
 
 def correction_renderer(user, corrections):
     """ 
@@ -108,14 +109,15 @@ def correction_renderer(user, corrections):
             correction, upvoted, downvoted)
         c = {
             'commprod': correction,
-            'upvote_selected': upvote_selected ,
+            'upvote_selected': upvote_selected,
             'downvote_selected': downvote_selected,
-            'obj_type' :'correction' #correction css class
+            'obj_type': 'correction'  # correction css class
         }
         html_list.append(render_to_string(
             'commprod/commprod_template.html', c))
 
     return html_list
+
 
 def vote_select(obj, upvoted, downvoted):
     """
@@ -129,6 +131,7 @@ def vote_select(obj, upvoted, downvoted):
     elif obj.id in downvoted:
         downvote_selected = 'selected'
     return upvote_selected, downvote_selected
+
 
 def fav_select(obj, favorites):
     """

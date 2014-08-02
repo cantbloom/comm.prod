@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User
 import commProd.models as cpm
 
+
 class EmailOrUsernameBackend(object):
+
     def authenticate(self, username=None, password=None):
         if '@' in username:
             kwargs = {
@@ -37,8 +39,8 @@ class EmailOrUsernameBackend(object):
             by any email they have registered
             returns None if no user is found.
         """
-        user = cpm.Email.objects.filter(email=email, 
-            confirmed=True)
+        user = cpm.Email.objects.filter(email=email,
+                                        confirmed=True)
         if user.exists():
             user = user[0].user_profile.user
             if user.check_password(password):

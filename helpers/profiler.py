@@ -5,7 +5,9 @@ import hotshot.stats
 from django.conf import settings
 from cStringIO import StringIO
 
+
 class ProfileMiddleware(object):
+
     """
         Displays hotshot profiling for any view.
         http://yoursite.com/yourview/?prof
@@ -16,6 +18,7 @@ class ProfileMiddleware(object):
         but you really shouldn't add this middleware to any production configuration.
         * Only tested on Linux
     """
+
     def process_request(self, request):
         if settings.DEBUG and request.GET.has_key('prof'):
             self.tmpfile = tempfile.NamedTemporaryFile()
@@ -34,7 +37,7 @@ class ProfileMiddleware(object):
             sys.stdout = out
 
             stats = hotshot.stats.load(self.tmpfile.name)
-            #stats.strip_dirs()
+            # stats.strip_dirs()
             stats.sort_stats('time', 'calls')
             stats.print_stats()
 

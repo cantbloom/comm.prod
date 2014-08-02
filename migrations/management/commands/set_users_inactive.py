@@ -10,14 +10,15 @@ class Command(NoArgsCommand):
         inactive so that they cannot log into the dev site. 
         Important!! Only run this on staging server since it
         will mess up the registration process for future users."""
+
     def handle(self, **options):
         self.stdout.write('Beginning update...\n')
         users = User.objects.all()
         admins = [admin[1] for admin in settings.ADMINS]
         for user in users:
             if user.email not in admins:
-                self.stdout.write('Updating %s\n' % \
-                    user.username)
+                self.stdout.write('Updating %s\n' %
+                                  user.username)
                 user.active = False
                 user.set_unusable_password()
                 user.save()

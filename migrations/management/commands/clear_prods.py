@@ -9,6 +9,7 @@ class Command(NoArgsCommand):
     rating and trendata points. Updates all of the 
     UserProfile objects to have a score and 
     avg score of zero."""
+
     def handle(self, **options):
         self.stdout.write("""CAUTION! This will reset the 
             database dumping all commprods, ratings, and 
@@ -19,11 +20,10 @@ class Command(NoArgsCommand):
             if ans.lower() == "very sure":
                 self.clear_db()
 
-
     def clear_db(self):
         self.stdout.write('Deleting commprods...\n')
-        #deletes all correction objects which 
-        #deletes all correction ratings
+        # deletes all correction objects which
+        # deletes all correction ratings
         cpm.CommProd.objects.all().delete()
         self.stdout.write('Deleting commprod emails...\n')
         cpm.CommProdEmail.objects.all.delete()
@@ -33,5 +33,5 @@ class Command(NoArgsCommand):
         cpm.TrendData.objects.all().delete()
         self.stdout.write('Updating UserProfile...\n')
         cpm.UserProfile.objects.all().update(score=0,
-         avg_score=0)
+                                             avg_score=0)
         self.stdout.write('Update complete.\n')

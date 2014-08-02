@@ -2,12 +2,12 @@ import commProd.models as cpm
 
 # import random
 
-def commprod_search(page=0, cp_id=None, 
-    query=None, orderBy='date', 
-    direction='hl', username=None, 
-    startDate=None, endDate=None, 
-    limit=None, unvoted=False, rec=False, media=False):
-    
+
+def commprod_search(page=0, cp_id=None,
+                    query=None, orderBy='date',
+                    direction='hl', username=None,
+                    startDate=None, endDate=None,
+                    limit=None, unvoted=False, rec=False, media=False):
     """
         To test:
         python manage.py shell
@@ -27,7 +27,7 @@ def commprod_search(page=0, cp_id=None,
     #       commprods = rec_object[0].get_prods()
     if not commprods:
         commprods = cpm.CommProd.objects.all()
-    
+
     try:
         if cp_id:
             commprods = commprods.filter(id=cp_id)
@@ -54,22 +54,20 @@ def commprod_search(page=0, cp_id=None,
         if unvoted:
             commprods = commprods.exclude(
                 rating__user_profile__user__username=unvoted)
-            
+
             # if random.random() > .5:
             #   commprods_exclude = commprods.exclude(score=0)
             #   if commprods_exclude.exists():
             #     commprods = commprods_exclude
-        
+
         if media:
             # is exclude False is faster?
-            commprods = commprods.filter(media=True) 
+            commprods = commprods.filter(media=True)
         if limit:
             commprods = commprods[:limit]
-            
+
     except Exception, e:
         print e
         commprods = cpm.CommProd.objects.all()
 
     return commprods.select_related()
-
-

@@ -9,6 +9,7 @@ def strip_quotes(string):
         string = string[:-1]
     return string
 
+
 def strip_old(query):
     """
         shitty hack
@@ -22,14 +23,15 @@ def strip_old(query):
         '\r\n>',
         '\n>',
         'From:',
-        ]
+    ]
     if query is not None:
         for param in strip_params:
             query = query.split(param)[0]
-        #if there is not newline at the end, 
-        #add it to pick up the commprod
+        # if there is not newline at the end,
+        # add it to pick up the commprod
         query += "\n"
         return query
+
 
 def clean_content(query, content_type="commprod"):
     """
@@ -44,7 +46,8 @@ def clean_content(query, content_type="commprod"):
     query = query.replace('=94', '"')
     query = query.replace('=20', '')
     return query
-                             
+
+
 def get_first_text_block(msg):
     """
         Helper to read message content

@@ -5,28 +5,28 @@ def get_active_page(pageName, requestType):
         a tuple of (template_key, template_value, request).
     """
     template_values = {
-    'home' : {
-            "" : 'subnav_home',
-            "trending" : 'subnav_trending',
-            "best" : 'subnav_best',
-            "worst" : 'subnav_worst',
-            "recent" : 'subnav_recent',
-            "media" : 'subnav_media'
+        'home': {
+            "": 'subnav_home',
+            "trending": 'subnav_trending',
+            "best": 'subnav_best',
+            "worst": 'subnav_worst',
+            "recent": 'subnav_recent',
+            "media": 'subnav_media'
         },
-    'profile' : {
-            "" : 'subnav_statistics',
-            "statistics" : 'subnav_statistics',
-            "best" : 'subnav_best',
-            "worst" : 'subnav_worst',
-            "recent" : 'subnav_recent',
-            "media" : 'subnav_media',
-            "favorites" : 'subnav_favorites'
+        'profile': {
+            "": 'subnav_statistics',
+            "statistics": 'subnav_statistics',
+            "best": 'subnav_best',
+            "worst": 'subnav_worst',
+            "recent": 'subnav_recent',
+            "media": 'subnav_media',
+            "favorites": 'subnav_favorites'
         },
     }
-    try: 
+    try:
         result = (template_values[pageName][requestType],
-         "active", requestType)
+                  "active", requestType)
     except KeyError:
         # returning '_' avoids index error at view on split('_')
-        result = ("_", "active", "") 
+        result = ("_", "active", "")
     return result

@@ -1,7 +1,8 @@
 from django.core.management.base import NoArgsCommand
 from helpers.urlize_tags import urlize_text, \
-commprod_contains_media
+    commprod_contains_media
 import commProd.models as cpm
+
 
 class Command(NoArgsCommand):
     help = """
@@ -17,11 +18,11 @@ class Command(NoArgsCommand):
             media = commprod_contains_media(commprod.content)
             self.stdout.write("""Updating commprod id
              %(id)s, media? %(media)s\n""" % {
-                'id' : commprod.id,
-                'media' :  media
+                'id': commprod.id,
+                'media':  media
             })
             commprod.media = media
-            if media: #write the media content
+            if media:  # write the media content
                 commprod.media_content = urlize_text(
                     commprod.content)
             commprod.save()

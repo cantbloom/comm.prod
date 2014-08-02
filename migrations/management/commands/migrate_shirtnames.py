@@ -1,10 +1,13 @@
-#this won't do everything, you have to fill in stuff. it is just boiler plate code
+# this won't do everything, you have to fill in stuff. it is just boiler
+# plate code
 from django.core.management.base import NoArgsCommand
 from django.contrib.auth.models import User
 import commProd.models as cpm
 
+
 class Command(NoArgsCommand):
     help = "Used to migrate old shirtname objects and ratings"
+
     def handle(self, **options):
         shirtnames = ShirtName.objects.all()
 
@@ -28,4 +31,3 @@ class Command(NoArgsCommand):
         #   commprod.user_profile = cpm.UserProfile.objects.get(
         #    user=commprod.user)
         #   commprod.save()
-

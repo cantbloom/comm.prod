@@ -10,11 +10,11 @@ from annoying.decorators import render_to, ajax_request
 import commProd.models as cpm
 
 from helpers.view_helpers import vote_commprod, \
-vote_correction, fav_commprod
+    vote_correction, fav_commprod
 from helpers.urlize_tags import commprod_contains_media
 from helpers.admin.utils import create_user
 from helpers.query_managers import commprod_query_manager, \
- vs_data_manager, trend_data_manager, correction_query_manager
+    vs_data_manager, trend_data_manager, correction_query_manager
 from helpers.link_activator import get_active_page
 from helpers.urlize_email_content import urlize_email_content
 
@@ -30,41 +30,42 @@ def home(request):
     profiles = cpm.UserProfile.objects.order_by('score')
 
     return {
-        'page_title' : "Vote on these comm.prods we think you'll like",
-        'nav_commprod' : "active",
-        'subnav_home' : "active",
+        'page_title': "Vote on these comm.prods we think you'll like",
+        'nav_commprod': "active",
+        'subnav_home': "active",
         # 'unvoted_commprods': str(commprod_query_manager({'unvoted':True, 'orderBy': '?', 'limit':30}, request.user, 'list')),
-        'user_profile':request.user.profile,
+        'user_profile': request.user.profile,
         'num_commprods': cpm.CommProd.objects.all().count(),
         'num_votes': cpm.Rating.objects.all().count(),
         'worst_user': profiles[0],
-        'best_user': profiles[len(profiles)-1],
-        'stats' : 'True'
+        'best_user': profiles[len(profiles) - 1],
+        'stats': 'True'
 
     }
+
 
 @login_required
 @render_to("commprod/search.html")
 def search(request):
-    subnav_key, subnav_value, title = get_active_page('home', 
-        request.GET.get('type', ""))
+    subnav_key, subnav_value, title = get_active_page('home',
+                                                      request.GET.get('type', ""))
     return {
-        'page_title' : subnav_key.split("_")[1],
-        'nav_commprod' : "active",
+        'page_title': subnav_key.split("_")[1],
+        'nav_commprod': "active",
         'user': request.user,
-        'commprod_timeline' : commprod_query_manager(
+        'commprod_timeline': commprod_query_manager(
             request.GET, request.user),
-        subnav_key : subnav_value
+        subnav_key: subnav_value
     }
 
 
 @login_required
 @render_to("commprod/permalink.html")
 def permalink(request, username, cp_id):
-    get_dict = {'username' : username, 'cp_id' : cp_id}
+    get_dict = {'username': username, 'cp_id': cp_id}
 
-    commprod = commprod_query_manager(get_dict, 
-        request.user, return_type='list')
+    commprod = commprod_query_manager(get_dict,
+                                      request.user, return_type='list')
     if len(commprod) == 1:
         rendered_commprod = commprod[0]
         cp_user = User.objects.filter(username=username)[0]
@@ -81,13 +82,14 @@ def permalink(request, username, cp_id):
 
     return {
         'user': request.user,
-        'page_title' : "permalink",
-        'nav_commprod' : "active",
-        'rendered_commprod' : rendered_commprod,
-        'commprod' : commprod,
-        'corrections' : corrections,
-        'email_content' : email_content,
+        'page_title': "permalink",
+        'nav_commprod': "active",
+        'rendered_commprod': rendered_commprod,
+        'commprod': commprod,
+        'corrections': corrections,
+        'email_content': email_content,
     }
+
 
 @staff_member_required
 @render_to("commprod/admin.html")
@@ -96,10 +98,11 @@ def admin(request):
         Frontend endpoint for adding commprods that are not picked up by the parser
     """
     return {
-        'key' : env['SECRET_KEY']
+        'key': env['SECRET_KEY']
     }
 
 ###### request endpoints #######
+
 
 @login_required
 @ajax_request
@@ -109,12 +112,13 @@ def end_tour(request):
     user_profile.save()
     return dict(res="Success!")
 
+
 @login_required
 @ajax_request
-def vote (request):
-    types = ['commprod' , 'correction']
-    valid_votes = ['-1','1'] #patlsotw
-    payload = {'success' : False}
+def vote(request):
+    types = ['commprod', 'correction']
+    valid_votes = ['-1', '1']  # patlsotw
+    payload = {'success': False}
 
     score = request.POST.get("score", None)
     id = request.POST.get("id", None)
@@ -129,7 +133,7 @@ def vote (request):
 
         if rating and score in valid_votes:
             rating.score = score
-            rating.save() #updates object avg automatically during save
+            rating.save()  # updates object avg automatically during save
 
             payload = {
                 "success": True,
@@ -141,12 +145,14 @@ def vote (request):
 
     return payload
 
+
 @login_required
 @ajax_request
 def favorite(request):
-    payload = {'success' : False}
+    payload = {'success': False}
     id = request.POST.get("id", None)
-    choice = json.loads(request.POST.get("choice", None)) #convert string to boolean
+    # convert string to boolean
+    choice = json.loads(request.POST.get("choice", None))
     user = request.user
     if id and choice != None:
         fav = fav_commprod(id, user)
@@ -154,32 +160,34 @@ def favorite(request):
             fav.fav = choice
             fav.save()
             payload = {
-                "success" : True,
-                "id" : id,
-                "fav" : choice,
+                "success": True,
+                "id": id,
+                "fav": choice,
             }
 
     return payload
+
 
 @login_required
 @ajax_request
 def api_search(request):
     return_type = request.GET.get("return_type", 'html')
     return {
-        'res' : commprod_query_manager(
-        request.GET, request.user, return_type)
+        'res': commprod_query_manager(
+            request.GET, request.user, return_type)
     }
+
 
 @login_required
 @ajax_request
 def profile_data(request):
-    response_data = None #patlsotw
+    response_data = None  # patlsotw
 
     type = request.GET.get('type', None)
     filter = request.GET.get('filter', None)
     username = request.GET.get('username', None)
     if username and User.objects.filter(
-        username=username).exists():
+            username=username).exists():
         user = User.objects.filter(username=username)[0]
 
         if type == "trend":
@@ -189,6 +197,7 @@ def profile_data(request):
 
     return response_data
 
+
 @login_required
 @ajax_request
 def correction(request):
@@ -196,21 +205,22 @@ def correction(request):
     cp_id = request.POST.get('cp_id', None)
     content = request.POST.get('content', None)
     if cp_id and content and CommProd.objects.filter(
-        id=cp_id).exists():
+            id=cp_id).exists():
         commprod = cpm.CommProd.objects.filter(id=cp_id)[0]
         correction = cpm.Correction(user_profile=user.profile,
-         content=content, commprod=commprod)
+                                    content=content, commprod=commprod)
         correction.save()
         response_data = {
-            'correction' : correction_query_manager(
+            'correction': correction_query_manager(
                 user=request.user, correction_id=correction.id)
-            }
+        }
     else:
         response_data = {
-            'nodata' : ''
-            }
+            'nodata': ''
+        }
 
     return response_data
+
 
 @csrf_exempt
 @ajax_request
@@ -238,15 +248,15 @@ def processProd(request):
 
         resp += """\nUser %(sender)s with 
         comm prods:\n %(commprods)s""" % {
-            'sender' : sender,
-            'commprods' :  commprods
+            'sender': sender,
+            'commprods':  commprods
         }
 
         for commprod in commprods:
             email_content, created = cpm.CommProdEmail\
-            .objects.get_or_create(
-                user_profile=user.profile, content=content, 
-                subject=subject, date=date)
+                .objects.get_or_create(
+                    user_profile=user.profile, content=content,
+                    subject=subject, date=date)
             if created:
                 email_content.save()
 
@@ -254,12 +264,13 @@ def processProd(request):
             media_content = ""
             if media:
                 media_content = urlize_text(commprod)
-            commprod, created = cpm.CommProd.objects.get_or_create(email_content=email_content, content=commprod, original_content=commprod, user_profile=user.profile, media=media, media_content=media_content, date=date)
+            commprod, created = cpm.CommProd.objects.get_or_create(
+                email_content=email_content, content=commprod, original_content=commprod, user_profile=user.profile, media=media, media_content=media_content, date=date)
             if created:
                 commprod.save()
             resp += "\nAdded? %s" % created
     else:
         resp = "No data"
-        if str(key) != env['SECRET_KEY']: #patlsotw
+        if str(key) != env['SECRET_KEY']:  # patlsotw
             resp = "Success!"
     return dict(res=resp)

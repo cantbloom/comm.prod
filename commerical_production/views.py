@@ -12,12 +12,12 @@ import commProd.models as cpm
 from commProd.forms import RegForm
 
 from helpers.view_helpers import get_rand_username, \
-render_err_msg, possesive, add_usr_to_query, \
-validate_email, get_floor_percentile, \
-get_day_trend, JSONResponse, render_to_response
+    render_err_msg, possesive, add_usr_to_query, \
+    validate_email, get_floor_percentile, \
+    get_day_trend, JSONResponse, render_to_response
 from helpers.aws_put import put_profile_pic
 from helpers.query_managers import commprod_query_manager, \
-profile_query_manager
+    profile_query_manager
 from helpers.link_activator import get_active_page
 from helpers.admin.utils import email_users
 from helpers.admin import email_templates
@@ -28,13 +28,13 @@ from commerical_production.settings import ADMINS
 def register(request, key):
     """
         Registration page. Visitor arrives wih activation key
-    """ 
+    """
     profile = cpm.UserProfile.objects.filter(
         activation_key=key)
 
     if not profile.exists() or profile[0].user.is_active:
-         hero_title = "Hmm... that registration key is invalid."
-         return render_err_msg(request, hero_title)
+        hero_title = "Hmm... that registration key is invalid."
+        return render_err_msg(request, hero_title)
 
     user = profile[0].user
 
@@ -62,7 +62,7 @@ def register(request, key):
             user.profile.save()
 
             user = auth.authenticate(username=user.username,
-             password=reg_form.cleaned_data['password'])
+                                     password=reg_form.cleaned_data['password'])
             if user is not None:
                 if user.is_active:
                     auth.login(request, user)
@@ -74,18 +74,20 @@ def register(request, key):
 
     template_values = {
         'page_title': "register",
-        'form' : reg_form,
-        'user' : user,
+        'form': reg_form,
+        'user': user,
     }
 
-    return render_to_response('register.html', 
-        template_values, request)
+    return render_to_response('register.html',
+                              template_values, request)
+
 
 def login(request, *args, **kwargs):
     if request.method == 'POST':
         if not request.POST.get('remember_me', None):
             request.session.set_expiry(0)
     return views.login(request, *args, **kwargs)
+
 
 @login_required
 def confirm_email(request, key):
@@ -96,8 +98,9 @@ def confirm_email(request, key):
     if alt_email.exists():
         alt_email[0].confirm()
         return redirect('/')
-    hero_title ="We weren't able to complete your request..."
+    hero_title = "We weren't able to complete your request..."
     return render_err_msg(request, hero_title)
+
 
 @login_required
 @ajax_request
@@ -108,14 +111,15 @@ def claim_email(request):
     email = request.POST.get('email', "")
     email_user = User.objects.filter(email=email)
     payload = {
-        'res':'failed'
+        'res': 'failed'
     }
     if email_user.exists() and \
-         not email_user[0].profile.send_mail:
+            not email_user[0].profile.send_mail:
         request.user.profile.add_email(email)
         payload['res'] = 'success'
 
     return payload
+
 
 @login_required
 @ajax_request
@@ -126,7 +130,7 @@ def feedback(request):
     feedback = request.POST.get('feedback', None)
     if not feedback:
         return {
-            'res':'failed'
+            'res': 'failed'
         }
     feedback.replace('\n', '<br>')
     user = request.user
@@ -134,11 +138,12 @@ def feedback(request):
     content = email_templates.feedback['content'] % \
         (user.username, feedback)
     admin_emails = [admin[1] for admin in ADMINS]
-    email_users(subject, content, admin_emails, 
-        from_email=user.email)
+    email_users(subject, content, admin_emails,
+                from_email=user.email)
     return {
-        'res':'success'
+        'res': 'success'
     }
+
 
 @login_required
 @render_to("welcome.html")
@@ -146,9 +151,10 @@ def welcome(request):
     """
         First page after successfully signing update
     """
-    return  dict(
+    return dict(
         user=request.user
     )
+
 
 @login_required
 def home(request):
@@ -157,6 +163,7 @@ def home(request):
         and ten newest commprods
     """
     return redirect('commprod/')
+
 
 @login_required
 def profile(request, username):
@@ -177,35 +184,35 @@ def profile(request, username):
     request_type = request.GET.get('type', "")
 
     subnav_key, subnav_value, page_title = get_active_page(
-            'profile', request_type)
+        'profile', request_type)
 
     header = possesive(page_username, page_title)
     title = possesive(profile_user.username, page_title)
 
     template_values = {
-        "page_title": title ,
-        'nav_profile' : 'active',
-        subnav_key : subnav_value,
-        'header' : header,
-        'user'  : request.user,
-        'profile_user' : profile_user,
+        "page_title": title,
+        'nav_profile': 'active',
+        subnav_key: subnav_value,
+        'header': header,
+        'user': request.user,
+        'profile_user': profile_user,
         'header-classes': '',
-        'floor_percentile' : get_floor_percentile(
+        'floor_percentile': get_floor_percentile(
             profile_user.profile),
-        "trend" : get_day_trend(profile_user.profile),
-        "num_commprods" : cpm.CommProd.objects.filter(
+        "trend": get_day_trend(profile_user.profile),
+        "num_commprods": cpm.CommProd.objects.filter(
             user_profile=profile_user.profile).count(),
-        "num_votes" : cpm.Rating.objects.filter(
+        "num_votes": cpm.Rating.objects.filter(
             user_profile=profile_user.profile).count()
     }
 
     if request_type != "":
-        return profile_search(request, 
-            template_values, profile_user)
+        return profile_search(request,
+                              template_values, profile_user)
     template_values.update(profile_query_manager(
-            request.user, profile_user))
-    return render_to_response('profile.html', 
-        template_values, request)
+        request.user, profile_user))
+    return render_to_response('profile.html',
+                              template_values, request)
 
 
 def profile_search(request, template_values, profile_user):
@@ -213,14 +220,15 @@ def profile_search(request, template_values, profile_user):
         Helper function to deal with recent/best 
         pages for user.
     """
-    get_dict = add_usr_to_query(request.GET, 
-        profile_user.username)
+    get_dict = add_usr_to_query(request.GET,
+                                profile_user.username)
     template_values['commprod_timeline'] = commprod_query_manager(
-            get_dict, user=request.user)
+        get_dict, user=request.user)
     template_values['header_classes'] = ''
 
-    return render_to_response('profile_search.html', 
-        template_values, request)
+    return render_to_response('profile_search.html',
+                              template_values, request)
+
 
 @login_required
 def edit_profile(request):
@@ -230,7 +238,7 @@ def edit_profile(request):
 
     user = request.user
     profile = user.profile
-    ##update for post request
+    # update for post request
 
     if request.POST and request.is_ajax():
         success = False
@@ -246,7 +254,7 @@ def edit_profile(request):
 
             if user.check_password(password):
                 if new_password is not None \
-                and new_password == new_password_confirm:
+                        and new_password == new_password_confirm:
                     user.set_password(new_password)
                     success = 'Password changed'
                     user.save()
@@ -257,47 +265,47 @@ def edit_profile(request):
 
         elif request_type == "shirt_name":
             try:
-                #delete all current shirt names
+                # delete all current shirt names
                 cpm.ShirtName.objects.filter(
-                    user_profile=profile, 
+                    user_profile=profile,
                     editable=True).delete()
 
-                #add in all new shirt names
+                # add in all new shirt names
                 shirt_names = request.POST.getlist(
                     'shirt_name')
                 for name in shirt_names:
                     name = name.strip()
                     if not name:
                         cpm.ShirtName(
-                            user_profile=profile, 
+                            user_profile=profile,
                             name=name).save()
                 success = "Shirt names added!"
             except:
                 errors['shirt_name'] = [
-                'Oops -- something went wrong.']
+                    'Oops -- something went wrong.']
 
         elif request_type == "email":
             emails = request.POST.getlist('email')
             errors['email'] = []
 
             for email in emails:
-                #makes sure email
+                # makes sure email
                 if not validate_email(email):
                     if not email.strip():
                         errors['email'].append(
                             "Empty email entered.")
                     else:
                         errors['email'].append(
-                            '%s is not a valid email.' % \
+                            '%s is not a valid email.' %
                             email)
 
-                #make sure email doesn't exists
+                # make sure email doesn't exists
                 elif cpm.UserProfile.objects.filter(
-                    email__email=email, 
-                    email__confirmed=True).exists() \
-                or cpm.UserProfile.objects.filter(
-                    user__email=email, 
-                    send_mail=True).exists():
+                        email__email=email,
+                        email__confirmed=True).exists() \
+                        or cpm.UserProfile.objects.filter(
+                        user__email=email,
+                        send_mail=True).exists():
                     errors['email'].append("""%s is already
                      re\gistered with an account.""" % email)
 
@@ -308,25 +316,25 @@ def edit_profile(request):
 
         elif request_type == 'pic':
             pic_url = request.POST.get('pic_url')
-            #download and upload to our S3
+            # download and upload to our S3
             pic_url = put_profile_pic(
-            pic_url, user.profile) 
-            if pic_url: #no errors/less than 1mb #patlsotw
+                pic_url, user.profile)
+            if pic_url:  # no errors/less than 1mb #patlsotw
                 user.profile.pic_url = pic_url
                 user.profile.save()
                 success = "Profile picture changed!"
             else:
                 errors['pic'] = [
-                'Oops -- something went wrong.']
+                    'Oops -- something went wrong.']
 
         return_obj = {
-            'success' : success,
+            'success': success,
             'errors': errors
         }
 
         return JSONResponse(return_obj)
 
-    #not post request
+    # not post request
     passwordForm = [
         {
             'name': 'current_password',
@@ -344,7 +352,7 @@ def edit_profile(request):
 
     shirtNameForm = []
     for name in cpm.ShirtName.objects.filter(
-        user_profile=profile).values_list('name', flat=True):
+            user_profile=profile).values_list('name', flat=True):
         field = {
             'name': 'shirt_name',
             'placeholder': 'Shirt name',
@@ -352,46 +360,46 @@ def edit_profile(request):
         }
         shirtNameForm.append(field)
 
-    emailForm = [{'value':user.email}]
+    emailForm = [{'value': user.email}]
     for email in cpm.Email.objects.filter(
-        user_profile=profile, 
-        confirmed=True).values_list('email', flat=True):
+            user_profile=profile,
+            confirmed=True).values_list('email', flat=True):
         field = {
             'value': email
         }
         emailForm.append(field)
 
-
     template_values = {
         "page_title": "Edit Profile",
-        'nav_account' : 'active',
-        'user'  : request.user,
+        'nav_account': 'active',
+        'user': request.user,
         'password': passwordForm,
         'shirtname': shirtNameForm,
         'email': emailForm
     }
 
-    return render_to_response('edit_profile.html', 
-        template_values, request)
+    return render_to_response('edit_profile.html',
+                              template_values, request)
+
 
 def reset_password(request):
-    errors = {'username' : []} #setup for javascript error setting
+    errors = {'username': []}  # setup for javascript error setting
     success = False
     if request.POST:
         username = request.POST.get('username', None)
         if not username or not username.strip():
-                errors['username'].append(
-                    "Empty username entered.")
+            errors['username'].append(
+                "Empty username entered.")
 
-            #make sure user exists
+            # make sure user exists
         elif not cpm.UserProfile.objects.filter(
-            user__username=username, 
-            send_mail=True, user__is_active=True).exists():
-                errors['username'].append(
-                    "%s is not registered with an account." % \
-                     username)
+                user__username=username,
+                send_mail=True, user__is_active=True).exists():
+            errors['username'].append(
+                "%s is not registered with an account." %
+                username)
 
-            #create password reset object
+            # create password reset object
         else:
             user_profile = cpm.UserProfile.objects.filter(
                 user__username=username)[0]
@@ -404,20 +412,21 @@ def reset_password(request):
             success = "Password reset email sent out!"
 
         return_obj = {
-            'success' : success,
+            'success': success,
             'errors': errors
         }
 
         return JSONResponse(return_obj)
     else:
         template_values = {
-                'page_title' : "Reset Password",
-                "hero_err_title": "",
-                'user'  : request.user,
+            'page_title': "Reset Password",
+            "hero_err_title": "",
+            'user': request.user,
         }
 
-    return render_to_response('reset_password.html', 
-        template_values, request)
+    return render_to_response('reset_password.html',
+                              template_values, request)
+
 
 @render_to("reset_password_confirm.html")
 def reset_password_confirm(request, key=None):
@@ -427,7 +436,7 @@ def reset_password_confirm(request, key=None):
         reset = cpm.PasswordReset.objects.filter(
             activation_key=key)
         if reset.exists() and reset[0].is_active and  \
-        reset[0].is_valid():
+                reset[0].is_valid():
             reset = reset[0]
             reset.is_active = False
             new_password = reset.get_new_passwd()
@@ -446,6 +455,7 @@ def reset_password_confirm(request, key=None):
         success=success,
         errors=errors,
     )
+
 
 @render_to("googlead6c3c617c310b08.html")
 def google_verify(request):

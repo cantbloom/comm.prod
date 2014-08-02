@@ -5,6 +5,7 @@ from django.contrib.humanize.templatetags.humanize import intcomma
 register = template.Library()
 base_url = "/public/"
 
+
 @register.simple_tag
 def include_script(script_name):
 
@@ -20,10 +21,11 @@ def include_script(script_name):
 
     return """<script type="text/javascript" src="%s"></script>""" % script_path
 
+
 @register.simple_tag
 def include_style(style_name):
     style_name = style_name.replace('.css', '')
-    path_prefix =  base_url  + "css/"
+    path_prefix = base_url + "css/"
     path_suffix = ".css"
 
     style_path = path_prefix + style_name + path_suffix

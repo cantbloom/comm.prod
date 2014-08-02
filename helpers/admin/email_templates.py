@@ -1,6 +1,6 @@
 registration = {
-	'subject': "Vote on comm.prods!",
-	'content': """
+        'subject': "Vote on comm.prods!",
+        'content': """
 		Hey %s,
 		<p style="margin-top:5px">
 		You are invited to sign up for <b>Burton Third's home online</b>! Currently, you are able to view and vote on past comm.prods. We are looking to make this a desitination for Bombers, so feel free to let us know what you'd like to see on the site.
@@ -21,8 +21,8 @@ registration = {
 }
 
 alt_email = {
-	'subject': 'Confirm your alternate email',
-	'content': """
+        'subject': 'Confirm your alternate email',
+        'content': """
 		Hi %s,
 		<br>
 		<br>
@@ -35,8 +35,8 @@ alt_email = {
 }
 
 sorry_email = {
-  'subject': 'Whoops!',
-  'content': """
+    'subject': 'Whoops!',
+    'content': """
     Hi %s,
     <br>
     <br>
@@ -58,8 +58,8 @@ sorry_email = {
 }
 
 forgot_password = {
-	'subject': 'Reset your password',
-	'content': """
+        'subject': 'Reset your password',
+        'content': """
 		Hi %s,
 		<br>
 		<br>
@@ -73,8 +73,8 @@ forgot_password = {
 }
 
 feedback = {
-	'subject': 'Feedback for commerical production',
-	'content': """
+        'subject': 'Feedback for commerical production',
+        'content': """
 		'Feedback received from: %s <br><br> %s'
 	"""
 }

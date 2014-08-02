@@ -8,7 +8,7 @@ from django.core import management
 
 from helpers.admin import email_templates, utils
 from helpers.urlize_tags import urlize_text, \
- commprod_contains_media
+    commprod_contains_media
 
 from datetime import date, datetime, timedelta
 from threading import Lock
@@ -20,27 +20,28 @@ import random
 commprod_lock = Lock()
 correction_lock = Lock()
 
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
-    #other fields here
+    # other fields here
 
-    activation_key = models.CharField(max_length=40, 
-        default='')
+    activation_key = models.CharField(max_length=40,
+                                      default='')
     class_year = models.IntegerField(default=1933)
     send_mail = models.BooleanField(default=False)
     avg_score = models.FloatField(default=0.0)
-    pic_url = models.CharField(max_length=1000, 
-        default="/public/img/placeholder.jpg")
+    pic_url = models.CharField(max_length=1000,
+                               default="/public/img/placeholder.jpg")
     score = models.IntegerField(default=0)
     data_point_count = models.IntegerField(default=0)
     use_tour = models.BooleanField(default=True)
-    stripe_customer_id = models.CharField(max_length=1000, 
-        default="no_id")
+    stripe_customer_id = models.CharField(max_length=1000,
+                                          default="no_id")
 
     def update_data_point(self, save=True):
         if not self.data_point_count % 1:
             data_point = TrendData(user_profile=self,
-             score=self.score, avg_score=self.avg_score)
+                                   score=self.score, avg_score=self.avg_score)
             data_point.save()
         self.data_point_count += 1
 
@@ -63,15 +64,15 @@ class UserProfile(models.Model):
     def to_json(self):
         return json.dumps({
             'username': self.user.username,
-            'name' : self.user.get_full_name(),
-            })
+            'name': self.user.get_full_name(),
+        })
 
     def add_email(self, email):
         email = Email(user_profile=self, email=email)
-        email.send_confirm_email();
+        email.send_confirm_email()
         email.save()
 
-    def merge_and_delete(self, email):   
+    def merge_and_delete(self, email):
         """
             Takes an email, updates commprod objects
             associatd with the alt_email user to self.
@@ -90,7 +91,7 @@ class UserProfile(models.Model):
 
             CommProdEmail.objects.filter(
                 user_profile=to_delete).update(
-                user_profile=self) #very important!!
+                user_profile=self)  # very important!!
             TrendData.objects.filter(
                 user_profile=to_delete).update(
                 user_profile=self)
@@ -104,30 +105,31 @@ class UserProfile(models.Model):
         return self.user.username
 
     def __unicode__(self):
-          return "%s's profile" % self.user
+        return "%s's profile" % self.user
 
 User.profile = property(lambda u: u.get_profile())
+
 
 class Email(models.Model):
     user_profile = models.ForeignKey(UserProfile)
 
     email = models.EmailField(default='')
     confirmed = models.BooleanField(default=False)
-    date_created = models.DateTimeField(auto_now=True, 
-        default=datetime.now())
-    activation_key = models.CharField(max_length=40, 
-        default=get_digest())
+    date_created = models.DateTimeField(auto_now=True,
+                                        default=datetime.now())
+    activation_key = models.CharField(max_length=40,
+                                      default=get_digest())
 
     def send_confirm_email(self):
         content = email_templates.alt_email['content'] % \
-        (self.user_profile.user.first_name, 
-            self.email, '%s/confirm_email/%s/' % \
-            (settings.BASE_URL_PROD, self.activation_key))
+            (self.user_profile.user.first_name,
+             self.email, '%s/confirm_email/%s/' %
+             (settings.BASE_URL_PROD, self.activation_key))
         subject = email_templates.alt_email['subject']
         emails = [self.email]
         utils.email_users(subject, content, emails)
 
-        self.rm_expired_emails() #perform cleanup of unconfirmed emails
+        self.rm_expired_emails()  # perform cleanup of unconfirmed emails
 
     def confirm(self):
         self.confirmed = True
@@ -136,30 +138,33 @@ class Email(models.Model):
 
     def rm_expired_emails(self):
         time_threshold = datetime.now() - timedelta(hours=24)
-        Email.objects.filter(date_created__lt=time_threshold, confirmed=False).delete()
+        Email.objects.filter(
+            date_created__lt=time_threshold, confirmed=False).delete()
 
     def __unicode__(self):
         return "%(email)s, confirmed: %s, owned by %s" % {
-            'email' : self.email,
-            'confirmed' : self.confirmed, 
-            'username' : self.user_profile.username(),
+            'email': self.email,
+            'confirmed': self.confirmed,
+            'username': self.user_profile.username(),
         }
+
 
 class ShirtName(models.Model):
     user_profile = models.ForeignKey(UserProfile)
 
     number = models.CharField(max_length=40, default='')
-    name = models.CharField(max_length=40, 
-        default='Human Jizz Rag')
+    name = models.CharField(max_length=40,
+                            default='Human Jizz Rag')
     year = models.IntegerField(default=1933)
     editable = models.BooleanField(default=True)
 
     def __unicode__(self):
         return "%(name)s, %(number)s, owned by %(username)s" % {
-            'name' : self.name,
-            'number' : self.number,
-            'username' : self.user_profile.username(),
+            'name': self.name,
+            'number': self.number,
+            'username': self.user_profile.username(),
         }
+
 
 class CommProdEmail(models.Model):
     user_profile = models.ForeignKey(UserProfile)
@@ -171,18 +176,19 @@ class CommProdEmail(models.Model):
     def __unicode__(self):
         return """Email with content %(content)s 
         by %(username)s on %(date)s""" % {
-            'content' : self.content, 
-            'username' : self.user_profile.username(), 
-            'date' : self.date,
+            'content': self.content,
+            'username': self.user_profile.username(),
+            'date': self.date,
         }
+
 
 class CommProd(models.Model):
     user_profile = models.ForeignKey(UserProfile)
     email_content = models.ForeignKey(CommProdEmail)
 
     content = models.TextField()
-    original_content = models.TextField() #fuck corrections
-    #commprod with url tags inserted
+    original_content = models.TextField()  # fuck corrections
+    # commprod with url tags inserted
     media_content = models.TextField()
     avg_score = models.FloatField(default=0.0)
     score = models.IntegerField(default=0)
@@ -192,10 +198,10 @@ class CommProd(models.Model):
     date_added = models.DateTimeField(auto_now=True)
 
     def update_avg(self, save=True):
-    	self.avg_score = Rating.objects.filter(
+        self.avg_score = Rating.objects.filter(
             commprod=self).aggregate(
             Avg('score'))['score__avg']
-    	if save:
+        if save:
             self.save()
 
     def update_score(self, diff):
@@ -204,16 +210,16 @@ class CommProd(models.Model):
 
         self.update_avg(save=False)
 
-        #there was no previous vote, so register activity
+        # there was no previous vote, so register activity
         if abs(diff) == 1:
             self.register_activity(save=False)
 
         self.save()
 
     def register_activity(self, save=True):
-        #fiddle with 400 to adjust how long a 
-        #vote has an effect
-        self.trending_score += 400;
+        # fiddle with 400 to adjust how long a
+        # vote has an effect
+        self.trending_score += 400
 
         if save:
             self.save()
@@ -224,10 +230,11 @@ class CommProd(models.Model):
     def __unicode__(self):
         return """a btb '%(content)s' comm.prod by %(date)s 
         on %(date)s""" % {
-            'content' : self.content, 
-            'username' : self.user_profile.username(), 
-            'date' : self.date
+            'content': self.content,
+            'username': self.user_profile.username(),
+            'date': self.date
         }
+
 
 class Rating(models.Model):
     commprod = models.ForeignKey(CommProd)
@@ -237,25 +244,26 @@ class Rating(models.Model):
     previous_score = models.IntegerField(default=0)
     date = models.DateTimeField(auto_now=True)
 
-    def save(self, force_insert=False, 
-        force_update=False, **kwargs):
-        #acquire global lock on ratings
+    def save(self, force_insert=False,
+             force_update=False, **kwargs):
+        # acquire global lock on ratings
         commprod_lock.acquire()
         diff = int(self.score) - int(self.previous_score)
-        self.previous_score = self.score;
+        self.previous_score = self.score
         super(Rating, self).save(force_insert, force_update)
         self.commprod.update_score(diff)
-        #release, commprod and user profile are updated by above line
-        commprod_lock.release() 
+        # release, commprod and user profile are updated by above line
+        commprod_lock.release()
 
     def __unicode__(self):
-    	return """%(username)s voted a %(score)s on 
+        return """%(username)s voted a %(score)s on 
         commprod_id %(id)s on %(date)s.""" % {
-            'username' : self.user_profile.username(), 
-            'score' : self.score, 
-            'id' : self.commprod.id,
-            'date' :  self.date,
+            'username': self.user_profile.username(),
+            'score': self.score,
+            'id': self.commprod.id,
+            'date':  self.date,
         }
+
 
 class TrendData(models.Model):
     user_profile = models.ForeignKey(UserProfile)
@@ -267,11 +275,12 @@ class TrendData(models.Model):
     def __unicode__(self):
         return """%(username)s had a score of %(score)s 
         and avg score of %(avg_score)s on %(date)s.""" % {
-            'username' : self.user_profile.username(), 
-            'score' : self.score, 
-            'avg_score' : self.avg_score, 
-            'date' : self.date,
+            'username': self.user_profile.username(),
+            'score': self.score,
+            'avg_score': self.avg_score,
+            'date': self.date,
         }
+
 
 class Correction(models.Model):
     user_profile = models.ForeignKey(UserProfile)
@@ -285,7 +294,8 @@ class Correction(models.Model):
 
     def update_score(self, diff, rating_user):
         self.score = self.score + diff
-        self.user_profile.score = self.user_profile.score + diff #update user for points
+        self.user_profile.score = self.user_profile.score + \
+            diff  # update user for points
         if rating_user.is_staff and diff >= 0:
             self.use_correction()
 
@@ -309,15 +319,16 @@ class Correction(models.Model):
             self.content)
         self.commprod.save()
         if save:
-            self.save() ##normally called at the end of update_score
+            self.save()  # normally called at the end of update_score
 
     def __unicode__(self):
         return """Correction by %(username)s with content
          %(content)s on %(date)s.""" % {
-            "username" : self.user_profile.username(), 
-            "content" : self.content, 
-            "date" : self.date,
+            "username": self.user_profile.username(),
+            "content": self.content,
+            "date": self.date,
         }
+
 
 class CorrectionRating(models.Model):
     correction = models.ForeignKey(Correction)
@@ -328,24 +339,25 @@ class CorrectionRating(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def save(self, force_insert=False, force_update=False,
-         **kwargs):
+             **kwargs):
         correction_lock.acquire()
         diff = int(self.score) - int(self.previous_score)
         self.previous_score = self.score
-        super(CorrectionRating, self).save(force_insert, 
-            force_update)
-        self.correction.update_score(diff, 
-            self.user_profile.user)
+        super(CorrectionRating, self).save(force_insert,
+                                           force_update)
+        self.correction.update_score(diff,
+                                     self.user_profile.user)
         correction_lock.release()
 
     def __unicode__(self):
         return """%(username)s voted a %(score)s 
         on correction_id %(id)s on %(date)s.""" % {
-            'username' : self.user_profile.username(), 
-            'score' : self.score, 
-            'id' : self.correction.id,
-            'date' : self.date,
+            'username': self.user_profile.username(),
+            'score': self.score,
+            'id': self.correction.id,
+            'date': self.date,
         }
+
 
 class Favorite(models.Model):
     commprod = models.ForeignKey(CommProd)
@@ -357,47 +369,48 @@ class Favorite(models.Model):
     def __unicode__(self):
         return """%(username)s favorited (%(fav)s) the 
         commprod %(id)s on %(date)s.""" % {
-            'username' : self.user_profile.username(),
-            'fav' : self.fav,
-            'id' : self.commprod.id,
-            'date' : self.date,
+            'username': self.user_profile.username(),
+            'fav': self.fav,
+            'id': self.commprod.id,
+            'date': self.date,
         }
+
 
 class PasswordReset(models.Model):
     user_profile = models.ForeignKey(UserProfile)
 
     is_active = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now=True)
-    activation_key = models.CharField(max_length=40, 
-        default=get_digest())
+    activation_key = models.CharField(max_length=40,
+                                      default=get_digest())
 
     def send_confirm_email(self):
         content = email_templates.forgot_password["content"] \
-        % (self.user_profile.user.first_name, 
-            "%(base_url)s/reset_password/%(activation_key)s/" % {
-                'base_url' : settings.BASE_URL_PROD,
-                'activation_key' : self.activation_key,
-            })
+            % (self.user_profile.user.first_name,
+               "%(base_url)s/reset_password/%(activation_key)s/" % {
+                   'base_url': settings.BASE_URL_PROD,
+                   'activation_key': self.activation_key,
+               })
         subject = email_templates.forgot_password["subject"]
         emails = [self.user_profile.user.email]
         utils.email_users(subject, content, emails)
 
     def is_valid(self):
-        now = timezone.make_aware(datetime.now(), 
-            timezone.get_default_timezone())
+        now = timezone.make_aware(datetime.now(),
+                                  timezone.get_default_timezone())
         time_threshold = now - timedelta(hours=24)
         return self.date_created > time_threshold
 
     def get_new_passwd(self):
-        get_rand = lambda : random.randint(1, 333)
+        get_rand = lambda: random.randint(1, 333)
         user = self.user_profile.user
         start = get_rand()
         end = get_rand()
         password = "%(start)s%(username)s%(end)s" % {
-            'start' : start,
-            'username' : self.user_profile.username(),
-            'end' : end, 
-            }
+            'start': start,
+            'username': self.user_profile.username(),
+            'end': end,
+        }
         user.set_password(password)
         user.save()
         return password
@@ -405,9 +418,10 @@ class PasswordReset(models.Model):
     def __unicode__(self):
         return """Password reset request by %(username)s 
         on %(date_created)s.""" % {
-            'username' : self.user_profile.username(),
-            'date_created' : self.date_created,
+            'username': self.user_profile.username(),
+            'date_created': self.date_created,
         }
+
 
 class CommProdRec(models.Model):
     user_profile = models.ForeignKey(UserProfile)
@@ -415,18 +429,18 @@ class CommProdRec(models.Model):
     ranked_list = models.TextField()
 
     def get_prods(self, limit=None):
-        #annoying hack to get a query set of commprods 
-        #in the order of the ranked_list
+        # annoying hack to get a query set of commprods
+        # in the order of the ranked_list
         pk_list = json.loads(self.ranked_list)
         ordering = "FIELD(`id`, %s)" % \
-        ",".join(str(id) for id in pk_list)
+            ",".join(str(id) for id in pk_list)
         queryset = CommProd.objects.filter(
             pk__in=pk_list).extra(
-            select={ "ordering" : ordering }, 
+            select={"ordering": ordering},
             order_by=("ordering",))
         return queryset
 
 
-#fuck.
+# fuck.
 import signals
 signals.setup()

@@ -5,7 +5,7 @@ from annoying.decorators import render_to
 
 from helpers.renderers import donation_renderer
 from helpers.view_helpers import _get_donation_stats, \
-render_to_response
+    render_to_response
 
 from donations.forms import AnonDonateForm, DonateForm
 import donations.models as dm
@@ -17,6 +17,7 @@ from operator import attrgetter
 
 import stripe
 
+
 @login_required
 @render_to("donations/home.html")
 def home(request):
@@ -24,21 +25,21 @@ def home(request):
         Donation home page. Return all of the 
         donation objects that are found.
     """
-    
+
     donations = dm.Donation.objects.all()
     anon_donations = dm.AnonDonation.objects.all()
 
-    sorted_donations = sorted(list(chain(donations, 
-        anon_donations)), 
-        key=attrgetter('date'), reverse=True)
+    sorted_donations = sorted(list(chain(donations,
+                                         anon_donations)),
+                              key=attrgetter('date'), reverse=True)
     page = request.GET.get('page', 1)
     rendered_donations = donation_renderer(
-        sorted_donations, page) 
+        sorted_donations, page)
 
     template_values = {
-        'page_title' : "Past Donations",
-        'nav_donate' : "active",
-        'donation_timeline' : rendered_donations,
+        'page_title': "Past Donations",
+        'nav_donate': "active",
+        'donation_timeline': rendered_donations,
     }
 
     template_values.update(_get_donation_stats(
@@ -46,15 +47,16 @@ def home(request):
 
     return template_values
 
+
 def donate(request):
     """
         Donate page returns the form for submitting a donation
-    """ 
-    
+    """
+
     template_values = {
-        'page_title' : "Make a Donation",
-        'nav_donate' : "active",
-        'stripe_public_key' : env['STRIPE_PUBLIC_KEY'],
+        'page_title': "Make a Donation",
+        'nav_donate': "active",
+        'stripe_public_key': env['STRIPE_PUBLIC_KEY'],
     }
 
     template_values.update(_get_donation_stats())
@@ -63,6 +65,7 @@ def donate(request):
         return user_donate(request, template_values)
 
     return anon_donate(request, template_values)
+
 
 @login_required
 def user_donate(request, template_values):
@@ -80,20 +83,20 @@ def user_donate(request, template_values):
             description = """Donation of $%(amount)s.00 
             by %(username)s on %(date)s 
             for %(reason)s""" % {
-                'amount' : amount,
-                'username' :  user_profile.user.username,
-                'date'  : datetime.now(),
-                'reason' :  reason
+                'amount': amount,
+                'username':  user_profile.user.username,
+                'date': datetime.now(),
+                'reason':  reason
             }
 
-            # set your secret key: remember to 
-            #change this to your live secret key in production
-            # see your keys here 
-            #https://manage.stripe.com/account
+            # set your secret key: remember to
+            # change this to your live secret key in production
+            # see your keys here
+            # https://manage.stripe.com/account
             stripe.api_key = env["STRIPE_SECRET_KEY"]
 
-            # get the credit card details 
-            #submitted by the form
+            # get the credit card details
+            # submitted by the form
             token = request.POST.get('stripeToken', '')
 
             if not token:
@@ -101,10 +104,10 @@ def user_donate(request, template_values):
 
             # customer_id = user_profile.stripe_customer_id
 
-            #user did not save card in the past 
-            # if customer_id == "no_id": 
+            # user did not save card in the past
+            # if customer_id == "no_id":
 
-            #     # create a Customer
+            # create a Customer
             #     customer = stripe.Customer.create(
             #         card=token,
             #         description=description
@@ -112,44 +115,45 @@ def user_donate(request, template_values):
 
             #     customer_id = customer.id
 
-            #     # save the customer ID in your 
+            # save the customer ID in your
             #      database so you can use it later
             #     user_profile.stripe_customer_id = customer_id
             #     user_profile.save()
 
             # charge the Customer
             stripe.Charge.create(
-                amount=amount*100, # in cents
+                amount=amount * 100,  # in cents
                 currency="usd",
                 card=token,
                 description=description
             )
-            
-            #charge has gone through successfully
-            donation = dm.Donation(reason=reason, 
-                amount=amount, 
-                is_anonymous=is_anonymous, 
-                user_profile=user_profile)
+
+            # charge has gone through successfully
+            donation = dm.Donation(reason=reason,
+                                   amount=amount,
+                                   is_anonymous=is_anonymous,
+                                   user_profile=user_profile)
             donation.save()
 
             template_values = {
-                "amount" : amount,
-                "reason" : reason,
+                "amount": amount,
+                "reason": reason,
             }
 
             return render_to_response(
-                'donations/donate_success.html', 
+                'donations/donate_success.html',
                 template_values, request)
 
     else:
         form = DonateForm()
 
     template_values.update({
-        'form' : form,
+        'form': form,
     })
 
     return render_to_response(
         'donations/donate.html', template_values, request)
+
 
 def anon_donate(request, template_values):
     """
@@ -167,16 +171,16 @@ def anon_donate(request, template_values):
 
             description = """AnonDonation by %(name)s of 
                 $%(amount)s.00 on %(date)s for %(reason)s""" % {
-                'name' : name,
-                'amount' :  amount, 
-                'date' : datetime.now(),
-                'reason' :  reason,
+                'name': name,
+                'amount':  amount,
+                'date': datetime.now(),
+                'reason':  reason,
             }
 
-            # set your secret key: remember to 
-            #change this to your live secret key in production
-            # see your keys here 
-            #https://manage.stripe.com/account
+            # set your secret key: remember to
+            # change this to your live secret key in production
+            # see your keys here
+            # https://manage.stripe.com/account
             stripe.api_key = env["STRIPE_SECRET_KEY"]
 
             # get the credit card details submitted
@@ -185,32 +189,32 @@ def anon_donate(request, template_values):
 
             # charge the Customer
             stripe.Charge.create(
-                amount=amount*100, # in cents
+                amount=amount * 100,  # in cents
                 currency="usd",
                 card=token,
                 description=description
             )
-            
-            #charge has gone through successfully
-            donation = dm.AnonDonation(name=name, 
-                reason=reason, amount=amount)
+
+            # charge has gone through successfully
+            donation = dm.AnonDonation(name=name,
+                                       reason=reason, amount=amount)
             donation.save()
 
             template_values = {
-                "amount" : amount,
-                "reason" : reason,
+                "amount": amount,
+                "reason": reason,
             }
 
             return render_to_response('donations/donate_success.html',
-                template_values, 
-    request)
+                                      template_values,
+                                      request)
 
     else:
         form = AnonDonateForm()
 
     template_values.update({
-        'form' : form,
+        'form': form,
     })
 
-    return render_to_response('donations/donate.html', 
-        template_values, request)
+    return render_to_response('donations/donate.html',
+                              template_values, request)
