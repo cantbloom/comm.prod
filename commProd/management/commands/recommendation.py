@@ -12,16 +12,14 @@ class Command(NoArgsCommand):
     help = 'Updates commprod recommnedation list for each user'
 
     def handle(self, **options):
-        print "Making CommProdRecs..."
+        print 'Making CommProdRecs...'
         commprods = cpm.CommProd.objects.all().select_related()
         ratings = cpm.Rating.objects.all().select_related()
 
         active_users = cpm.UserProfile.objects.filter(
             user__is_active=True).select_related()
 
-        to_add = []
         for user_profile in active_users:
-            print user_profile.user.username
             ranked_list = []
             for commprod in commprods:
                 score = self.calc_score(

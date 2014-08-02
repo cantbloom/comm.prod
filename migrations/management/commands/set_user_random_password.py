@@ -1,11 +1,9 @@
 from django.core.management.base import NoArgsCommand
 from django.contrib.auth.models import User
 
-from django.conf import settings
-
 
 class Command(NoArgsCommand):
-    help = """Removes 500 error from users 
+    help = """Removes 500 error from users
     that are not registered."""
 
     def handle(self, **options):

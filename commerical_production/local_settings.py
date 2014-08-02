@@ -5,7 +5,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 BASE_URL = settings.BASE_URL_DEV
 
 
-DATABASES["default"] = {
+settings.DATABASES["default"] = {
     "ENGINE": "django.db.backends.mysql",
     "NAME": env["MYSQL_NAME_LOCAL"],
     "HOST": env["MYSQL_HOST_LOCAL"],

@@ -6,7 +6,7 @@ import commProd.models as cpm
 
 
 class Command(NoArgsCommand):
-    help = """Updates the trending score for all of the 
+    help = """Updates the trending score for all of the
     commprod objects"""
 
     def handle(self, **options):

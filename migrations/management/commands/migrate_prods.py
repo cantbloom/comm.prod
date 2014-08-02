@@ -1,4 +1,5 @@
 from django.core.management.base import NoArgsCommand
+
 import commProd.models as cpm
 
 from datetime import datetime
@@ -10,7 +11,7 @@ import time
 
 
 class Command(NoArgsCommand):
-    help = """Migrates prods from dev to production 
+    help = """Migrates prods from dev to production
     from the prod dump from Chris Post"""
 
     def handle(self, **options):
@@ -23,10 +24,10 @@ class Command(NoArgsCommand):
             date_added__gt=dump_day,
             date__lt=day_zero).select_related()
 
-        self.stdout.write("Starting...\n")
+        self.stdout.write('Starting...\n')
 
         for commprod in commprods.iterator():
-            self.stdout.write("\nAdding %d" % commprod.id)
+            self.stdout.write('\nAdding %d' % commprod.id)
             data = json.dumps({
                 commprod.user_profile.user.email: (
                     commprod.email_content.content,
@@ -41,5 +42,5 @@ class Command(NoArgsCommand):
             })
             # don't overload poor heroku
             time.sleep(0.5)
-            self.stdout.write("%s\n" % r.text)
-        self.stdout.write("Done.\n")
+            self.stdout.write('%s\n' % r.text)
+        self.stdout.write('Done.\n')
