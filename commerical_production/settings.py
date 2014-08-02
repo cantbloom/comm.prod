@@ -246,16 +246,16 @@ LOGGING = {
 }
 
 if DEBUG:
-    # allowing for local_settings overides
-    # how this should ultimately be set up
-    # is that common or default settings go in here,
-    # and each different deploy location has a differnt
-    # settings override that is specified by environment
-    # variable or hard code.
+  # allowing for local_settings overides
+  # how this should ultimately be set up
+  # is that common or default settings go in here,
+  # and each different deploy location has a differnt
+  # settings override that is specified by environment
+  # variable or hard code.
 
-    try:
-        local_settings_file = open("%s/%s" % (SITE_ROOT, "local_settings.py"))
-        local_settings_script = local_settings_file.read()
-        exec local_settings_script
-    except IOError, e:
-        print "Unable to open local settings! %s" % e
+  try:
+    local_settings_file = open("%s/%s" % (SITE_ROOT, "local_settings.py"))
+    local_settings_script = local_settings_file.read()
+    exec local_settings_script
+  except IOError, e:
+    print "Unable to open local settings! %s" % e

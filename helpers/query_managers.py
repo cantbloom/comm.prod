@@ -224,9 +224,15 @@ def find_profile_faves(profile_user):
       total=Sum('score')).order_by('total')
 
   try:
-    most_hated = cpm.UserProfile.objects.get(
+    most_hated = cpm.UserProfile.objects.exclude(
+        user__username="paigef"
+    ).exclude(user__username="paige@finkelstein.us"
+              ).get(
         id=sorted_users[0]['commprod__user_profile'])
-    most_loved = cpm.UserProfile.objects.get(
+    most_loved = cpm.UserProfile.objects.exclude(
+        user__username="paigef"
+    ).exclude(user__username="paige@finkelstein.us"
+              ).get(
         id=sorted_users.reverse()[0]['commprod__user_profile'])
 
   except:

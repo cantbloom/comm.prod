@@ -13,7 +13,7 @@ registration = {
     so you must register for the site using the link below.
     </p>
     <p style="margin-top:5px">
-    Please register to start rating commprods <a href='%s'>here</a>
+    Please <a href='%s'> register </a> to start rating commprods.
     </p>
     <p>
     Love,
