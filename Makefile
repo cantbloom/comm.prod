@@ -1,4 +1,4 @@
-.PHONY: default, clean, webserver, pull, syntax, test, lint
+.PHONY: default, clean, webserver, pull, syntax, test, lint, deploy
 
 BASE = $(shell pwd)/conf
 
@@ -29,3 +29,6 @@ test:
 
 lint:
 	flake8 --exclude=venv/* .
+
+deploy:
+	./scripts/deploy.sh
