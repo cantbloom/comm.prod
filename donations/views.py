@@ -104,24 +104,6 @@ def user_donate(request, template_values):
       if not token:
         return redirect('/donate')
 
-      # customer_id = user_profile.stripe_customer_id
-
-      # user did not save card in the past
-      # if customer_id == 'no_id':
-
-      # create a Customer
-      #     customer = stripe.Customer.create(
-      #         card=token,
-      #         description=description
-      #     )
-
-      #     customer_id = customer.id
-
-      # save the customer ID in your
-      #      database so you can use it later
-      #     user_profile.stripe_customer_id = customer_id
-      #     user_profile.save()
-
       # charge the Customer
       stripe.Charge.create(
           amount=amount * 100,  # in cents
@@ -188,6 +170,9 @@ def anon_donate(request, template_values):
       # get the credit card details submitted
       # by the form
       token = request.POST.get('stripeToken', '')
+
+      if not token:
+        return redirect('/donate')
 
       # charge the Customer
       stripe.Charge.create(
