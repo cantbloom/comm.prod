@@ -25,8 +25,7 @@ def init_parser():
   login = env['PARSE_EMAIL']
   password = env['PASSWORD']
   mailbox = 'inbox'
-  search_query = """(OR(UNSEEN TO 'bombers@mit.edu')
-                    (UNSEEN TO 'bombers-minus-fascists@mit.edu'))"""
+  search_query = '(OR (UNSEEN TO "bombers@mit.edu") (UNSEEN TO "bombers-minus-fascists@mit.edu"))'
 
   # manual override of defaults. enter own gmail account/password and scrape
   # prods.
@@ -38,8 +37,7 @@ def init_parser():
     login = raw_input('Email: ')
     password = getpass.getpass()
     mailbox = '[Gmail]/All Mail'
-    search_query = """(OR(TO 'bombers@mit.edu')
-                      (TO 'bombers-minus-fascists@mit.edu'))"""
+    search_query = '(OR (TO "bombers@mit.edu") (TO "bombers-minus-fascists@mit.edu"))'
 
     if options.mailbox:
       mailbox = options.mailbox
@@ -130,10 +128,10 @@ def fetch_prods(url, login, password, mailbox, search_query):
           logging.warn("""
                      No commprods found:\n
                      Date: %(date)s \n
-                     From: %(from)s \n
+                     From: %(sender)s \n
                      Subject: %(subject)s \n
                      Content: %(content)s\n""" % {
-              'data': date,
+              'date': date,
               'sender': sender,
               'subject': subject,
               'content': utils.clean_content(content),
@@ -147,8 +145,8 @@ def fetch_prods(url, login, password, mailbox, search_query):
 
       except UnicodeDecodeError as e:
         logging.warning("""
-                    UnicodeDecodeError for email %s
-                    from %s on %s""" % {
+                    UnicodeDecodeError for email %(content)s
+                    from %(sender)s on %(date)s""" % {
             'content': content,
             'sender': sender,
             'date': date,
@@ -176,8 +174,7 @@ def parse_prod(query):
   comm_regex = '(comm)(()|( )|(\.)|(\. )|( \.)|(\,)|(\, )|( \,))'
   prod_regex = '((prod)|(prodd))((\s)|(\.\s)|(\.\.\s))'
 
-  commprod_regex = """((%(comm)s%(prod)s)
-        |(%(comm)s\s%(prod)s))""" % {
+  commprod_regex = """((%(comm)s%(prod)s)|(%(comm)s\s%(prod)s))""" % {
       'comm': comm_regex,
       'prod': prod_regex,
   }
@@ -211,8 +208,8 @@ if __name__ == '__main__':
                           defaults to[Gmail] / All Mail""")
   parser.add_option('-s', '--search_query', dest='search_query',
                     help="""Use a custom search_query -- defaults to
-                    '(OR (TO 'bombers@mit.edu')
-                    (TO 'bombers-minus-fascists@mit.edu'))'""")
+                    '(OR (TO "bombers@mit.edu")
+                    (TO "bombers-minus-fascists@mit.edu"))'""")
 
   (options, args) = parser.parse_args()
   url, login, password, mailbox, search_query = init_parser()
