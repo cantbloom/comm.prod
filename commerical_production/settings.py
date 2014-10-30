@@ -14,6 +14,7 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     ('Joshua Blum', 'joshblum@mit.edu'),
     ('Max Kanter', 'kanter@mit.edu'),
+    ('Bennett Cyphers', 'bcyphers@mit.edu'),
     ('comm.prod-admins', 'comm.prod@mit.edu'),
 )
 

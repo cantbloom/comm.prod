@@ -20,6 +20,7 @@ urlpatterns = patterns('',
                            {'template_name': 'logout.html'}),
                        url(r'^commprod/', include('commProd.urls')),
                        url(r'^donations/', include('donations.urls')),
+                       url(r'^runner/', include('runner.urls')),
                        url(r'^donate/', 'donations.views.donate'),
                        url(r'^robots\.txt$',
                            lambda r: HttpResponse(

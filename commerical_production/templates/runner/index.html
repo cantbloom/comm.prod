@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block styles %}
+  {% include_style 'runner/bootstrap.min' %}
+  {% include_style 'runner/whhg' %}
+  {% include_style 'runner/bootstrap_override' %}
+{% endblock %}
+
+{% block content %} 
+<div class='row'>
+  {% include 'runner/my_cart.html' %}
+  <div class='col-xs-3 col-xs-offset-1'>
+    <div class='title'><h1>Your Order</h1></div>
+    <div class='my-order outer row'>
+      <div id='my-order-list'>
+        <div id='my-order-empty' class='item'>
+          Your cart is empty.
+        </div>
+      </div>
+    <div class='row order-summary'>
+      <div class='price-info col-xs-3 col-xs-offset-1'>
+        <div class='row' id='drinks-price'>0</div>
+        <div class='row info-rollover-text price'>subtotal</div>
+      </div>
+      <div class='price-info col-xs-3'>
+        <div class='row' id='drinks-tax'>0</div>
+        <div class='row info-rollover-text tax'>tax/tip</div>
+      </div>
+      <div class='col-xs-4' id='total-price'>$0</div>
+    </div>
+      <div class='button'>
+        <button id='submit-order' type='button' class='btn btn-warning btn-lg'
+          disabled='disabled'>Submit</button>
+      </div>
+    </div>
+  </div>
+  <div class='catalog col-xs-8'>
+    <div class='title'><h1>Catalog</h1></div>
+    <div class='row'>
+      <div class='search-bar col-xs-8'>
+        <form role='form'>
+          <input class='form-control input-lg' id='search-bar-form' type='text'
+          placeholder='Search' autocomplete="off">
+        </form>
+      </div>
+      <button id='feeling-lucky' type='button' class='btn btn-default btn-lg'>I'm Feeling
+        Lucky</button>
+    </div>
+  </div>
+  <div class='col-xs-1'></div>
+</div>
+{% endblock %}
+
+{% block scripts %} 
+
+  {% include_script 'runner/jquery-2.1.1.min' %}
+  {% include_script 'runner/jquery-cookie/jquery.cookie.js' %}
+  {% include_script 'runner/underscore.min' %}
+  {% include_script 'runner/bootstrap.min' %}
+
+  <script type="text/javascript">
+    BEERRUN_DATA = {};
+    BEERRUN_DATA.categories = {{ categories|safe }};
+    BEERRUN_DATA.allDrinks = {{ all_drinks|safe }};
+    BEERRUN_DATA.myDrinks = {{ my_drinks|safe }};
+    BEERRUN_DATA.runID = {{ run_id|safe }};
+  </script>
+
+  {% include_script 'runner/green_tea' %}
+{% endblock %}

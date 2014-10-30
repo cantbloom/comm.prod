@@ -60,6 +60,7 @@
 
     <body>
 
+    <!-- Top nav bar (logo, blog, comm.prod, runner, profile, donate) -->
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner nav-bg">
                 <div class="container-fluid">
@@ -79,6 +80,10 @@
                         {% if user.is_authenticated %}
                             <li class={{ nav_commprod }}>
                                 <a href="/">comm.prod</a>
+                            </li>
+
+                            <li class={{ nav_runner }}>
+                                <a href="/runner">runner</a>
                             </li>
 
                             <li class={{ nav_profile }}>
@@ -118,13 +123,13 @@
                                             Send Feedback
                                         </a>
                                     </li>
+
+                                    <!-- TODO: My Cart -->
                                         
-                                        {% if user.is_authenticated %}
-                                            <li class="divider"></li>
-                                            <li>
-                                                <a href={% url django.contrib.auth.views.logout %}> Logout </a>
-                                            </li>
-                                        {% endif %}
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href={% url django.contrib.auth.views.logout %}> Logout </a>
+                                    </li>
                                     </ul>
                                 </li>
 
@@ -141,18 +146,20 @@
                 </div>
             </div>
         </div>
+
         <!-- Part 1: Wrap all page content here -->
         <div class="wrap">
 
             <!-- Begin page content -->
             <div class="container">
-                {% block content %} {% endblock%}
+                {% block content %} {% endblock %}
             </div>
 
         <div class="push"></div>
         
         
-<!--         <div class="footer">
+<!--    WTF is this shit (bcyphers 10/30)
+     <div class="footer">
             <div class="navbar">
                 <div class="navbar-inner nav-bg">
                     <div class="container">
@@ -230,6 +237,7 @@
 
         {% include_script 'base' %}
         {% include_script 'analytics' %}
+
         <!-- stripe -->
         <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 

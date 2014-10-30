@@ -1,0 +1,186 @@
+a {
+  color: #555;
+  cursor: pointer;
+  cursor: hand;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #f96302;
+}
+
+body {
+  repeat top left;
+  padding-top: 70px;
+  background-position-x: 0%;
+  background-position-y: 0%;
+  background-size: initial;
+  background-repeat-x: repeat;
+  background-repeat-y: repeat;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.row {
+  cursor: default;
+}
+
+.catalog {
+  overflow: auto;
+  height: 90%;
+  font-size: 24px;
+}
+
+.catalog .row {
+  margin: 10px 10px 10px 10px; 
+}
+
+.catalog .item {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; /* future proofing */
+  -khtml-border-radius: 5px; /* for old Konqueror browsers */
+}
+
+.catalog .item i {
+  font-size: 22px;
+}
+
+.catalog .item .drink:hover {
+  background-color: white;/*rgba(0,0,0,0.2);*/
+}
+
+.catalog .item .drink {
+  margin: 0 0 0 0;
+}
+
+.nav-list ul {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; /* future proofing */
+  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+  font-size: 18px;
+  background-color: #FFF;
+  border-color: #DDD;
+  overflow: hidden;
+}
+
+.nav-list ul li a span {
+  float: right;
+}
+
+.nav-list ul li a {
+  font-size: 18px;
+  color: #555;
+  cursor: pointer;
+  cursor: hand;
+  display: block;
+  width: 100%;
+}
+
+h1 {
+  margin: 0 0 0 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.title {
+  text-align: center;
+} 
+
+.my-order {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; /* future proofing */
+  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+  font-size: 18px;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.my-order .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.my-order h2 {
+  text-align: center;
+}
+
+.my-order .item {
+  padding: 10px 0px 10px 0px;
+  font-size: 18px;
+}
+
+.my-order .item:hover {
+  background-color: #FFF;
+}
+
+.my-order .button {
+  text-align: center;
+}
+
+.my-order .button .btn {
+  border-radius: 0px;
+  width: 100%;
+  display: none;
+}
+
+.my-order #my-order-empty {
+  text-align: center;
+}
+
+.order-summary {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -khtml-border-radius: 10px;
+
+  background-color: ;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.order-summary #total-price {
+  font-size: 36px;
+}
+
+.order-summary .price-info {
+  font-size: 28px;
+  text-align: center;
+}
+
+.order-summary .info-rollover-text {
+  margin-top: -10px;
+  font-size: 16px;
+}
+
+.order-summary .info-rollover-text .tax {
+  color: rgba(92, 184, 92, 0.8);
+}
+
+.order-summary .info-rollover-text .price {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/*
+.order-summary #drinks-tax {
+  color: #5cb85c;
+}
+*/
+
+.order-summary #my-order-list .order-count {
+  font-weight: bold;
+}
