@@ -177,6 +177,7 @@ INSTALLED_APPS = (
     'commProd',
     'helpers',
     'cron',
+    'runner',
 )
 
 
