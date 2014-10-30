@@ -168,6 +168,7 @@ INSTALLED_APPS = (
     'django_evolution',
     'pagination',
     'gunicorn',
+    'south',
 
     # comm.prod
     'migrations',
