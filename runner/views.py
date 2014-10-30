@@ -41,8 +41,7 @@ def index(request, run_id=None, sortby='name'):
     context = { 'run': _json_run(run),
                 'all_drinks': _json_drinks(),
                 'categories': _json_categories(),
-                'my_drinks': _get_user_order(request.user, run),
-                'static_prefix': settings.STATIC_PREFIX }
+                'my_drinks': _get_user_order(request.user, run) }
     context.update(csrf(request))
     return render(request, 'runner/index.html', context)
 
