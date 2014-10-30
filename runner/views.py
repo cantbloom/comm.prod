@@ -24,19 +24,27 @@ from runner.models import Category, Drink, RunItem, Run
 @ensure_csrf_cookie
 @login_required
 def index(request, run_id=None, sortby='name'):
-    if not run_id:
-        run = Run.objects.all().reverse()[0]
+    runs = Run.objects.all()
+    if not runs:
+        # If there are no runs in the database, create one
+        run = Run()
+        run.name = "Test Run"
+        run.save()
+    elif not run_id:
+        run = runs.reverse()[0]
     else:
         run = Run.objects.get(pk=run_id)
 
     if not request.user.is_authenticated():
         request.user = authenticate(username='bcyphers', password='elixir')
 
-    context = {'run_id': run.id, 'all_drinks': _json_drinks(), 'categories':
-            _json_categories(), 'my_drinks': _get_user_order(request.user, run),
-            'static_prefix': settings.STATIC_PREFIX}
+    context = { 'run': _json_run(run),
+                'all_drinks': _json_drinks(),
+                'categories': _json_categories(),
+                'my_drinks': _get_user_order(request.user, run),
+                'static_prefix': settings.STATIC_PREFIX }
     context.update(csrf(request))
-    return render(request, 'index.html', context)
+    return render(request, 'runner/index.html', context)
 
 
 # Get all categories and drinks as JSON
@@ -59,38 +67,33 @@ def get_order(request, run_id):
 # the data will be in the form {drink_id: count}
 @login_required
 def update_run(request, run_id):
-    try:
-        print "POST.items()", map(lambda (d, c): (int(d), int(c)), request.POST.items())
-        print "run_id", run_id
-        for drink_id, count in map(lambda (d, c): (int(d), int(c)), request.POST.items()):
-            run = Run.objects.get(pk=run_id)
-            drink = Drink.objects.get(pk=drink_id)
-            my_items = RunItem.objects.filter(
-                    drink__id=drink_id, customer=request.user, run=run).count()
-            delta = count - my_items
-            now = datetime.utcnow().replace(tzinfo=utc)
+    run = Run.objects.get(pk=run_id)
+    for drink_id, count in map(lambda (d, c): (int(d), int(c)), request.POST.items()):
+        drink = Drink.objects.get(pk=drink_id)
+        my_items = RunItem.objects.filter(
+                drink__id=drink_id, customer=request.user, run=run).count()
+        delta = count - my_items
+        now = datetime.utcnow().replace(tzinfo=utc)
 
-            # If there are more items in the ajax call than the DB, we add some
-            if delta > 0:
-                for i in range(delta):
-                    item = RunItem(
-                            drink=drink,
-                            customer=request.user,
-                            run=run,
-                            time=now)
-                    item.save()
-            # if there are fewer, delete some
-            elif delta < 0:
-                for i in range(-delta):
-                    RunItem.objects.filter(
-                            customer=request.user,
-                            run=run,
-                            drink=drink)[0].delete()
+        # If there are more items in the ajax call than the DB, we add some
+        if delta > 0:
+            for i in range(delta):
+                item = RunItem(
+                        drink=drink,
+                        customer=request.user,
+                        run=run,
+                        time=now)
+                item.save()
+        # if there are fewer, delete some
+        elif delta < 0:
+            for i in range(-delta):
+                RunItem.objects.filter(
+                        customer=request.user,
+                        run=run,
+                        drink=drink)[0].delete()
 
-        return HttpResponse(status=201)
-    except Exception, e:
-        print e
-        print_tb(err.__traceback__)
+    # return the updated run summary
+    return HttpResponse(_json_run(run), mimetype='application/json')
 
 
 # Get a list of all categories in clean json
@@ -114,6 +117,16 @@ def _json_drinks():
         drink = Drink.objects.get(id=d['pk'])
         d['clean_volume'] = drink.clean_volume()
         d['clean_price'] = drink.clean_price()
+    return json.dumps(data)
+
+
+# Get the current run as a JSO
+def _json_run(run):
+    total = sum([i.drink.price for i in RunItem.objects.filter(run=run.id)])
+    data = { 'pk': run.pk,
+             'name': run.name,
+             'goal': run.goal,
+             'total': total }
     return json.dumps(data)
 
 

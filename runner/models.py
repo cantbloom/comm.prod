@@ -36,9 +36,9 @@ class Drink(models.Model):
         ordering = ('category', 'name', 'quantity', '-volume')
 
 class Run(models.Model):
-    start_date = models.DateField()
+    start_date = models.DateField(default=datetime.date.today)
     end_date = models.DateField(null=True, blank=True)
-    goal = models.DecimalField(max_digits=6, decimal_places=2)
+    goal = models.DecimalField(max_digits=6, decimal_places=2, default=500.00)
     name = models.CharField(max_length=200)
 
     def save(self, *args, **kwargs):

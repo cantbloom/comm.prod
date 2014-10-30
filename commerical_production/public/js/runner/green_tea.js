@@ -14,7 +14,7 @@ $(function() {
         }
     });
 
-    var runID = $('meta[name=runID]').attr('content');
+    var run = BEERRUN_DATA.run;
     var highLifeID = false;
 
     // add an element to the "my order" list
@@ -209,6 +209,7 @@ $(function() {
     */
 
     // update the database with the new order
+    // TODO: add a timeout and such
     $('#submit-order').click(function() {
         $('#submit-order').prop('disabled', true);
         $('#submit-order').text('Submitting...');
@@ -216,7 +217,7 @@ $(function() {
         for (var v in cleanOrder) {
             if (myOrder[v] === undefined) { postOrder[v] = 0; }
         }
-        $.post(STATIC_PREFIX + '/api/update_run/' + runID, postOrder, function(d, status) {
+        $.post(STATIC_PREFIX + '/api/update_run/' + run.pk, postOrder, function(d, status) {
             console.log(status);
             // disable the 'submit' button
             cleanOrder = _.clone(myOrder);
