@@ -98,6 +98,8 @@
                                 </form>
                             </li>
                         </ul>
+
+                        <!--pulldown options bar for logged in users-->
                         <ul class="nav pull-right topbar">
                             <li id="account_dropdown" class="dropdown {{ nav_account }}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -209,7 +211,10 @@
         {% endif %}
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
-        {% include_script 'lib/jquery.min' %}
+
+        <!-- latest jquery and compatibility code -->
+        {% include_script 'lib/jquery-1.11.1.min' %}
+        {% include_script 'lib/jquery-migrate-1.2.1.min' %}
 
         <!--  helpers -->
         {% include_script 'lib/filepicker' %}
@@ -232,7 +237,7 @@
         {% include_script 'lib/bootstrap-button' %}
         {% include_script 'lib/bootstrap-collapse' %}
         {% include_script 'lib/bootstrap-typeahead' %}
-        {% include_script 'lib/jquery.cookie' %}
+        {% include_script 'lib/jquery.cookie-1.4.1' %}
         {% include_script 'lib/bootstrap-tour' %}
 
         {% include_script 'base' %}
