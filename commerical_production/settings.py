@@ -12,10 +12,11 @@ DEBUG = (not env['DEBUG'] == 'False')  # convert from sting to bool
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Joshua Blum', 'joshblum@mit.edu'),
-    ('Max Kanter', 'kanter@mit.edu'),
+    #('Joshua Blum', 'joshblum@mit.edu'),
+    #('Max Kanter', 'kanter@mit.edu'),
     ('Bennett Cyphers', 'bcyphers@mit.edu'),
-    ('comm.prod-admins', 'comm.prod@mit.edu'),
+    ('Stephanie Wang', 'swang93@mit.edu'),
+    #('comm.prod-admins', 'comm.prod@mit.edu'),
 )
 
 MANAGERS = ADMINS
