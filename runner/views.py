@@ -121,12 +121,11 @@ def _json_drinks():
 
 # Get the current run as a JSO
 def _json_run(run):
-    total = sum([i.drink.price for i in RunItem.objects.filter(run=run.id)])
-    data = json.loads(serializers.serialize('json', run))
-    for f, val in data['fields'].iteritems():
-        data[f] = val
-    del data['fields']
-    data['total'] = total
+    total = sum([float(i.drink.price) for i in RunItem.objects.filter(run=run.id)])
+    data = { 'pk': int(run.pk),
+             'name': str(run.name),
+             'goal': float(run.goal),
+             'total': total }
     return json.dumps(data)
 
 
