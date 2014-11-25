@@ -1,0 +1,27 @@
+<!-- analytics -->
+<script type="text/javascript">
+    var seg=seg||[];seg.load=function(a){var b,c,d,e,f,g=document;b=g.createElement("script"),b.type="text/javascript",b.async=!0,b.src=a,c=g.getElementsByTagName("script")[0],c.parentNode.insertBefore(b,c),d=function(a){return function(){seg.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["init","identify","track","callback","verbose"];for(f=0;f<e.length;f+=1)seg[e[f]]=d(e[f])};seg.load(document.location.protocol+'//d47xnnr8b1rki.cloudfront.net/api/js/v2/segmentio.js');
+
+    seg.init('l37wedvl0ut'); // commprod's very own API key
+    var firstSemesterAdd = [6, 7, 8, 9, 10, 11].indexOf((new Date()).getMonth()) ? 1 : 0
+    //seg.verbose(true); // remove this in production to turn off logging
+    {% if user.is_authenticated %}
+    seg.identify("{{ user.email }}",
+        {
+        'class_year': {{ user.profile.class_year }},
+        'alum' : {{ user.profile.class_year }} < (new Date()).getFullYear() + firstSemesterAdd,
+        'is_staff' : "{{ user.is_staff }}" == "True"
+        }
+    )
+    {% endif %}
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33833631-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>

@@ -1,0 +1,70 @@
+{% load filters %}
+{% load compress %}
+{% load gravatar %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title id="page_title"> comm.prod | {{ page_title }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- special head data -->
+        {% block head %} {% endblock %}
+
+        <!-- styles -->
+        {# compress css #}
+        {% block styles %} {% endblock%}
+        {# endcompress #}
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <link rel="shortcut icon" href="/public/favicon.ico">
+    </head>
+
+    <body>
+
+        {% block navbar %} {% endblock %}
+
+        <!-- Part 1: Wrap all page content here -->
+        <div class="wrap">
+
+            <!-- Begin page content -->
+            <div class="container">
+                {% block content %} {% endblock %}
+            </div>
+
+        <div class="push"></div>
+        
+        {% block footer %} {% endblock %}
+        
+
+        <!--  javascript -->
+        {# compress js #}
+        {% if user.is_authenticated %}
+            {% include_script 'user_list' %}
+        {% else %}
+            <script type="text/javascript">
+                var user_list={};
+            </script>
+        {% endif %}
+        {% include "send_feedback.html" %}
+        {% include "commprod/claim_email.html" %}
+
+        {% block scripts %} {% endblock %}
+
+        <script type="text/javascript">
+            {% if user.profile.use_tour %}
+                var use_tour = true;
+            {% else %}
+                var use_tour = false;
+            {% endif %}
+        </script>
+        {# endcompress #}
+    </body>
+</html>
