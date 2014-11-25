@@ -31,8 +31,8 @@
 
         <!--  styles -->
         {# compress css #}
-        {% include_style "bootstrap.min" %}
-        {% include_style "bootstrap-responsive" %}
+        {% include_style "bootstrap-2.0.4.min" %}
+        {% include_style "bootstrap-responsive-2.0.4" %}
         {% include_style "base" %}
         {% include_style "home" %}
         {% block styles %} {% endblock%}
@@ -99,7 +99,7 @@
                             </li>
                         </ul>
 
-                        <!--pulldown options bar for logged in users-->
+                        <!-- pulldown options bar for logged in users -->
                         <ul class="nav pull-right topbar">
                             <li id="account_dropdown" class="dropdown {{ nav_account }}">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -215,6 +215,7 @@
         <!-- latest jquery and compatibility code -->
         {% include_script 'lib/jquery-1.11.1.min' %}
         {% include_script 'lib/jquery-migrate-1.2.1.min' %}
+        {% include_script 'lib/jquery.cookie-1.4.1' %}
 
         <!--  helpers -->
         {% include_script 'lib/filepicker' %}
@@ -227,18 +228,17 @@
         {% include_script 'lib/highcharts' %}
 
         <!--  bootstrap -->
-        {% include_script 'lib/bootstrap-transition' %}
-        {% include_script 'lib/bootstrap-alert' %}
-        {% include_script 'lib/bootstrap-modal' %}
-        {% include_script 'lib/bootstrap-dropdown' %}
-        {% include_script 'lib/bootstrap-tab' %}
-        {% include_script 'lib/bootstrap-tooltip' %}
-        {% include_script 'lib/bootstrap-popover' %}
-        {% include_script 'lib/bootstrap-button' %}
-        {% include_script 'lib/bootstrap-collapse' %}
-        {% include_script 'lib/bootstrap-typeahead' %}
-        {% include_script 'lib/jquery.cookie-1.4.1' %}
-        {% include_script 'lib/bootstrap-tour' %}
+        {% include_script 'lib/bootstrap-transition-2.0.4' %}
+        {% include_script 'lib/bootstrap-alert-2.0.4' %}
+        {% include_script 'lib/bootstrap-modal-2.0.4' %}
+        {% include_script 'lib/bootstrap-dropdown-2.0.4' %}
+        {% include_script 'lib/bootstrap-tab-2.0.4' %}
+        {% include_script 'lib/bootstrap-tooltip-2.0.4' %}
+        {% include_script 'lib/bootstrap-popover-2.0.4' %}
+        {% include_script 'lib/bootstrap-button-2.0.4' %}
+        {% include_script 'lib/bootstrap-collapse-2.0.4' %}
+        {% include_script 'lib/bootstrap-typeahead-2.0.4' %}
+        {% include_script 'lib/bootstrap-tour-2.0.4' %}
 
         {% include_script 'base' %}
         {% include_script 'analytics' %}

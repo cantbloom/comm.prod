@@ -2,7 +2,7 @@
 {% load filters %}
 
 {% block styles %}
-  {% include_style 'runner/bootstrap.min' %}
+  {% include_style 'bootstrap-3.2.0.min' %}
   {% include_style 'runner/whhg' %}
   {% include_style 'runner/bootstrap_override' %}
 {% endblock %}
@@ -40,8 +40,8 @@
 {% endblock %}
 
 {% block scripts %} 
-  {% include_script 'runner/underscore-1.6.0.min' %}
-  {% include_script 'runner/bootstrap-3.2.0.min' %}
+  {% include_script 'lib/underscore-1.6.0.min' %}
+  {% include_script 'lib/bootstrap-3.2.0.min' %}
 
   <script type="text/javascript">
     BEERRUN_DATA = {};
