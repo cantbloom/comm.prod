@@ -46,7 +46,7 @@
 {% endblock%}
 
 {% block scripts %}
-{% include 'bootstrap_scripts.html' %}
+
     <script type="text/javascript">
         var stripe_public_key = "{{ stripe_public_key }}";
         var card_info = "{{ user.profile.stripe_customer_id }}" != "no_id";

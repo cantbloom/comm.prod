@@ -1,226 +1,64 @@
+{% extends "shell.html" %}
 {% load filters %}
-{% load compress %}
-{% load gravatar %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title id="page_title"> comm.prod | {{ page_title }}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
+{% block head %}
+  {% include "analytics.html" %}
+{% endblock %}
 
-        <!-- analytics -->
-        <script type="text/javascript">
-            var seg=seg||[];seg.load=function(a){var b,c,d,e,f,g=document;b=g.createElement("script"),b.type="text/javascript",b.async=!0,b.src=a,c=g.getElementsByTagName("script")[0],c.parentNode.insertBefore(b,c),d=function(a){return function(){seg.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["init","identify","track","callback","verbose"];for(f=0;f<e.length;f+=1)seg[e[f]]=d(e[f])};seg.load(document.location.protocol+'//d47xnnr8b1rki.cloudfront.net/api/js/v2/segmentio.js');
+<!--  styles -->
+{% block styles %} 
+  {% include_style "bootstrap-2.0.4.min" %}
+  {% include_style "bootstrap-responsive-2.0.4" %}
+  {% include_style "base" %}
+  {% include_style "home" %}
+{% endblock %}
 
-            seg.init('l37wedvl0ut'); // commprod's very own API key
-            var firstSemesterAdd = [6, 7, 8, 9, 10, 11].indexOf((new Date()).getMonth()) ? 1 : 0
-            //seg.verbose(true); // remove this in production to turn off logging
-            {% if user.is_authenticated %}
-            seg.identify("{{ user.email }}",
-                {
-                'class_year': {{ user.profile.class_year }},
-                'alum' : {{ user.profile.class_year }} < (new Date()).getFullYear() + firstSemesterAdd,
-                'is_staff' : "{{ user.is_staff }}" == "True"
-                }
-            )
-            {% endif %}
-        </script>
+{% block navbar %} 
+  {% include 'nav_bar.html' %}
+{% endblock %}
 
-        <!--  styles -->
-        {# compress css #}
-        {% include_style "bootstrap-2.0.4.min" %}
-        {% include_style "bootstrap-responsive-2.0.4" %}
-        {% include_style "base" %}
-        {% include_style "home" %}
-        {% block styles %} {% endblock%}
-        {# endcompress #}
-        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-        <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-
-        <link rel="shortcut icon" href="/public/favicon.ico">
-        <script type="text/javascript">
-
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-33833631-1']);
-          _gaq.push(['_trackPageview']);
-
-          (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-
-        </script>
-    </head>
-
-    <body>
-
-    <!-- Top nav bar (logo, blog, comm.prod, runner, profile, donate) -->
-        <div class="navbar navbar-fixed-top">
+{% block footer %}
+<!--  WTF is this shit (bcyphers 10/30)
+ <div class="footer">
+        <div class="navbar">
             <div class="navbar-inner nav-bg">
-                <div class="container-fluid">
-                    <a class="brand" href="/">
-                        a <img class="logo" src="/public/img/btb-logo.png"/> comm.prod
-                    </a>
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <div class="nav-collapse">
-                        <ul class="nav topbar">
-                            <li class={{ nav_blog }}>
-                                <a href="http://blog.burtonthird.com">Blog</a>
-                            </li>
-                        {% if user.is_authenticated %}
-                            <li class={{ nav_commprod }}>
-                                <a href="/">comm.prod</a>
-                            </li>
-
-                            <li class={{ nav_runner }}>
-                                <a href="/runner">runner</a>
-                            </li>
-
-                            <li class={{ nav_profile }}>
-                                <a id="user_prof" href=/users/{{user.username}}>Profile</a>
-                            </li>
-                            <li class={{ nav_donate }}>
-                                 <a href="/donate">Donate</a>
-                            </li>
+                <div class="container">
+                        <ul class="nav pull-right">
                             <li>
-                                <form id="navbar-search" class="navbar-search">
-                                    <input type="search" id="search_bar" class="search-query" placeholder="Find people..." autocomplete="off"> 
-                                </form>
-                            </li>
-                        </ul>
-
-                        <!-- pulldown options bar for logged in users -->
-                        <ul class="nav pull-right topbar">
-                            <li id="account_dropdown" class="dropdown {{ nav_account }}">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="{% gravatar_for_user user 24 %}" class="nav-prof-img">
-                                    {{user.username}} <i class="icon-cog icon-white"></i>
+                                <a href="http://github.com/cantbloom">
+                                    <img class="icon" src="https://github.com/favicon.ico">
+                                    cantbloom project
                                 </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="/users/{{user.username}}">
-                                            <i class="icon-user"></i>
-                                            My Profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="/edit">
-                                            <i class="icon-wrench"></i>
-                                            Settings
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="modal" href="#send-feedback-modal" >
-                                            <i class="icon-envelope"></i>
-                                            Send Feedback
-                                        </a>
-                                    </li>
-
-                                    <!-- TODO: My Cart -->
-                                        
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href={% url django.contrib.auth.views.logout %}> Logout </a>
-                                    </li>
-                                    </ul>
-                                </li>
-
-                        {% else %}
-                            <li class={{ nav_donate }}>
-                                 <a href="/donate">Donate</a>
-                            </li> 
-                            <li>
-                                <a href="/login"> Login </a>
                             </li>
-                        {% endif %}
+                            <li> <a>|</a> </li>
+                            <li>
+                                <a href="twitter.com/cantbloom">
+                                    <img src="https://si0.twimg.com/favicons/favicon.ico">
+                                    @cantbloom
+                                </a>
+                            </li>
+                            <li> <a>|</a> </li>
+                            <li>
+                                <a data-toggle="modal" href="#send-feedback-modal">
+                                    <i class="icon-envelope icon-white"></i>
+                                    contact
+                                </a>
+                            </li>
+                            <li> <a>|</a> </li>
+                            <li>
+                                <a href="mailto:avianap@mit.edu">
+                                     <i class="icon-heart icon-white"></i>
+                                    avi ideas
+                                </a>
+                            </li>
                         </ul>
-                    </div><!--/.nav-collapse -->
                 </div>
             </div>
         </div>
+    </div>
+</div> -->
+{% endblock %}
 
-        <!-- Part 1: Wrap all page content here -->
-        <div class="wrap">
-
-            <!-- Begin page content -->
-            <div class="container">
-                {% block content %} {% endblock %}
-            </div>
-
-        <div class="push"></div>
-        
-        
-<!--    WTF is this shit (bcyphers 10/30)
-     <div class="footer">
-            <div class="navbar">
-                <div class="navbar-inner nav-bg">
-                    <div class="container">
-                            <ul class="nav pull-right">
-                                <li>
-                                    <a href="http://github.com/cantbloom">
-                                        <img class="icon" src="https://github.com/favicon.ico">
-                                        cantbloom project
-                                    </a>
-                                </li>
-                                <li> <a>|</a> </li>
-                                <li>
-                                    <a href="twitter.com/cantbloom">
-                                        <img src="https://si0.twimg.com/favicons/favicon.ico">
-                                        @cantbloom
-                                    </a>
-                                </li>
-                                <li> <a>|</a> </li>
-                                <li>
-                                    <a data-toggle="modal" href="#send-feedback-modal">
-                                        <i class="icon-envelope icon-white"></i>
-                                        contact
-                                    </a>
-                                </li>
-                                <li> <a>|</a> </li>
-                                <li>
-                                    <a href="mailto:avianap@mit.edu">
-                                         <i class="icon-heart icon-white"></i>
-                                        avi ideas
-                                    </a>
-                                </li>
-                            </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-        <!--  javascript -->
-        {# compress js #}
-        {% if user.is_authenticated %}
-            {% include_script 'user_list' %}
-        {% else %}
-            <script type="text/javascript">
-                var user_list={};
-            </script>
-        {% endif %}
-        {% include "send_feedback.html" %}
-        {% include "commprod/claim_email.html" %}
-
-        {% block scripts %}
-        {% endblock %}
-        <script type="text/javascript">
-            {% if user.profile.use_tour %}
-                var use_tour = true;
-            {% else %}
-                var use_tour = false;
-            {% endif %}
-        </script>
-        {# endcompress #}
-    </body>
-</html>
+{% block scripts %}
+  
+{% endblock %}
