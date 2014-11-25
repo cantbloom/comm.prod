@@ -40,6 +40,10 @@
 {% endblock %}
 
 {% block scripts %} 
+  <!-- latest jquery and compatibility code -->
+  {% include_script 'lib/jquery-1.11.1.min' %}
+  {% include_script 'lib/jquery.cookie-1.4.1' %}
+
   {% include_script 'lib/underscore-1.6.0.min' %}
   {% include_script 'lib/bootstrap-3.2.0.min' %}
 

@@ -212,27 +212,6 @@
         {% include "send_feedback.html" %}
         {% include "commprod/claim_email.html" %}
 
-        <!-- latest jquery and compatibility code -->
-        {% include_script 'lib/jquery-1.11.1.min' %}
-        {% include_script 'lib/jquery-migrate-1.2.1.min' %}
-        {% include_script 'lib/jquery.cookie-1.4.1' %}
-
-        <!--  helpers -->
-        {% include_script 'lib/filepicker' %}
-        {% include_script 'lib/jquery.raty.min' %}
-        {% include_script 'lib/mobile_detection' %}
-        {% include_script 'lib/es5-shim.min' %}
-        {% include_script 'basket' %}
-        
-        <!--  graphing -->
-        {% include_script 'lib/highcharts' %}
-
-        {% include_script 'base' %}
-        {% include_script 'analytics' %}
-
-        <!-- stripe -->
-        <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
-
         {% block scripts %}
         {% endblock %}
         <script type="text/javascript">
