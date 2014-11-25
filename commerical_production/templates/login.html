@@ -30,7 +30,8 @@
             </p>
             <br>
             <p class="remember-container">
-                <strong>Remember me:</strong> <input name="remember_me" type="checkbox" checked="" />
+                <strong>Remember me:</strong> <input name="remember_me"
+                  type="checkbox" checked="" />
             </p>
 
             <input class="btn btn-warning" id="login" type="submit" value="Login" />
@@ -44,6 +45,7 @@
 
 {% endblock %}
 {% block scripts %} 
+{% include 'bootstrap_scripts.html' %}
 <script type="text/javascript">
     $(document).ready(function() {
         $('#id_username').attr('placeholder', 'Username or Email');

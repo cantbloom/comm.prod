@@ -15,7 +15,8 @@
         <a id="pic-tab" href="#pic" class="tab">Change Profile Picture</a>
         </li>
         <li><a id="password-tab" href="#password" class="tab">Change Password</a></li>
-        <li><a id="shirt_name-tab" href="#shirt_name" class="tab">Add/Remove Shirt Names</a></li>
+        <li><a id="shirt_name-tab" href="#shirt_name" class="tab">
+          Add/Remove Shirt Names</a></li>
         <li><a id="email-tab" href="#email" class="tab">Change Emails</a></li>
     </ul>
 </div>
@@ -25,11 +26,14 @@
         {% include 'snippets/alert_box.html' %}
         <input type="hidden" name="form_type" value="pic">
 
-        <input type='hidden' name='pic_url' value="{% gravatar_for_user user 40 %}" id='id_pic_url'>
+        <input type='hidden' name='pic_url' 
+          value="{% gravatar_for_user user 40 %}" id='id_pic_url'>
         <img id="profile_pic" class="author-pic" src="{% gravatar_for_user user 40 %}">
 
-        <input class="btn" name="upload" id="upload" type="button" value="Edit profile picture"/>
-        <input class="btn btn-warning disabled" disabled type="submit" value="Save" data-loading-text="Saving..." id="profile-pic-save"/>
+        <input class="btn" name="upload" id="upload" type="button" value="Edit
+          profile picture"/>
+        <input class="btn btn-warning disabled" disabled type="submit"
+          value="Save" data-loading-text="Saving..." id="profile-pic-save"/>
     </form>
     <form class="hidden edit" id="password" data-url="/edit">
         {% include 'snippets/alert_box.html' %}
@@ -37,10 +41,12 @@
         <input type="hidden" name="form_type" value="password">
         {% for input in password %}
         <p>
-            <input type="password" placeholder="{{input.placeholder}}" name="{{input.name}}" id="id_{{input.name}} ">
+            <input type="password" placeholder="{{input.placeholder}}"
+              name="{{input.name}}" id="id_{{input.name}} ">
         </p>
         {% endfor %}
-        <input class="btn btn-warning" type="submit" value="Save" data-loading-text="Saving..." id="password_save"/>
+          <input class="btn btn-warning" type="submit" value="Save"
+        data-loading-text="Saving..." id="password_save"/>
     </form>
     <form class="hidden edit" id="shirt_name" data-url="/edit">
         {% csrf_token %}
@@ -48,17 +54,21 @@
         <input type="hidden" name="form_type" value="shirt_name">
         {% for input in shirtname %}
         <p>
-            <input type="text" class="removable_input" placeholder="{{input.placeholder}}" name="{{input.name}}" value="{{input.value}}">
+            <input type="text" class="removable_input"
+              placeholder="{{input.placeholder}}" name="{{input.name}}"
+              value="{{input.value}}">
             <a class="btn remove-input remove-shirt-name">
               <i class="icon-minus"></i>
             </a>
         </p>
         {% endfor %}
         <p id="">
-            <a id='add-shirt-name' class="btn"><i class="icon-plus">
-            </i> Add another shirtname</a>
+            <a id='add-shirt-name' class="btn">
+              <i class="icon-plus"></i> Add another shirtname
+            </a>
         </p> <br>
-        <input class="btn btn-warning" type="submit" value="Save" data-loading-text="Saving..." id="shirt-name-save"/>
+        <input class="btn btn-warning" type="submit" value="Save"
+          data-loading-text="Saving..." id="shirt-name-save"/>
     </form> 
 
     <form class="hidden edit" id="email" data-url="/edit" >
@@ -72,13 +82,17 @@
         {% endfor %}
 
         <p id="">
-            <a id='add-email' class="btn" ><i class="icon-plus"></i> Add another email</a>
+            <a id='add-email' class="btn" >
+              <i class="icon-plus"></i> Add another email
+            </a>
         </p> <br>
-        <input class="btn btn-warning" data-loading-text="Saving..." type="submit" value="Save" id="email-save"/>
+        <input class="btn btn-warning" data-loading-text="Saving..."
+          type="submit" value="Save" id="email-save"/>
     </form>
 </div>
 {%  endblock %}
 
 {% block scripts %} 
+{% include 'bootstrap_scripts.html' %}
 {% include_script 'edit_profile' %}
 {% endblock %}
