@@ -1,9 +1,9 @@
 from django.conf import settings
+import os
 from os import environ as env
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 BASE_URL = settings.BASE_URL_DEV
-
 
 settings.DATABASES["default"] = {
     "ENGINE": "django.db.backends.mysql",

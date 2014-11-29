@@ -2,9 +2,9 @@
 {% load filters %}
 
 {% block styles %}
-  {% include_style 'bootstrap-3.2.0.min' %}
-  {% include_style 'runner/whhg' %}
-  {% include_style 'runner/bootstrap_override' %}
+  {% include_style "bootstrap-3.2.0.min" %}
+  {% include_style "runner/whhg" %}
+  {% include_style "runner/bootstrap_override" %}
 {% endblock %}
 
 {% block content %} 
@@ -13,7 +13,7 @@
   <!-- construction.jpg -->
   <!--<img src='http://www.straight-p.com/run/images/stories/under-construction.jpg'/>-->
 
-  {% include 'runner/my_cart.html' %}
+  {% include "runner/my_cart.html" %}
 
   <div class='catalog col-xs-8'>
     <div class='title'><h1>Catalog</h1></div>
@@ -41,11 +41,11 @@
 
 {% block scripts %} 
   <!-- latest jquery and compatibility code -->
-  {% include_script 'lib/jquery-1.11.1.min' %}
-  {% include_script 'lib/jquery.cookie-1.4.1' %}
+  {% include_script "lib/jquery-1.11.1.min" %}
+  {% include_script "lib/jquery.cookie-1.4.1" %}
 
-  {% include_script 'lib/underscore-1.6.0.min' %}
-  {% include_script 'lib/bootstrap-3.2.0.min' %}
+  {% include_script "lib/underscore-1.6.0.min" %}
+  {% include_script "lib/bootstrap-3.2.0.min" %}
 
   <script type="text/javascript">
     BEERRUN_DATA = {};
@@ -56,5 +56,5 @@
     STATIC_PREFIX = "/runner";
   </script>
 
-  {% include_script 'runner/green_tea' %}
+  {% include_script "runner/green_tea" %}
 {% endblock %}

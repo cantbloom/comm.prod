@@ -37,21 +37,26 @@ class Drink(models.Model):
         ordering = ('category', 'name', 'quantity', '-volume')
 
 class Run(models.Model):
-    start_date = models.DateField(default=datetime.date.today)
-    end_date = models.DateField(null=True, blank=True)
+    start_time = models.DateTimeField(default=datetime.datetime.now())
+    end_time = models.DateTimeField(null=True, blank=True)
     goal = models.DecimalField(max_digits=6, decimal_places=2, default=500.00)
     name = models.CharField(max_length=200)
+    run_master = models.CharField(max_length=200, default='runmasters@mit.edu')
 
     def save(self, *args, **kwargs):
         if not self.name:
-            self.name = str(self.start_date)
+            self.name = 'Run ' + str(self.start_date)
         super(Run, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return str(self.start_date)
 
+    def total_price(self):
+        items = RunItem.objects.filter(run=self.id)
+        return sum(map(lambda i: i.price, items))
+
     class Meta:
-        ordering = ('start_date',)
+        ordering = ('end_date', 'start_date')
 
 class RunItem(models.Model):
     time = models.DateTimeField()

@@ -53,6 +53,8 @@ $(function() {
         });
     }
 
+    // Handler for whenever the user adds/removes an item - mostly updates the
+    // price elements
     var orderChanged = function() {
         $submit = $('#submit-order');
 
@@ -65,6 +67,7 @@ $(function() {
         $('#drinks-tax').text('$' + Math.round(total * 0.15));
         $('#total-price').text('$' + Math.round(total * 1.15));
 
+        // If the local cart is synced with the server, remove the 'submit' button.
         if (_.isEqual(myOrder, cleanOrder)) {
             $submit.slideUp(100);
             $submit.prop('disabled', true);

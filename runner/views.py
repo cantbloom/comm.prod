@@ -91,8 +91,24 @@ def update_run(request, run_id):
                         run=run,
                         drink=drink)[0].delete()
 
+    # if the run has reached a threshold order size, give it an end date and
+    # notify the run master
+    if run.total_price() >= run.goal:
+        # is it too late for the run to go out today?
+        if datetime.datetime.now().hour >= 17:
+            run.end_date = datetime.datetime.tomorrow(12) # tomorrow at 12 pm
+        else:
+            run.end_date = datetime.datetime.now + 1 # in one hour
+        email_runmaster(run)
+
     # return the updated run summary
     return HttpResponse(_json_run(run), mimetype='application/json')
+
+
+# The run has reached its goal threshold: get the run master off his ass
+def email_runmaster(run):
+    body = _summarize_run(run)
+    #do_the_thing()
 
 
 # Get a list of all categories in clean json
@@ -119,7 +135,7 @@ def _json_drinks():
     return json.dumps(data)
 
 
-# Get the current run as a JSO
+# Convert a run object to a JSO
 def _json_run(run):
     total = sum([float(i.drink.price) for i in RunItem.objects.filter(run=run.id)])
     data = { 'pk': int(run.pk),
@@ -129,7 +145,7 @@ def _json_run(run):
     return json.dumps(data)
 
 
-# Get all drinks queued for the requested order by the current user.
+# Get all drinks queued for the requested order by the current user
 def _get_user_order(user, run):
     my_items = RunItem.objects.filter(customer=user, run=run.id)
     my_drinks = []
@@ -142,3 +158,34 @@ def _get_user_order(user, run):
     data = json.dumps({d.id: d.count for d in my_drinks})
 
     return data
+
+
+# Summarize the order for the run master
+def _summarize_run(run):
+    all_items = RunItem.objects.filter(drink=drink.id, run=run.id)
+    all_drinks = set(i.drink for i in all_items)
+    all_users = set(i.customer for i in all_items)
+
+    item_summaries = []
+    for drink in all_drinks:
+        item_summaries.append(str(len(
+            [i for i in all_items if i.drink == drink]
+            )) + ' ' + str(drink))
+
+    user_summaries = []
+    for u in all_users:
+        my_items = [i for i in items if i.customer == u]
+        my_drinks = set(i.drink for i in my_items)
+        my_total = sum(i.price for i in my_items)
+        summary = str(user) + ' ($' + str(my_total) + '): '
+        summary += ', '.join([str(drink),
+            len([i for i in my_items if i.drink == drink])
+            for drink in my_drinks])
+        user_summaries.append(summary)
+
+    total = str(run.total_price())
+    items = '\n'.join(item_summaries)
+    user_items = '\n'.join(user_summaries)
+    return run.name + '\nTotal: ' + total + '\n\n' +\
+            items + '\n\n' + user_items
+
