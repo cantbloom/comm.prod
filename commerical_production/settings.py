@@ -1,6 +1,7 @@
 # Django settings for commerical_production project.
 from os import environ as env
 import os
+import django
 
 # custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
