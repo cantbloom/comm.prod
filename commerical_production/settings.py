@@ -1,7 +1,6 @@
 # Django settings for commerical_production project.
 from os import environ as env
 import os
-import django
 
 # custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
@@ -10,7 +9,6 @@ BASE_URL_PROD = 'http://www.burtonthird.com'
 BASE_URL_DEV = 'http://www.burtonthird.com'
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
-print django.get_version()
 
 # load env vars from bash script
 ev_file = os.path.join(SITE_ROOT, 'export_envvar')
