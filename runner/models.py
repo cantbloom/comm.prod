@@ -45,18 +45,18 @@ class Run(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.name:
-            self.name = 'Run ' + str(self.start_date)
+            self.name = 'Run ' + str(self.start_time)
         super(Run, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return str(self.start_date)
+        return str(self.start_time)
 
     def total_price(self):
         items = RunItem.objects.filter(run=self.id)
         return sum(map(lambda i: i.price, items))
 
     class Meta:
-        ordering = ('end_date', 'start_date')
+        ordering = ('end_time', 'start_time')
 
 class RunItem(models.Model):
     time = models.DateTimeField()

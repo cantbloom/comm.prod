@@ -10,18 +10,38 @@ BASE_URL_DEV = 'http://www.burtonthird.com'
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-# load env vars from bash script
-ev_file = os.path.join(SITE_ROOT, 'export_envvar')
-if os.path.isfile(ev_file):
-    evf = open(ev_file)
-    for l in evf:
-        if l.split()[0] == 'export':
-            args = l.split()[1].split('=')
-            env[args[0]] = '='.join(args[1:])
-
-
-DEBUG = (not env['DEBUG'] == 'False')  # convert from sting to bool
+DEBUG = ('DEBUG' not in env or not env['DEBUG'] == 'False')  # convert from sting to bool
 TEMPLATE_DEBUG = DEBUG
+
+# load env vars from bash script
+if DEBUG:
+    ev_file = os.path.join(SITE_ROOT, 'export_local_envvar')
+    if os.path.isfile(ev_file):
+        evf = open(ev_file)
+        for l in evf:
+            if not len(l) or l[0] == '#':
+                continue
+            if l.split()[0] == 'export':
+                args = l.split()[1].split('=')
+                k, v = args[0], '='.join(args[1:])
+                if v[0] == '$':
+                    env[k] = env[v[1:]]
+                elif v[0] == '"' and v[-1] == '"':
+                    env[k] = v[1:-1]
+                else:
+                    env[k] = v
+else:
+    ev_file = os.path.join(SITE_ROOT, 'export_envvar')
+    if os.path.isfile(ev_file):
+        evf = open(ev_file)
+        for l in evf:
+            if not len(l) or l[0] == '#':
+                continue
+            if l.split()[0] == 'export':
+                args = l.split()[1].split('=')
+                val = '='.join(args[1:])
+                env[args[0]] = val.translate(None, '"')
+
 
 ADMINS = (
     #('Joshua Blum', 'joshblum@mit.edu'),
@@ -266,22 +286,6 @@ if DEBUG:
   # and each different deploy location has a differnt
   # settings override that is specified by environment
   # variable or hard code.
-
-  # load env vars from bash script
-  ev_file = os.path.join(SITE_ROOT, 'export_local_envvar')
-  if os.path.isfile(ev_file):
-    evf = open(ev_file)
-    for l in evf:
-      if l.split()[0] == 'export':
-        args = l.split()[1].split('=')
-        k, v = args[0], '='.join(args[1:])
-        if v[0] == '$':
-            env[k] = env[v[1:]]
-        elif v[0] == '"' and v[-1] == '"':
-            env[k] = v[1:-1]
-        else:
-            env[k] = v
-
   try:
     local_settings_file = open("%s/%s" % (SITE_ROOT, "local_settings.py"))
     local_settings_script = local_settings_file.read()

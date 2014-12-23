@@ -178,8 +178,8 @@ def _summarize_run(run):
         my_drinks = set(i.drink for i in my_items)
         my_total = sum(i.price for i in my_items)
         summary = str(user) + ' ($' + str(my_total) + '): '
-        summary += ', '.join([str(drink),
-            len([i for i in my_items if i.drink == drink])
+        summary += ', '.join([str(drink) +
+            str(len([i for i in my_items if i.drink == drink]))
             for drink in my_drinks])
         user_summaries.append(summary)
 

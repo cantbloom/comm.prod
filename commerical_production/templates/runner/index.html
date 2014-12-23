@@ -5,6 +5,12 @@
   {% include_style "bootstrap-3.2.0.min" %}
   {% include_style "runner/whhg" %}
   {% include_style "runner/bootstrap_override" %}
+  {% include_style "base" %}
+  {% include_style "home" %}
+{% endblock %}
+
+{% block navbar %} 
+  {% include "nav_bar_bs3.html" %}
 {% endblock %}
 
 {% block content %} 

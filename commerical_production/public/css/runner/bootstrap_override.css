@@ -1,10 +1,10 @@
-a {
+.row a {
   color: #555;
   cursor: pointer;
   cursor: hand;
 }
 
-a:hover {
+.row a:hover {
   text-decoration: none;
   color: #f96302;
 }
