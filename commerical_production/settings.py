@@ -10,33 +10,46 @@ BASE_URL_DEV = 'http://www.burtonthird.com'
 
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-DEBUG = ('DEBUG' not in env or not env['DEBUG'] == 'False')  # convert from sting to bool
+DEBUG = ('DEBUG' not in env or not env['DEBUG'] == 'False')  # default to True
 TEMPLATE_DEBUG = DEBUG
 
 # load env vars from bash script
+# all the required variables to run locally are in export_envvar or
+# export_local_envvar; the latter has pretty much all the same settings as the
+# former, with a couple exceptions. Some variables are duplicated with names
+# XYZ_LOCAL = XYZ. This whole process should be cleaned up.
 if DEBUG:
     ev_file = os.path.join(SITE_ROOT, 'export_local_envvar')
     if os.path.isfile(ev_file):
         evf = open(ev_file)
+
         for l in evf:
+            # parse line by line, ignoring comments
             if not len(l) or l[0] == '#':
                 continue
+
+            # expects lines of format VARIABLE = "value"
             if l.split()[0] == 'export':
                 args = l.split()[1].split('=')
+                # split the variable and the value at the first '=', then paste
+                # the value back together if need be
                 k, v = args[0], '='.join(args[1:])
-                if v[0] == '$':
+
+                if v[0] == '$':  # reference to an existing env var
                     env[k] = env[v[1:]]
-                elif v[0] == '"' and v[-1] == '"':
+                elif v[0] == '"' and v[-1] == '"':  # can only deal with ""
                     env[k] = v[1:-1]
                 else:
                     env[k] = v
-else:
+else:  # DEBUG == False
     ev_file = os.path.join(SITE_ROOT, 'export_envvar')
     if os.path.isfile(ev_file):
         evf = open(ev_file)
+
         for l in evf:
             if not len(l) or l[0] == '#':
                 continue
+
             if l.split()[0] == 'export':
                 args = l.split()[1].split('=')
                 val = '='.join(args[1:])

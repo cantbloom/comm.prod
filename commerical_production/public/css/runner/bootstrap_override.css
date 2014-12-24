@@ -1,15 +1,4 @@
-.row a {
-  color: #555;
-  cursor: pointer;
-  cursor: hand;
-}
-
-.row a:hover {
-  text-decoration: none;
-  color: #f96302;
-}
-
-body {
+.runner-content {
   repeat top left;
   padding-top: 40px;
   background-position-x: 0%;
@@ -29,8 +18,19 @@ body {
   user-select: none;
 }
 
-.row {
+.runner-content .row {
   cursor: default;
+}
+
+.runner-content a {
+  color: #555;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.runner-content a:hover {
+  text-decoration: none;
+  color: #f96302;
 }
 
 .catalog {
@@ -62,7 +62,7 @@ body {
   margin: 0 0 0 0;
 }
 
-.nav-list ul {
+.runner-content .nav-list ul {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px; /* future proofing */
@@ -73,11 +73,11 @@ body {
   overflow: hidden;
 }
 
-.nav-list ul li a span {
+.runner-content .nav-list ul li a span {
   float: right;
 }
 
-.nav-list ul li a {
+.runner-content .nav-list ul li a {
   font-size: 18px;
   color: #555;
   cursor: pointer;
@@ -86,13 +86,14 @@ body {
   width: 100%;
 }
 
-h1 {
+.runner-content h1 {
   margin: 0 0 0 0;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
 .title {
+  cursor: default;
   text-align: center;
 } 
 

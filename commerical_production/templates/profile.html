@@ -3,8 +3,9 @@
 {% load gravatar %}
 
 {% block styles %}
+{{ block.super }}
 {% include_style 'profile' %}
-{%  endblock %}
+{% endblock %}
 
 {% block content %}
 
@@ -85,6 +86,7 @@
 {% endblock %}
 
 {% block scripts %}
+{{ block.super }}
 
 <script type="text/javascript">
     user_data = {

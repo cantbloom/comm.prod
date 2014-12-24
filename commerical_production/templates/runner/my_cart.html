@@ -1,22 +1,27 @@
 <div class='col-xs-3 col-xs-offset-1'>
-  <div class='title'><h1>Your Order</h1></div>
+  <div class='title'>
+    <h1>Your Order</h1>
+  </div>
+
   <div class='my-order outer row'>
     <div id='my-order-list'>
       <div id='my-order-empty' class='item'>
         Your cart is empty.
       </div>
     </div>
-  <div class='row order-summary'>
-    <div class='price-info col-xs-3 col-xs-offset-1'>
-      <div class='row' id='drinks-price'>0</div>
-      <div class='row info-rollover-text price'>subtotal</div>
+
+    <div class='row order-summary'>
+      <div class='price-info col-xs-3 col-xs-offset-1'>
+        <div class='row' id='drinks-price'>0</div>
+        <div class='row info-rollover-text price'>subtotal</div>
+      </div>
+      <div class='price-info col-xs-3'>
+        <div class='row' id='drinks-tax'>0</div>
+        <div class='row info-rollover-text tax'>tax/tip</div>
+      </div>
+      <div class='col-xs-4' id='total-price'>$0</div>
     </div>
-    <div class='price-info col-xs-3'>
-      <div class='row' id='drinks-tax'>0</div>
-      <div class='row info-rollover-text tax'>tax/tip</div>
-    </div>
-    <div class='col-xs-4' id='total-price'>$0</div>
-  </div>
+
     <div class='button'>
       <button id='submit-order' type='button' class='btn btn-warning btn-lg'
         disabled='disabled'>Submit</button>

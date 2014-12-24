@@ -3,8 +3,9 @@
 {% load gravatar %}
 
 {% block styles %}
-    {% include_style "edit_profile" %}
-{%  endblock %}
+{{ block.super }}
+{% include_style "edit_profile" %}
+{% endblock %}
 
 {% block content %}
  
@@ -93,6 +94,6 @@
 {%  endblock %}
 
 {% block scripts %} 
-
+{{ block.super }}
 {% include_script "edit_profile" %}
 {% endblock %}

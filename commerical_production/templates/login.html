@@ -3,8 +3,10 @@
 {% load filters %} 
 
 {% block styles %}
-{% include_style 'login' %}
-{%  endblock %}
+  {{ block.super }}
+  {% include_style 'login' %}
+{% endblock %}
+
 {% block content %}
 {% if user.is_authenticated %}
      <meta http-equiv="REFRESH" content="0; url=/">
@@ -44,6 +46,7 @@
 </div>
 
 {% endblock %}
+
 {% block scripts %} 
 
 <script type="text/javascript">
