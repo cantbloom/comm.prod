@@ -41,19 +41,25 @@ if DEBUG:
                     env[k] = v[1:-1]
                 else:
                     env[k] = v
+
 else:  # DEBUG == False
     ev_file = os.path.join(SITE_ROOT, 'export_envvar')
     if os.path.isfile(ev_file):
         evf = open(ev_file)
 
+        # same story
         for l in evf:
             if not len(l) or l[0] == '#':
                 continue
-
             if l.split()[0] == 'export':
                 args = l.split()[1].split('=')
-                val = '='.join(args[1:])
-                env[args[0]] = val.translate(None, '"')
+                k, v = args[0], '='.join(args[1:])
+                if v[0] == '$':
+                    env[k] = env[v[1:]]
+                elif v[0] == '"' and v[-1] == '"':
+                    env[k] = v[1:-1]
+                else:
+                    env[k] = v
 
 
 ADMINS = (

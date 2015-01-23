@@ -50,7 +50,6 @@ def home(request):
       'worst_user': profiles[0],
       'best_user': profiles[len(profiles) - 1],
       'stats': 'True'
-
   }
 
 

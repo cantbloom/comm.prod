@@ -1,0 +1,87 @@
+.topbar {
+	padding-top:3px;
+}
+
+.logo {
+	width:32px;
+	height:32px;
+}
+
+.navbar a {
+  color: #FFF;
+}
+
+.navbar .nav a {
+  padding-right: 10px;
+  padding-left: 10px;
+  color: #999;
+}
+
+.navbar .nav #account_dropdown a {
+  background-color: transparent !important;
+}
+
+.navbar .nav a:hover {
+	color: #fff;
+	background-color: transparent;
+}
+
+.navbar .nav .active>a {
+  background-color: #222;
+  color: #FFF;
+}
+
+.navbar>.container .navbar-brand {
+  float: left;
+  display: block;
+  padding-top: 13px;
+  padding-left: 15px;
+  padding-right: 25px;
+  margin-left: -20px;
+  font-size: 20px;
+  font-weight: 200;
+  line-height: 1;
+  color: #999;
+}
+
+.navbar>.container .navbar-brand:hover{
+  color: #FFF;
+}
+
+.nav-bg {
+	background: url(/public/img/bg-nav.png) repeat top left;
+  width: 100%;
+}
+
+.nav-prof-img {
+	height:24px;
+    width:24px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.navbar-fixed-top {
+	z-index: 10000!important;
+}
+
+/*
+.navbar-brand {
+	padding-top:7px !important;
+	padding-bottom:5px !important;  
+}
+*/
+
+.search-query {
+	background-color:#FFFFFF !important;
+}
+
+#search_bar{
+	-webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-top: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

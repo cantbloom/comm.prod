@@ -35,13 +35,14 @@ def index(request, run_id=None, sortby='name'):
     else:
         run = Run.objects.get(pk=run_id)
 
-    if not request.user.is_authenticated():
-        request.user = authenticate(username='bcyphers', password='elixir')
-
-    context = { 'run': _json_run(run),
-                'all_drinks': _json_drinks(),
-                'categories': _json_categories(),
-                'my_drinks': _get_user_order(request.user, run) }
+    context = {
+        'run': _json_run(run),
+        'all_drinks': _json_drinks(),
+        'categories': _json_categories(),
+        'my_drinks': _get_user_order(request.user, run),
+        'page_title': 'Burton Third\'s premier beverage delivery service',
+        'nav_runner': 'active'
+    }
     context.update(csrf(request))
     return render(request, 'runner/index.html', context)
 
