@@ -39,12 +39,41 @@
       </div>
     </div>
 
+    <!-- sort buttons -->
+    <div class='row drink-sort'>
+      <div class='col-xs-7 col-xs-offset-1'>
+        <a data='name' class='sort-link' href='#'>Name</a>
+      </div>
+      <div class='col-xs-2'>
+        <a data='price' class='sort-link' href='#'>Price</a>
+      </div>
+
+      <!-- dropdown menu for selectable sort attributes --!>
+      <div class='dropdown col-xs-2'>
+        <button class='btn btn-default dropdown-toggle pull-right' type='button'
+          id='dropdownMenu1' data-toggle='dropdown' aria-expanded='true'>
+            Attribute
+          <span class='caret'></span>
+        </button>
+
+        <ul class='dropdown-menu dropdown-menu-right' role='menu'
+            aria-labelledby='dropdownMenu1'>
+          <li role='presentation'>
+            <a role='menuitem' class='sort-link' href='#'>Another action</a>
+          </li>
+          <li role='presentation'>
+            <a role='menuitem' class='sort-link' href='#'>Something else here</a>
+          </li>
+          <li role='presentation'>
+            <a role='menuitem' class='sort-link' href='#'>Separated link</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <!-- everything else is populated dynamically -->
 
   </div>
-
-  <div class='col-xs-1'></div>
-
 </div>
 {% endblock %}
 

@@ -36,11 +36,21 @@
 .catalog {
   overflow: auto;
   height: 90%;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .catalog .row {
   margin: 10px 10px 10px 10px; 
+}
+
+.catalog .drink-sort {
+  margin-left: 0px;
+  margin-right: 20px;
+}
+
+.catalog .dropdown-toggle, .open>.dropdown-toggle.btn-default {
+  background-color: transparent;
+  border: none;
 }
 
 .catalog .item {
@@ -48,10 +58,6 @@
   -webkit-border-radius: 5px;
   border-radius: 5px; /* future proofing */
   -khtml-border-radius: 5px; /* for old Konqueror browsers */
-}
-
-.catalog .item i {
-  font-size: 22px;
 }
 
 .catalog .item .drink:hover {
@@ -142,13 +148,16 @@
   text-align: center;
 }
 
+.order-increment, .order-decrement {
+  padding-right: 5px;
+}
+
 .order-summary {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
   -khtml-border-radius: 10px;
 
-  background-color: ;
   overflow: hidden;
   margin-top: 10px;
   margin-bottom: 10px;

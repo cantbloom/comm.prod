@@ -68,6 +68,7 @@ def get_order(request, run_id):
 @login_required
 def update_run(request, run_id):
     run = Run.objects.get(pk=run_id)
+
     for drink_id, count in map(lambda (d, c): (int(d), int(c)), request.POST.items()):
         drink = Drink.objects.get(pk=drink_id)
         my_items = RunItem.objects.filter(
@@ -75,7 +76,7 @@ def update_run(request, run_id):
         delta = count - my_items
         now = datetime.utcnow().replace(tzinfo=utc)
 
-        # If there are more items in the ajax call than the DB, we add some
+        # If there are more items in the ajax call than the DB, add them
         if delta > 0:
             for i in range(delta):
                 item = RunItem(
@@ -110,6 +111,17 @@ def update_run(request, run_id):
 def email_runmaster(run):
     body = _summarize_run(run)
     #do_the_thing()
+
+
+# Custom encoder for Django decimals
+class DecimalEncoder(json.JSONEncoder):
+    def _iterencode(self, o, markers=None):
+        if isinstance(o, decimal.Decimal):
+            # wanted a simple yield str(o) in the next line,
+            # but that would mean a yield on the line with super(...),
+            # which wouldn't work (see my comment below), so...
+            return (str(o) for o in [o])
+        return super(DecimalEncoder, self)._iterencode(o, markers)
 
 
 # Get a list of all categories in clean json

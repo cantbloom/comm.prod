@@ -31,15 +31,15 @@ $(function() {
         $('#my-order-list').append(
             "<div id='my-order-"+id+"' class='item'>\
               <div class='row'>\
-                <span class='col-xs-10'>"+name+"</span><a \
-                  class='order-increment col-xs-2 icon-chevron-up' data-drink-id=\
-                  '"+id+"'></a>\
+                <span class='col-xs-10'>"+name+"</span><a\
+                  class='order-increment col-xs-2 glyphicon glyphicon-chevron-up'\
+                  data-drink-id='"+id+"'></a>\
               </div>\
               <div class='row'>\
                 <span class='order-count col-xs-4 col-xs-offset-1'>"+amt+"\
-                  </span><span class='order-total-price col-xs-5'>$"+price+"</span><a class=\
-                  'order-decrement col-xs-2 icon-chevron-down' data-drink-id=\
-                  '"+id+"'></a>\
+                  </span><span class='order-total-price col-xs-5'>$"+price+"</span>\
+                  <a class='order-decrement col-xs-2 glyphicon glyphicon-chevron-down'\
+                  data-drink-id='"+id+"'></a>\
               </div>\
             </div>"
         );
@@ -113,6 +113,11 @@ $(function() {
         orderChanged();
     };
 
+    // Depending on the contents of the 
+    var dataFor = function(drink) {
+
+    }
+
     // Get relevant data from the janky embedded JS on the page. 
     // Format is the same as the model: name, category, volume, abv, price,
     // quantity, plus clean_price and clean_volume.
@@ -126,52 +131,73 @@ $(function() {
       drinkList.append(
       "<div class='row item'>\
         <a class='drink' id='" + drink.pk + "'><i \
-            class='icon-" + categories[drink.category].icon + "\
+            class='icon-" + categories[drink.category[0]].icon + "\
             col-xs-1'></i><span class='col-xs-7'>" + drink.name + "</span>\
-          <span class='col-xs-2'>" + drink.clean_volume + "</span>\
-          <span class='col-xs-2'>$" + drink.clean_price + "</span></a>\
+          <span class='col-xs-2'>$" + drink.clean_price + "</span>\
+          <span class='col-xs-2 drink-data'>" + dataFor(drink) + "</span></a>\
       </div>");
     }
 
-    // Sort functions
-    var sortByName = function(drinks) { 
-      drinks.sort(function(a, b) {
-        if (a.name < b.name) { return -1; }
-        if (a.name > b.name) { return 1; }
-        return 0;
-      });
-    }
-    var sortByPrice = function(drinks) {
-      drinks.sort(function(a, b) { return a.price - b.price; });
-    }
-    var sortByPopular = function(drinks) {
-      drinks.sort(function(a, b) {
-        //TODO
-        return 0;
-      });
-    }
-    var sortByEconomy = function(drinks) {
-      drinks.sort(function(a, b) {
-        aVal = a.ABV * a.volume / a.price;
-        bVal = b.ABV * b.volume / b.price;
-        return aVal - bVal;
-      });
+    // if 1, sort ascending; -1, descending
+    sortDir = 1;
+    // Object containing sort functions
+    var sort_funcs = {
+      // alphabetical
+      name: function(drinks) { 
+        drinks.sort(function(a, b) {
+          if (a.name < b.name) { return -1 * sortDir; }
+          if (a.name > b.name) { return 1 * sortDir; }
+          return 0;
+        });
+      },
+
+      // price, lo-hi or hi-lo
+      price: function(drinks) {
+        drinks.sort(function(a, b) { return (a.price - b.price) * sortDir; });
+      },
+
+      // abv * volume / price
+      economy: function(drinks) {
+        drinks.sort(function(a, b) {
+          aVal = a.ABV * a.volume / a.price;
+          bVal = b.ABV * b.volume / b.price;
+          return (aVal - bVal) * sortDir;
+        });
+      },
+
+      // alcohol percentage
+      abv: function(drinks) {
+        drinks.sort(function(a, b) { return (a.abv - b.abv) * sortDir; });
+      }
+      
+      // popularity (TODO)
+      //popular: function(drinks) {
+        //drinks.sort(function(a, b) {
+          //return 0;
+        //});
+      //}
     }
 
     // the current active sort function
-    var sortCatalog = sortByName;
+    var sortCatalog = sort_funcs.name;
 
-    // refresh the catalog with new filters
+    // all drinks currently filtered
     var currentCatalog = Array();
+    // number of drinks to show per page
+    var DRINKS_PER_PAGE = 10;
+    
+    // refresh the catalog with new filters and re-sort
     var updateCatalog = function() {
+      currentCatalog = _.map(allDrinks, _.clone);
       sortCatalog(currentCatalog);
-      var activeDrinks = $.map($('.drink'), function(d) { return d.id });
-      console.log(activeDrinks);
+      console.log(allDrinks);
+      console.log(currentCatalog);
+      console.log(sortCatalog);
 
       // delete all drink elements and add them back one by one.
       // TODO: only add/remove if necessary.
       $('.catalog .row.item').remove();
-      currentCatalog.slice(0, 25).forEach(addDrinkToCatalog);
+      currentCatalog.slice(0, DRINKS_PER_PAGE).forEach(addDrinkToCatalog);
     }
 
     // load drinks next so they can be referenced by myDrinks
@@ -183,7 +209,7 @@ $(function() {
     });
     currentCatalog = _.map(allDrinks, _.clone);
     sortCatalog(currentCatalog);
-    currentCatalog.slice(0, 25).forEach(addDrinkToCatalog);
+    currentCatalog.slice(0, DRINKS_PER_PAGE).forEach(addDrinkToCatalog);
 
     // hook up drink click handlers
     for (var i in allDrinks) {
@@ -216,10 +242,12 @@ $(function() {
     $('#submit-order').click(function() {
         $('#submit-order').prop('disabled', true);
         $('#submit-order').text('Submitting...');
+
         postOrder = _.clone(myOrder);
         for (var v in cleanOrder) {
             if (myOrder[v] === undefined) { postOrder[v] = 0; }
         }
+
         $.post(STATIC_PREFIX + '/api/update_run/' + run.pk, postOrder, function(d, status) {
             console.log(status);
             // disable the 'submit' button
@@ -230,8 +258,8 @@ $(function() {
     });
 
     // dynamic search whenever the bar input changes
-    $('#search-bar-form').keyup(function() {
-      var term = $.trim($('#search-bar-form').val()).toLowerCase();
+    $('#drink-search-form').keyup(function() {
+      var term = $.trim($('#drink-search-form').val()).toLowerCase();
       console.log(term);
 
       // If the bar is empty, return everything
@@ -243,8 +271,15 @@ $(function() {
         for (id in allDrinks) {
           if (allDrinks[id].name.toLowerCase().indexOf(term) > -1)
             currentCatalog.push(_.clone(allDrinks[id]));
-          else if (categories[allDrinks[id].category].name.toLowerCase().indexOf(term) > -1)
-            currentCatalog.push(_.clone(allDrinks[id]));
+          else {
+            for (var j = 0; j < allDrinks[id].category.length; j++) {
+              var c = allDrinks[id].category[j];
+              if (categories[c].name.toLowerCase().indexOf(term) > -1) {
+                currentCatalog.push(_.clone(allDrinks[id]));
+                break;
+              }
+            }
+          }
         }
       }
 
@@ -252,7 +287,22 @@ $(function() {
       updateCatalog();
     });
 
-    // TODO: handles to activate sorting
+    // attach handlers to the sort buttons: sort and reload elements on each click
+    $('.sort-link').each(function() {
+      // grab the name of the button
+      var f = $(this).attr('data');
+
+      $(this).click(function() {
+        if (sort_funcs[f] == sortCatalog) {
+          sortDir *= -1;
+        } else {
+          sortDir = 1;
+          sortCatalog = sort_funcs[f];
+        }
+        // re-sort the catalog
+        updateCatalog();
+      });
+    });
 
     // there's only one choice for the lucky bomber
     $('#feeling-lucky').click(function() {

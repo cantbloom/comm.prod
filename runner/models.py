@@ -13,12 +13,20 @@ class Category(models.Model):
         ordering = ('name',)
         verbose_name_plural = "categories"
 
+volume_conversions = {
+    '169.1oz': '5L',
+    '101.4oz': '3L',
+    '59.2oz': '1.75L',
+    '33.8oz': '1L',
+    '25.4oz': '750mL'
+}
+
 class Drink(models.Model):
     name = models.CharField(max_length=60)
-    category = models.ForeignKey(Category)
+    category = models.ManyToManyField(Category, blank=True)
     volume = models.FloatField()
     abv = models.FloatField()
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __unicode__(self):
@@ -26,15 +34,18 @@ class Drink(models.Model):
 
     # This should handle the logic for displaying in liters, oz, gallons, etc.
     def clean_volume(self):
-        return (str(int(self.volume)) if int(self.volume) == self.volume else
-                self.volume) + 'oz'
+        prestr = (str(int(self.volume)) if int(self.volume) == self.volume else
+                str(self.volume)) + 'oz'
+        if prestr in volume_conversions:
+            return volume_conversions[prestr]
+        return prestr
 
     # Give an int if possible
     def clean_price(self):
-        return str(int(self.price)) if int(self.price) == self.price else self.price
+        return str(int(self.price)) if int(self.price) == self.price else str(self.price)
 
     class Meta:
-        ordering = ('category', 'name', 'quantity', '-volume')
+        ordering = ('name', 'quantity', '-volume')
 
 class Run(models.Model):
     start_time = models.DateTimeField(default=datetime.datetime.now())
@@ -52,8 +63,8 @@ class Run(models.Model):
         return str(self.start_time)
 
     def total_price(self):
-        items = RunItem.objects.filter(run=self.id)
-        return sum(map(lambda i: i.price, items))
+        items = RunItem.objects.filter(run=self)
+        return sum(map(lambda i: i.drink.price, items))
 
     class Meta:
         ordering = ('end_time', 'start_time')
