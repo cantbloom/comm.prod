@@ -1,6 +1,6 @@
 {% extends "snippets/hero_err_template.html" %}
 
-    {% block hero_content %} 
+    {% block hero_content %}
         <p> Come back soon. </p>
           <p>
             <a class="btn btn-primary btn-large" href="/login">
@@ -12,7 +12,7 @@
 {% block helper %}
 {% endblock %}
 
-{% block scripts %} 
+{% block scripts %}
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#page_title').html("comm.prod | logout");
@@ -20,7 +20,7 @@
 	});
 
 	function setHero() {
-		var byes = ['Godspeed ', 'Buhbyes', 'Toodles', 'Ta ta for now', 'Ciao', 'Sayanora', 'Laters', 'Live long and prosper', 'Cheerio', "Y'all come back soon now", 'So long', 'Farewell good ser', 'Bon voyage', 'May the Force be with you', 'Shalom', 'Peace out', 'Be well, fellow bomber', 'Adios', 'Kkkkk...out', 'Stay cool, home-brotha', 'That is all', 'No more of you', 'Smell ya later', 'Drink bitch.', "Sometimes I think that boy's cheese done slid right off his cracker", "Let's bounce", "Fuck you.", "Let's blow this cheap taco stand", "Let's bid this place adieu", "It's been real", "That's all folks", "It's fine I didn't like you either."];
+		var byes = ['Godspeed ', 'Buhbyes', 'Toodles', 'Ta ta for now', 'Ciao', 'Sayanora', 'Laters', 'Live long and prosper', 'Cheerio', "Y'all come back soon now", 'So long', 'Farewell good ser', 'Bon voyage', 'May the Force be with you', 'Shalom', 'Peace out', 'Be well, fellow bomber', 'Adios', 'Kkkkk...out', 'Stay cool, home-brotha', 'That is all', 'No more of you', 'Smell ya later', 'Drink bitch.', "Sometimes I think that boy's cheese done slid right off his cracker", "Let's bounce", "Fuck you.", "Let's blow this cheap taco stand", "Let's bid this place adieu", "It's been real", "That's all folks", "It's fine I didn't like you either.", "Shall we?", "Let's roll","We out.", "Let's make moves." ];
 			
 			return byes[Math.floor(Math.random()*byes.length)];
 	}
