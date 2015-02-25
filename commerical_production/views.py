@@ -1,3 +1,4 @@
+from django.contrib.auth import views as auth_views
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -90,7 +91,7 @@ def login(request, *args, **kwargs):
   if request.method == 'POST':
     if not request.POST.get('remember_me', None):
       request.session.set_expiry(0)
-  return auth.views.login(request, *args, **kwargs)
+  return auth_views.login(request, *args, **kwargs)
 
 
 @login_required
