@@ -2,13 +2,13 @@
 from os import environ as env
 import os
 
-#custom auth
+# custom auth
 AUTH_PROFILE_MODULE = 'commProd.UserProfile'
 
 BASE_URL_PROD = 'http://www.burtonthird.com'
 BASE_URL_DEV = 'http://www.burtonthird.com'
 
-DEBUG = (not env['DEBUG'] == 'False') #convert from sting to bool
+DEBUG = (not env['DEBUG'] == 'False')  # convert from sting to bool
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -20,12 +20,15 @@ ADMINS = (
 MANAGERS = ADMINS
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': env['MYSQL_NAME'],# Or path to database file if using sqlite3.
-        'USER': env['MYSQL_USER'], # Not used with sqlite3.
-        'PASSWORD': env['MYSQL_PASSWORD'],# Not used with sqlite3.
-        'HOST':env['MYSQL_HOST'], # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '', # Set to empty string for default. Not used with sqlite3.
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql',
+        # Or path to database file if using sqlite3.
+        'NAME': env['MYSQL_NAME'],
+        'USER': env['MYSQL_USER'],  # Not used with sqlite3.
+        'PASSWORD': env['MYSQL_PASSWORD'],  # Not used with sqlite3.
+        # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': env['MYSQL_HOST'],
+        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -86,11 +89,11 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
 )
 
-##### settings for django-compressor
+# settings for django-compressor
 # COMPRESS_ENABLED = True ##todo move to static files
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.template.TemplateFilter',
@@ -103,7 +106,7 @@ SECRET_KEY = env['SECRET_KEY']
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -136,8 +139,8 @@ ROOT_URLCONF = 'commerical_production.urls'
 LOGIN_REDIRECT_URL = "/home"
 LOGIN_URL = '/login'
 
-#a week in milliseconds 
-SESSION_COOKIE_AGE = 1000*60*60*24*7 #so basically forever
+# a week in milliseconds
+SESSION_COOKIE_AGE = 1000 * 60 * 60 * 24 * 7  # so basically forever
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'commerical_production.wsgi.application'
@@ -155,17 +158,17 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django_admin_bootstrapped',
     # Uncomment the next line to enable the admin:
-     'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    
+
     # third party
     'compressor',
     'django_evolution',
     'pagination',
     'gunicorn',
-    
-    #comm.prod
+
+    # comm.prod
     'migrations',
     'donations',
     'common',
@@ -175,7 +178,7 @@ INSTALLED_APPS = (
 )
 
 
-#email settings from sendgrid.com
+# email settings from sendgrid.com
 EMAIL_HOST = env['EMAIL_HOST']
 EMAIL_HOST_USER = env['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = env['PASSWORD']
@@ -205,7 +208,7 @@ LOGGING = {
         'mail_admins': {
             'class': 'django.utils.log.AdminEmailHandler',
             'level': 'ERROR',
-             # But the emails are plain text by default - HTML is nicer
+            # But the emails are plain text by default - HTML is nicer
             'include_html': True,
         },
         # Log to a text file that can be rotated by logrotate
@@ -235,7 +238,7 @@ LOGGING = {
         },
         'commProd.views': {
             'handlers': ['logfile'],
-            'level': 'INFO', # Or maybe INFO or DEBUG
+            'level': 'INFO',  # Or maybe INFO or DEBUG
             'propagate': False,
             'formatter': 'simple',
         },
@@ -243,16 +246,16 @@ LOGGING = {
 }
 
 if DEBUG:
-    # allowing for local_settings overides
-    # how this should ultimately be set up
-    # is that common or default settings go in here,
-    # and each different deploy location has a differnt
-    # settings override that is specified by environment 
-    # variable or hard code.
+  # allowing for local_settings overides
+  # how this should ultimately be set up
+  # is that common or default settings go in here,
+  # and each different deploy location has a differnt
+  # settings override that is specified by environment
+  # variable or hard code.
 
-    try:
-        local_settings_file = open("%s/%s" % (SITE_ROOT, "local_settings.py"))
-        local_settings_script = local_settings_file.read()
-        exec local_settings_script
-    except IOError, e:
-        print "Unable to open local settings! %s" % e
+  try:
+    local_settings_file = open("%s/%s" % (SITE_ROOT, "local_settings.py"))
+    local_settings_script = local_settings_file.read()
+    exec local_settings_script
+  except IOError, e:
+    print "Unable to open local settings! %s" % e

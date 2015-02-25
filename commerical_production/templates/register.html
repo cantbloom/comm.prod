@@ -19,9 +19,9 @@
         {% endif %}
         <div class='row'>
             <div class="span4 offset4 form">
-              <form id="reg-form" method='post' action='/register/{{ user.profile.activation_key }}/' >
-                    {% csrf_token %}
-                    {{ form.as_p }}
+                <form id="reg-form" method='post' action='/register/{{ user.profile.activation_key }}/' >
+                  {{ form.as_p }}
+                   {% csrf_token %}
                     <p id=""><a id='add-email' class="btn" href="#"><i class="icon-plus"></i> Add another alternate email</a></p>
                     <img id="profile_pic" class="author-pic" src="/public/img/placeholder.jpg">
                     <input class="btn" name="upload" id="upload"type="button" value="Edit profile picture"/>

@@ -11,3 +11,4 @@ boto==2.8.0
 numpy
 requests==1.1.0
 stripe==1.7.9
+flake8==2.2.2

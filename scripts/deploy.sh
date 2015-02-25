@@ -15,7 +15,7 @@ if [ $MASTER == "y" ] ; then
     git fetch staging
     git reset --hard staging/master
     echo "Pushing to origin master"
-    git push origin master --force
+    git push heroku master --force
 fi
 
 echo "Done!"
