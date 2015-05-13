@@ -26,9 +26,9 @@ def home(request):
       Donation home page. Return all of the
       donation objects that are found.
   """
-
-  donations = dm.Donation.objects.all()
-  anon_donations = dm.AnonDonation.objects.all()
+  time_threshold = datetime.now() - timedelta(weeks=52)
+  donations = dm.Donation.objects.filter(date__gt=time_threshold)
+  anon_donations = dm.AnonDonation.objects.filter(date__gt=time_threshold)
 
   sorted_donations = sorted(list(chain(donations,
                                        anon_donations)),
