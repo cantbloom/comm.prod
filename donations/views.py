@@ -12,6 +12,7 @@ from donations.forms import DonateForm
 import donations.models as dm
 
 from datetime import datetime
+from datetime import timedelta
 from os import environ as env
 from itertools import chain
 from operator import attrgetter

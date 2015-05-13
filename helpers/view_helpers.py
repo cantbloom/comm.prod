@@ -174,9 +174,9 @@ def _get_donation_stats(donations=None, anon_donations=None):
   """
       Helper to yield dotation stats for home and anon page
   """
-  if not donations:
+  if donations is None:
     donations = dm.Donation.objects.all()
-  if not anon_donations:
+  if anon_donations is None:
     anon_donations = dm.AnonDonation.objects.all()
 
   tot_donations = donations.count() + anon_donations.count()
